@@ -15,27 +15,49 @@
   <h1>Inference Tokens</h1>
   <p class="standfirst">Total tokens processed when models answer requests, across the US enterprise market. Everything except training.</p>
   <dl class="meta">
-    <div><dt>Charts published</dt><dd>1</dd></div>
+    <div><dt>Charts published</dt><dd>2</dd></div>
   </dl>
 </header>
 
-<div class="section" id="composition-of-the-total">
-<section class="chart" id="P-59">
+<div class="section" id="other">
+<section class="chart" id="P-1">
+<span id="P-59" class="legacy-anchor"></span>
 <div class="chart-head">
-<a class="pid" href="#P-59">P-59</a>
-<h3>Input and output token distributions</h3>
+<a class="pid" href="#P-1">P-1</a>
+<h3>Distribution of input and output tokens per request — Azure LLM inference traces, 2023</h3>
 </div>
-<p class="shows">Input and output token distributions per trace.</p>
+<p class="shows">How input and output token counts are distributed across the 28,185 requests in the 2023 Azure trace release, with the cumulative curve beside each distribution.</p>
 <div class="figure">
-<img src="charts/P-59.svg" alt="Input and output token distributions" width="792" height="518" loading="lazy">
+<img src="charts/P-1.svg" alt="Distribution of input and output tokens per request — Azure LLM inference traces, 2023" width="864" height="788" loading="lazy">
 </div>
 <dl class="facts">
 <div><dt>Dataset</dt><dd>Microsoft Azure — LLM Inference Production Traces</dd></div>
-<div><dt>Source</dt><dd><a href="https://github.com/Azure/AzurePublicDataset" rel="noopener">Microsoft Azure — AzurePublicDataset</a></dd></div>
-<div><dt>Methodology</dt><dd data-methodology-ref>§7.9 — De-duplication rule 3, sub-types</dd></div>
-<div><dt>Note</dt><dd>Code service median output is 13 tokens (measured) - inline completion, not chat</dd></div>
+<div><dt>Granularity</dt><dd>Request-level observations (one row per inference request)</dd></div>
+<div><dt>Year</dt><dd>2023</dd></div>
+<div><dt>Source</dt><dd><a href="https://github.com/Azure/AzurePublicDataset/blob/master/AzureLLMInferenceDataset2023.md" rel="noopener">Microsoft Azure — AzurePublicDataset</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>§3.2 — What we measured · §7.9 — De-duplication rule 3, sub-types</dd></div>
+<div><dt>Note</dt><dd>A single 58-minute window on 16 November 2023: a snapshot, not a representative period</dd></div>
 </dl>
-<p class="downloads"><a href="charts/P-59.svg" download>Download SVG</a><a href="charts/P-59.png" download>Download PNG</a></p>
+<p class="downloads"><a href="charts/P-1.svg" download>Download SVG</a><a href="charts/P-1.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="P-3">
+<div class="chart-head">
+<a class="pid" href="#P-3">P-3</a>
+<h3>Distribution of input and output tokens per request — Azure multimodal inference traces, 2025</h3>
+</div>
+<p class="shows">The multimodal release, where input tokens carry image content as well as text.</p>
+<div class="figure">
+<img src="charts/P-3.svg" alt="Distribution of input and output tokens per request — Azure multimodal inference traces, 2025" width="864" height="590" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Microsoft Azure — Multimodal (LMM) Inference Production Traces</dd></div>
+<div><dt>Granularity</dt><dd>Request-level observations (one row per inference request)</dd></div>
+<div><dt>Year</dt><dd>2025 release; observed October 2024</dd></div>
+<div><dt>Source</dt><dd><a href="https://github.com/Azure/AzurePublicDataset/blob/master/AzureLMMInferenceDataset2025.md" rel="noopener">Microsoft Azure — AzurePublicDataset</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>§3.2 — What we measured · §7.9 — De-duplication rule 3, sub-types</dd></div>
+<div><dt>Note</dt><dd>Released 2025 but observed 15–22 October 2024, and published by Microsoft as a sample of the cluster rather than its full volume</dd></div>
+</dl>
+<p class="downloads"><a href="charts/P-3.svg" download>Download SVG</a><a href="charts/P-3.png" download>Download PNG</a></p>
 </section>
 </div>
 

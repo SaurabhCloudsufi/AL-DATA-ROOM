@@ -44,7 +44,9 @@ DOMAINS = [
         "title": "Inference Tokens",
         "blurb": "Total tokens processed when models answer requests, across the US "
                  "enterprise market. Everything except training.",
-        "index": "build/plot_index.csv",
+        # build/plot_index.csv remains the 69-row workbook catalogue for
+        # reference; the site is driven by the curated published index
+        "index": "build/plot_index_published.csv",
         "live": True,
     },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
@@ -149,6 +151,10 @@ def render_chart(slug, p):
             note = line.split("\u2014", 1)[-1].strip().rstrip(".")
 
     parts = [f'<section class="chart" id="{e(pid)}">']
+    # an ID this chart used to carry, kept as an invisible anchor so links
+    # already shared against the old identifier keep resolving
+    if p.get("Legacy_anchor"):
+        parts.append(f'<span id="{e(p["Legacy_anchor"])}" class="legacy-anchor"></span>')
     parts.append('<div class="chart-head">')
     parts.append(f'<a class="pid" href="#{e(pid)}">{e(pid)}</a>')
     parts.append(f"<h3>{e(title)}</h3>")
@@ -173,6 +179,10 @@ def render_chart(slug, p):
     parts.append('<dl class="facts">')
     if p.get("Owning_dataset"):
         parts.append(f'<div><dt>Dataset</dt><dd>{e(p["Owning_dataset"])}</dd></div>')
+    if p.get("Granularity"):
+        parts.append(f'<div><dt>Granularity</dt><dd>{e(p["Granularity"])}</dd></div>')
+    if p.get("Year"):
+        parts.append(f'<div><dt>Year</dt><dd>{e(p["Year"])}</dd></div>')
     if p.get("Source_name"):
         src = e(p["Source_name"])
         url = (p.get("Source_url") or "").strip()
@@ -219,8 +229,8 @@ def build_gallery(dom):
     for name, blurb, ps in sections:
         anchor = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
         body.append(f'<div class="section" id="{anchor}">')
-        # a single chart is its own section heading; the label adds nothing
-        if len(plots) > 1:
+        # with everything in one section the heading labels nothing useful
+        if len(sections) > 1:
             body.append(f"<h2>{e(name)}</h2>")
             if blurb:
                 body.append(f'<p class="blurb">{e(blurb)}</p>')

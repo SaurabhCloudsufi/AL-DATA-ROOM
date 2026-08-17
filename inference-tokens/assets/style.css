@@ -196,3 +196,6 @@ a.pid:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
   .toc, .foot { display: none; }
   .chart { page-break-inside: avoid; }
 }
+
+/* invisible anchor preserving a chart's former Plot ID in shared links */
+.legacy-anchor { display: block; height: 0; overflow: hidden; }

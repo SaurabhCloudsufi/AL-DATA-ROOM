@@ -349,83 +349,214 @@ def build_p58(_rows):
     save(fig, "P-58")
 
 
-# =============================================================== P-59
-def build_p59(_rows):
-    """Input and output token distributions, log-binned, per service.
+# ======================================= Azure token distributions (P-1 / P-2 / P-3)
+# One builder for every Azure release. Each chart pairs the distribution itself
+# with its cumulative curve, so the reader sees the shape on the left and can read
+# any percentile straight off the right.
+AZURE_PLOTS = {
+    "P-1": {
+        "traces": [("conv_2023", "Conversation service"),
+                   ("code_2023", "Code service")],
+        "title": "Distribution of input and output tokens per request \u2014 "
+                 "Azure LLM inference traces, 2023",
+        "source": "Microsoft Azure, AzurePublicDataset \u2014 LLM inference production "
+                  "traces (2023 release, CC-BY)",
+        "caveat": "A 58-minute snapshot, not a representative period, and it predates "
+                  "reasoning models and agentic tool-calling, both of which lengthen "
+                  "output. The code service's median input of 1,469 tokens against a "
+                  "median output of 13 is the signature of inline completion, not chat.",
+    },
+    "P-2": {
+        "traces": [("conv_2024", "Conversation service"),
+                   ("code_2024", "Code service")],
+        "title": "Distribution of input and output tokens per request \u2014 "
+                 "Azure LLM inference traces, 2024",
+        "source": "Microsoft Azure, AzurePublicDataset \u2014 LLM inference production "
+                  "traces (2024 release, CC-BY)",
+        "caveat": "Computed from every request in the released week, read in chunks - "
+                  "nothing is sampled or estimated. One week of one provider's "
+                  "production traffic is not a market-wide sample, and the two services "
+                  "are separate workloads whose distributions must not be pooled.",
+    },
+    "P-3": {
+        "traces": [("multimodal_2025", "Multimodal service")],
+        "title": "Distribution of input and output tokens per request \u2014 "
+                 "Azure multimodal inference traces, 2025",
+        "source": "Microsoft Azure, AzurePublicDataset \u2014 multimodal (LMM) inference "
+                  "production traces (2025 release, CC-BY)",
+        "caveat": "Input tokens include image tokens as well as text, so this is not "
+                  "comparable with the text-only traces and the two must never be "
+                  "pooled. Despite the 2025 release label the observation window is "
+                  "October 2024, and Microsoft describes the file as a sample of the "
+                  "cluster's traffic rather than its full volume.",
+    },
+}
 
-    Reads the derived Azure trace histograms, which are re-derivable byte for
-    byte from Microsoft's published 2023 traces by build/summarise_azure_traces.py.
-    Every bin count is a real request count; the medians drawn as reference lines
-    come from the same summary file, not from the binned data.
-    """
+KINDS = (("input", "Input tokens", "prior"), ("output", "Output tokens", "current"))
+
+
+def _azure_data():
+    """Load the derived summary and histograms. Both are re-derivable byte for
+    byte from Microsoft's published traces by build/summarise_azure_traces.py,
+    so every value plotted traces back to a real request count."""
     import csv as _csv
     from collections import defaultdict
-    hist = defaultdict(lambda: defaultdict(int))
+    hist = defaultdict(dict)
     with AZURE_HIST.open(encoding="utf-8") as f:
         for r in _csv.DictReader(f):
-            hist[(r["trace"], r["kind"])][int(r["bin_low"])] += int(r["count"])
+            hist[(r["trace"], r["kind"])][int(r["bin_low"])] = (
+                int(r["bin_high"]), int(r["count"]))
     with AZURE.open(encoding="utf-8") as f:
         summary = {r["trace"]: r for r in _csv.DictReader(f)}
-
-    fig = plt.figure(figsize=(11.0, 7.2))
-    axes = [fig.add_axes([0.085, 0.30, 0.40, 0.48]),
-            fig.add_axes([0.565, 0.30, 0.40, 0.48])]
-
-    for ax, trace, title in zip(axes, ["conv_2023", "code_2023"],
-                                ["Conversation service", "Code service"]):
-        n = int(summary[trace]["requests"])
-        for kind, colour in (("input", SERIES["prior"]), ("output", SERIES["current"])):
-            d = hist[(trace, kind)]
-            if not d:
-                continue
-            xs = sorted(d)
-            total = sum(d.values())
-            ys = [d[x] / total * 100 for x in xs]
-            ax.step([max(x, 0.5) for x in xs], ys, where="post", color=colour,
-                    linewidth=1.9, label=kind.capitalize())
-            ax.fill_between([max(x, 0.5) for x in xs], ys, step="post",
-                            color=colour, alpha=0.16)
-            # median from the summary file, marked so the title's claim is legible
-            med = float(summary[trace][f"{kind}_median"])
-            ax.axvline(med, color=colour, linewidth=1.1, linestyle=":", zorder=5)
-            ax.text(med * (1.3 if kind == "input" else 0.77), 49.2,
-                    f"{kind} median {med:,.0f}",
-                    ha="left" if kind == "input" else "right", va="center",
-                    fontsize=8.3, color=MUTED)
-        ax.set_xscale("log")
-        ax.set_title(f"{title}  —  {n:,} requests", fontsize=11, color=INK,
-                     pad=8)
-        ax.set_xlabel("Tokens per request (log scale)", fontsize=9.5)
-        ax.grid(axis="y", color=RULE, linewidth=0.7)
-        ax.set_axisbelow(True)
-        ax.set_ylim(0, 52)
-        ax.set_yticks([0, 10, 20, 30, 40, 50])
-    axes[0].set_ylabel("Share of requests in bin (%)", fontsize=10)
-    axes[1].tick_params(labelleft=False)
-    # sits below the median callout row so the two never collide
-    axes[0].legend(frameon=False, fontsize=9.5, loc="upper left",
-                   bbox_to_anchor=(0.0, 0.90))
-
-    frame(fig, axes[0], "P-59",
-          "Code requests carry long prompts and return almost nothing",
-          "Distribution of input and output tokens per request across the two Azure services in "
-          "the 2023 trace release, log-binned over all 28,185 requests.",
-          "Microsoft Azure, AzurePublicDataset \u2014 LLM inference production traces "
-          "(2023 release, CC-BY)",
-          "\u00a73.2 \u2014 What we measured; \u00a77.9 \u2014 De-duplication rule 3",
-          "The code service has a median input of 1,469 tokens but a median output of 13 "
-          "tokens - the signature of inline completion rather than chat. Conversation medians "
-          "are 1,020 input and 129 output. This asymmetry, not a difference in volume, is what "
-          "drives the gap in output share between the two services. Caveat: the 2023 release "
-          "covers a single 58-minute window on 16 November 2023, so it is a snapshot rather "
-          "than a representative period, and it predates reasoning models and agentic "
-          "tool-calling, both of which lengthen output. Bins are left-closed powers of two; "
-          "the two services are separate workloads and their distributions must not be pooled.")
-    save(fig, "P-59")
+    return summary, hist
 
 
-BUILDERS = {"P-01": build_p01, "P-03": build_p03,
-            "P-58": build_p58, "P-59": build_p59}
+def _count_fmt(v, _pos=None):
+    if v >= 1e6:
+        return f"{v/1e6:g}M"
+    if v >= 1e3:
+        return f"{v/1e3:g}k"
+    return f"{v:g}"
+
+
+def _window_text(rec):
+    """Observation window, read off the trace itself rather than assumed."""
+    from datetime import datetime
+    def ts(x):
+        return datetime.fromisoformat(str(x).replace("Z", "+00:00"))
+    a, b = ts(rec["window_start"]), ts(rec["window_end"])
+    if a.date() == b.date():
+        return f"{a:%d %b %Y}, {a:%H:%M}\u2013{b:%H:%M}"
+    return f"{a:%d %b %Y} \u2013 {b:%d %b %Y}"
+
+
+def build_azure(plot_id):
+    cfg = AZURE_PLOTS[plot_id]
+    summary, hist = _azure_data()
+
+    missing = [t for t, _ in cfg["traces"] if t not in summary]
+    if missing:
+        raise SystemExit(
+            f"{plot_id}: no derived data for {', '.join(missing)}.\n"
+            f"Run: python build/summarise_azure_traces.py <dir holding the raw traces>")
+
+    rows = cfg["traces"]
+    nrows = len(rows)
+    total_req = sum(int(summary[t]["requests"]) for t, _ in rows)
+    windows = "; ".join(f"{lab.split()[0].lower()} {_window_text(summary[t])}"
+                        for t, lab in rows)
+
+    subtitle = (f"What it shows: how input and output token counts are distributed "
+                f"across {total_req:,} observed Azure inference requests. Left panel "
+                f"counts requests per token bin; right panel gives the cumulative "
+                f"share, so any percentile reads off the curve.")
+    note = (f"Observation window \u2014 {windows}. {cfg['caveat']} The horizontal axis is "
+            f"log-scaled because token counts span several orders of magnitude and a linear "
+            f"axis would collapse everything below a thousand tokens into a single bar; "
+            f"bins are left-closed powers of two. No request is excluded and the full "
+            f"long tail is drawn.")
+
+    # frame() places its furniture in figure fractions, so the panel band has to be
+    # derived from the same numbers or the text and the axes overlap.
+    n_sub = len(textwrap.wrap(subtitle, 122))
+    n_note = len(textwrap.wrap(note, 133))
+    fig_h = 4.6 + 2.75 * nrows + 0.17 * n_note
+    fig = plt.figure(figsize=(12.0, fig_h))
+
+    top = 0.882 - (n_sub - 1) * 0.030 - 0.105          # clear of subtitle + legend
+    bottom = 0.052 + 0.026 * (2 + n_note) + 0.055      # clear of the footer rule
+    band = top - bottom
+    gap = 0.24 * band if nrows > 1 else 0.0
+    panel_h = (band - gap * (nrows - 1)) / nrows
+
+    axes = []
+    for i in range(nrows):
+        y = bottom + (nrows - 1 - i) * (panel_h + gap)
+        axes.append((fig.add_axes([0.070, y, 0.370, panel_h]),
+                     fig.add_axes([0.585, y, 0.370, panel_h])))
+
+    for (ax_d, ax_c), (trace, label) in zip(axes, rows):
+        rec = summary[trace]
+        n = int(rec["requests"])
+        x_hi, y_hi = 1, 0
+        medians = []
+
+        for kind, _legend, tone in KINDS:
+            colour = SERIES[tone]
+            bins = hist[(trace, kind)]
+            lows = sorted(bins)
+            counts = [bins[l][1] for l in lows]
+            highs = [bins[l][0] for l in lows]
+            x_hi = max(x_hi, max((h for h, c in zip(highs, counts) if c), default=1))
+            y_hi = max(y_hi, max(counts))
+
+            # ---- left: the distribution itself, request counts per log-spaced bin
+            edges = [max(l, 0.5) for l in lows] + [highs[-1]]
+            ax_d.stairs(counts, edges, color=colour, linewidth=1.9, fill=False)
+            ax_d.stairs(counts, edges, color=colour, alpha=0.16, fill=True)
+
+            # ---- right: cumulative curve, exact at every bin edge
+            total = sum(counts)
+            cum, run = [], 0
+            for c in counts:
+                run += c
+                cum.append(run / total * 100)
+            ax_c.plot(highs, cum, color=colour, linewidth=2.1)
+
+            med = float(rec[f"{kind}_median"])
+            medians.append((med, kind, colour))
+
+        for ax in (ax_d, ax_c):
+            ax.set_xscale("log")
+            ax.set_xlim(0.7, x_hi * 1.6)
+            ax.grid(axis="y", color=RULE, linewidth=0.7)
+            ax.set_axisbelow(True)
+            ax.set_xlabel("Tokens per request  (log scale)", fontsize=9.4)
+
+        # median callouts. Each label sits directly over its own marker - input
+        # above the 50% line, output below - so the two can never read as swapped.
+        # Only a label that would overrun the panel edge is nudged inward.
+        from math import log10
+        lo, hi = 0.7, x_hi * 1.6
+        for med, kind, colour in medians:
+            ax_c.plot([med], [50], marker="o", markersize=5.5, color=colour, zorder=6)
+            frac = (log10(med) - log10(lo)) / (log10(hi) - log10(lo))
+            ha, dx = "center", 0
+            if frac > 0.88:
+                ha, dx = "right", 5
+            elif frac < 0.12:
+                ha, dx = "left", -5
+            ax_c.annotate(f"median {med:,.0f}", xy=(med, 50),
+                          xytext=(dx, 13 if kind == "input" else -18),
+                          textcoords="offset points", ha=ha,
+                          fontsize=8.6, color=colour, fontweight="bold", zorder=7)
+
+        ax_d.set_ylim(0, y_hi * 1.16)
+        ax_d.set_title(f"{label}  \u2014  {n:,} requests", fontsize=10.6,
+                       color=INK, pad=7)
+        ax_d.set_ylabel("Number of requests", fontsize=9.8)
+        ax_d.yaxis.set_major_formatter(plt.FuncFormatter(_count_fmt))
+
+        ax_c.set_title(f"{label}  \u2014  cumulative", fontsize=10.6, color=INK, pad=7)
+        ax_c.set_ylabel("Requests at or below x  (%)", fontsize=9.8)
+        ax_c.set_ylim(0, 104)
+        ax_c.set_yticks([0, 25, 50, 75, 100])
+        ax_c.axhline(50, color=MUTED, linewidth=0.8, linestyle=":", zorder=1)
+
+    # one legend for the whole figure - repeating it in every panel is noise
+    handles = [plt.Line2D([0], [0], color=SERIES[t], linewidth=2.4) for _, _, t in KINDS]
+    fig.legend(handles, [lbl for _, lbl, _ in KINDS], loc="lower left",
+               bbox_to_anchor=(0.070, top + 0.045), ncol=2, frameon=False,
+               fontsize=9.8, handlelength=1.9, columnspacing=2.2)
+
+    frame(fig, axes[0][0], plot_id, cfg["title"], subtitle, cfg["source"],
+          "\u00a73.2 \u2014 What we measured; \u00a77.9 \u2014 De-duplication rule 3, "
+          "sub-types", note)
+    save(fig, plot_id)
+
+
+BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
+BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 
 
 def main():
