@@ -203,3 +203,7 @@ a.pid:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 /* the observed-only constraint is the point of the Epoch charts, so it reads
    as a statement rather than another metadata row */
 .facts dd.treatment { font-weight: 600; color: #1f3864; }
+
+/* interactive companion sits with the downloads but reads as the primary action */
+.downloads a.interactive { background: #1f3864; color: #fff; border-color: #1f3864; }
+.downloads a.interactive:hover { background: #16294a; border-color: #16294a; }

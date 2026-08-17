@@ -1,0 +1,78 @@
+site,owner,primary_user,country,compute_h100e,it_power_mw,capital_cost_busd,compute_cost_busd,construction_cost_busd,annual_opex_busd,buildings_operational
+Colossus 2,SpaceXAI,Anthropic,United States,1111672.5619,946.0,35.836372,24.702898,11.133474,0.853292,2.0
+Microsoft Fairwater Atlanta,Microsoft,OpenAI,United States,768768.722082,636.0,24.092952,16.607868,7.485084,0.573672,4.0
+Meta Prometheus,Meta,Meta,United States,763011.622031,631.0,23.903542,16.477303,7.426239,0.569162,13.0
+Anthropic-Amazon New Carlisle,Amazon,Anthropic,United States,685912.076806,910.0,34.47262,23.76283,10.70979,0.82082,16.0
+OpenAI Stargate Abilene,Oracle,OpenAI,United States,509348.155634,421.0,15.948322,10.993573,4.954749,0.379742,4.0
+Microsoft Fairwater Wisconsin,Microsoft,OpenAI,United States,445679.63618,369.0,13.978458,9.635697,4.342761,0.332838,1.0
+Google Columbus,Google,Google DeepMind,United States,408792.319353,303.0,11.478246,7.912239,3.566007,0.273306,4.0
+Google New Albany,Google,Google DeepMind,United States,351692.774128,339.0,12.841998,8.852307,3.989691,0.305778,4.0
+Google Council Bluffs (East),Google,Google DeepMind,United States,339060.131379,237.0,8.978034,6.188781,2.789253,0.213774,3.0
+Google Lincoln,Google,Unknown,United States,287518.948964,141.0,5.341362,3.681933,1.659429,0.127182,1.0
+Google Bristow,Google,Google DeepMind,United States,283675.088428,279.0,10.569078,7.285527,3.283551,0.251658,3.0
+DayOne Nusajaya,Unknown,Unknown,Malaysia,281670.439616,240.0,9.09168,6.26712,2.82456,0.21648,6.0
+Colossus 1,SpaceXAI,Anthropic,United States,275795.856493,340.0,12.87988,8.87842,4.00146,0.30668,1.0
+Google Omaha,Google,Google DeepMind,United States,267812.026276,237.0,8.978034,6.188781,2.789253,0.213774,3.0
+CoreWeave Denton TX,CoreWeave,OpenAI,United States,252652.854977,262.0,9.925084,6.841606,3.083478,0.236324,7.0
+Google Kansas City East,Google,Unknown,United States,244567.963618,105.0,3.97761,2.741865,1.235745,0.09471,1.0
+QTS Richmond 1,Unknown,Unknown,United States,242546.740778,238.0,9.015916,6.214894,2.801022,0.214676,5.0
+Meta Rosemount,Meta,Meta,United States,215765.538151,178.0,6.742996,4.648114,2.094882,0.160556,2.0
+Amazon Madison Mega Site,Amazon,Anthropic,United States,214348.143546,284.0,10.758488,7.416092,3.342396,0.256168,5.0
+Microsoft Goodyear,Microsoft,OpenAI,United States,205154.118242,202.0,7.652164,5.274826,2.377338,0.182204,4.0
+Meta Jeffersonville,Meta,Meta,United States,203132.895402,178.0,6.742996,4.648114,2.094882,0.160556,2.0
+Google The Dalles,Google,Unknown,United States,201616.978272,154.0,5.833828,4.021402,1.812426,0.138908,2.0
+Google Midlothian,Google,Unknown,United States,191005.558363,103.0,3.901846,2.689639,1.212207,0.092906,1.0
+QTS Richmond 2,Unknown,Unknown,United States,182920.667004,180.0,6.81876,4.70034,2.11842,0.16236,5.0
+QTS Richmond 3,Unknown,Unknown,United States,174835.775644,144.0,5.455008,3.760272,1.694736,0.129888,3.0
+Meta Montgomery,Meta,Meta,United States,174517.433047,153.0,5.795946,3.995289,1.800657,0.138006,2.0
+Meta Kuna,Meta,Meta,United States,173319.858514,152.0,5.758064,3.969176,1.788888,0.137104,2.0
+Meta Temple,Meta,Meta,United States,173247.671984,152.0,5.758064,3.969176,1.788888,0.137104,2.0
+Meta Cheyenne,Meta,Meta,United States,172814.552804,152.0,5.758064,3.969176,1.788888,0.137104,2.0
+Amazon Ridgeland,Amazon,Anthropic,United States,171298.635675,228.0,8.637096,5.953764,2.683332,0.205656,4.0
+Meta Aiken,Meta,Meta,United States,161697.827185,142.0,5.379244,3.708046,1.671198,0.128084,2.0
+Coreweave Helios,CoreWeave,OpenAI,United States,159551.768237,132.0,5.000424,3.446916,1.553508,0.119064,1.0
+Google Arcola,Google,Unknown,United States,157150.075796,77.0,2.916914,2.010701,0.906213,0.069454,1.0
+Microsoft Project Osmium,Microsoft,OpenAI,United States,155634.158666,190.0,7.19758,4.96147,2.23611,0.17138,4.0
+Google Storey County,Google,Google DeepMind,United States,153612.935826,161.0,6.099002,4.204193,1.894809,0.145222,2.0
+Meta Eagle Mountain,Meta,Meta,United States,151354.219303,133.0,5.038306,3.473029,1.565277,0.119966,2.0
+Google Lancaster,Google,Unknown,United States,130368.873168,137.0,5.189834,3.577481,1.612353,0.123574,2.0
+Fluidstack Lake Mariner,Fluidstack,Anthropic,United States,130368.873168,100.0,3.7882,2.6113,1.1769,0.0902,3.0
+Google Mesa,Google,Unknown,United States,125821.121779,90.0,3.40938,2.35017,1.05921,0.08118,1.0
+Google Waltham Cross,Google,Google DeepMind,United Kingdom,123799.898939,88.0,3.333616,2.297944,1.035672,0.079376,1.0
+VNET Bayin Ulanqab,VNET,ByteDance,China,122789.287519,221.0,8.371922,5.770973,2.600949,0.199342,4.0
+Huawei Horinger,Huawei,Unknown,China,117230.924709,241.8,9.159868,6.314123,2.845744,0.218104,4.0
+Google Red Oak,Google,Unknown,United States,108135.42193,77.0,2.916914,2.010701,0.906213,0.069454,1.0
+Meta Los Lunas,Meta,Meta,United States,99545.224861,87.0,3.295734,2.271831,1.023903,0.078474,1.0
+Meta Gallatin,Meta,Meta,United States,99545.224861,87.0,3.295734,2.271831,1.023903,0.078474,1.0
+CoreWeave Ellendale ND,CoreWeave,OpenAI,United States,93481.556342,68.0,2.575976,1.775684,0.800292,0.061336,1.0
+Meta Sarpy,Meta,Meta,United States,91965.639212,80.0,3.03056,2.08904,0.94152,0.07216,1.0
+CoreWeave Chester VA,CoreWeave,OpenAI,United States,88428.499242,82.0,3.106324,2.141266,0.965058,0.073964,2.0
+Oracle Batam,Oracle,Unknown,Indonesia,84386.053562,72.0,2.727504,1.880136,0.847368,0.064944,3.0
+Google Papillion,Google,Google DeepMind,United States,80343.607883,237.0,8.978034,6.188781,2.789253,0.213774,3.0
+CoreWeave Marble NC,CoreWeave,OpenAI,United States,78827.690753,65.0,2.46233,1.697345,0.764985,0.05863,1.0
+Microsoft SAT40,Microsoft,Unknown,United States,64679.130874,75.0,2.84115,1.958475,0.882675,0.06765,2.0
+STACK Infrastructure NVA02,Unknown,Unknown,United States,61141.990904,85.0,3.21997,2.219605,1.000365,0.07667,1.0
+Microsoft-Nebius New Jersey,Nebius,Microsoft,United States,56846.89237,50.0,1.8941,1.30565,0.58845,0.0451,1.0
+Stream Phoenix,Unknown,Unknown,United States,46134.411319,64.0,2.424448,1.671232,0.753216,0.057728,1.0
+Microsoft SAT14,Microsoft,Unknown,United States,45174.33047,47.0,1.780454,1.227311,0.553143,0.042394,2.0
+Vantage TX1,Unknown,Unknown,United States,38706.417383,32.0,1.212224,0.835616,0.376608,0.028864,1.0
+CoreWeave Dalton 1 & 2,CoreWeave,OpenAI,United States,32238.504295,28.0,1.060696,0.731164,0.329532,0.025256,1.0
+Alibaba Zhangbei,Alibaba,Alibaba,China,31884.790298,169.0,6.402058,4.413097,1.988961,0.152438,6.0
+Start Campus Sines Data Campus,Nscale,Microsoft,Portugal,31834.259727,33.0,1.250106,0.861729,0.388377,0.029766,1.0
+Google Pryor (North),Google,Google DeepMind,United States,26275.896918,53.0,2.007746,1.383989,0.623757,0.047806,1.0
+xAI QTS Atlanta,SpaceXAI,SpaceXAI,United States,11470.439616,17.32971,0.656484,0.452531,0.203953,0.015631,1.0
+OpenAI Stargate Shackelford,Oracle,OpenAI,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+OpenAI Stargate UAE,G42,OpenAI,United Arab Emirates,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+OpenAI Stargate Wisconsin,Oracle,OpenAI,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+OpenAI Stargate Lordstown,Softbank,OpenAI,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+QTS Cedar Rapids,Unknown,Unknown,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Meta Hyperion,Meta,Meta,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+OpenAI Stargate Milam,Softbank,OpenAI,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Google Fort Wayne,Google,Google DeepMind,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Google Cedar Rapids,Google,Google DeepMind,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Southgate Melbourne,Firmus,Unknown,Australia,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+OpenAI Stargate New Mexico,Oracle,OpenAI,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Goodnight,Google,Google DeepMind,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Crusoe Abilene Expansion,Microsoft,Microsoft,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+CoreWeave Muskogee OK,CoreWeave,OpenAI,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+OpenAI Stargate Michigan,Oracle,OpenAI,United States,0.0,0.0,0.0,0.0,0.0,0.0,0.0

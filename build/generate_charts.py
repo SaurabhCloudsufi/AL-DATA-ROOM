@@ -55,6 +55,9 @@ plt.rcParams.update({
     "axes.spines.top": False,
     "axes.spines.right": False,
     "svg.fonttype": "none",   # keep text as text, so SVG stays crisp and selectable
+    # captions quote dollar figures; without this a "$316bn ... $143bn" pair is
+    # parsed as mathtext and the chart fails to render
+    "text.parse_math": False,
     "figure.dpi": 100,
     # fixed salt -> stable SVG element ids -> clean git diffs
     "svg.hashsalt": "inference-tokens",
@@ -683,9 +686,511 @@ def build_epoch(plot_id):
     save(fig, plot_id, "ai-infrastructure")
 
 
+# ================= Epoch views by company + derived analysis (observed only)
+DC_COLOURS = ["#1f3864", "#4a6fa5", "#6b8f71", "#b4763a", "#7d5a7d",
+              "#4e8a8b", "#9aa9c4", "#a46b6b", "#8a8f5c", "#c3c8d1"]
+
+OWNER_METRICS = {
+    "EPOCH-03": ("compute_h100e", "Compute capacity of AI data centers, by company",
+                 "Installed compute (millions of H100-equivalents)", 1e6, "{v:.1f}M",
+                 "Compute is derived by Epoch from IT power and the chip mix judged "
+                 "most likely to be installed, except where a site's chips are "
+                 "reported. It is modelled, not a hardware inventory."),
+    "EPOCH-04": ("it_power_mw", "IT power of AI data centers, by company",
+                 "Installed IT power (GW)", 1e3, "{v:.1f} GW",
+                 "IT power is the computing load only, not the facility total, and is "
+                 "estimated largely from cooling equipment visible in satellite "
+                 "imagery. Facility power runs about 1.28x higher."),
+    "EPOCH-05": ("capital_cost_busd", "Capital cost of AI data centers, by company",
+                 "Capital cost (2025 US$ billions)", 1, "${v:,.0f}bn",
+                 "Capital cost is modelled entirely from IT power using Epoch's "
+                 "cost-per-watt model; it is not drawn from company filings."),
+}
+
+
+def _dcsv(name):
+    import csv as _csv
+    with (DC_DATA / name).open(encoding="utf-8") as f:
+        return list(_csv.DictReader(f))
+
+
+def _dc_meta():
+    return {r["metric"]: r for r in _dcsv("epoch_observed_summary.csv")}
+
+
+def _owner_stack(metric, top_n=9):
+    """Forward-fill each owner's change points onto the common date axis.
+
+    The per-owner series sums back to Epoch's published total exactly; that is
+    asserted in build/summarise_epoch_datacenters.py, not assumed here.
+    """
+    from datetime import date as _date
+    rows = _dcsv("epoch_observed_by_owner.csv")
+    dates = sorted({r["date"] for r in rows})
+    owners = sorted({r["owner"] for r in rows})
+
+    filled = {}
+    for ow in owners:
+        pts = {r["date"]: float(r[metric]) for r in rows if r["owner"] == ow}
+        run, out = 0.0, []
+        for d in dates:
+            if d in pts:
+                run = pts[d]
+            out.append(run)
+        filled[ow] = out
+
+    ranked = sorted(owners, key=lambda o: -filled[o][-1])
+    keep, rest = ranked[:top_n], ranked[top_n:]
+    series = {o: filled[o] for o in keep}
+    if rest:
+        series["Other owners"] = [sum(filled[o][i] for o in rest)
+                                  for i in range(len(dates))]
+    labels = keep + (["Other owners"] if rest else [])
+    return [_date.fromisoformat(d) for d in dates], series, labels
+
+
+def _observed_badge(ax, above=False):
+    """The constraint that defines these charts, stated on the plot itself.
+
+    Bar charts fill their top-left corner, so there the badge sits just above the
+    axes instead of inside them.
+    """
+    y, va = (1.030, "bottom") if above else (0.955, "top")
+    ax.text(0.0 if above else 0.017, y,
+            "  OBSERVED DATA ONLY  \u00b7  projections excluded  ",
+            transform=ax.transAxes, ha="left", va=va, fontsize=9.1,
+            fontweight="bold", color="white", zorder=9, clip_on=False,
+            bbox=dict(boxstyle="round,pad=0.42", facecolor=SERIES["current"],
+                      edgecolor="none"))
+
+
+def _rect(subtitle, note, left=0.075, width=0.700, xlabel_room=0.058,
+          badge_above=False):
+    n_sub = len(textwrap.wrap(subtitle, 122))
+    n_note = len(textwrap.wrap(note, 133))
+    top = 0.882 - (n_sub - 1) * 0.030 - 0.055 - (0.040 if badge_above else 0.0)
+    bottom = 0.052 + 0.026 * (2 + n_note) + xlabel_room
+    return [left, bottom, width, top - bottom]
+
+
+EPOCH_SRC = "Epoch AI, AI Data Centers (CC-BY) \u2014 https://epoch.ai/data/ai-data-centers"
+EPOCH_METH = ("Methodology reference pending final methodology document; derivation "
+              "follows Epoch AI's published data centers documentation")
+
+
+def build_owner_metric(plot_id):
+    import matplotlib.dates as mdates
+    from datetime import date as _date
+    metric, title, ylabel, scale, fmt, caveat = OWNER_METRICS[plot_id]
+    meta = _dc_meta()[metric]
+    snapshot = _date.fromisoformat(meta["snapshot_date"])
+    dates, series, labels = _owner_stack(metric)
+
+    keep = [i for i, d in enumerate(dates) if d >= _date(2023, 1, 1)]
+    px = [dates[i] for i in keep]
+    stacks = [[series[l][i] / scale for i in keep] for l in labels]
+    total_now = sum(series[l][-1] for l in labels)
+
+    subtitle = (f"What it shows: the same Epoch view broken out by owner \u2014 who has "
+                f"actually built the {meta['sites_with_observed_data']} tracked sites. "
+                f"Observed data only; the {meta['records_projected_excluded']} "
+                f"future-dated milestones in the source are excluded, so the series "
+                f"stops at the {meta['snapshot_date']} snapshot rather than 2030.")
+    note = (f"Owner shares sum to Epoch's published total of "
+            f"{fmt.format(v=total_now/scale)} exactly. Ownership is the entity that "
+            f"built and holds the site, which is often not the entity using it - "
+            f"see the owner-versus-user chart in Derived Analysis. \"Unknown\" is "
+            f"Epoch's own label where ownership is unattributed, not a residual we "
+            f"computed. {caveat} Coverage is about 27% of AI compute delivered "
+            f"globally and is strongest for the largest sites, so every share is a "
+            f"share of what Epoch tracks, not of the world.")
+
+    fig = plt.figure(figsize=(12.0, 8.3))
+    ax = fig.add_axes(_rect(subtitle, note))
+    ax.stackplot(px, stacks, colors=DC_COLOURS[:len(labels)], labels=labels,
+                 edgecolor="white", linewidth=0.35)
+    ax.set_xlim(px[0], snapshot)
+    ax.set_ylim(0, max(sum(c) for c in zip(*stacks)) * 1.18)
+    ax.set_ylabel(ylabel, fontsize=10)
+    ax.set_xlabel("Date", fontsize=10)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: fmt.format(v=v)))
+    ax.xaxis.set_major_locator(mdates.YearLocator())
+    ax.xaxis.set_minor_locator(mdates.MonthLocator(bymonth=(4, 7, 10)))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    _observed_badge(ax)
+
+    h, l = ax.get_legend_handles_labels()
+    ax.legend(h[::-1], l[::-1], loc="upper left", bbox_to_anchor=(1.015, 1.0),
+              frameon=False, fontsize=9, title="Owner", title_fontsize=9.2,
+              handlelength=1.5, borderaxespad=0)
+    ax.annotate(f"{fmt.format(v=total_now/scale)}\n{meta['snapshot_date']}",
+                xy=(snapshot, total_now / scale), xytext=(-10, 14),
+                textcoords="offset points", ha="right", fontsize=10,
+                fontweight="bold", color=INK, zorder=8)
+
+    frame(fig, ax, plot_id, title, subtitle, EPOCH_SRC, EPOCH_METH, note)
+    save(fig, plot_id, "ai-infrastructure")
+
+
+# ------------------------------------------------- Derived Analysis (observed)
+def _sites():
+    rows = _dcsv("dc_sites_observed.csv")
+    for r in rows:
+        for k in ("compute_h100e", "it_power_mw", "capital_cost_busd",
+                  "compute_cost_busd", "construction_cost_busd", "annual_opex_busd"):
+            r[k] = float(r[k])
+    return rows
+
+
+def build_d01(_r=None):
+    """How concentrated the observed build-out is across individual sites."""
+    rows = sorted(_sites(), key=lambda r: -r["compute_h100e"])
+    meta = _dc_meta()["compute_h100e"]
+    total = sum(r["compute_h100e"] for r in rows)
+    top = rows[:15]
+    owners = [r["owner"] for r in top]
+    palette = {o: DC_COLOURS[i % len(DC_COLOURS)]
+               for i, o in enumerate(dict.fromkeys(owners))}
+
+    subtitle = ("What it shows: the 15 largest sites by observed compute, and how much "
+                "of the tracked total they account for. A useful check on whether AI "
+                "capacity is a handful of megasites or a broad build-out.")
+    note = (f"Observed data only, at the {meta['snapshot_date']} snapshot. The largest "
+            f"single site holds {top[0]['compute_h100e']/total*100:.1f}% of tracked "
+            f"compute, the top 10 hold "
+            f"{sum(r['compute_h100e'] for r in rows[:10])/total*100:.1f}% and the top 20 "
+            f"hold {sum(r['compute_h100e'] for r in rows[:20])/total*100:.1f}%. "
+            f"{sum(1 for r in rows if r['compute_h100e'] == 0)} of {len(rows)} tracked "
+            f"sites have no observed compute yet - they are under construction, and "
+            f"they are counted in the denominator. Concentration is measured across "
+            f"Epoch's coverage, which is deliberately biased toward the largest sites, "
+            f"so the real market is less concentrated than this.")
+
+    fig = plt.figure(figsize=(12.0, 8.6))
+    ax = fig.add_axes(_rect(subtitle, note, left=0.315, width=0.635, xlabel_room=0.05, badge_above=True))
+    ys = range(len(top))[::-1]
+    ax.barh(list(ys), [r["compute_h100e"] / 1e3 for r in top], height=0.72,
+            color=[palette[r["owner"]] for r in top], edgecolor="white", linewidth=0.6)
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([r["site"] for r in top], fontsize=9.2)
+    ax.set_xlabel("Observed compute (thousands of H100-equivalents)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    for y, r in zip(ys, top):
+        ax.text(r["compute_h100e"] / 1e3 + total / 1e3 * 0.006, y,
+                f"{r['compute_h100e']/1e3:,.0f}k  \u00b7  {r['compute_h100e']/total*100:.1f}%",
+                va="center", fontsize=8.6, color=MUTED)
+    ax.set_xlim(0, max(r["compute_h100e"] for r in top) / 1e3 * 1.20)
+    seen = []
+    for o in owners:
+        if o not in seen:
+            seen.append(o)
+    ax.legend([plt.Rectangle((0, 0), 1, 1, color=palette[o]) for o in seen], seen,
+              loc="lower right", frameon=False, fontsize=8.8, title="Owner",
+              title_fontsize=9)
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "DERIVED-01",
+          "AI compute is concentrated, but not in a single site",
+          subtitle, EPOCH_SRC, EPOCH_METH, note)
+    save(fig, "DERIVED-01", "ai-infrastructure")
+
+
+def build_d02(_r=None):
+    """Where the observed capacity physically is."""
+    rows = _sites()
+    meta = _dc_meta()["compute_h100e"]
+    agg = {}
+    for r in rows:
+        a = agg.setdefault(r["country"], {"c": 0.0, "n": 0})
+        a["c"] += r["compute_h100e"]
+        a["n"] += 1
+    order = sorted(agg, key=lambda k: -agg[k]["c"])
+    total = sum(a["c"] for a in agg.values())
+    zero = [k for k in order if agg[k]["c"] == 0]
+
+    subtitle = ("What it shows: observed compute and tracked site count by country. The "
+                "single most important structural fact about the dataset, and the "
+                "reason it cannot be read as a picture of global capacity.")
+    note = (f"Observed data only, at the {meta['snapshot_date']} snapshot. The United "
+            f"States holds {agg[order[0]]['c']/total*100:.1f}% of observed compute "
+            f"across {agg[order[0]]['n']} of {len(rows)} tracked sites. That is partly "
+            f"real and partly coverage: Epoch states the database is strongest in the "
+            f"US and is still expanding elsewhere, so non-US capacity is understated by "
+            f"an unknown margin rather than absent. "
+            f"{', '.join(zero)} appear with tracked sites but no observed compute yet. "
+            f"Chinese capacity in particular is known to be larger than the three sites "
+            f"recorded here.")
+
+    fig = plt.figure(figsize=(11.6, 7.9))
+    ax = fig.add_axes(_rect(subtitle, note, left=0.185, width=0.755, xlabel_room=0.05, badge_above=True))
+    ys = list(range(len(order)))[::-1]
+    ax.barh(ys, [agg[k]["c"] / 1e6 for k in order], height=0.68,
+            color=SERIES["current"], edgecolor="white", linewidth=0.6)
+    ax.set_yticks(ys)
+    ax.set_yticklabels(order, fontsize=9.6)
+    ax.set_xlabel("Observed compute (millions of H100-equivalents)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    xmax = max(agg[k]["c"] for k in order) / 1e6
+    for y, k in zip(ys, order):
+        v = agg[k]["c"] / 1e6
+        lab = (f"{v:,.2f}M  \u00b7  {agg[k]['c']/total*100:.1f}%  "
+               f"({agg[k]['n']} site{'s' if agg[k]['n'] != 1 else ''})")
+        ax.text(v + xmax * 0.012, y, lab, va="center", fontsize=8.8, color=MUTED)
+    ax.set_xlim(0, xmax * 1.34)
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "DERIVED-02",
+          "The tracked build-out is almost entirely American",
+          subtitle, EPOCH_SRC, EPOCH_METH, note)
+    save(fig, "DERIVED-02", "ai-infrastructure")
+
+
+def build_d03(_r=None):
+    """What the money buys: chips versus buildings."""
+    rows = _sites()
+    meta = _dc_meta()["capital_cost_busd"]
+    agg = {}
+    for r in rows:
+        a = agg.setdefault(r["owner"], {"chips": 0.0, "build": 0.0, "opex": 0.0})
+        a["chips"] += r["compute_cost_busd"]
+        a["build"] += r["construction_cost_busd"]
+        a["opex"] += r["annual_opex_busd"]
+    order = [o for o in sorted(agg, key=lambda k: -(agg[k]["chips"] + agg[k]["build"]))
+             if agg[o]["chips"] + agg[o]["build"] > 0]
+    chips = sum(a["chips"] for a in agg.values())
+    build = sum(a["build"] for a in agg.values())
+    opex = sum(a["opex"] for a in agg.values())
+
+    subtitle = ("What it shows: observed capital cost split into compute hardware and "
+                "construction, by owner. In Epoch's cost model the two sum exactly to "
+                "the capital total, so the split is arithmetic rather than an estimate "
+                "layered on top.")
+    note = (f"Observed data only, at the {meta['snapshot_date']} snapshot. Across all "
+            f"tracked sites, chips are ${chips:,.0f}bn of ${chips+build:,.0f}bn capital "
+            f"({chips/(chips+build)*100:.1f}%) and buildings ${build:,.0f}bn "
+            f"({build/(chips+build)*100:.1f}%). Annual operating cost, a flow rather "
+            f"than a stock, runs a further ${opex:,.1f}bn a year and is deliberately "
+            f"not stacked into the capital bars. Read this as scale, not as cost "
+            f"structure: Epoch derives both components from IT power with a fixed "
+            f"cost-per-watt model, so the chips/buildings ratio is identical for every "
+            f"owner by construction and carries no information about how differently "
+            f"these companies build. Only the totals differ. Nothing here is reported "
+            f"company spend, and it should not be reconciled against capex disclosures.")
+
+    fig = plt.figure(figsize=(11.8, 8.0))
+    ax = fig.add_axes(_rect(subtitle, note, left=0.145, width=0.795, xlabel_room=0.05, badge_above=True))
+    ys = list(range(len(order)))[::-1]
+    c1 = [agg[o]["chips"] for o in order]
+    c2 = [agg[o]["build"] for o in order]
+    ax.barh(ys, c1, height=0.70, color=SERIES["current"], label="Compute hardware",
+            edgecolor="white", linewidth=0.6)
+    ax.barh(ys, c2, height=0.70, left=c1, color=SERIES["scope"], label="Construction",
+            edgecolor="white", linewidth=0.6)
+    ax.set_yticks(ys)
+    ax.set_yticklabels(order, fontsize=9.6)
+    ax.set_xlabel("Observed capital cost (2025 US$ billions)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    xmax = max(a + b for a, b in zip(c1, c2))
+    for y, o in zip(ys, order):
+        t = agg[o]["chips"] + agg[o]["build"]
+        ax.text(t + xmax * 0.012, y, f"${t:,.0f}bn", va="center",
+                fontsize=8.8, color=MUTED)
+    ax.set_xlim(0, xmax * 1.30)
+    ax.legend(loc="lower right", frameon=False, fontsize=9.2)
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "DERIVED-03",
+          "Epoch's cost model puts roughly two-thirds of the capital in chips",
+          subtitle, EPOCH_SRC, EPOCH_METH, note)
+    save(fig, "DERIVED-03", "ai-infrastructure")
+
+
+def build_d04(_r=None):
+    """Accelerator mix over time, observed only."""
+    import matplotlib.dates as mdates
+    from datetime import date as _date
+    rows = _dcsv("dc_chip_mix_observed.csv")
+    meta = _dc_meta()["compute_h100e"]
+    dates = sorted({r["date"] for r in rows})
+    chips = sorted({r["chip_type"] for r in rows})
+    filled = {}
+    for c in chips:
+        pts = {r["date"]: float(r["units"]) for r in rows if r["chip_type"] == c}
+        run, out = 0.0, []
+        for d in dates:
+            if d in pts:
+                run = pts[d]
+            out.append(run)
+        filled[c] = out
+    ranked = sorted(chips, key=lambda c: -filled[c][-1])
+    keep, rest = ranked[:9], ranked[9:]
+    labels = keep + (["Other chips"] if rest else [])
+    series = {c: filled[c] for c in keep}
+    if rest:
+        series["Other chips"] = [sum(filled[c][i] for c in rest) for i in range(len(dates))]
+
+    px = [_date.fromisoformat(d) for d in dates]
+    idx = [i for i, d in enumerate(px) if d >= _date(2023, 1, 1)]
+    px = [px[i] for i in idx]
+    stacks = [[series[l][i] / 1e6 for i in idx] for l in labels]
+    total = sum(series[l][-1] for l in labels)
+
+    subtitle = ("What it shows: how many accelerators of each type are installed at the "
+                "sites where Epoch records a chip breakdown, over time.")
+    note = (f"Observed data only: {meta['chip_records_observed']} of "
+            f"{meta['chip_records_total']} chip records are dated at or before the "
+            f"snapshot; {meta['chip_records_projected_excluded']} future-dated records "
+            f"are excluded. Units are counted, not performance-weighted - one TPU v5e "
+            f"and one B300 each count once despite differing several-fold in "
+            f"throughput, so this is a headcount, not capacity. Only "
+            f"{meta['chip_units_company_disclosed']} of "
+            f"{meta['chip_records_total']} unit counts come from company disclosure; "
+            f"the rest are Epoch estimates. Chip detail exists for a subset of sites "
+            f"only, so the level here is not comparable with the compute charts.")
+
+    fig = plt.figure(figsize=(12.0, 8.3))
+    ax = fig.add_axes(_rect(subtitle, note))
+    ax.stackplot(px, stacks, colors=DC_COLOURS[:len(labels)], labels=labels,
+                 edgecolor="white", linewidth=0.35)
+    ax.set_xlim(px[0], _date.fromisoformat(meta["snapshot_date"]))
+    ax.set_ylim(0, max(sum(c) for c in zip(*stacks)) * 1.18)
+    ax.set_ylabel("Accelerators installed (millions of units)", fontsize=10)
+    ax.set_xlabel("Date", fontsize=10)
+    ax.xaxis.set_major_locator(mdates.YearLocator())
+    ax.xaxis.set_minor_locator(mdates.MonthLocator(bymonth=(4, 7, 10)))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.1f}M"))
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    _observed_badge(ax)
+    h, l = ax.get_legend_handles_labels()
+    ax.legend(h[::-1], l[::-1], loc="upper left", bbox_to_anchor=(1.015, 1.0),
+              frameon=False, fontsize=9, title="Chip type", title_fontsize=9.2,
+              handlelength=1.5, borderaxespad=0)
+    ax.annotate(f"{total/1e6:.1f}M units\n{meta['snapshot_date']}",
+                xy=(_date.fromisoformat(meta["snapshot_date"]), total / 1e6),
+                xytext=(-10, 14), textcoords="offset points", ha="right",
+                fontsize=10, fontweight="bold", color=INK)
+    frame(fig, ax, "DERIVED-04",
+          "Custom silicon carries as much of the installed fleet as Nvidia does",
+          subtitle, EPOCH_SRC, EPOCH_METH, note)
+    save(fig, "DERIVED-04", "ai-infrastructure")
+
+
+def build_d05(_r=None):
+    """Cooling capacity against footprint - the measurement backbone."""
+    rows = _dcsv("dc_cooling_equipment.csv")
+    meta = _dc_meta()["it_power_mw"]
+    groups = {}
+    for r in rows:
+        try:
+            a, c = float(r["area_m2"]), float(r["capacity_kw"])
+        except (ValueError, KeyError):
+            continue
+        if a > 0 and c > 0:
+            groups.setdefault(r["equipment"], []).append((a, c))
+    order = sorted(groups, key=lambda k: -len(groups[k]))
+    tones = {"Cooling tower (wet)": SERIES["current"],
+             "Chiller (air-cooled)": SERIES["scope"],
+             "Chiller (water-cooled)": SERIES["other"]}
+
+    subtitle = ("What it shows: rated cooling capacity against physical footprint for "
+                "every unit in Epoch's two equipment catalogues. This relationship is "
+                "the measurement backbone of the whole dataset - it is what turns a "
+                "rooftop counted in an aerial image into a power figure.")
+    allpts = [p for g in order for p in groups[g]]
+    med = sorted(c / a for a, c in allpts)[len(allpts) // 2]
+    note = (f"Manufacturer catalogue specifications, not measurements of installed "
+            f"units: rated capacity is an upper bound that real duty rarely reaches. "
+            f"{meta['cooling_rows_usable']} of {meta['cooling_rows']} catalogue rows "
+            f"carry both a footprint and a capacity and are plotted; the rest are "
+            f"omitted rather than imputed. The dashed line is the median intensity of "
+            f"{med:,.0f} kW per m\u00b2, a summary of central tendency and not a fitted "
+            f"model - the three equipment classes have visibly different intensities, "
+            f"so applying one ratio to a mixed site introduces error. This is the step "
+            f"where most of the uncertainty in the IT power figures originates.")
+
+    fig = plt.figure(figsize=(11.6, 8.0))
+    ax = fig.add_axes(_rect(subtitle, note, left=0.085, width=0.875, xlabel_room=0.05))
+    for g in order:
+        pts = groups[g]
+        ax.scatter([p[0] for p in pts], [p[1] for p in pts], s=26,
+                   facecolor=tones.get(g, SERIES["prior"]), edgecolor="white",
+                   linewidth=0.4, alpha=0.75, label=f"{g}  (n={len(pts)})", zorder=3)
+    xs = [min(p[0] for p in allpts), max(p[0] for p in allpts)]
+    ax.plot(xs, [med * x for x in xs], color=MUTED, linewidth=1.2, linestyle="--",
+            zorder=2, label=f"Median intensity  {med:,.0f} kW/m\u00b2")
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlabel("Footprint of the unit (m\u00b2, log scale)", fontsize=10)
+    ax.set_ylabel("Rated cooling capacity (kW, log scale)", fontsize=10)
+    ax.grid(color=RULE, linewidth=0.7, which="major")
+    ax.set_axisbelow(True)
+    ax.legend(frameon=False, fontsize=9, loc="upper left")
+    frame(fig, ax, "DERIVED-05",
+          "Cooling hardware size predicts its capacity, and so a site's power",
+          subtitle, EPOCH_SRC, EPOCH_METH, note)
+    save(fig, "DERIVED-05", "ai-infrastructure")
+
+
+def build_d06(_r=None):
+    """Who builds the capacity versus who runs on it."""
+    rows = _sites()
+    meta = _dc_meta()["compute_h100e"]
+    own, use = {}, {}
+    for r in rows:
+        own[r["owner"]] = own.get(r["owner"], 0.0) + r["compute_h100e"]
+        use[r["primary_user"]] = use.get(r["primary_user"], 0.0) + r["compute_h100e"]
+    names = [n for n in dict.fromkeys(list(own) + list(use))
+             if own.get(n, 0) > 0 or use.get(n, 0) > 0]
+    names = sorted(names, key=lambda n: -max(own.get(n, 0), use.get(n, 0)))
+    total = sum(own.values())
+
+    subtitle = ("What it shows: observed compute by the company that owns each site "
+                "against the company recorded as its primary user. The gap between the "
+                "two is the rental market: labs run on capacity other companies built.")
+    note = (f"Observed data only, at the {meta['snapshot_date']} snapshot. Epoch records "
+            f"a user for {meta['sites_with_primary_user']} of {len(rows)} sites; where "
+            f"it does not, the site appears under \"Unknown\" on the user side, which "
+            f"is why the Unknown user bar is large. Only the first listed user is taken "
+            f"as primary, so shared sites are attributed whole to one tenant and the "
+            f"user side is coarser than the owner side. Both columns total the same "
+            f"{total/1e6:.1f}M H100-equivalents. Ownership and use are Epoch "
+            f"attributions carrying their own confidence tags, not contractual facts.")
+
+    fig = plt.figure(figsize=(11.8, 8.2))
+    ax = fig.add_axes(_rect(subtitle, note, left=0.165, width=0.775, xlabel_room=0.05, badge_above=True))
+    ys = list(range(len(names)))[::-1]
+    h = 0.38
+    ax.barh([y + h / 2 for y in ys], [own.get(n, 0) / 1e6 for n in names], height=h,
+            color=SERIES["current"], label="Owns the site", edgecolor="white",
+            linewidth=0.5)
+    ax.barh([y - h / 2 for y in ys], [use.get(n, 0) / 1e6 for n in names], height=h,
+            color=SERIES["other"], label="Primary user of the site", edgecolor="white",
+            linewidth=0.5)
+    ax.set_yticks(ys)
+    ax.set_yticklabels(names, fontsize=9.6)
+    ax.set_xlabel("Observed compute (millions of H100-equivalents)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.set_xlim(0, max(max(own.values()), max(use.values())) / 1e6 * 1.16)
+    ax.legend(loc="lower right", frameon=False, fontsize=9.2)
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "DERIVED-06",
+          "The largest users of AI compute are not the largest owners of it",
+          subtitle, EPOCH_SRC, EPOCH_METH, note)
+    save(fig, "DERIVED-06", "ai-infrastructure")
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
+BUILDERS.update({pid: (lambda _rows, _p=pid: build_owner_metric(_p)) for pid in OWNER_METRICS})
+BUILDERS.update({"DERIVED-01": build_d01, "DERIVED-02": build_d02,
+                 "DERIVED-03": build_d03, "DERIVED-04": build_d04,
+                 "DERIVED-05": build_d05, "DERIVED-06": build_d06})
 
 
 def main():

@@ -15,10 +15,14 @@
   <h1>AI Data Centers</h1>
   <p class="standfirst">The physical build-out behind AI compute: installed capacity, IT power, capital cost and hardware across the largest AI data centers worldwide.</p>
   <dl class="meta">
-    <div><dt>Charts published</dt><dd>2</dd></div>
+    <div><dt>Charts published</dt><dd>11</dd></div>
   </dl>
 </header>
 
+<div class="toc"><h2>Contents</h2><ol>
+<li><a href="#epoch-ai-published-visualizations">Epoch AI — Published Visualizations</a> <span class="count">5 of 5 published</span></li>
+<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">6 of 6 published</span></li>
+</ol></div>
 <div class="section" id="epoch-ai-published-visualizations">
 <h2>Epoch AI — Published Visualizations</h2>
 <p class="blurb">These reproduce Epoch AI&#x27;s own published views of the AI Data Centers dataset, rebuilt from the underlying CSVs rather than screenshotted. Observed data only — every future-dated milestone in the source is excluded, so nothing here is a projection.</p>
@@ -27,7 +31,7 @@
 <a class="pid" href="#EPOCH-01">EPOCH-01</a>
 <h3>Compute capacity of AI data centers</h3>
 </div>
-<p class="shows">Total installed compute capacity across the AI data centers Epoch tracks, reproduced from Epoch&#x27;s published dataset rather than screenshotted.</p>
+<p class="shows">Total installed compute across the tracked sites, reproduced from Epoch&#x27;s published dataset rather than screenshotted.</p>
 <div class="figure">
 <img src="charts/EPOCH-01.svg" alt="Compute capacity of AI data centers" width="864" height="569" loading="lazy">
 </div>
@@ -38,7 +42,7 @@
 <div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
 <div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
 <div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
-<div><dt>Note</dt><dd>Observed data only; 72 future-dated timeline records excluded as schedules. Compute is a modelled quantity Epoch derives from IT power and the likely chip mix</dd></div>
+<div><dt>Note</dt><dd>72 future-dated timeline records excluded as schedules. Compute is modelled by Epoch from IT power and the likely chip mix</dd></div>
 </dl>
 <p class="downloads"><a href="charts/EPOCH-01.svg" download>Download SVG</a><a href="charts/EPOCH-01.png" download>Download PNG</a></p>
 </section>
@@ -47,7 +51,7 @@
 <a class="pid" href="#EPOCH-02">EPOCH-02</a>
 <h3>IT power of AI data centers</h3>
 </div>
-<p class="shows">Total installed IT power across the same sites, reproduced from Epoch&#x27;s published dataset.</p>
+<p class="shows">Total installed IT power across the same sites.</p>
 <div class="figure">
 <img src="charts/EPOCH-02.svg" alt="IT power of AI data centers" width="864" height="569" loading="lazy">
 </div>
@@ -58,14 +62,194 @@
 <div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
 <div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
 <div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
-<div><dt>Note</dt><dd>Observed data only; 72 future-dated timeline records excluded. IT power is the computing load only — facility power runs about 1.28x higher</dd></div>
+<div><dt>Note</dt><dd>IT power is the computing load only — facility power runs about 1.28x higher</dd></div>
 </dl>
 <p class="downloads"><a href="charts/EPOCH-02.svg" download>Download SVG</a><a href="charts/EPOCH-02.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="EPOCH-03">
+<div class="chart-head">
+<a class="pid" href="#EPOCH-03">EPOCH-03</a>
+<h3>Compute capacity of AI data centers, by company</h3>
+</div>
+<p class="shows">The same Epoch view broken out by owner, matching Epoch&#x27;s colour-by-owner option. Interactive version available.</p>
+<div class="figure">
+<img src="charts/EPOCH-03.svg" alt="Compute capacity of AI data centers, by company" width="864" height="598" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_centers.csv, data_center_timelines.csv)</dd></div>
+<div><dt>Granularity</dt><dd>Site-level cumulative milestone records, step-summed across sites to a daily series</dd></div>
+<div><dt>Coverage</dt><dd>Observed 2023-01-01 to 2026-08-06 (snapshot); last recorded milestone 2026-08-02</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>Owner shares sum to Epoch&#x27;s published total exactly. Ownership is not the same as use — see DERIVED-06</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/EPOCH-03.html" target="_blank" rel="noopener">Open interactive chart &#8599;</a><a href="charts/EPOCH-03.svg" download>Download SVG</a><a href="charts/EPOCH-03.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="EPOCH-04">
+<div class="chart-head">
+<a class="pid" href="#EPOCH-04">EPOCH-04</a>
+<h3>IT power of AI data centers, by company</h3>
+</div>
+<p class="shows">Installed IT power by owner, on the same observed basis. Interactive version available.</p>
+<div class="figure">
+<img src="charts/EPOCH-04.svg" alt="IT power of AI data centers, by company" width="864" height="598" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_centers.csv, data_center_timelines.csv)</dd></div>
+<div><dt>Granularity</dt><dd>Site-level cumulative milestone records, step-summed across sites to a daily series</dd></div>
+<div><dt>Coverage</dt><dd>Observed 2023-01-01 to 2026-08-06 (snapshot); last recorded milestone 2026-08-02</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>&quot;Unknown&quot; is Epoch&#x27;s own label where ownership is unattributed, not a residual we computed</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/EPOCH-04.html" target="_blank" rel="noopener">Open interactive chart &#8599;</a><a href="charts/EPOCH-04.svg" download>Download SVG</a><a href="charts/EPOCH-04.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="EPOCH-05">
+<div class="chart-head">
+<a class="pid" href="#EPOCH-05">EPOCH-05</a>
+<h3>Capital cost of AI data centers, by company</h3>
+</div>
+<p class="shows">Modelled capital cost by owner, the third of Epoch&#x27;s three metric views. Interactive version available.</p>
+<div class="figure">
+<img src="charts/EPOCH-05.svg" alt="Capital cost of AI data centers, by company" width="864" height="598" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_centers.csv, data_center_timelines.csv)</dd></div>
+<div><dt>Granularity</dt><dd>Site-level cumulative milestone records, step-summed across sites to a daily series</dd></div>
+<div><dt>Coverage</dt><dd>Observed 2023-01-01 to 2026-08-06 (snapshot); last recorded milestone 2026-08-02</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>Cost is modelled entirely from IT power via a cost-per-watt model; it is not company-reported spend</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/EPOCH-05.html" target="_blank" rel="noopener">Open interactive chart &#8599;</a><a href="charts/EPOCH-05.svg" download>Download SVG</a><a href="charts/EPOCH-05.png" download>Download PNG</a></p>
 </section>
 </div>
 <div class="section" id="derived-analysis">
 <h2>Derived Analysis</h2>
-<p class="blurb">Additional analytical visualizations derived from the underlying Epoch AI datasets will be added separately.</p>
+<p class="blurb">Our own analysis of the same underlying Epoch AI files — questions the published views do not answer. Same observed-only rule throughout.</p>
+<section class="chart" id="DERIVED-01">
+<div class="chart-head">
+<a class="pid" href="#DERIVED-01">DERIVED-01</a>
+<h3>AI compute is concentrated, but not in a single site</h3>
+</div>
+<p class="shows">The 15 largest sites by observed compute, and the share of the tracked total they account for.</p>
+<div class="figure">
+<img src="charts/DERIVED-01.svg" alt="AI compute is concentrated, but not in a single site" width="864" height="619" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_centers.csv, data_center_timelines.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per tracked site, at the snapshot</dd></div>
+<div><dt>Coverage</dt><dd>Observed 2023-01-01 to 2026-08-06 (snapshot); last recorded milestone 2026-08-02</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>Concentration is measured across Epoch&#x27;s coverage, which is biased toward the largest sites</dd></div>
+</dl>
+<p class="downloads"><a href="charts/DERIVED-01.svg" download>Download SVG</a><a href="charts/DERIVED-01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="DERIVED-02">
+<div class="chart-head">
+<a class="pid" href="#DERIVED-02">DERIVED-02</a>
+<h3>The tracked build-out is almost entirely American</h3>
+</div>
+<p class="shows">Observed compute and tracked site count by country.</p>
+<div class="figure">
+<img src="charts/DERIVED-02.svg" alt="The tracked build-out is almost entirely American" width="835" height="569" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_centers.csv, data_center_timelines.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per tracked site, at the snapshot</dd></div>
+<div><dt>Coverage</dt><dd>Observed 2023-01-01 to 2026-08-06 (snapshot); last recorded milestone 2026-08-02</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>93.9% US is partly real and partly coverage — Epoch&#x27;s database is strongest in the US and still expanding elsewhere</dd></div>
+</dl>
+<p class="downloads"><a href="charts/DERIVED-02.svg" download>Download SVG</a><a href="charts/DERIVED-02.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="DERIVED-03">
+<div class="chart-head">
+<a class="pid" href="#DERIVED-03">DERIVED-03</a>
+<h3>Epoch&#x27;s cost model puts roughly two-thirds of the capital in chips</h3>
+</div>
+<p class="shows">Observed capital cost split into compute hardware and construction, by owner.</p>
+<div class="figure">
+<img src="charts/DERIVED-03.svg" alt="Epoch&#x27;s cost model puts roughly two-thirds of the capital in chips" width="850" height="576" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_centers.csv, data_center_timelines.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per tracked site, at the snapshot</dd></div>
+<div><dt>Coverage</dt><dd>Observed 2023-01-01 to 2026-08-06 (snapshot); last recorded milestone 2026-08-02</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>The chips/buildings ratio is fixed by Epoch&#x27;s cost model and identical for every owner — read scale, not cost structure</dd></div>
+</dl>
+<p class="downloads"><a href="charts/DERIVED-03.svg" download>Download SVG</a><a href="charts/DERIVED-03.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="DERIVED-04">
+<div class="chart-head">
+<a class="pid" href="#DERIVED-04">DERIVED-04</a>
+<h3>Custom silicon carries as much of the installed fleet as Nvidia does</h3>
+</div>
+<p class="shows">Accelerators installed by chip type over time, at the sites where Epoch records a chip breakdown.</p>
+<div class="figure">
+<img src="charts/DERIVED-04.svg" alt="Custom silicon carries as much of the installed fleet as Nvidia does" width="864" height="598" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_center_chip_quantities.csv)</dd></div>
+<div><dt>Granularity</dt><dd>Site and chip-type level cumulative counts, aggregated to a daily series</dd></div>
+<div><dt>Coverage</dt><dd>Observed 2023-01-01 to 2026-08-06 (snapshot); last recorded milestone 2026-08-02</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>Units are counted, not performance-weighted, and only 16 of 219 chip records are company disclosures</dd></div>
+</dl>
+<p class="downloads"><a href="charts/DERIVED-04.svg" download>Download SVG</a><a href="charts/DERIVED-04.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="DERIVED-05">
+<div class="chart-head">
+<a class="pid" href="#DERIVED-05">DERIVED-05</a>
+<h3>Cooling hardware size predicts its capacity, and so a site&#x27;s power</h3>
+</div>
+<p class="shows">Rated cooling capacity against physical footprint for every unit in Epoch&#x27;s two equipment catalogues — the measurement backbone of the dataset.</p>
+<div class="figure">
+<img src="charts/DERIVED-05.svg" alt="Cooling hardware size predicts its capacity, and so a site&#x27;s power" width="835" height="576" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_center_cooling_towers.csv, data_center_chillers.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per equipment model in the reference catalogue</dd></div>
+<div><dt>Coverage</dt><dd>Catalogue reference data (snapshot downloaded 2026-08-06); not a time series</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>Manufacturer catalogue ratings, not measurements of installed units; rated capacity is an upper bound</dd></div>
+</dl>
+<p class="downloads"><a href="charts/DERIVED-05.svg" download>Download SVG</a><a href="charts/DERIVED-05.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="DERIVED-06">
+<div class="chart-head">
+<a class="pid" href="#DERIVED-06">DERIVED-06</a>
+<h3>The largest users of AI compute are not the largest owners of it</h3>
+</div>
+<p class="shows">Observed compute by the company that owns each site against the company recorded as its primary user.</p>
+<div class="figure">
+<img src="charts/DERIVED-06.svg" alt="The largest users of AI compute are not the largest owners of it" width="850" height="590" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Data Centers (data_centers.csv, data_center_timelines.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per tracked site, at the snapshot</dd></div>
+<div><dt>Coverage</dt><dd>Observed 2023-01-01 to 2026-08-06 (snapshot); last recorded milestone 2026-08-02</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Observed data only; projected/future observations excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-data-centers" rel="noopener">Epoch AI — AI Data Centers</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published data centers documentation</dd></div>
+<div><dt>Note</dt><dd>Epoch records a user for 56 of 77 sites; only the first listed user is taken as primary</dd></div>
+</dl>
+<p class="downloads"><a href="charts/DERIVED-06.svg" download>Download SVG</a><a href="charts/DERIVED-06.png" download>Download PNG</a></p>
+</section>
 </div>
 
 <footer class="foot">

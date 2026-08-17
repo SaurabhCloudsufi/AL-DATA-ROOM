@@ -63,12 +63,10 @@ DOMAINS = [
                 "dataset, rebuilt from the underlying CSVs rather than screenshotted. "
                 "Observed data only — every future-dated milestone in the source is "
                 "excluded, so nothing here is a projection.",
+            "Derived Analysis":
+                "Our own analysis of the same underlying Epoch AI files — questions the "
+                "published views do not answer. Same observed-only rule throughout.",
         },
-        "extra_sections": [
-            {"title": "Derived Analysis",
-             "body": "Additional analytical visualizations derived from the underlying "
-                     "Epoch AI datasets will be added separately."},
-        ],
         "live": True,
     },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
@@ -173,6 +171,11 @@ def chart_files(slug, pid):
     return ((base / f"{pid}.svg").exists(), (base / f"{pid}.png").exists())
 
 
+def has_interactive(slug, pid):
+    """A self-contained interactive companion, if one was generated."""
+    return (REPO / slug / "charts" / f"{pid}.html").exists()
+
+
 def render_chart(slug, p):
     pid = p["Plot_ID"]
     has_svg, has_png = chart_files(slug, pid)
@@ -238,8 +241,11 @@ def render_chart(slug, p):
         parts.append(f"<div><dt>Note</dt><dd>{e(note)}</dd></div>")
     parts.append("</dl>")
 
-    if has_svg or has_png:
+    if has_svg or has_png or has_interactive(slug, pid):
         links = []
+        if has_interactive(slug, pid):
+            links.append(f'<a class="interactive" href="charts/{e(pid)}.html" '
+                         f'target="_blank" rel="noopener">Open interactive chart &#8599;</a>')
         if has_svg:
             links.append(f'<a href="charts/{e(pid)}.svg" download>Download SVG</a>')
         if has_png:

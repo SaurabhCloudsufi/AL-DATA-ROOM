@@ -1,0 +1,161 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IT power of AI data centers, by company</title>
+<style>
+  :root {{ color-scheme: light; }}
+  * {{ box-sizing: border-box; }}
+  body {{ margin:0; padding:14px 16px 10px; background:#fff; color:#1a1a1a;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }}
+  .hd {{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }}
+  .pid {{ font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }}
+  h1 {{ font-size:15px; margin:0; font-weight:700; }}
+  .sub {{ color:#6b7280; font-size:12px; margin:2px 0 8px; }}
+  .badge {{ display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }}
+  .legend {{ display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }}
+  .lg {{ display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+         font-size:12px; border:0; background:none; padding:2px 3px; color:#1a1a1a; }}
+  .lg .sw {{ width:12px; height:12px; border-radius:2px; flex:none; }}
+  .lg[aria-pressed="true"] {{ opacity:.32; text-decoration:line-through; }}
+  .lg:focus-visible {{ outline:2px solid #1f3864; outline-offset:2px; }}
+  svg {{ width:100%; height:auto; display:block; touch-action:none; }}
+  .grid {{ stroke:#d7dbe2; stroke-width:1; }}
+  .axis {{ fill:#6b7280; font-size:11px; }}
+  .guide {{ stroke:#1a1a1a; stroke-width:1; stroke-dasharray:3 3; }}
+  .tip {{ position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px; box-shadow:0 4px 14px rgba(0,0,0,.10);
+          opacity:0; transition:opacity .08s; max-width:280px; z-index:5; }}
+  .tip b {{ display:block; margin-bottom:4px; font-size:11.5px; color:#6b7280; font-weight:600; }}
+  .tip .row {{ display:flex; align-items:center; gap:7px; white-space:nowrap; }}
+  .tip .row span.sw {{ width:9px; height:9px; border-radius:2px; flex:none; }}
+  .tip .row i {{ font-style:normal; margin-left:auto; font-variant-numeric:tabular-nums;
+                 padding-left:14px; }}
+  .tot {{ border-top:1px solid #d7dbe2; margin-top:5px; padding-top:4px; font-weight:700; }}
+  .foot {{ color:#6b7280; font-size:11px; margin-top:6px; }}
+</style>
+<div class="hd"><span class="pid">EPOCH-04</span><h1>IT power of AI data centers, by company</h1></div>
+<div class="sub">Observed to 2026-08-06 across 77 tracked sites; 72 future-dated milestones excluded. <span class="badge">OBSERVED DATA ONLY</span></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" viewBox="0 0 1000 470" role="img" aria-label="IT power of AI data centers, by company"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Hover to read every owner at a date; click a legend entry to remove it from
+the stack. Source: Epoch AI, AI Data Centers (CC-BY). Observed to 2026-08-06; projected
+milestones excluded.</div>
+<script>
+const D = {"dates":[1672531200000,1674432000000,1682294400000,1688083200000,1693353600000,1704067200000,1706486400000,1706659200000,1711929600000,1712534400000,1713571200000,1714348800000,1714435200000,1716508800000,1719100800000,1719792000000,1721347200000,1722643200000,1723334400000,1725235200000,1726185600000,1727740800000,1731974400000,1735603200000,1736985600000,1738627200000,1739750400000,1740009600000,1740787200000,1741305600000,1745884800000,1747267200000,1748649600000,1748736000000,1748908800000,1749945600000,1750636800000,1751241600000,1751328000000,1753142400000,1756080000000,1756684800000,1758067200000,1758844800000,1759276800000,1760400000000,1760832000000,1761523200000,1761868800000,1761955200000,1762473600000,1763510400000,1763942400000,1764547200000,1765065600000,1765238400000,1766448000000,1766534400000,1767139200000,1767398400000,1768694400000,1769040000000,1769904000000,1770940800000,1771113600000,1771545600000,1771804800000,1772150400000,1772323200000,1772409600000,1774224000000,1774915200000,1775174400000,1775433600000,1776211200000,1776297600000,1776384000000,1776556800000,1777420800000,1777593600000,1778025600000,1778544000000,1778716800000,1778803200000,1779062400000,1779235200000,1779494400000,1779926400000,1780185600000,1780272000000,1780531200000,1781395200000,1781481600000,1781568000000,1781740800000,1781827200000,1782777600000,1782864000000,1783036800000,1783382400000,1784073600000,1784937600000,1785542400000,1785628800000],"series":[{"name":"Google","values":[0.0,79.0,79.0,79.0,160.0,228.0,228.0,228.0,293.0,372.0,440.0,539.0,539.0,539.0,539.0,539.0,592.0,750.0,750.0,750.0,829.0,829.0,987.0,987.0,987.0,987.0,987.0,987.0,1052.0,1129.0,1228.0,1228.0,1228.0,1307.0,1307.0,1386.0,1386.0,1466.0,1556.0,1556.0,1633.0,1721.0,1721.0,1721.0,1807.0,1920.0,1920.0,1920.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,1989.0,2058.0,2135.0,2222.0,2222.0,2363.0,2363.0,2363.0,2363.0,2444.0,2444.0,2444.0,2444.0,2444.0,2444.0,2444.0,2444.0,2521.0,2521.0,2521.0,2600.0,2634.0,2634.0,2713.0,2713.0,2713.0,2818.0,2818.0],"color":"#1f3864"},{"name":"Meta","values":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,76.0,76.0,76.0,76.0,76.0,76.0,76.0,76.0,76.0,209.0,361.0,361.0,361.0,361.0,361.0,624.0,624.0,624.0,624.0,624.0,624.0,624.0,693.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,780.0,934.0,934.0,934.0,1003.0,1003.0,1155.0,1333.0,1333.0,1420.0,1420.0,1573.0,1751.0,1751.0,1751.0,1751.0,1751.0,1893.0,2045.0,2045.0,2125.0],"color":"#4a6fa5"},{"name":"Microsoft","values":[48.0,48.0,88.0,135.0,135.0,135.0,135.0,135.0,135.0,135.0,135.0,135.0,135.0,182.0,182.0,201.0,201.0,201.0,201.0,201.0,201.0,201.0,201.0,201.0,242.0,242.0,242.0,242.0,337.0,337.0,337.0,337.0,337.0,337.0,337.0,337.0,337.0,337.0,337.0,337.0,337.0,458.0,458.0,458.0,458.0,779.0,779.0,779.0,779.0,779.0,779.0,779.0,779.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,807.0,835.0,835.0,835.0,835.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1204.0,1519.0,1519.0,1519.0,1519.0,1519.0,1519.0,1519.0,1519.0,1519.0,1519.0,1519.0,1519.0,1519.0],"color":"#6b8f71"},{"name":"Amazon","values":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,682.0,910.0,910.0,910.0,910.0,910.0,910.0,910.0,910.0,910.0,910.0,910.0,910.0,910.0,910.0,1194.0,1194.0,1194.0,1194.0,1194.0,1194.0,1194.0,1194.0,1194.0,1194.0,1194.0,1194.0,1194.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0,1422.0],"color":"#b4763a"},{"name":"SpaceXAI","values":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.0,139.0,139.0,139.0,139.0,139.0,139.0,139.0,278.0,295.3297,295.3297,295.3297,295.3297,295.3297,295.3297,295.3297,295.3297,295.3297,295.3297,295.3297,295.3297,357.3297,357.3297,357.3297,285.3297,285.3297,285.3297,285.3297,524.3297,524.3297,524.3297,524.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,596.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,847.3297,1303.3297,1303.3297,1303.3297,1303.3297,1303.3297,1303.3297,1303.3297,1303.3297,1303.3297,1303.3297,1303.3297,1303.3297],"color":"#7d5a7d"},{"name":"Unknown","values":[0.0,0.0,0.0,0.0,0.0,0.0,47.0,47.0,47.0,47.0,47.0,47.0,47.0,47.0,94.0,94.0,94.0,94.0,94.0,94.0,94.0,179.0,179.0,229.0,229.0,349.0,349.0,349.0,349.0,349.0,349.0,349.0,349.0,349.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,397.0,445.0,445.0,445.0,445.0,445.0,445.0,445.0,517.0,517.0,517.0,707.0,707.0,755.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,787.0,851.0,851.0,851.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0,983.0],"color":"#4e8a8b"},{"name":"CoreWeave","values":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,18.0,18.0,18.0,18.0,18.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,27.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,85.0,85.0,85.0,85.0,85.0,103.0,103.0,103.0,103.0,103.0,103.0,162.0,162.0,162.0,162.0,162.0,162.0,162.0,190.0,254.0,254.0,254.0,290.0,290.0,290.0,290.0,290.0,290.0,290.0,290.0,290.0,290.0,290.0,319.0,319.0,319.0,319.0,319.0,374.0,374.0,374.0,374.0,374.0,374.0,374.0,374.0,374.0,374.0,374.0,506.0,506.0,637.0,637.0,637.0,637.0,637.0,637.0],"color":"#9aa9c4"},{"name":"Oracle","values":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,33.0,33.0,33.0,33.0,33.0,33.0,33.0,33.0,33.0,33.0,33.0,33.0,138.0,138.0,138.0,138.0,138.0,138.0,138.0,138.0,138.0,138.0,138.0,138.0,138.0,138.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,244.0,283.0,283.0,283.0,283.0,283.0,283.0,283.0,283.0,283.0,283.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0,493.0],"color":"#a46b6b"},{"name":"Huawei","values":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,47.6,47.6,47.6,47.6,47.6,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,95.3,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,150.2,241.8,241.8,241.8,241.8,241.8,241.8,241.8],"color":"#8a8f5c"},{"name":"Other owners","values":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,38.0,38.0,38.0,38.0,123.0,123.0,139.0,139.0,139.0,139.0,139.0,272.0,272.0,272.0,272.0,322.0,322.0,322.0,322.0,322.0,322.0,406.0,406.0,406.0,406.0,406.0,406.0,406.0,406.0,406.0,406.0,406.0,406.0,448.0,481.0,481.0,531.0,531.0,531.0,531.0,531.0,531.0,531.0,531.0,531.0,531.0,531.0,531.0,531.0,531.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0,573.0],"color":"#c3c8d1"}],"scale":1000.0,"unit":" GW","dp":1,"ylabel":"Installed IT power (GW)"};
+
+function niceTicks(max, count) {
+  if (!(max > 0)) return [0];
+  const raw = max / count, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const norm = raw / mag;
+  const step = (norm >= 5 ? 10 : norm >= 2 ? 5 : norm >= 1 ? 2 : 1) * mag;
+  const out = [];
+  for (let v = 0; v <= max * 1.0000001; v += step) out.push(v);
+  return out;
+}
+
+function geometry(D, hidden, W, H, M) {
+  const vis = D.series.filter(s => !hidden.has(s.name));
+  const n = D.dates.length;
+  const tops = new Array(n).fill(0);
+  const bands = [];
+  for (const s of vis) {
+    const lower = tops.slice();
+    for (let i = 0; i < n; i++) tops[i] += s.values[i];
+    bands.push({ name: s.name, color: s.color, lower, upper: tops.slice() });
+  }
+  const yMax = Math.max(1e-9, Math.max.apply(null, tops)) * 1.08;
+  const x0 = D.dates[0], x1 = D.dates[n - 1];
+  const sx = t => M.l + (t - x0) / (x1 - x0) * (W - M.l - M.r);
+  const sy = v => H - M.b - v / yMax * (H - M.t - M.b);
+
+  for (const b of bands) {
+    let d = "";
+    for (let i = 0; i < n; i++) d += (i ? "L" : "M") + sx(D.dates[i]).toFixed(2) + " " + sy(b.upper[i]).toFixed(2);
+    for (let i = n - 1; i >= 0; i--) d += "L" + sx(D.dates[i]).toFixed(2) + " " + sy(b.lower[i]).toFixed(2);
+    b.path = d + "Z";
+  }
+  return { bands, yMax, tops, sx, sy, yTicks: niceTicks(yMax, 5) };
+}
+
+function nearestIndex(D, t) {
+  let lo = 0, hi = D.dates.length - 1;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (D.dates[mid] < t) lo = mid + 1; else hi = mid;
+  }
+  if (lo > 0 && Math.abs(D.dates[lo - 1] - t) <= Math.abs(D.dates[lo] - t)) lo--;
+  return lo;
+}
+
+const W=1000, H=470, M={{l:74,r:16,t:14,b:34}};
+const svg=document.getElementById('c'), tip=document.getElementById('tip'), lgw=document.getElementById('lg');
+const hidden=new Set();
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}};
+const fmt=v=>(v/D.scale).toLocaleString('en-US',{{minimumFractionDigits:D.dp,maximumFractionDigits:D.dp}})+D.unit;
+const dstr=t=>new Date(t).toISOString().slice(0,10);
+
+function drawLegend(){{
+  lgw.innerHTML='';
+  D.series.forEach(s=>{{
+    const b=document.createElement('button');
+    b.className='lg'; b.type='button';
+    b.setAttribute('aria-pressed', hidden.has(s.name)?'true':'false');
+    b.innerHTML='<span class="sw" style="background:'+s.color+'"></span>'+s.name;
+    b.onclick=()=>{{ hidden.has(s.name)?hidden.delete(s.name):hidden.add(s.name); drawLegend(); draw(); }};
+    lgw.appendChild(b);
+  }});
+}}
+
+let G=null;
+function draw(){{
+  G=geometry(D,hidden,W,H,M);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  G.yTicks.forEach(v=>{{
+    const y=G.sy(v);
+    svg.appendChild(el('line',{{x1:M.l,x2:W-M.r,y1:y,y2:y,class:'grid'}}));
+    const t=el('text',{{x:M.l-8,y:y+4,class:'axis','text-anchor':'end'}});
+    t.textContent=fmt(v); svg.appendChild(t);
+  }});
+  const y0=new Date(D.dates[0]).getUTCFullYear(), y1=new Date(D.dates[D.dates.length-1]).getUTCFullYear();
+  for(let y=y0;y<=y1;y++){{
+    const t=Date.UTC(y,0,1); if(t<D.dates[0]||t>D.dates[D.dates.length-1]) continue;
+    const x=G.sx(t);
+    const lab=el('text',{{x:x,y:H-M.b+18,class:'axis','text-anchor':'middle'}});
+    lab.textContent=y; svg.appendChild(lab);
+  }}
+  G.bands.forEach(b=>svg.appendChild(el('path',{{d:b.path,fill:b.color,stroke:'#fff','stroke-width':.4}})));
+  svg.appendChild(el('line',{{x1:M.l,x2:W-M.r,y1:H-M.b,y2:H-M.b,class:'grid'}}));
+  const g=el('line',{{class:'guide',id:'gd',y1:M.t,y2:H-M.b,x1:-99,x2:-99}}); svg.appendChild(g);
+}}
+
+function move(ev){{
+  if(!G) return;
+  const r=svg.getBoundingClientRect();
+  const px=(ev.clientX-r.left)/r.width*W;
+  if(px<M.l||px>W-M.r){{ tip.style.opacity=0; return; }}
+  const t=D.dates[0]+(px-M.l)/(W-M.l-M.r)*(D.dates[D.dates.length-1]-D.dates[0]);
+  const i=nearestIndex(D,t);
+  const gd=document.getElementById('gd'); const gx=G.sx(D.dates[i]);
+  gd.setAttribute('x1',gx); gd.setAttribute('x2',gx);
+  let rows='', tot=0;
+  D.series.forEach(s=>{{
+    if(hidden.has(s.name)) return;
+    const v=s.values[i]; tot+=v;
+    if(v>0) rows+='<div class="row"><span class="sw" style="background:'+s.color+'"></span>'+s.name+'<i>'+fmt(v)+'</i></div>';
+  }});
+  tip.innerHTML='<b>'+dstr(D.dates[i])+'</b>'+rows+'<div class="row tot">Total<i>'+fmt(tot)+'</i></div>';
+  tip.style.opacity=1;
+  const left=gx/W*r.width;
+  tip.style.left=Math.min(Math.max(8,left+14), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top='8px';
+}}
+svg.addEventListener('mousemove',move);
+svg.addEventListener('mouseleave',()=>{{tip.style.opacity=0;}});
+drawLegend(); draw();
+</script>
