@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------- secrets
+.env
+.env.*
+*.key
+*.pem
+credentials*.json
+service-account*.json
+token.json
+.netrc
+
+# ------------------------------------------------- private working datasets
+# Only data cleared for public release belongs in this repository.
+# The published company disclosures are an explicit exception, re-included below.
+*.xlsx
+*.xls
+*.docx
+/data/
+/private/
+/raw/
+**/data/raw/
+**/data/private/
+
+# Large staged source files that stay in the private project store
+AzureLLMInferenceTrace*.csv
+AzureLMMInferenceTrace*.csv
+aei_*.csv
+rankings_*.csv
+app_rankings_*.csv
+price-history_*.csv
+model_prices_and_context_window.json
+
+# Public, source-linked disclosures travel with the site for reproducibility
+!inference-tokens/data/company_disclosures.csv
+!build/plot_index.csv
+!build/company_disclosures.csv
+
+# ---------------------------------------------------------------- python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ---------------------------------------------------------------- os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,277 @@
+Plot_ID,Chart_title,Datasets_used,What_the_chart_shows,Methodology_reference,Chart_link,Status,Owning_dataset,Source_name,Source_url
+P-01,Annualised throughput by disclosing provider (grouped bar),"Company-Disclosed Inference Throughput
+Inputs: Method 1 provider disclosures (Google, OpenAI, Microsoft)","The bottom-up Method 1 subtotal, provider by provider.
+Axes: Provider vs Annualised tokens/yr (quadrillions).
+Note — Label each bar with its disclosure date; state that Google and OpenAI are spot rates annualised.","§7.3 — Method 1, Direct Provider Throughput",,Not started,Company-Disclosed Inference Throughput,Primary company disclosures:,https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm
+P-02,Spot-rate to annualised conversion (waterfall),"Company-Disclosed Inference Throughput
+Inputs: Alphabet Q2 2026 disclosure","How 22bn tokens/min becomes 11.6 quadrillion/yr.
+Axes: Conversion step vs Tokens.
+Note — Label the constancy assumption explicitly at the annualisation step.","§7.3 — Method 1, Direct Provider Throughput",,Not started,Company-Disclosed Inference Throughput,Primary company disclosures:,https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm
+P-03,API-only vs all-surfaces scope ladder (scope ladder / nested bar),"Company-Disclosed Inference Throughput
+Inputs: Google API vs Google all-surfaces","That the all-surfaces figure contains the API figure.
+Axes: Scope vs Tokens/month.
+Note — Caption with de-dup rule 2: never add these two.","§7.3 — Method 1, Direct Provider Throughput",,Not started,Company-Disclosed Inference Throughput,Primary company disclosures:,https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm
+P-04,OpenAI vs Google share of Method 1 subtotal (stacked bar with share labels),"Company-Disclosed Inference Throughput
+Inputs: OpenAI vs Google","How concentrated the measurable total is in two providers.
+Axes: Provider vs Share of Method 1 subtotal.
+Note — Disclosure dates differ (Mar 2026 vs Q2 2026) - state it.","§7.3 — Method 1, Direct Provider Throughput",,Not started,Company-Disclosed Inference Throughput,Primary company disclosures:,https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm
+P-05,Microsoft Foundry quarterly vs annual run rate (line + reference band),"Company-Disclosed Inference Throughput
+Inputs: Microsoft FY25 quarterly vs annual","Whether quarterly scaling reconciles to the disclosed FY25 annual run rate.
+Axes: Fiscal quarter vs Tokens.
+Note — Mark the FY/CY boundary (Microsoft FY25 ends 30 Jun 2025).","§7.3 — Method 1, Direct Provider Throughput",,Not started,Company-Disclosed Inference Throughput,Primary company disclosures:,https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm
+P-06,"Gateway vs owner attribution overlap (stacked bar, overlap shaded)","Company-Disclosed Inference Throughput
+Inputs: Microsoft Foundry vs OpenAI overlap","The double-count risk from gateway-served traffic.
+Axes: Attribution basis vs Tokens.
+Note — Cite de-dup rule 1: count at the model owner, not the gateway.","§7.3 — Method 1, Direct Provider Throughput",,Not started,Company-Disclosed Inference Throughput,Primary company disclosures:,https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm
+P-07,"Daily tokens by company over time (scatter/line, log y)","Epoch AI — AI Companies: Usage Reports
+Inputs: ai_companies_usage_reports","Every disclosed daily-token figure on one timeline.
+Axes: Report date vs Daily tokens.
+Note — Encode the confidence field as marker size or opacity.","§7.3 — Method 1, Direct Provider Throughput",,Not started,Epoch AI — AI Companies: Usage Reports,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-08,Disclosure coverage matrix (heatmap / presence matrix),"Epoch AI — AI Companies: Usage Reports
+Inputs: ai_companies_usage_reports","Which providers disclose tokens at all, and how often.
+Axes: Quarter vs Company.
+Note — Empty cells are the collection gap - label them, do not hide them.","§7.3 — Method 1, Direct Provider Throughput",,Not started,Epoch AI — AI Companies: Usage Reports,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-09,Tokens per active user by product (bar),"Epoch AI — AI Companies: Usage Reports
+Inputs: ai_companies_usage_reports","The bridge between usage-based and throughput-based estimates.
+Axes: Product vs Tokens per active user.
+Note — Note where the user-count definition differs by provider.","§7.3 — Method 1, Direct Provider Throughput",,Not started,Epoch AI — AI Companies: Usage Reports,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-10,"Annualised revenue by company and scope (line, faceted by scope)","Epoch AI — AI Companies: Revenue Reports
+Inputs: ai_companies_revenue_reports","Revenue trajectories, kept separate by revenue scope.
+Axes: Reporting date vs Annualised revenue.
+Note — Never pool API-only and company-wide scopes on one line.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,Epoch AI — AI Companies: Revenue Reports,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-11,Revenue scope composition (stacked bar),"Epoch AI — AI Companies: Revenue Reports
+Inputs: ai_companies_revenue_reports","How much of the revenue register is usable for Method 2.
+Axes: Scope type vs Count of records.
+Note — API-only records are the usable subset; label the rest.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,Epoch AI — AI Companies: Revenue Reports,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-12,Revenue to implied tokens under price scenarios (tornado / range bar),"Epoch AI — AI Companies: Revenue Reports
+Inputs: Revenue reports x price registry","How wide the Method 2 output is before the price is fixed.
+Axes: Provider vs Implied tokens under low/base/high price.
+Note — Show the price assumption used for each scenario in the axis label.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,Epoch AI — AI Companies: Revenue Reports,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-13,"Anthropic token sensitivity to price assumption (sensitivity curve, log-log)","Epoch AI — AI Companies: Revenue Reports
+Inputs: Anthropic Series H x price registry","That Anthropic's token estimate moves by the same factor as the price assumption.
+Axes: Assumed $/M tokens vs Implied annual tokens.
+Note — Mark the current working assumption; note this is a blocking open decision.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,Epoch AI — AI Companies: Revenue Reports,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-14,Blended 3:1 list price per model over time (multi-line),"BenchLM — Frontier Model Pricing, Capability and Model Mapping Data
+Inputs: benchlm-pricing + frontier map","Frontier price movement on the project's standard cost metric.
+Axes: Date vs Blended 3:1 list price ($/M).
+Note — State the 3:1 input:output blend in the title; list prices not realised.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,"BenchLM — Frontier Model Pricing, Capability and Model Mapping Data",BenchLM — model pricing and capability data (staged in project Drive),
+P-15,"Price vs capability frontier (scatter, log y)","BenchLM — Frontier Model Pricing, Capability and Model Mapping Data
+Inputs: benchlm-pricing + leaderboard","The price-capability frontier that weights the Method 2 denominator.
+Axes: Capability index vs Blended price ($/M).
+Note — Mark the frontier envelope; label the 29 mapped frontier models.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,"BenchLM — Frontier Model Pricing, Capability and Model Mapping Data",BenchLM — model pricing and capability data (staged in project Drive),
+P-16,"List price decline by model family (multi-line, log y)","LLM Cost Hub — Model Price History and Current Pricing
+Inputs: price-history_llmcosthub","Price decline by model family over the full history.
+Axes: Date vs List price ($/M).
+Note — This is the fix for OpenRouter's current-only prices (caveat 13).","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,LLM Cost Hub — Model Price History and Current Pricing,LLM Cost Hub (staged in project Drive),
+P-17,Blended effective price index over time (line),"LLM Cost Hub — Model Price History and Current Pricing
+Inputs: price-history_llmcosthub","The time-varying price that Methods 2 and 3 divide by.
+Axes: Date vs Blended effective price index.
+Note — Do NOT apply today's price retroactively - that is the whole point of this chart.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,LLM Cost Hub — Model Price History and Current Pricing,LLM Cost Hub (staged in project Drive),
+P-18,Cached vs standard input price ratio (grouped bar),"LiteLLM — Model Price and Context Window Registry
+Inputs: model_prices_and_context_window","The cached-token discount actually published, not assumed.
+Axes: Provider vs Cached : standard input price ratio.
+Note — Feeds the Method 3 cache adjustment - link to Variable 6.","§7.5 — Method 3, Enterprise Spend (cache adjustment)",,Not started,LiteLLM — Model Price and Context Window Registry,LiteLLM — model price and context window registry,https://github.com/BerriAI/litellm
+P-19,Model coverage by price source (bar),"LiteLLM — Model Price and Context Window Registry
+Inputs: All price registries","Relative breadth of each price source.
+Axes: Source vs Models covered.
+Note — Breadth is not authority - provider pages win on conflict.","§7.5 — Method 3, Enterprise Spend (cache adjustment)",,Not started,LiteLLM — Model Price and Context Window Registry,LiteLLM — model price and context window registry,https://github.com/BerriAI/litellm
+P-20,Cross-source price agreement scatter (scatter with 45-degree line),"Cross-Source Price Verification Set
+Inputs: Cross-source price comparison","Whether the price registries actually agree.
+Axes: Price in source A vs Price in source B.
+Note — Agreement is weak evidence if sources scrape the same pages - caption it.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,Cross-Source Price Verification Set,Independent public LLM price registries (staged in project Drive),
+P-21,Price dispersion per model across sources (box plot),"Cross-Source Price Verification Set
+Inputs: Cross-source price comparison","The width the Method 2 price range should have.
+Axes: Model vs Price dispersion across sources.
+Note — Dispersion here propagates directly into the token estimate.","§7.4 — Method 2, Revenue ÷ Price per Token",,Not started,Cross-Source Price Verification Set,Independent public LLM price registries (staged in project Drive),
+P-22,Enterprise AI spend by category (stacked bar),"Menlo Ventures — State of Generative AI in the Enterprise
+Inputs: Menlo Ventures enterprise survey","The API/model-access denominator separated from software spend.
+Axes: Spend category vs Enterprise AI spend ($bn).
+Note — Survey-based; panel composition not fully disclosed.","§7.5 — Method 3, Enterprise Spend",,Not started,Menlo Ventures — State of Generative AI in the Enterprise,Menlo Ventures — 2025: The State of Generative AI in the Enterprise,https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/
+P-23,Spend to effective price bridge (bridge / waterfall),"Menlo Ventures — State of Generative AI in the Enterprise
+Inputs: Menlo + price registry + cache/reasoning adj","List spend walked down to an effective price, step by step.
+Axes: Adjustment step vs Effective price ($/M).
+Note — Every step is an assumption - label each one.","§7.5 — Method 3, Enterprise Spend",,Not started,Menlo Ventures — State of Generative AI in the Enterprise,Menlo Ventures — 2025: The State of Generative AI in the Enterprise,https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/
+P-24,Inference vs R&D compute spend (stacked bar),"Epoch AI — AI Companies: Compute Spend
+Inputs: ai_companies_compute_spend","Inference spend isolated from R&D and training spend.
+Axes: Company / period vs Compute spend ($).
+Note — Inference Tokens excludes training - this split is what enforces that.","§7.5 — Method 3, Enterprise Spend",,Not started,Epoch AI — AI Companies: Compute Spend,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-25,Inference share of compute spend (scatter (points only)),"Epoch AI — AI Companies: Compute Spend
+Inputs: ai_companies_compute_spend","Whether inference is taking a rising share of spend.
+Axes: Period vs Inference share of compute spend.
+Note — Do NOT fit a trend line - n is very small.","§7.5 — Method 3, Enterprise Spend",,Not started,Epoch AI — AI Companies: Compute Spend,Epoch AI — AI Companies,https://epoch.ai/data/ai-companies
+P-26,Installed H100e by owner over time (stacked area),"Epoch AI — AI Chip Owners
+Inputs: AI Chip Owners","Deployed compute by owner over time.
+Axes: Quarter vs Installed H100e.
+Note — Ownership is estimated, not disclosed, for most orgs.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Chip Owners,Epoch AI — AI Chip Owners,https://epoch.ai/data/ai-chip-owners
+P-27,Chip-type mix of installed base (stacked area),"Epoch AI — AI Chip Owners
+Inputs: AI Chip Owners","Generation mix of the installed base.
+Axes: Quarter vs Installed H100e by chip type.
+Note — H100e flattens real inference-efficiency differences between generations.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Chip Owners,Epoch AI — AI Chip Owners,https://epoch.ai/data/ai-chip-owners
+P-28,Owner concentration of deployed compute (bar / lorenz curve),"Epoch AI — AI Chip Owners
+Inputs: AI Chip Owners","How concentrated deployed compute ownership is.
+Axes: Owner rank vs Cumulative share of H100e.
+Note — Top-10 concentration drives how much of Method 4 rests on few estimates.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Chip Owners,Epoch AI — AI Chip Owners,https://epoch.ai/data/ai-chip-owners
+P-29,Quarterly shipments by chip type (stacked bar),"Epoch AI — AI Chip Sales
+Inputs: AI Chip Sales","Supply-side shipment cadence.
+Axes: Quarter vs Units shipped by chip.
+Note — Shipments are not deployments - there is a lag.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Chip Sales,Epoch AI — AI Chip Sales,https://epoch.ai/data/ai-chip-sales
+P-30,"Shipped vs owned H100e reconciliation (line pair, gap shaded)","Epoch AI — AI Chip Sales
+Inputs: Chip sales vs chip owners","Reconciliation between shipped and owned compute.
+Axes: Quarter vs Cumulative H100e.
+Note — An unexplained gap means one of the two datasets is wrong.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Chip Sales,Epoch AI — AI Chip Sales,https://epoch.ai/data/ai-chip-sales
+P-31,FLOPS and memory per chip by release date (scatter),"Epoch AI — AI Chip Sales
+Inputs: chip_types + ml_hardware","The generation curve underlying capacity conversion.
+Axes: Release date vs FLOPS and memory per chip.
+Note — Peak spec figures, not achieved throughput.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Chip Sales,Epoch AI — AI Chip Sales,https://epoch.ai/data/ai-chip-sales
+P-32,US-sited vs non-US H100e capacity (stacked area),"Epoch AI — AI Data Centers
+Inputs: AI Data Centers","A bottom-up US capacity subset for the US enterprise scope.
+Axes: Date vs H100e capacity, US vs non-US.
+Note — 77 facilities is the known large-scale subset, not the universe.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Data Centers,Epoch AI — AI Data Centers,https://epoch.ai/data/ai-data-centers
+P-33,Facility capacity timeline by operational status (timeline / gantt),"Epoch AI — AI Data Centers
+Inputs: data_center_timelines","Capacity coming online, filtered to operational status.
+Axes: Date vs Facility capacity.
+Note — Exclude announced-but-not-built capacity or the ceiling inflates.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Data Centers,Epoch AI — AI Data Centers,https://epoch.ai/data/ai-data-centers
+P-34,Power demand vs compute capacity (scatter),"Epoch AI — AI Data Centers
+Inputs: AI Data Centers","Physical consistency check across facilities.
+Axes: Compute capacity (H100e) vs Power demand (MW).
+Note — Outliers here are usually data errors - investigate before publishing.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — AI Data Centers,Epoch AI — AI Data Centers,https://epoch.ai/data/ai-data-centers
+P-35,TFLOPs per watt by release date (scatter),"Epoch AI — Machine Learning Hardware
+Inputs: ml_hardware","Efficiency trajectory across accelerator generations.
+Axes: Release date vs TFLOPs per watt.
+Note — Spec-sheet peak, not achieved.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — Machine Learning Hardware,Epoch AI — Machine Learning Hardware,https://epoch.ai/data/machine-learning-hardware
+P-36,"Memory bandwidth by generation, installed-base weighted (bar)","Epoch AI — Machine Learning Hardware
+Inputs: ml_hardware weighted by chip owners","Why output throughput is bandwidth-bound, not FLOPs-bound.
+Axes: Generation vs Memory bandwidth, installed-base weighted.
+Note — A FLOPs-only Method 4 systematically overstates output capacity.","§7.6 — Method 4, GPU Capacity",,Not started,Epoch AI — Machine Learning Hardware,Epoch AI — Machine Learning Hardware,https://epoch.ai/data/machine-learning-hardware
+P-37,Tokens/s by accelerator and model size (grouped bar),"MLCommons — MLPerf Inference: Datacenter Benchmarks
+Inputs: MLPerf","Measured throughput, the tokens/GPU-hour input to Method 4.
+Axes: Accelerator vs Tokens/second.
+Note — Benchmark-tuned conditions; production serving is lower.","§7.6 — Method 4, GPU Capacity",,Not started,MLCommons — MLPerf Inference: Datacenter Benchmarks,MLCommons — MLPerf Inference: Datacenter,https://mlcommons.org/benchmarks/inference-datacenter/
+P-38,Offline vs server scenario throughput gap (paired bar),"MLCommons — MLPerf Inference: Datacenter Benchmarks
+Inputs: MLPerf","The batching premium between offline and interactive serving.
+Axes: Accelerator vs Tokens/s, offline vs server.
+Note — Quoting offline throughput inflates the ceiling - never pool the scenarios.","§7.6 — Method 4, GPU Capacity",,Not started,MLCommons — MLPerf Inference: Datacenter Benchmarks,MLCommons — MLPerf Inference: Datacenter,https://mlcommons.org/benchmarks/inference-datacenter/
+P-39,Capacity ceiling vs bottom-up floor (range bar),"MLCommons — MLPerf Inference: Datacenter Benchmarks
+Inputs: MLPerf x chip owners x utilisation","Method 4 capacity ceiling against the Method 1 bottom-up floor.
+Axes: Method vs Tokens/yr.
+Note — Label Method 4 as a CEILING, not an estimate.","§7.6 — Method 4, GPU Capacity",,Not started,MLCommons — MLPerf Inference: Datacenter Benchmarks,MLCommons — MLPerf Inference: Datacenter,https://mlcommons.org/benchmarks/inference-datacenter/
+P-40,Quantified vs unquantified provider waterfall (waterfall),"Chinese-Lab Inference Coverage Set (derived)
+Inputs: Chinese-lab coverage set","Quantified providers, then the explicitly unquantified block.
+Axes: Provider group vs Tokens/yr.
+Note — The unquantified block must be drawn, not omitted - this is the honest chart.","§7.7 — Chinese labs, a fallback waterfall",,Not started,Chinese-Lab Inference Coverage Set (derived),"Epoch AI (chip owners, chip sales, revenue reports) plus individual lab disclosures",https://epoch.ai/data/ai-chip-owners
+P-41,Waterfall step reached per Chinese lab (categorical matrix),"Chinese-Lab Inference Coverage Set (derived)
+Inputs: Chinese-lab coverage set","Which fallback each Chinese lab currently sits at.
+Axes: Lab vs Waterfall step reached (1-4).
+Note — Labs at 'not quantified at all' are the priority work queue.","§7.7 — Chinese labs, a fallback waterfall",,Not started,Chinese-Lab Inference Coverage Set (derived),"Epoch AI (chip owners, chip sales, revenue reports) plus individual lab disclosures",https://epoch.ai/data/ai-chip-owners
+P-42,China vs rest-of-world installed H100e (stacked area),"Chinese-Lab Inference Coverage Set (derived)
+Inputs: Chip owners + organizations (country)","Capacity-side proxy for the missing Chinese token volume.
+Axes: Quarter vs Installed H100e, China vs RoW.
+Note — Capacity is a proxy only - serving share is not ownership share.","§7.7 — Chinese labs, a fallback waterfall",,Not started,Chinese-Lab Inference Coverage Set (derived),"Epoch AI (chip owners, chip sales, revenue reports) plus individual lab disclosures",https://epoch.ai/data/ai-chip-owners
+P-43,Daily total tokens with data gaps marked (line),"OpenRouter — Daily Model Token Rankings
+Inputs: rankings_daily","The raw OpenRouter series, gaps visible.
+Axes: Date vs Daily total tokens.
+Note — Mark 15 Jun 2025 and 15 Jul 2025 as missing - do not interpolate silently.","§7.11 — Validation, sanity-checking the estimate",,Not started,OpenRouter — Daily Model Token Rankings,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-44,Monthly totals and MoM growth (bar + line overlay),"OpenRouter — Daily Model Token Rankings
+Inputs: rankings_daily aggregated monthly","Growth trend used as the independent shape check.
+Axes: Month vs Monthly tokens and MoM growth %.
+Note — Flag the partial final month and exclude it from the trend read.","§7.11 — Validation, sanity-checking the estimate",,Not started,OpenRouter — Daily Model Token Rankings,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-45,Raw vs gap-corrected June/July 2025 (paired bar),"OpenRouter — Daily Model Token Rankings
+Inputs: rankings_daily","That the -4.56% June 2025 decline is mostly a missing-day artefact.
+Axes: Month vs Raw vs gap-corrected tokens.
+Note — Corrected June is -1.27%, not -4.56%.","§7.11 — Validation, sanity-checking the estimate",,Not started,OpenRouter — Daily Model Token Rankings,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-46,Model composition over time (stacked area),"OpenRouter — Daily Model Token Rankings
+Inputs: rankings_daily","Model composition of the gateway over time.
+Axes: Date vs Tokens by model.
+Note — Show the 7.15% 'other' residual as its own band; catalogue join covers 79.1%.","§7.11 — Validation, sanity-checking the estimate",,Not started,OpenRouter — Daily Model Token Rankings,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-47,Tokens per request over time (line),"OpenRouter — Application Rankings Panel
+Inputs: app_rankings_monthly x rankings_daily","Rising token intensity per user action - the agentic fingerprint.
+Axes: Month vs Tokens per request.
+Note — Panel-derived request count carries its own derivation assumption.","§2.5 — Caveat 10, no gateway-wide request count",,Not started,OpenRouter — Application Rankings Panel,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-48,App concentration within the panel (line),"OpenRouter — Application Rankings Panel
+Inputs: app_rankings_monthly","Concentration within the app panel.
+Axes: Month vs Top-10 share of panel requests.
+Note — Top-100 panel, not the full population.","§2.5 — Caveat 10, no gateway-wide request count",,Not started,OpenRouter — Application Rankings Panel,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-49,Panel churn month to month (flow / churn chart),"OpenRouter — Application Rankings Panel
+Inputs: app_rankings_monthly","How much apparent movement is compositional rather than real.
+Axes: Month vs Apps entering and leaving top 100.
+Note — Panel churn creates false trends if unaccounted.","§2.5 — Caveat 10, no gateway-wide request count",,Not started,OpenRouter — Application Rankings Panel,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-50,Context-length bucket distribution (stacked area),"OpenRouter — Traffic Composition Slices
+Inputs: rankings_by_context_bucket","Long-context share, which drives cache economics.
+Axes: Date vs Tokens by context-length bucket.
+Note — Absolute tokens only.","§2.5 — Caveats 11 and 12, overlap and later start",,Not started,OpenRouter — Traffic Composition Slices,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-51,"Application category volumes (absolute) (grouped bar, absolute)","OpenRouter — Traffic Composition Slices
+Inputs: rankings_by_category","Workload composition of gateway traffic.
+Axes: Date vs Tokens by application category.
+Note — OVERLAP 1.75x - never convert to % or draw as a pie.","§2.5 — Caveats 11 and 12, overlap and later start",,Not started,OpenRouter — Traffic Composition Slices,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-52,"Modality volumes (absolute) (grouped bar, absolute)","OpenRouter — Traffic Composition Slices
+Inputs: rankings_by_modality","Multimodal share of traffic.
+Axes: Date vs Tokens by modality.
+Note — OVERLAP 2.68x - never convert to % or draw as a pie.","§2.5 — Caveats 11 and 12, overlap and later start",,Not started,OpenRouter — Traffic Composition Slices,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-53,Language type volumes (stacked area),"OpenRouter — Traffic Composition Slices
+Inputs: rankings_by_language_type","Language composition.
+Axes: Date vs Tokens by language type.
+Note — Series starts Aug 2025, later than the main series - mark the start.","§2.5 — Caveats 11 and 12, overlap and later start",,Not started,OpenRouter — Traffic Composition Slices,OpenRouter — Rankings API,https://openrouter.ai/docs/api-reference/overview
+P-54,Range comparison across all methods (headline) (range / dumbbell chart),"NBER Working Paper 35451 — 'AI Premium' (Borri, Liu & Tsyvinski)
+Inputs: NBER AI Premium + all methods","HEADLINE: bottom-up floor, NBER 60-84 range, adopted 60-100 range with ~75 central, Method 4 ceiling.
+Axes: Estimate source vs Tokens/yr (quadrillions).
+Note — Label the adopted range MODELLED, not measured; the range is not symmetric.","§7.11 — Validation, sanity-checking the estimate",,Not started,"NBER Working Paper 35451 — 'AI Premium' (Borri, Liu & Tsyvinski)","Borri, Liu & Tsyvinski — 'AI Premium', NBER Working Paper 35451",https://arxiv.org/abs/2606.30583
+P-55,OpenRouter share of global under each assumption (bar),"NBER Working Paper 35451 — 'AI Premium' (Borri, Liu & Tsyvinski)
+Inputs: NBER AI Premium + section 2.6 bracketing","Why OpenRouter cannot carry the level (2% academic vs 3-8% bracket).
+Axes: Bracketing assumption vs OpenRouter share of global %.
+Note — This chart is the justification for using OpenRouter for shape only.","§7.11 — Validation, sanity-checking the estimate",,Not started,"NBER Working Paper 35451 — 'AI Premium' (Borri, Liu & Tsyvinski)","Borri, Liu & Tsyvinski — 'AI Premium', NBER Working Paper 35451",https://arxiv.org/abs/2606.30583
+P-56,Global to US enterprise adjustment bridge (bridge),"'State of AI: An Empirical 100 Trillion Token Study'
+Inputs: 100 Trillion Token Study","Global total walked down to a US enterprise figure.
+Axes: Adjustment vs Tokens.
+Note — Each multiplier is a single-study estimate - carry as a range.","§7.11 — Validation, sanity-checking the estimate",,Not started,'State of AI: An Empirical 100 Trillion Token Study','State of AI: An Empirical 100 Trillion Token Study',https://arxiv.org/abs/2601.10088
+P-57,Closed-weight visible volume vs open-weight blind spot (stacked bar),"'State of AI: An Empirical 100 Trillion Token Study'
+Inputs: 100 Trillion Token Study","Closed-weight provider-visible volume vs the open-weight blind spot.
+Axes: Model weight class vs Tokens.
+Note — Self-hosted open-weight serving appears in no provider disclosure.","§7.11 — Validation, sanity-checking the estimate",,Not started,'State of AI: An Empirical 100 Trillion Token Study','State of AI: An Empirical 100 Trillion Token Study',https://arxiv.org/abs/2601.10088
+P-58,Output share by trace vs pipeline assumption (bar with reference band),"Microsoft Azure — LLM Inference Production Traces
+Inputs: Azure traces (all five)","Measured output share against the pipeline's 0.15/0.25/0.40 assumption.
+Axes: Trace and service vs Output share %.
+Note — THE KEY FINDING: every measured value sits below even the low case.","§7.9 — De-duplication rule 3, sub-types",,Not started,Microsoft Azure — LLM Inference Production Traces,Microsoft Azure — AzurePublicDataset,https://github.com/Azure/AzurePublicDataset
+P-59,"Input and output token distributions (log histogram, paired)","Microsoft Azure — LLM Inference Production Traces
+Inputs: Azure traces","Input and output token distributions per trace.
+Axes: Token count vs Request frequency.
+Note — Code service median output is 8 tokens - inline completion, not chat.","§7.9 — De-duplication rule 3, sub-types",,Not started,Microsoft Azure — LLM Inference Production Traces,Microsoft Azure — AzurePublicDataset,https://github.com/Azure/AzurePublicDataset
+P-60,Hourly request rate across the trace week (line),"Microsoft Azure — LLM Inference Production Traces
+Inputs: Azure traces (2024 pair)","Diurnal and weekly demand pattern across the trace week.
+Axes: Hour of week vs Requests.
+Note — One week in May 2024 only - not a seasonal series.","§7.9 — De-duplication rule 3, sub-types",,Not started,Microsoft Azure — LLM Inference Production Traces,Microsoft Azure — AzurePublicDataset,https://github.com/Azure/AzurePublicDataset
+P-61,Asymmetric sensitivity of the input/output split (paired sensitivity bar),"Microsoft Azure — LLM Inference Production Traces
+Inputs: Azure traces applied to a total","Asymmetric sensitivity: input moves ~17%, output moves 2.7x.
+Axes: Value of s vs Input and output tokens.
+Note — Treat s as a central case, never a point estimate.","§7.9 — De-duplication rule 3, sub-types",,Not started,Microsoft Azure — LLM Inference Production Traces,Microsoft Azure — AzurePublicDataset,https://github.com/Azure/AzurePublicDataset
+P-62,Multimodal image count vs tokens (scatter),"Microsoft Azure — LLM Inference Production Traces
+Inputs: AzureLMMInferenceTrace_multimodal_2025","How multimodal input scales with image count.
+Axes: Image count vs Input tokens.
+Note — Text-only and multimodal traces are not comparable - keep separate.","§7.9 — De-duplication rule 3, sub-types",,Not started,Microsoft Azure — LLM Inference Production Traces,Microsoft Azure — AzurePublicDataset,https://github.com/Azure/AzurePublicDataset
+P-63,"Task category distribution, API vs Claude.ai (paired horizontal bar)","Anthropic — Anthropic Economic Index
+Inputs: Anthropic Economic Index","Enterprise API mix against consumer Claude.ai mix.
+Axes: Task category vs Share of requests.
+Note — Never pool the two files - scope is US enterprise.","§10.1 — Step 0, filter to paid work first",,Not started,Anthropic — Anthropic Economic Index,Anthropic — Anthropic Economic Index,https://huggingface.co/datasets/Anthropic/EconomicIndex
+P-64,Sector mix of enterprise API usage (bar),"Anthropic — Anthropic Economic Index
+Inputs: aei_1p_api","Sector composition of enterprise usage.
+Axes: Sector vs Share of API requests.
+Note — One provider's customers, skewed to coding and technical work.","§10.1 — Step 0, filter to paid work first",,Not started,Anthropic — Anthropic Economic Index,Anthropic — Anthropic Economic Index,https://huggingface.co/datasets/Anthropic/EconomicIndex
+P-65,Automation vs augmentation split (diverging bar),"Anthropic — Anthropic Economic Index
+Inputs: Anthropic Economic Index","Which task types are being automated rather than assisted.
+Axes: Task category vs Automation vs augmentation score.
+Note — Scores are Anthropic's own classification.","§10.1 — Step 0, filter to paid work first",,Not started,Anthropic — Anthropic Economic Index,Anthropic — Anthropic Economic Index,https://huggingface.co/datasets/Anthropic/EconomicIndex
+P-66,Task categories ranked by token intensity (ranked bar),"Anthropic — Anthropic Economic Index
+Inputs: AEI x Azure traces x agentic amplification","The bridge from workload mix to token volume.
+Axes: Task category vs Expected tokens per task.
+Note — Amplification factors are assumptions - state each one.","§10.1 — Step 0, filter to paid work first",,Not started,Anthropic — Anthropic Economic Index,Anthropic — Anthropic Economic Index,https://huggingface.co/datasets/Anthropic/EconomicIndex
+P-67,Usage frequency by AI service (grouped bar),"US Public Polling on AI Usage
+Inputs: polling_on_ai_usage_mar_2026","Consumer adoption intensity by service.
+Axes: AI service vs Usage frequency distribution.
+Note — Self-reported; respondents misreport both frequency and service.","§7.14 — Putting it together, scope boundary",,Not started,US Public Polling on AI Usage,US public polling on AI usage (staged in project Drive),
+P-68,Purpose of use by age band (stacked bar),"US Public Polling on AI Usage
+Inputs: polling_on_ai_usage_mar_2026","What consumers use AI for, by demographic.
+Axes: Age band vs Purpose of use.
+Note — US only, single point in time.","§7.14 — Putting it together, scope boundary",,Not started,US Public Polling on AI Usage,US public polling on AI usage (staged in project Drive),
+P-69,Adoption rate by region and income (choropleth or bar),"US Public Polling on AI Usage
+Inputs: polling_on_ai_usage_mar_2026","Consumer surface sizing - the scope this variable excludes.
+Axes: Region / income band vs Adoption rate.
+Note — Do not convert survey frequency into token volume directly.","§7.14 — Putting it together, scope boundary",,Not started,US Public Polling on AI Usage,US public polling on AI usage (staged in project Drive),

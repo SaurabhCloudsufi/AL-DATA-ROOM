@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="532.8pt" viewBox="0 0 792 532.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 532.8 
+L 792 532.8 
+L 792 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 67.32 372.96 
+L 764.28 372.96 
+L 764.28 106.56 
+L 67.32 106.56 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 67.32 286.090435 
+L 764.28 286.090435 
+L 764.28 141.307826 
+L 67.32 141.307826 
+z
+" clip-path="url(#p93bb0adf52)" style="fill: #b4763a; opacity: 0.1; stroke: #b4763a; stroke-linejoin: miter"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(156.264311 402.938359)">Conversation</text>
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(172.167709 414.696063)">service</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(402.358359 402.938359)">Code</text>
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(396.993516 414.696063)">service</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(605.216197 402.938359)">Both services</text>
+      <text style="font-size: 10.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(614.731002 414.696063)">combined</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_4">
+      <path d="M 67.32 372.96 
+L 764.28 372.96 
+" clip-path="url(#p93bb0adf52)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_5">
+      <defs>
+       <path id="mdfe75e7a28" d="M 0 0 
+L -3.5 0 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="67.32" y="372.96" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="60.32" y="376.759219" transform="rotate(-0 60.32 376.759219)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6">
+      <path d="M 67.32 315.046957 
+L 764.28 315.046957 
+" clip-path="url(#p93bb0adf52)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="67.32" y="315.046957" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="60.32" y="318.846175" transform="rotate(-0 60.32 318.846175)">10</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8">
+      <path d="M 67.32 257.133913 
+L 764.28 257.133913 
+" clip-path="url(#p93bb0adf52)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="67.32" y="257.133913" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="60.32" y="260.933132" transform="rotate(-0 60.32 260.933132)">20</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_10">
+      <path d="M 67.32 199.22087 
+L 764.28 199.22087 
+" clip-path="url(#p93bb0adf52)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="67.32" y="199.22087" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="60.32" y="203.020088" transform="rotate(-0 60.32 203.020088)">30</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_12">
+      <path d="M 67.32 141.307826 
+L 764.28 141.307826 
+" clip-path="url(#p93bb0adf52)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="67.32" y="141.307826" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="60.32" y="145.107045" transform="rotate(-0 60.32 145.107045)">40</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="41.515313" y="239.76" transform="rotate(-90 41.515313 239.76)">Output tokens as a share of total tokens (%)</text>
+    </g>
+   </g>
+   <g id="line2d_14">
+    <path d="M 67.32 228.177391 
+L 764.28 228.177391 
+" clip-path="url(#p93bb0adf52)" style="fill: none; stroke-dasharray: 4.81,2.08; stroke-dashoffset: 0; stroke: #b4763a; stroke-width: 1.3"/>
+   </g>
+   <g id="line2d_15">
+    <path d="M 67.32 286.090435 
+L 764.28 286.090435 
+" clip-path="url(#p93bb0adf52)" style="fill: none; stroke: #b4763a; stroke-opacity: 0.6; stroke-width: 0.9; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_16">
+    <path d="M 67.32 141.307826 
+L 764.28 141.307826 
+" clip-path="url(#p93bb0adf52)" style="fill: none; stroke: #b4763a; stroke-opacity: 0.6; stroke-width: 0.9; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 67.32 372.96 
+L 67.32 106.56 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 67.32 372.96 
+L 764.28 372.96 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #b4763a" x="744.045677" y="222.83089" transform="rotate(-0 744.045677 222.83089)">pipeline base case  0.25</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #b4763a; opacity: 0.85" x="744.045677" y="280.847918" transform="rotate(-0 744.045677 280.847918)">low  0.15</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #b4763a; opacity: 0.85" x="744.045677" y="136.065309" transform="rotate(-0 744.045677 136.065309)">high  0.40</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 134.767742 372.96 
+L 247.180645 372.96 
+L 247.180645 283.439176 
+L 134.767742 283.439176 
+z
+" clip-path="url(#p93bb0adf52)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="190.974194" y="392.93788" transform="rotate(-0 190.974194 392.93788)">19,366 requests</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 359.593548 372.96 
+L 472.006452 372.96 
+L 472.006452 365.180541 
+L 359.593548 365.180541 
+z
+" clip-path="url(#p93bb0adf52)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="415.8" y="392.93788" transform="rotate(-0 415.8 392.93788)">8,819 requests</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 584.419355 372.96 
+L 696.832258 372.96 
+L 696.832258 316.872376 
+L 584.419355 316.872376 
+z
+" clip-path="url(#p93bb0adf52)" style="fill: #6b8f71; stroke: #ffffff; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="640.625806" y="392.93788" transform="rotate(-0 640.625806 392.93788)">28,185 requests</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="190.974194" y="275.360215" transform="rotate(-0 190.974194 275.360215)">15.46%</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="415.8" y="357.10158" transform="rotate(-0 415.8 357.10158)">1.34%</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="640.625806" y="308.793415" transform="rotate(-0 640.625806 308.793415)">9.68%</text>
+   </g>
+  </g>
+  <g id="line2d_17">
+   <path d="M 27.72 421.9776 
+L 764.28 421.9776 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linecap: square"/>
+  </g>
+  <g id="text_19">
+   <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #1f3864" x="27.72" y="22.896759" transform="rotate(-0 27.72 22.896759)">P-58</text>
+  </g>
+  <g id="text_20">
+   <text style="font-weight: 700; font-size: 15.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="27.72" y="50.139178" transform="rotate(-0 27.72 50.139178)">Measured output share lands at the floor of the assumed range, or below it</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="27.72" y="70.620806" transform="rotate(-0 27.72 70.620806)">Output tokens as a percentage of all tokens, computed directly from Microsoft's published Azure inference traces, against</text>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="27.72" y="86.604806" transform="rotate(-0 27.72 86.604806)">the output share the pipeline currently assumes.</text>
+  </g>
+  <g id="text_23">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="27.72" y="440.233856" transform="rotate(-0 27.72 440.233856)">Source: Microsoft Azure, AzurePublicDataset (2023 release, CC-BY)</text>
+  </g>
+  <g id="text_24">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="27.72" y="454.086656" transform="rotate(-0 27.72 454.086656)">Methodology: §3.2 — What we measured; §7.9 — De-duplication rule 3</text>
+  </g>
+  <g id="text_25">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="27.72" y="467.787488" transform="rotate(-0 27.72 467.787488)">Note: Computed from 28,185 real requests. The combined figure of 9.68% and the code service at 1.34% both fall below even the pipeline's</text>
+  </g>
+  <g id="text_26">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="27.72" y="480.574688" transform="rotate(-0 27.72 480.574688)">      low case; the conversation service at 15.46% is the one value inside the band, and only just. The 2023 release covers a single</text>
+  </g>
+  <g id="text_27">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="27.72" y="493.361888" transform="rotate(-0 27.72 493.361888)">      58-minute window on 16 November 2023, so it is a snapshot rather than a representative period, and it predates reasoning models and</text>
+  </g>
+  <g id="text_28">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="27.72" y="506.149088" transform="rotate(-0 27.72 506.149088)">      agentic tool-calling, both of which push output share up.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p93bb0adf52">
+   <rect x="67.32" y="106.56" width="696.96" height="266.4"/>
+  </clipPath>
+ </defs>
+</svg>
