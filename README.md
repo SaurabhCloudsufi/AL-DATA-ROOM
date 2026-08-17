@@ -13,11 +13,20 @@ read it.
 
 ## What is published
 
-One chart, in the Inference Tokens gallery:
+The Azure inference token distributions, one chart per trace release:
 
 | Plot ID | Chart | Dataset |
 |---|---|---|
-| [`P-59`](https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-59) | Input and output token distributions | Microsoft Azure — LLM inference production traces, 2023 release |
+| [`P-1`](https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-1) | Input and output tokens per request — 2023 | Azure LLM inference production traces, 2023 release |
+| [`P-2`](https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-2) | Input and output tokens per request — 2024 | Azure LLM inference production traces, 2024 release |
+| [`P-3`](https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-3) | Input and output tokens per request — 2025 | Azure multimodal (LMM) inference traces, 2025 release |
+
+Each chart pairs the distribution with its cumulative curve, so the shape reads
+off the left panel and any percentile off the right.
+
+The published set is driven by `build/plot_index_published.csv`, not by the Excel
+workbook. `P-1` was previously published as `P-59`; that anchor is retained on the
+page so links already shared keep resolving.
 
 The site shows only charts that have actually been generated. Work that is
 catalogued but not yet produced does not appear on the page at all — no Pending
@@ -32,9 +41,23 @@ US enterprise market, over a given period. Everything except training.
 
 `build/plot_index.csv` remains the full catalogue of **69 charts**, `P-01`
 through `P-69`, grouped into six sections that follow the estimation methods in
-the methodology. That catalogue is the working inventory; it is not published to
-the site. Setting `PUBLISHED_ONLY = False` in `build/build_site.py` renders the
-whole catalogue again, with Pending placeholders for anything not yet generated.
+the methodology. That catalogue is the working inventory and is no longer what
+the site renders — the gallery reads `build/plot_index_published.csv` instead.
+Setting `PUBLISHED_ONLY = False` in `build/build_site.py` renders whichever index
+is configured in full, with Pending placeholders for anything not yet generated.
+
+### Azure trace releases
+
+| Release | Files | Requests | Observation window |
+|---|---|---|---|
+| 2023 | conv, code | 28,185 | 16 Nov 2023, a single 58-minute window |
+| 2024 | conv, code | see chart | one week, May 2024 |
+| 2025 | multimodal | 1,000,000 | 15–22 Oct 2024 (released 2025) |
+
+The 2024 pair is ~1.8 GB. `summarise_azure_traces.py` streams it in chunks and
+derives exact quantiles from an integer value-count table, so **nothing is
+sampled** — the chunked result is identical to loading the files whole, which is
+verified against the 2023 aggregates on every run.
 
 ---
 
@@ -45,7 +68,7 @@ ai-data-room/
 ├── index.html                  landing page (generated)
 ├── inference-tokens/
 │   ├── index.html              gallery (generated)
-│   ├── charts/                 P-59.svg, P-59.png
+│   ├── charts/                 P-1.svg, P-1.png, P-2.*, P-3.*
 │   ├── assets/style.css        shared stylesheet
 │   └── data/                   derived public data backing the charts
 │       ├── azure_trace_summary.csv
@@ -56,7 +79,8 @@ ai-data-room/
 │   ├── generate_charts.py       CSV  →  chart SVG + PNG
 │   ├── build_site.py            plot index + charts  →  HTML
 │   ├── update_excel_links.py    gallery URLs  →  workbook
-│   ├── plot_index.csv           the chart catalogue (69 rows)
+│   ├── plot_index.csv           the workbook catalogue (69 rows, unpublished)
+│   ├── plot_index_published.csv what the site actually renders
 │   └── company_disclosures.csv  23 verified company disclosures
 ├── notebooks/
 │   └── Inference_Tokens_Chart_Generation.ipynb
@@ -77,8 +101,9 @@ Excel Dataset Register     the inventory of datasets and charts
         └─ build_site.py ───────────→ index.html + inference-tokens/index.html
 ```
 
-The Excel register is the source of truth for which charts exist. The gallery
-HTML is generated, never hand-edited.
+The gallery HTML is generated, never hand-edited. The published set is chosen by
+`build/plot_index_published.csv`; the Excel register still drives
+`build/plot_index.csv`, which is kept for reference.
 
 `build/` holds builders for charts that are not currently published. Running
 `python build/generate_charts.py` with no arguments rebuilds all of them, and
@@ -92,7 +117,7 @@ explicit Plot ID to avoid that.
 Every chart has an anchor matching its Plot ID:
 
 ```
-https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-59
+https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-1
 ```
 
 These addresses are stable. Adding charts or new domains does not change them, so
@@ -104,7 +129,7 @@ a link made today keeps working.
 
 ```bash
 python build/summarise_azure_traces.py ~/data/azure-traces   # derive aggregates
-python build/generate_charts.py P-59                         # regenerate a chart
+python build/generate_charts.py P-1 P-2 P-3                  # regenerate charts
 python build/build_site.py                                   # rebuild HTML
 ```
 
@@ -115,8 +140,8 @@ produces byte-identical SVG and PNG, so a git diff only ever shows a real change
 
 ## Adding a chart
 
-1. Confirm the Plot ID exists in `build/plot_index.csv`. Charts are never invented
-   outside the catalogue.
+1. Add a row to `build/plot_index_published.csv` with its Plot ID, title, dataset,
+   granularity, year, source and methodology reference.
 2. Add a builder function in `build/generate_charts.py`, or a cell in the
    notebook, that loads the **real** source data. If the data is not available,
    request it rather than substituting another dataset.

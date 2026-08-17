@@ -15,7 +15,7 @@
   <h1>Inference Tokens</h1>
   <p class="standfirst">Total tokens processed when models answer requests, across the US enterprise market. Everything except training.</p>
   <dl class="meta">
-    <div><dt>Charts published</dt><dd>2</dd></div>
+    <div><dt>Charts published</dt><dd>3</dd></div>
   </dl>
 </header>
 
@@ -39,6 +39,25 @@
 <div><dt>Note</dt><dd>A single 58-minute window on 16 November 2023: a snapshot, not a representative period</dd></div>
 </dl>
 <p class="downloads"><a href="charts/P-1.svg" download>Download SVG</a><a href="charts/P-1.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="P-2">
+<div class="chart-head">
+<a class="pid" href="#P-2">P-2</a>
+<h3>Distribution of input and output tokens per request — Azure LLM inference traces, 2024</h3>
+</div>
+<p class="shows">The same distribution one release later, computed over all 44.1 million requests in the published 2024 release.</p>
+<div class="figure">
+<img src="charts/P-2.svg" alt="Distribution of input and output tokens per request — Azure LLM inference traces, 2024" width="864" height="801" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Microsoft Azure — LLM Inference Production Traces</dd></div>
+<div><dt>Granularity</dt><dd>Request-level observations (one row per inference request)</dd></div>
+<div><dt>Year</dt><dd>2024</dd></div>
+<div><dt>Source</dt><dd><a href="https://github.com/Azure/AzurePublicDataset/blob/master/AzureLLMInferenceDataset2024.md" rel="noopener">Microsoft Azure — AzurePublicDataset</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>§3.2 — What we measured · §7.9 — De-duplication rule 3, sub-types</dd></div>
+<div><dt>Note</dt><dd>The two services cover different weeks in May 2024, overlapping by five days; they are separate workloads and must not be pooled</dd></div>
+</dl>
+<p class="downloads"><a href="charts/P-2.svg" download>Download SVG</a><a href="charts/P-2.png" download>Download PNG</a></p>
 </section>
 <section class="chart" id="P-3">
 <div class="chart-head">

@@ -373,10 +373,11 @@ AZURE_PLOTS = {
                  "Azure LLM inference traces, 2024",
         "source": "Microsoft Azure, AzurePublicDataset \u2014 LLM inference production "
                   "traces (2024 release, CC-BY)",
-        "caveat": "Computed from every request in the released week, read in chunks - "
-                  "nothing is sampled or estimated. One week of one provider's "
-                  "production traffic is not a market-wide sample, and the two services "
-                  "are separate workloads whose distributions must not be pooled.",
+        "caveat": "Computed from all 44.1 million requests in the release, streamed in "
+                  "chunks - nothing is sampled or estimated. Note the two services cover "
+                  "different weeks, overlapping by five days, so they are not a matched "
+                  "pair; they are separate workloads and must not be pooled. One week of "
+                  "one provider's production traffic is not a market-wide sample.",
     },
     "P-3": {
         "traces": [("multimodal_2025", "Multimodal service")],
