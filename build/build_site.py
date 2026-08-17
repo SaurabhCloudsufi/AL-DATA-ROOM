@@ -2,13 +2,25 @@
 """Generate the AI Data Room site from the Plot Index.
 
 The gallery HTML is never hand-edited. It is rebuilt from build/plot_index.csv
-plus whatever chart files actually exist in the domain's charts/ directory.
-A plot with no chart file renders as Pending rather than as a broken image, so
+plus whatever chart files actually exist in the domain's charts/ directory, so
 the page can never imply a chart exists when it does not.
+
+PUBLISHED_ONLY controls what reaches the page:
+
+    True  - the site carries only plots whose chart files are on disk. The Plot
+            Index stays the full catalogue; it simply is not advertised on the
+            public page. This is the current setting: the site publishes one
+            chart and says nothing about work not yet done.
+    False - every catalogued plot renders, with Pending placeholders for those
+            not yet generated.
+
+Either way the catalogue in build/plot_index.csv is untouched, so flipping the
+flag back restores the full gallery without regenerating anything.
 
 Adding a new domain (Training Compute, Model Pricing, ...) means appending an
 entry to DOMAINS and dropping a plot index CSV in place - the root page and the
-per-domain gallery both pick it up without touching any HTML.
+per-domain gallery both pick it up without touching any HTML. Domains with no
+published charts are not rendered at all.
 
 Usage:
     python build/build_site.py
@@ -19,6 +31,9 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
+
+# Publish only what has actually been generated. See the module docstring.
+PUBLISHED_ONLY = True
 
 # --------------------------------------------------------------- domains
 # 'live' domains are built from a plot index; 'planned' render as placeholders
@@ -184,25 +199,31 @@ def render_chart(slug, p):
 
 
 def build_gallery(dom):
-    plots = load_plots(dom["index"])
+    catalogued = load_plots(dom["index"])
+    plots = ([p for p in catalogued if chart_files(dom["slug"], p["Plot_ID"])[0]]
+             if PUBLISHED_ONLY else catalogued)
     sections = assign(plots)
     built = sum(1 for p in plots if chart_files(dom["slug"], p["Plot_ID"])[0])
 
     body = []
-    body.append('<div class="toc"><h2>Contents</h2><ol>')
-    for name, _, ps in sections:
-        live = sum(1 for p in ps if chart_files(dom["slug"], p["Plot_ID"])[0])
-        anchor = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-        body.append(f'<li><a href="#{anchor}">{e(name)}</a> '
-                    f'<span class="count">{live} of {len(ps)} published</span></li>')
-    body.append("</ol></div>")
+    # a contents list earns its place only once there is more than one section
+    if len(sections) > 1:
+        body.append('<div class="toc"><h2>Contents</h2><ol>')
+        for name, _, ps in sections:
+            live = sum(1 for p in ps if chart_files(dom["slug"], p["Plot_ID"])[0])
+            anchor = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+            body.append(f'<li><a href="#{anchor}">{e(name)}</a> '
+                        f'<span class="count">{live} of {len(ps)} published</span></li>')
+        body.append("</ol></div>")
 
     for name, blurb, ps in sections:
         anchor = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
         body.append(f'<div class="section" id="{anchor}">')
-        body.append(f"<h2>{e(name)}</h2>")
-        if blurb:
-            body.append(f'<p class="blurb">{e(blurb)}</p>')
+        # a single chart is its own section heading; the label adds nothing
+        if len(plots) > 1:
+            body.append(f"<h2>{e(name)}</h2>")
+            if blurb:
+                body.append(f'<p class="blurb">{e(blurb)}</p>')
         for p in ps:
             body.append(render_chart(dom["slug"], p))
         body.append("</div>")
@@ -224,10 +245,7 @@ def build_gallery(dom):
   <h1>{e(dom['title'])}</h1>
   <p class="standfirst">{e(dom['blurb'])}</p>
   <dl class="meta">
-    <div><dt>Charts catalogued</dt><dd>{len(plots)}</dd></div>
     <div><dt>Charts published</dt><dd>{built}</dd></div>
-    <div><dt>Sections</dt><dd>{len(sections)}</dd></div>
-    <div><dt>Headline estimate</dt><dd>60–100 quadrillion tokens/yr</dd></div>
   </dl>
 </header>
 
@@ -236,12 +254,7 @@ def build_gallery(dom):
 <footer class="foot">
   <p><strong>How to read this gallery.</strong> Every chart carries a stable Plot ID
   matching the Dataset Register. Link straight to any chart by appending its ID, for
-  example <code>#P-01</code>. Charts marked Pending are catalogued and specified but not
-  yet generated.</p>
-  <p><strong>On the headline figure.</strong> The 60–100 quadrillion tokens per year
-  range, central scenario approximately 75 quadrillion, is a modelled estimate combining
-  four estimation methods. It is not a measured figure — no official global dataset
-  exists.</p>
+  example <code>#P-59</code>. That address does not change as the gallery grows.</p>
   <p><strong>Methodology references.</strong> Section references shown against each chart
   are taken from the working methodology. They become links once that document is final.</p>
 </footer>
@@ -258,20 +271,17 @@ def build_gallery(dom):
 
 
 def build_root(stats):
+    # only domains that actually carry published charts appear; nothing is
+    # advertised before it exists
     cards = []
     for dom in DOMAINS:
-        if dom["live"]:
-            total, built = stats[dom["slug"]]
-            cards.append(f"""    <div class="domain live">
+        if not dom["live"]:
+            continue
+        _total, built = stats[dom["slug"]]
+        cards.append(f"""    <div class="domain live">
       <h2>{e(dom['title'])}</h2>
-      <p>{e(dom['blurb'])}<br><strong>{built}</strong> of {total} charts published.</p>
+      <p>{e(dom['blurb'])}<br><strong>{built}</strong> chart{'' if built == 1 else 's'} published.</p>
       <a class="btn" href="{e(dom['slug'])}/">Open {e(dom['title'])} Gallery</a>
-    </div>""")
-        else:
-            cards.append(f"""    <div class="domain planned">
-      <h2>{e(dom['title'])}</h2>
-      <p>Not yet published.</p>
-      <span class="status">Planned</span>
     </div>""")
 
     page = f"""<!DOCTYPE html>
@@ -289,9 +299,9 @@ def build_root(stats):
 <header class="masthead">
   <p class="eyebrow">Research Data Room</p>
   <h1>AI Data Room</h1>
-  <p class="standfirst">Visual evidence supporting AI demand research. Each domain below
-  holds a catalogue of charts, every one carrying a stable identifier, a named source and
-  a methodology reference, so any figure can be traced back to where it came from.</p>
+  <p class="standfirst">Visual evidence supporting AI demand research. Every chart carries a
+  stable identifier, a named source and a methodology reference, so any figure can be
+  traced back to where it came from.</p>
 </header>
 
 <div class="domains">
@@ -301,7 +311,6 @@ def build_root(stats):
 <footer class="foot">
   <p>Charts are generated from source data and published here with stable URLs. A chart's
   address does not change as the gallery grows, so a link made today keeps working.</p>
-  <p>Domains marked Planned do not yet contain published charts.</p>
 </footer>
 
 </div>
@@ -309,8 +318,7 @@ def build_root(stats):
 </html>
 """
     (REPO / "index.html").write_text(page, encoding="utf-8")
-    print(f"  index.html  —  {sum(1 for d in DOMAINS if d['live'])} live, "
-          f"{sum(1 for d in DOMAINS if not d['live'])} planned")
+    print(f"  index.html  —  {len(cards)} domain card(s)")
 
 
 def main():
