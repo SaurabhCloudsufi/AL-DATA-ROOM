@@ -351,13 +351,21 @@ def build_p58(_rows):
 
 # =============================================================== P-59
 def build_p59(_rows):
-    """Input and output token distributions, log-binned, per service."""
+    """Input and output token distributions, log-binned, per service.
+
+    Reads the derived Azure trace histograms, which are re-derivable byte for
+    byte from Microsoft's published 2023 traces by build/summarise_azure_traces.py.
+    Every bin count is a real request count; the medians drawn as reference lines
+    come from the same summary file, not from the binned data.
+    """
     import csv as _csv
     from collections import defaultdict
     hist = defaultdict(lambda: defaultdict(int))
     with AZURE_HIST.open(encoding="utf-8") as f:
         for r in _csv.DictReader(f):
             hist[(r["trace"], r["kind"])][int(r["bin_low"])] += int(r["count"])
+    with AZURE.open(encoding="utf-8") as f:
+        summary = {r["trace"]: r for r in _csv.DictReader(f)}
 
     fig = plt.figure(figsize=(11.0, 7.2))
     axes = [fig.add_axes([0.085, 0.30, 0.40, 0.48]),
@@ -365,6 +373,7 @@ def build_p59(_rows):
 
     for ax, trace, title in zip(axes, ["conv_2023", "code_2023"],
                                 ["Conversation service", "Code service"]):
+        n = int(summary[trace]["requests"])
         for kind, colour in (("input", SERIES["prior"]), ("output", SERIES["current"])):
             d = hist[(trace, kind)]
             if not d:
@@ -376,26 +385,42 @@ def build_p59(_rows):
                     linewidth=1.9, label=kind.capitalize())
             ax.fill_between([max(x, 0.5) for x in xs], ys, step="post",
                             color=colour, alpha=0.16)
+            # median from the summary file, marked so the title's claim is legible
+            med = float(summary[trace][f"{kind}_median"])
+            ax.axvline(med, color=colour, linewidth=1.1, linestyle=":", zorder=5)
+            ax.text(med * (1.3 if kind == "input" else 0.77), 49.2,
+                    f"{kind} median {med:,.0f}",
+                    ha="left" if kind == "input" else "right", va="center",
+                    fontsize=8.3, color=MUTED)
         ax.set_xscale("log")
-        ax.set_title(title, fontsize=11, color=INK, pad=8)
+        ax.set_title(f"{title}  —  {n:,} requests", fontsize=11, color=INK,
+                     pad=8)
         ax.set_xlabel("Tokens per request (log scale)", fontsize=9.5)
         ax.grid(axis="y", color=RULE, linewidth=0.7)
         ax.set_axisbelow(True)
-        ax.set_ylim(0, 45)
-    axes[0].set_ylabel("Share of requests (%)", fontsize=10)
+        ax.set_ylim(0, 52)
+        ax.set_yticks([0, 10, 20, 30, 40, 50])
+    axes[0].set_ylabel("Share of requests in bin (%)", fontsize=10)
     axes[1].tick_params(labelleft=False)
-    axes[0].legend(frameon=False, fontsize=9.5, loc="upper left")
+    # sits below the median callout row so the two never collide
+    axes[0].legend(frameon=False, fontsize=9.5, loc="upper left",
+                   bbox_to_anchor=(0.0, 0.90))
 
     frame(fig, axes[0], "P-59",
           "Code requests carry long prompts and return almost nothing",
-          "Distribution of input and output tokens per request across the two Azure services, "
-          "log-binned.",
-          "Microsoft Azure, AzurePublicDataset (2023 release, CC-BY)",
-          "\u00a73.2 \u2014 What we measured",
+          "Distribution of input and output tokens per request across the two Azure services in "
+          "the 2023 trace release, log-binned over all 28,185 requests.",
+          "Microsoft Azure, AzurePublicDataset \u2014 LLM inference production traces "
+          "(2023 release, CC-BY)",
+          "\u00a73.2 \u2014 What we measured; \u00a77.9 \u2014 De-duplication rule 3",
           "The code service has a median input of 1,469 tokens but a median output of 13 "
           "tokens - the signature of inline completion rather than chat. Conversation medians "
           "are 1,020 input and 129 output. This asymmetry, not a difference in volume, is what "
-          "drives the gap in output share between the two services.")
+          "drives the gap in output share between the two services. Caveat: the 2023 release "
+          "covers a single 58-minute window on 16 November 2023, so it is a snapshot rather "
+          "than a representative period, and it predates reasoning models and agentic "
+          "tool-calling, both of which lengthen output. Bins are left-closed powers of two; "
+          "the two services are separate workloads and their distributions must not be pooled.")
     save(fig, "P-59")
 
 

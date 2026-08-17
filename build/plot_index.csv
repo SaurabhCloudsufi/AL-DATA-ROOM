@@ -234,7 +234,7 @@ Note — THE KEY FINDING: every measured value sits below even the low case.","�
 P-59,"Input and output token distributions (log histogram, paired)","Microsoft Azure — LLM Inference Production Traces
 Inputs: Azure traces","Input and output token distributions per trace.
 Axes: Token count vs Request frequency.
-Note — Code service median output is 8 tokens - inline completion, not chat.","§7.9 — De-duplication rule 3, sub-types",,Not started,Microsoft Azure — LLM Inference Production Traces,Microsoft Azure — AzurePublicDataset,https://github.com/Azure/AzurePublicDataset
+Note — Code service median output is 13 tokens (measured) - inline completion, not chat.","§7.9 — De-duplication rule 3, sub-types",,Not started,Microsoft Azure — LLM Inference Production Traces,Microsoft Azure — AzurePublicDataset,https://github.com/Azure/AzurePublicDataset
 P-60,Hourly request rate across the trace week (line),"Microsoft Azure — LLM Inference Production Traces
 Inputs: Azure traces (2024 pair)","Diurnal and weekly demand pattern across the trace week.
 Axes: Hour of week vs Requests.
