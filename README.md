@@ -11,18 +11,17 @@ read it.
 
 ---
 
-## Domains
+## What is published
 
-| Domain | Status | Gallery |
+One chart, in the Inference Tokens gallery:
+
+| Plot ID | Chart | Dataset |
 |---|---|---|
-| **Inference Tokens** | Published | [`/inference-tokens/`](inference-tokens/) |
-| Training Compute | Planned | — |
-| Model Pricing | Planned | — |
-| AI Infrastructure | Planned | — |
-| Energy | Planned | — |
+| [`P-59`](https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-59) | Input and output token distributions | Microsoft Azure — LLM inference production traces, 2023 release |
 
-Domains marked Planned have no published charts. They appear on the landing page
-as placeholders so the structure is visible, not to imply work that does not exist.
+The site shows only charts that have actually been generated. Work that is
+catalogued but not yet produced does not appear on the page at all — no Pending
+placeholders, no planned-domain cards. Nothing is advertised before it exists.
 
 ---
 
@@ -31,21 +30,11 @@ as placeholders so the structure is visible, not to imply work that does not exi
 The total number of tokens processed when AI models answer requests, across the
 US enterprise market, over a given period. Everything except training.
 
-The gallery catalogues **69 charts**, identified `P-01` through `P-69`, grouped
-into six sections that follow the estimation methods in the methodology:
-provider throughput, pricing and model economics, capacity and infrastructure,
-coverage gaps, validation and cross-check, and composition of the total.
-
-Charts that have been generated appear as images. Charts that are catalogued and
-specified but not yet produced render as **Pending** placeholders — the gallery
-never shows an image for a chart that does not exist.
-
-### Headline figure
-
-60–100 quadrillion tokens per year, central scenario approximately 75
-quadrillion. This is a modelled estimate combining four estimation methods, not a
-measured figure — no official global dataset exists. Every chart that carries it
-says so.
+`build/plot_index.csv` remains the full catalogue of **69 charts**, `P-01`
+through `P-69`, grouped into six sections that follow the estimation methods in
+the methodology. That catalogue is the working inventory; it is not published to
+the site. Setting `PUBLISHED_ONLY = False` in `build/build_site.py` renders the
+whole catalogue again, with Pending placeholders for anything not yet generated.
 
 ---
 
@@ -56,14 +45,19 @@ ai-data-room/
 ├── index.html                  landing page (generated)
 ├── inference-tokens/
 │   ├── index.html              gallery (generated)
-│   ├── charts/                 P-01.svg, P-01.png, ...
+│   ├── charts/                 P-59.svg, P-59.png
 │   ├── assets/style.css        shared stylesheet
-│   └── data/                   public source data for reproducibility
+│   └── data/                   derived public data backing the charts
+│       ├── azure_trace_summary.csv
+│       └── azure_trace_histograms.csv
 ├── build/
-│   ├── export_from_workbook.py Excel register  →  CSV
-│   ├── generate_charts.py      CSV  →  chart SVG + PNG
-│   ├── build_site.py           plot index + charts  →  HTML
-│   └── plot_index.csv          the chart catalogue
+│   ├── export_from_workbook.py  Excel register  →  CSV
+│   ├── summarise_azure_traces.py  raw traces  →  derived aggregates
+│   ├── generate_charts.py       CSV  →  chart SVG + PNG
+│   ├── build_site.py            plot index + charts  →  HTML
+│   ├── update_excel_links.py    gallery URLs  →  workbook
+│   ├── plot_index.csv           the chart catalogue (69 rows)
+│   └── company_disclosures.csv  23 verified company disclosures
 ├── notebooks/
 │   └── Inference_Tokens_Chart_Generation.ipynb
 └── README.md
@@ -75,7 +69,8 @@ ai-data-room/
 Excel Dataset Register     the inventory of datasets and charts
         │
         ├─ export_from_workbook.py ─→ build/plot_index.csv
-        │                             inference-tokens/data/*.csv
+        │
+        ├─ summarise_azure_traces.py ─→ inference-tokens/data/*.csv
         │
         ├─ generate_charts.py ──────→ inference-tokens/charts/P-NN.svg + .png
         │
@@ -83,8 +78,12 @@ Excel Dataset Register     the inventory of datasets and charts
 ```
 
 The Excel register is the source of truth for which charts exist. The gallery
-HTML is generated, never hand-edited, so the site cannot drift out of step with
-the catalogue.
+HTML is generated, never hand-edited.
+
+`build/` holds builders for charts that are not currently published. Running
+`python build/generate_charts.py` with no arguments rebuilds all of them, and
+they would then reappear on the site at the next `build_site.py`. Pass an
+explicit Plot ID to avoid that.
 
 ---
 
@@ -93,7 +92,7 @@ the catalogue.
 Every chart has an anchor matching its Plot ID:
 
 ```
-https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-01
+https://saurabhcloudsufi.github.io/AL-DATA-ROOM/inference-tokens/#P-59
 ```
 
 These addresses are stable. Adding charts or new domains does not change them, so
@@ -104,13 +103,15 @@ a link made today keeps working.
 ## Rebuilding the site
 
 ```bash
-python build/export_from_workbook.py path/to/register.xlsx   # refresh catalogue
-python build/generate_charts.py                              # regenerate charts
-python build/generate_charts.py P-01                         # or just one
+python build/summarise_azure_traces.py ~/data/azure-traces   # derive aggregates
+python build/generate_charts.py P-59                         # regenerate a chart
 python build/build_site.py                                   # rebuild HTML
 ```
 
 Requires `python3` with `matplotlib`, `pandas` and `openpyxl`.
+
+Chart output is deterministic: re-running `generate_charts.py` on unchanged input
+produces byte-identical SVG and PNG, so a git diff only ever shows a real change.
 
 ## Adding a chart
 
@@ -120,7 +121,7 @@ Requires `python3` with `matplotlib`, `pandas` and `openpyxl`.
    notebook, that loads the **real** source data. If the data is not available,
    request it rather than substituting another dataset.
 3. Save as `P-NN.svg` and `P-NN.png` in the domain's `charts/` directory.
-4. Run `build/build_site.py`. The chart replaces its Pending placeholder.
+4. Run `build/build_site.py`. The chart appears on the page; nothing else moves.
 
 ## Adding a domain
 
@@ -132,10 +133,15 @@ are generated from there. No existing HTML changes, and no existing URL moves.
 
 ## Data and disclosure
 
-`inference-tokens/data/company_disclosures.csv` contains figures that companies
-published themselves — earnings calls, earnings releases, SEC exhibits, official
-announcements — each with a link to its primary source. It is committed so the
-charts are reproducible.
+`inference-tokens/data/` carries only derived aggregates — the small, public,
+chart-backing files. The Azure trace summaries are re-derivable byte for byte
+from Microsoft's published traces (CC-BY) using
+`build/summarise_azure_traces.py`, so every plotted value can be checked against
+its source.
+
+`build/company_disclosures.csv` records 23 figures that companies published
+themselves — earnings calls, earnings releases, SEC exhibits, official
+announcements — each with a link to its primary source.
 
 Working datasets that are not cleared for public release are **not** committed to
 this repository. Where a chart depends on one, the chart output is published but
@@ -145,8 +151,8 @@ the underlying file stays in the private project store. See `.gitignore`.
 
 ## Methodology references
 
-Section references shown against each chart (for example `§7.3 — Method 1,
-Direct Provider Throughput`) come from the working methodology document. They are
-plain text for now and become links once that document is finalised; the HTML
-already carries a `data-methodology-ref` attribute on each one so they can be
-converted in a single pass.
+Section references shown against each chart (for example `§7.9 — De-duplication
+rule 3`) come from the working methodology document. They are plain text for now
+and become links once that document is finalised; the HTML already carries a
+`data-methodology-ref` attribute on each one so they can be converted in a single
+pass.
