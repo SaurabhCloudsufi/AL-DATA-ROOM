@@ -1,0 +1,16 @@
+Plot_ID,Chart_title,Datasets_used,What_the_chart_shows,Methodology_reference,Chart_link,Status,Owning_dataset,Granularity,Year,Source_name,Source_url,Legacy_anchor
+P-4,"Compute capacity of the world's largest AI data centers, 2023–2030",,"Compute capacity across the AI data centers Epoch tracks, stacked by owner, with observed history separated from projected build-out.
+Note — Coverage is ~27% of AI compute delivered globally, so this is a floor; everything past the snapshot is an announced schedule, not a measurement","Epoch AI data centers documentation
+Site-level cumulative snapshots, step-summed across sites",,,Epoch AI — AI Data Centers,"Site-level cumulative snapshots, aggregated quarterly",2023–2030 (snapshot downloaded 2026-08-06),Epoch AI — AI Data Centers,https://epoch.ai/data/ai-data-centers,
+P-5,"IT power of the world's largest AI data centers, 2023–2030",,"Installed IT power across the same sites, stacked by owner.
+Note — IT power is the computing load only, not the facility total, and is largely inferred from cooling equipment seen in satellite imagery","Epoch AI data centers documentation
+Site-level cumulative snapshots, step-summed across sites",,,Epoch AI — AI Data Centers,"Site-level cumulative snapshots, aggregated quarterly",2023–2030 (snapshot downloaded 2026-08-06),Epoch AI — AI Data Centers,https://epoch.ai/data/ai-data-centers,
+P-6,"Capital cost of the world's largest AI data centers, 2023–2030",,"Cumulative capital cost of the tracked sites in 2025 US dollars, stacked by owner.
+Note — Cost is modelled from IT power using Epoch's cost-per-watt model; it is not drawn from company filings","Epoch AI data centers documentation
+Cost-per-watt model applied to IT power",,,Epoch AI — AI Data Centers,"Site-level cumulative snapshots, aggregated quarterly",2023–2030 (snapshot downloaded 2026-08-06),Epoch AI — AI Data Centers,https://epoch.ai/data/ai-data-centers,
+P-7,"Accelerator mix across tracked AI data centers, 2023–2030",,"How many accelerators of each type are installed at the sites where Epoch records a chip breakdown.
+Note — Units are counted, not performance-weighted, and only 16 of 219 chip records are company disclosures","Epoch AI data centers documentation
+Cumulative per-site chip counts, step-summed",,,Epoch AI — AI Data Centers,"Site and chip-type level cumulative counts, aggregated quarterly",2023–2030 (snapshot downloaded 2026-08-06),Epoch AI — AI Data Centers,https://epoch.ai/data/ai-data-centers,
+P-8,"Cooling hardware size predicts its capacity, and so a site's power",,"Rated cooling capacity against physical footprint for every unit in Epoch's cooling tower and chiller reference tables — the relationship that turns satellite imagery into a power estimate.
+Note — Manufacturer catalogue ratings, not measurements of installed units; rated capacity is an upper bound","Epoch AI data centers documentation
+Cooling equipment reference tables",,,Epoch AI — AI Data Centers,One row per equipment model in the reference catalogue,Catalogue reference data (snapshot downloaded 2026-08-06),Epoch AI — AI Data Centers,https://epoch.ai/data/ai-data-centers,

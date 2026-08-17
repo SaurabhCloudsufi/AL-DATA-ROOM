@@ -97,7 +97,8 @@ def frame(fig, ax, plot_id, title, subtitle, source, methodology, note):
     ax.set_axisbelow(True)
 
 
-def save(fig, plot_id):
+def save(fig, plot_id, domain="inference-tokens"):
+    CHARTS = REPO / domain / "charts"
     CHARTS.mkdir(parents=True, exist_ok=True)
     svg = CHARTS / f"{plot_id}.svg"
     png = CHARTS / f"{plot_id}.png"
@@ -556,7 +557,273 @@ def build_azure(plot_id):
     save(fig, plot_id)
 
 
+# ============================= Epoch AI data centers (P-4 / P-5 / P-6 / P-7 / P-8)
+# Reproduces the three metric tabs of Epoch's own AI Data Centers timeline
+# (Compute / IT Power / Cost) from the published CSVs, then two further charts
+# the remaining files in that download support.
+DC_DATA = REPO / "ai-infrastructure" / "data"
+
+# Owner palette. Nine slots is more than the four-colour house set carries, so
+# the extras stay inside the same muted register rather than turning categorical.
+DC_COLOURS = ["#1f3864", "#4a6fa5", "#6b8f71", "#b4763a", "#7d5a7d",
+              "#4e8a8b", "#9aa9c4", "#a46b6b", "#c3c8d1"]
+
+DC_METRICS = {
+    "P-4": ("compute_h100e", "Compute capacity",
+            "H100-equivalents", 1e6, "{v:.0f}M",
+            "Compute is derived from IT power and the chip mix Epoch judges most "
+            "likely to be installed; only where a site's chips are actually "
+            "reported is it counted directly."),
+    "P-5": ("it_power_mw", "IT power",
+            "IT power (GW)", 1e3, "{v:.0f} GW",
+            "IT power is the load of the computing equipment itself, not the "
+            "facility total, and is largely inferred from cooling equipment "
+            "visible in satellite imagery."),
+    "P-6": ("capital_cost_busd", "Capital cost",
+            "Cumulative capital cost (2025 US$ billions)", 1, "${v:.0f}bn",
+            "Capital cost is modelled entirely from IT power using Epoch's "
+            "cost-per-watt model; it is not drawn from company filings."),
+}
+
+
+def _dc_summary():
+    import csv as _csv
+    with (DC_DATA / "dc_summary.csv").open(encoding="utf-8") as f:
+        return next(_csv.DictReader(f))
+
+
+def _dc_frame(name):
+    import csv as _csv
+    with (DC_DATA / name).open(encoding="utf-8") as f:
+        return list(_csv.DictReader(f))
+
+
+def _dc_stack(ax, dates, series, labels, snapshot, ylabel, yscale, ytick):
+    """Stacked area with the observed / projected split drawn, not described."""
+    from datetime import date as _date
+    xs = [_date.fromisoformat(d) for d in dates]
+    vals = [[v / yscale for v in series[l]] for l in labels]
+    ax.stackplot(xs, vals, colors=DC_COLOURS[:len(labels)], labels=labels,
+                 edgecolor="white", linewidth=0.35)
+
+    cut = _date.fromisoformat(snapshot)
+    top = max(sum(col) for col in zip(*vals)) * 1.10
+    ax.axvspan(cut, xs[-1], color="#f2f0ec", alpha=0.55, zorder=0)
+    ax.axvline(cut, color=INK, linewidth=1.1, linestyle="--", zorder=6)
+    ax.text(cut, top * 0.985, "  projected \u2192", ha="left", va="top",
+            fontsize=8.6, color=MUTED, style="italic", zorder=7)
+    ax.text(cut, top * 0.985, "\u2190 observed  ", ha="right", va="top",
+            fontsize=8.6, color=MUTED, style="italic", zorder=7)
+
+    ax.set_ylim(0, top)
+    ax.set_xlim(xs[0], xs[-1])
+    ax.set_ylabel(ylabel, fontsize=10)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(
+        lambda v, _p: ytick.format(v=v)))
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+
+
+def _dc_top_owners(rows, metric, snapshot, n=8):
+    at = {r["group"]: float(r["value"]) for r in rows
+          if r["metric"] == metric and r["group_kind"] == "owner"
+          and r["date"] <= snapshot}
+    last = {}
+    for r in rows:
+        if r["metric"] == metric and r["group_kind"] == "owner" and r["date"] <= snapshot:
+            last[r["group"]] = float(r["value"])
+    ranked = sorted(last, key=lambda k: -last[k])
+    return ranked[:n], ranked[n:]
+
+
+def _dc_rect(subtitle, note, left=0.085, width=0.735, xlabel_room=0.055):
+    """Panel rect that clears frame()'s subtitle above and footer below.
+
+    frame() lays its furniture out in figure fractions, so anything that sets an
+    axes rect by hand has to derive it from the same numbers or the text and the
+    plot overlap once a note runs long.
+    """
+    n_sub = len(textwrap.wrap(subtitle, 122))
+    n_note = len(textwrap.wrap(note, 133))
+    top = 0.882 - (n_sub - 1) * 0.030 - 0.055
+    bottom = 0.052 + 0.026 * (2 + n_note) + xlabel_room
+    return [left, bottom, width, top - bottom]
+
+
+def build_dc_metric(plot_id):
+    metric, what, ylabel, yscale, ytick, caveat = DC_METRICS[plot_id]
+    rows = _dc_frame("dc_metric_timeseries.csv")
+    meta = _dc_summary()
+    snapshot = meta["snapshot_date"]
+
+    dates = sorted({r["date"] for r in rows})
+    top, rest = _dc_top_owners(rows, metric, snapshot)
+    labels = top + (["Other owners"] if rest else [])
+
+    series = {l: [0.0] * len(dates) for l in labels}
+    idx = {d: i for i, d in enumerate(dates)}
+    for r in rows:
+        if r["metric"] != metric or r["group_kind"] != "owner":
+            continue
+        key = r["group"] if r["group"] in top else "Other owners"
+        if key in series:
+            series[key][idx[r["date"]]] += float(r["value"])
+
+    final = sum(series[l][-1] for l in labels) / yscale
+    now = sum(series[l][idx[max(d for d in dates if d <= snapshot)]]
+              for l in labels) / yscale
+    prec = ytick.replace(":.0f", ":,.1f")
+
+    subtitle = (f"What it shows: {what} across the {meta['sites']} AI data centers Epoch "
+                f"tracks, stacked by owner. Solid ground is observed to {snapshot}; the "
+                f"shaded band is Epoch's projection from announced construction "
+                f"schedules.")
+    note = (f"Snapshot downloaded {snapshot}; Epoch updates the dataset in place, so "
+            f"live figures will differ. Reading {prec.format(v=now)} at the snapshot and "
+            f"{prec.format(v=final)} by 2030 on present plans. {caveat} Coverage is about "
+            f"27% of AI compute delivered globally and is strongest for the largest "
+            f"sites, so this is a floor on the total, not the whole market. Everything "
+            f"right of the dashed line is a schedule, not a measurement, and announced "
+            f"build-outs slip. The flattening after 2029 is an artefact of the data "
+            f"ending, not a forecast of saturation: each site is held at its last "
+            f"announced milestone, and few sites have published one beyond then.")
+
+    fig = plt.figure(figsize=(12.0, 8.1))
+    ax = fig.add_axes(_dc_rect(subtitle, note))
+    _dc_stack(ax, dates, series, labels, snapshot, ylabel, yscale, ytick)
+    ax.set_xlabel("Quarter", fontsize=10)
+
+    handles, labs = ax.get_legend_handles_labels()
+    ax.legend(handles[::-1], labs[::-1], loc="upper left",
+              bbox_to_anchor=(1.012, 1.0), frameon=False, fontsize=9,
+              title="Owner", title_fontsize=9.2, handlelength=1.5,
+              borderaxespad=0)
+
+    frame(fig, ax, plot_id,
+          f"{what} of the world's largest AI data centers, 2023\u20132030",
+          subtitle,
+          "Epoch AI, AI Data Centers (CC-BY) \u2014 https://epoch.ai/data/ai-data-centers",
+          "Epoch AI data centers documentation \u2014 site-level cumulative snapshots, "
+          "step-summed across sites",
+          note)
+    save(fig, plot_id, "ai-infrastructure")
+
+
+def build_p7(_rows=None):
+    """Accelerator mix over time, from the chip quantities table."""
+    rows = _dc_frame("dc_chip_mix.csv")
+    meta = _dc_summary()
+    snapshot = meta["snapshot_date"]
+    dates = sorted({r["date"] for r in rows})
+    idx = {d: i for i, d in enumerate(dates)}
+
+    last = {}
+    for r in rows:
+        if r["date"] <= snapshot:
+            last[r["chip_type"]] = max(last.get(r["chip_type"], 0), float(r["units"]))
+    ranked = sorted(last, key=lambda k: -last[k])
+    top, rest = ranked[:8], ranked[8:]
+    labels = top + (["Other chips"] if rest else [])
+    series = {l: [0.0] * len(dates) for l in labels}
+    for r in rows:
+        key = r["chip_type"] if r["chip_type"] in top else "Other chips"
+        if key in series:
+            series[key][idx[r["date"]]] += float(r["units"])
+
+    fig = plt.figure(figsize=(12.0, 7.9))
+    ax = fig.add_axes([0.085, 0.30, 0.735, 0.475])
+    _dc_stack(ax, dates, series, labels, snapshot,
+              "Accelerators installed (millions of units)", 1e6, "{v:.1f}M")
+    ax.set_xlabel("Quarter", fontsize=10)
+    handles, labs = ax.get_legend_handles_labels()
+    ax.legend(handles[::-1], labs[::-1], loc="upper left", bbox_to_anchor=(1.012, 1.0),
+              frameon=False, fontsize=9, title="Chip type", title_fontsize=9.2,
+              handlelength=1.5, borderaxespad=0)
+
+    frame(fig, ax, "P-7",
+          "Accelerator mix across tracked AI data centers, 2023\u20132030",
+          "What it shows: how many accelerators of each type are installed across the "
+          "sites where Epoch records a chip breakdown, stacked by chip type.",
+          "Epoch AI, AI Data Centers \u2014 data_center_chip_quantities.csv (CC-BY)",
+          "Epoch AI data centers documentation \u2014 cumulative per-site chip counts, "
+          "step-summed",
+          f"Units are counted, not performance-weighted: one Trainium2 and one B300 "
+          f"each count as one accelerator, though they differ several-fold in "
+          f"throughput. Use the compute chart for capacity. Only "
+          f"{meta['chip_rows_company_disclosed']} of {meta['chip_rows']} chip records "
+          f"are company disclosures; the rest are Epoch estimates. Chip detail exists "
+          f"for only a subset of sites, so this understates total deployment and is "
+          f"not comparable in level with the compute chart. Right of the dashed line "
+          f"is planned deployment.")
+    save(fig, "P-7", "ai-infrastructure")
+
+
+def build_p8(_rows=None):
+    """Cooling capacity against footprint - the basis for reading power off imagery."""
+    import math
+    rows = _dc_frame("dc_cooling_equipment.csv")
+    meta = _dc_summary()
+    groups = {}
+    for r in rows:
+        try:
+            a, c = float(r["area_m2"]), float(r["capacity_kw"])
+        except ValueError:
+            continue
+        if a <= 0 or c <= 0:
+            continue
+        groups.setdefault(r["equipment"], []).append((a, c))
+
+    order = sorted(groups, key=lambda k: -len(groups[k]))
+    tones = {"Cooling tower (wet)": SERIES["current"],
+             "Chiller (air-cooled)": SERIES["scope"],
+             "Chiller (water-cooled)": SERIES["other"]}
+
+    fig = plt.figure(figsize=(11.6, 7.7))
+    ax = fig.add_axes([0.085, 0.315, 0.875, 0.465])
+
+    for g in order:
+        pts = groups[g]
+        colour = tones.get(g, SERIES["prior"])
+        ax.scatter([p[0] for p in pts], [p[1] for p in pts], s=26,
+                   facecolor=colour, edgecolor="white", linewidth=0.4,
+                   alpha=0.75, label=f"{g}  (n={len(pts)})", zorder=3)
+
+    allpts = [p for g in order for p in groups[g]]
+    med = sorted(c / a for a, c in allpts)[len(allpts) // 2]
+    xs = [min(p[0] for p in allpts), max(p[0] for p in allpts)]
+    ax.plot(xs, [med * x for x in xs], color=MUTED, linewidth=1.2, linestyle="--",
+            zorder=2, label=f"Median intensity  {med:,.0f} kW/m\u00b2")
+
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlabel("Footprint of the unit (m\u00b2, log scale)", fontsize=10)
+    ax.set_ylabel("Rated cooling capacity (kW, log scale)", fontsize=10)
+    ax.grid(color=RULE, linewidth=0.7, which="major")
+    ax.set_axisbelow(True)
+    ax.legend(frameon=False, fontsize=9, loc="upper left")
+
+    frame(fig, ax, "P-8",
+          "Cooling hardware size predicts its capacity, and so a site's power",
+          "What it shows: rated cooling capacity against physical footprint for every "
+          "unit in Epoch's two equipment reference tables. The tight relationship is "
+          "what lets a rooftop count in an aerial image become a power estimate.",
+          "Epoch AI, AI Data Centers \u2014 data_center_cooling_towers.csv and "
+          "data_center_chillers.csv (CC-BY)",
+          "Epoch AI data centers documentation \u2014 cooling equipment reference tables",
+          f"These are manufacturer catalogue specifications, not measurements of "
+          f"installed units, and rated capacity is an upper bound that real duty "
+          f"rarely reaches. {meta['cooling_equipment_usable']} of "
+          f"{meta['cooling_equipment_rows']} catalogue rows carry both a footprint and "
+          f"a capacity and are plotted; the rest are omitted rather than imputed. The "
+          f"median line is a summary of central tendency, not a fitted model, and the "
+          f"three equipment classes have genuinely different intensities, so applying "
+          f"one ratio to a mixed site introduces error.")
+    save(fig, "P-8", "ai-infrastructure")
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
+BUILDERS.update({pid: (lambda _rows, _p=pid: build_dc_metric(_p)) for pid in DC_METRICS})
+BUILDERS.update({"P-7": build_p7, "P-8": build_p8})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 
 

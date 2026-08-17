@@ -49,9 +49,18 @@ DOMAINS = [
         "index": "build/plot_index_published.csv",
         "live": True,
     },
+    {
+        "slug": "ai-infrastructure",
+        "title": "AI Data Centers",
+        "blurb": "The physical build-out behind AI compute: installed capacity, IT power, "
+                 "capital cost and hardware across the largest AI data centers worldwide.",
+        "index": "build/plot_index_datacenters.csv",
+        # one stylesheet for the whole site rather than a copy per domain
+        "css": "../inference-tokens/assets/style.css",
+        "live": True,
+    },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
     {"slug": "model-pricing", "title": "Model Pricing", "live": False},
-    {"slug": "ai-infrastructure", "title": "AI Infrastructure", "live": False},
     {"slug": "energy", "title": "Energy", "live": False},
 ]
 
@@ -245,7 +254,7 @@ def build_gallery(dom):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(dom['title'])} — Visual Evidence Gallery — AI Data Room</title>
 <meta name="description" content="{e(dom['blurb'])}">
-<link rel="stylesheet" href="{CSS}">
+<link rel="stylesheet" href="{dom.get('css', CSS)}">
 </head>
 <body>
 <div class="wrap">
