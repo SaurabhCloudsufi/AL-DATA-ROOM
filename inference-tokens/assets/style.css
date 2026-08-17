@@ -199,3 +199,7 @@ a.pid:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 
 /* invisible anchor preserving a chart's former Plot ID in shared links */
 .legacy-anchor { display: block; height: 0; overflow: hidden; }
+
+/* the observed-only constraint is the point of the Epoch charts, so it reads
+   as a statement rather than another metadata row */
+.facts dd.treatment { font-weight: 600; color: #1f3864; }

@@ -57,6 +57,18 @@ DOMAINS = [
         "index": "build/plot_index_datacenters.csv",
         # one stylesheet for the whole site rather than a copy per domain
         "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "Epoch AI — Published Visualizations":
+                "These reproduce Epoch AI's own published views of the AI Data Centers "
+                "dataset, rebuilt from the underlying CSVs rather than screenshotted. "
+                "Observed data only — every future-dated milestone in the source is "
+                "excluded, so nothing here is a projection.",
+        },
+        "extra_sections": [
+            {"title": "Derived Analysis",
+             "body": "Additional analytical visualizations derived from the underlying "
+                     "Epoch AI datasets will be added separately."},
+        ],
         "live": True,
     },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
@@ -104,8 +116,24 @@ def load_plots(path):
         return list(csv.DictReader(f))
 
 
-def assign(plots):
-    """Bucket each plot into a section by its methodology reference."""
+def assign(plots, blurbs=None):
+    """Bucket each plot into a section.
+
+    A plot index may name its own sections in a Section column, which takes
+    precedence and preserves the order the sections first appear. Otherwise
+    plots are bucketed by methodology reference against SECTIONS.
+    """
+    if any((p.get("Section") or "").strip() for p in plots):
+        blurbs = blurbs or {}
+        order, grouped = [], {}
+        for p in plots:
+            name = (p.get("Section") or "Other").strip()
+            if name not in grouped:
+                order.append(name)
+                grouped[name] = []
+            grouped[name].append(p)
+        return [(n, blurbs.get(n, ""), grouped[n]) for n in order]
+
     out = [(name, blurb, []) for name, blurb, _ in SECTIONS]
     leftover = []
     for p in plots:
@@ -192,6 +220,11 @@ def render_chart(slug, p):
         parts.append(f'<div><dt>Granularity</dt><dd>{e(p["Granularity"])}</dd></div>')
     if p.get("Year"):
         parts.append(f'<div><dt>Year</dt><dd>{e(p["Year"])}</dd></div>')
+    if p.get("Coverage"):
+        parts.append(f'<div><dt>Coverage</dt><dd>{e(p["Coverage"])}</dd></div>')
+    if p.get("Data_treatment"):
+        parts.append('<div><dt>Data treatment</dt>'
+                     f'<dd class="treatment">{e(p["Data_treatment"])}</dd></div>')
     if p.get("Source_name"):
         src = e(p["Source_name"])
         url = (p.get("Source_url") or "").strip()
@@ -221,7 +254,8 @@ def build_gallery(dom):
     catalogued = load_plots(dom["index"])
     plots = ([p for p in catalogued if chart_files(dom["slug"], p["Plot_ID"])[0]]
              if PUBLISHED_ONLY else catalogued)
-    sections = assign(plots)
+    sections = assign(plots, dom.get("section_blurbs"))
+    named = any((p.get("Section") or "").strip() for p in plots)
     built = sum(1 for p in plots if chart_files(dom["slug"], p["Plot_ID"])[0])
 
     body = []
@@ -238,13 +272,21 @@ def build_gallery(dom):
     for name, blurb, ps in sections:
         anchor = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
         body.append(f'<div class="section" id="{anchor}">')
-        # with everything in one section the heading labels nothing useful
-        if len(sections) > 1:
+        # a named section is part of the page structure, so it always shows;
+        # an inferred one only earns a heading when there is more than one
+        if named or len(sections) > 1:
             body.append(f"<h2>{e(name)}</h2>")
             if blurb:
                 body.append(f'<p class="blurb">{e(blurb)}</p>')
         for p in ps:
             body.append(render_chart(dom["slug"], p))
+        body.append("</div>")
+
+    for extra in dom.get("extra_sections", []):
+        anchor = re.sub(r"[^a-z0-9]+", "-", extra["title"].lower()).strip("-")
+        body.append(f'<div class="section" id="{anchor}">')
+        body.append(f"<h2>{e(extra['title'])}</h2>")
+        body.append(f'<p class="blurb">{e(extra["body"])}</p>')
         body.append("</div>")
 
     page = f"""<!DOCTYPE html>
