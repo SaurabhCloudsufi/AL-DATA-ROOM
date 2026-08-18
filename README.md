@@ -34,10 +34,15 @@ placeholders, no planned-domain cards. Nothing is advertised before it exists.
 
 ---
 
-## Inference Tokens
+## AzureLLMInferenceTrace
 
-The total number of tokens processed when AI models answer requests, across the
-US enterprise market, over a given period. Everything except training.
+Microsoft's own production inference traces, released from Azure's LLM and
+multimodal serving fleets: one row per request, with the input and output token
+counts it actually used. The domain is named for the release itself; the wider
+inference-token estimate it feeds is a separate piece of work.
+
+The URL stays `/inference-tokens/` — it is the published address, and five other
+domains load their stylesheet through it, so only the display name changes.
 
 `build/plot_index.csv` remains the full catalogue of **69 charts**, `P-01`
 through `P-69`, grouped into six sections that follow the estimation methods in

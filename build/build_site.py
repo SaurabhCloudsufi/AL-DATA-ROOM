@@ -40,10 +40,14 @@ PUBLISHED_ONLY = True
 # on the root page only. Nothing is claimed to exist before it does.
 DOMAINS = [
     {
+        # the slug stays "inference-tokens": it is the published address, five
+        # other domains load their stylesheet through it, and the site's premise
+        # is that a link made today keeps working. Only the display name changes.
         "slug": "inference-tokens",
-        "title": "Inference Tokens",
-        "blurb": "Total tokens processed when models answer requests, across the US "
-                 "enterprise market. Everything except training.",
+        "title": "AzureLLMInferenceTrace",
+        "blurb": "Microsoft's own production inference traces, released from Azure's "
+                 "LLM and multimodal serving fleets: one row per request, with the "
+                 "input and output token counts it actually used.",
         # build/plot_index.csv remains the 69-row workbook catalogue for
         # reference; the site is driven by the curated published index
         "index": "build/plot_index_published.csv",

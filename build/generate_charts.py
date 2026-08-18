@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Inference Tokens charts from company-disclosed figures.
+"""Generate AzureLLMInferenceTrace charts from company-disclosed figures.
 
 Every value plotted here is read from build/company_disclosures.csv, which is
 exported from the Excel register. That file records each figure exactly as the
@@ -134,6 +134,14 @@ def save(fig, plot_id, domain="inference-tokens"):
     fig.savefig(svg, format="svg", facecolor="white", metadata={"Date": None})
     fig.savefig(png, format="png", dpi=200, facecolor="white")
     plt.close(fig)
+    # text.parse_math is off repo-wide, so any tick left on matplotlib's default
+    # log formatter renders its mathtext source literally - several overlapping
+    # "$\mathdefault{10^{4}}$" strings where the axis labels should be. It is
+    # invisible in code review and obvious to a reader, so it fails here instead.
+    if "mathdefault" in svg.read_text(encoding="utf-8"):
+        raise SystemExit(
+            f"{plot_id}: axis labels contain raw mathtext. A log axis was left on "
+            f"matplotlib's default formatter - call _plain_log_axis() on it.")
     print(f"  wrote {svg.relative_to(REPO)} and {png.relative_to(REPO)}")
 
 
@@ -557,6 +565,7 @@ def build_azure(plot_id):
 
         for ax in (ax_d, ax_c):
             ax.set_xscale("log")
+            _plain_log_axis(ax.xaxis)
             ax.set_xlim(0.7, x_hi * 1.6)
             ax.grid(axis="y", color=RULE, linewidth=0.7)
             ax.set_axisbelow(True)
@@ -1193,6 +1202,8 @@ def build_d05(_r=None):
             zorder=2, label=f"Median intensity  {med:,.0f} kW/m\u00b2")
     ax.set_xscale("log")
     ax.set_yscale("log")
+    _plain_log_axis(ax.xaxis)
+    _plain_log_axis(ax.yaxis)
     ax.set_xlabel("Footprint of the unit (m\u00b2, log scale)", fontsize=10)
     ax.set_ylabel("Rated cooling capacity (kW, log scale)", fontsize=10)
     ax.grid(color=RULE, linewidth=0.7, which="major")
@@ -1331,6 +1342,22 @@ AXIS_FMT = {
                        else f"{v:,.0f} W"),
     "days": lambda v: (f"{v:,.0f}" if v >= 1 else f"{v:g}"),
 }
+
+
+def _plain_log_axis(axis, formatter=None):
+    """Label a log axis in plain text.
+
+    text.parse_math is off repo-wide so that dollar figures in captions render
+    literally. The side effect is that matplotlib's default log formatter emits
+    "$\\mathdefault{10^{4}}$" and, with math parsing disabled, that string is
+    drawn verbatim - several of them overlapping into an illegible smear. Any
+    log axis therefore has to state its own formatter.
+    """
+    import matplotlib.ticker as mticker
+    formatter = formatter or AXIS_FMT["count"]
+    axis.set_major_locator(mticker.LogLocator(base=10.0))
+    axis.set_minor_locator(mticker.NullLocator())
+    axis.set_major_formatter(plt.FuncFormatter(lambda v, _p: formatter(v)))
 
 
 def _dec_year(stamp):
