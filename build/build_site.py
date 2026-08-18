@@ -163,12 +163,19 @@ DOMAINS = [
                 "domain carries one caveat that cannot be repeated often enough: this "
                 "is one provider's own consumer traffic, so every share is a share of "
                 "Claude conversations and never of AI use at large.",
+            "Anthropic — Enterprise API":
+                "The same index over Anthropic's other published population: 1P API "
+                "traffic, excluding Claude Code. This is programmatic, paid usage "
+                "rather than consumer conversation, published globally with no "
+                "geographic breakdown. It is the file that speaks to enterprise "
+                "workloads, and it behaves nothing like the consumer one.",
             "Derived Analysis":
-                "Our own analysis of the same file — the published views held at a "
-                "grain where they vary, and crossed against each other. A cell "
-                "Anthropic did not publish is absent rather than zero: a value is "
-                "released only where it clears an aggregation threshold and a "
-                "geography sample floor, so a missing country is a suppressed one.",
+                "Our own analysis of the same two files — the published views held at "
+                "a grain where they vary, and the API set against Claude.ai on the "
+                "measures where they diverge. The two are never pooled: they are "
+                "different populations, and the gap between them is the finding. A "
+                "cell Anthropic did not publish is absent rather than zero, so a "
+                "missing country is a suppressed one.",
         },
         "live": True,
     },

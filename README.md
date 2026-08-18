@@ -252,24 +252,31 @@ What people actually do with a frontier model. Source: the
 | File | Rows | What it is |
 |---|---|---|
 | `aei_claude_ai_2026-06-26.csv` | 1,636,573 | Claude chat and Cowork (Free, Pro, Max), 2026-04 and 2026-05 |
+| `aei_1p_api_2026-06-26.csv` | 491,705 | Anthropic 1P API calls, excluding Claude Code. Global only |
 
 One row is one metric value for one geography and one category node — 219 MB of
 them. `summarise_anthropic_aei.py` reduces it to the nine small tables in
 `ai-usage/data/` that the charts read; nothing else touches the raw file.
 
-**13 charts**, in two sections:
+**18 charts**, in three sections:
 
 | IDs | Section | What they are |
 |---|---|---|
 | `AEI-01` – `AEI-10` | Anthropic — Published Visualizations | The views Anthropic's own index presents: the usage index by country and by US state, usage share by country, the work/personal/study split, collaboration patterns, request topics, occupation groups, work activities and artifact types |
-| `AEI-D01` – `AEI-D06` | Derived Analysis | The published views held at a grain where they vary, and crossed against each other — automation by occupation, the time estimates converted to one unit, volume against intensity, and what the release actually holds |
+| `AEI-11` – `AEI-12` | Anthropic — Enterprise API | The API file on its own: what enterprise traffic is doing by occupation group, and what it is asked for |
+| `AEI-D01` – `AEI-D09` | Derived Analysis | The published views held at a grain where they vary, plus the API set against Claude.ai on the measures where they diverge — automation by occupation, the time estimates converted to one unit, volume against intensity, what the release holds, and the three API-against-consumer comparisons |
 
-Three rules hold across all 13:
+Three rules hold across all 18:
 
 - **One provider's own traffic.** Claude.ai is not the market. Every share is a
   share of Claude conversations, and the charts carry that on their face rather
-  than implying a market measurement. The API file is a separate release and is
-  not pooled with this one.
+  than implying a market measurement.
+- **The two files are never pooled.** They are different populations and behave
+  nothing alike: API traffic is 94% automated against 49%, 83% directive against
+  31%, and 84% work against 43%. `AEI-D07` to `AEI-D09` set them side by side,
+  which is the point; averaging them would destroy the only thing the pair is
+  good for. That gap is also the reason a Claude.ai figure cannot stand in for
+  enterprise behaviour.
 - **A missing cell is not a zero.** Anthropic publishes a value only where it
   clears an aggregation threshold and a geography sample floor, so an absent
   country or node was suppressed for sparsity. It is left absent.
@@ -444,10 +451,10 @@ The names are the files as downloaded, in the project source store:
 `build/source_files_manifest.csv` records that store file by file, and
 
 ```bash
-python build/verify_source_files.py     # 87 published charts checked, 0 failing
+python build/verify_source_files.py     # 92 published charts checked, 0 failing
 ```
 
-checks all 87 published charts against it. A chart that names no file, that
+checks all 92 published charts against it. A chart that names no file, that
 names a different file on its face than in its index row, or that names a file
 the store does not hold, fails the check rather than reaching a client.
 

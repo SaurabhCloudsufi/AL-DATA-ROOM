@@ -4310,6 +4310,225 @@ AEI_DERIVED = {
 }
 
 
+# --------------------------------------------------- Enterprise API (1P) file
+AEI_API_FILE = "aei_1p_api_2026-06-26.csv"
+AEI_API_SCOPE = ("The 1P API file is Anthropic's own API traffic excluding Claude Code, "
+                 "published globally with no geographic breakdown. It is a different "
+                 "population from Claude.ai and the two are never pooled.")
+
+
+def aei_api_src(both=False):
+    files = f"{AEI_API_FILE} + {AEI_FILE}" if both else AEI_API_FILE
+    return (f"Anthropic Economic Index (CC-BY) — {files} — "
+            f"huggingface.co/datasets/Anthropic/EconomicIndex")
+
+
+def _api_badge(ax, above=True):
+    y, va = (1.030, "bottom") if above else (0.955, "top")
+    ax.text(0.0 if above else 0.017, y,
+            "  ENTERPRISE API TRAFFIC  ·  not consumer conversation  ",
+            transform=ax.transAxes, ha="left", va=va, fontsize=9.1,
+            fontweight="bold", color="white", zorder=9, clip_on=False,
+            bbox=dict(boxstyle="round,pad=0.42", facecolor="#6b8f71",
+                      edgecolor="none"))
+
+
+AEI_API_RANK = {
+    "AEI-11": dict(table="aei_api_soc_major.csv", label="node_name", col="pct",
+                   top=15, left=0.345,
+                   title="API usage mapped to occupation groups",
+                   xlabel="Share of API conversations",
+                   what="what enterprise API traffic is doing, mapped onto the US "
+                        "Bureau of Labor Statistics occupational classification. This "
+                        "is the sector view of paid, programmatic usage rather than of "
+                        "consumer chat.",
+                   note="Computer and Mathematical work is the largest single group and "
+                        "Office and Administrative Support runs well above its consumer "
+                        "share, which is what back-office automation looks like when it "
+                        "is bought rather than chatted with."),
+    "AEI-12": dict(table="aei_api_request_major.csv", label="node_name", col="pct",
+                   top=15, left=0.315,
+                   title="What API traffic is asked to do",
+                   xlabel="Share of API conversations",
+                   what="the request topics behind enterprise API calls.",
+                   note="Document processing and business-process work lead here and "
+                        "barely register on the consumer side, where content creation "
+                        "and learning dominate. The API is bought to run pipelines."),
+}
+
+
+def build_aei_api_rank(plot_id):
+    cfg = AEI_API_RANK[plot_id]
+    full = _acsv(cfg["table"]).dropna(subset=[cfg["col"]])
+    t = full.sort_values(cfg["col"], ascending=False).head(cfg["top"])
+    meta = _ameta()
+
+    subtitle = (f"What it shows: {cfg['what']} {len(t)} of {len(full)} shown, "
+                f"{meta['period_last'][:7]} data.")
+    note = f"{cfg['note']} {AEI_API_SCOPE} {AEI_ABSENT}"
+
+    fig, ax = _cfig(subtitle, note, left=cfg["left"], width=0.955 - cfg["left"] - 0.10,
+                    badge_above=True, source=aei_api_src())
+    _abar(ax, [_clip(str(x), 46) for x in t[cfg["label"]]], list(t[cfg["col"]]),
+          colours=["#6b8f71"] * len(t), fmt="{v:.1f}%")
+    ax.set_xlabel(cfg["xlabel"], fontsize=10)
+    _api_badge(ax, above=True)
+    frame(fig, ax, plot_id, cfg["title"], subtitle, aei_api_src(), AEI_METH, note)
+    save(fig, plot_id, AEI_DOMAIN)
+
+
+# ------------------------------- the pair, which is what the two files are for
+API_COL, CAI_COL = "#6b8f71", "#1f3864"
+
+
+def _paired(plot_id, dimension, title, headline, what, note_extra, top=12,
+            left=0.335, fmt="{v:.1f}%", label_clip=44):
+    """One horizontal pair per node: API against Claude.ai, biggest gaps first."""
+    c = _acsv("aei_compare.csv")
+    d = c[c.dimension == dimension].copy()
+    d["gap"] = d["diff"].abs()
+    d = d.sort_values("gap", ascending=False).head(top).sort_values("diff")
+    meta = _ameta()
+
+    subtitle = (f"What it shows: {what} The {len(d)} largest gaps of "
+                f"{int((c.dimension == dimension).sum())} shared categories, "
+                f"{meta['period_last'][:7]} data.")
+    # AEI_API_SCOPE already states that the two are never pooled, so this only
+    # adds what the pairing does: sets them side by side, never combines them
+    note = (f"{note_extra} The chart sets the two files side by side and does not "
+            f"combine them. {AEI_API_SCOPE} {AEI_ABSENT}")
+
+    fig, ax = _cfig(subtitle, note, left=left, width=0.955 - left - 0.135,
+                    badge_above=True, source=aei_api_src(both=True))
+    ys = list(range(len(d)))
+    h = 0.36
+    ax.barh([y - h / 2 for y in ys], d["api"], height=h, color=API_COL,
+            edgecolor="white", linewidth=0.5, label="1P API", zorder=3)
+    ax.barh([y + h / 2 for y in ys], d["claude_ai"], height=h, color=CAI_COL,
+            edgecolor="white", linewidth=0.5, label="Claude.ai", zorder=3)
+    hi = float(max(d["api"].max(), d["claude_ai"].max()))
+    for y, r in zip(ys, d.itertuples()):
+        ax.text(r.api + hi * 0.012, y - h / 2, fmt.format(v=r.api), va="center",
+                fontsize=8.4, color=INK)
+        ax.text(r.claude_ai + hi * 0.012, y + h / 2, fmt.format(v=r.claude_ai),
+                va="center", fontsize=8.4, color=INK)
+        ax.text(hi * 1.30, y, f"{r.diff:+.0f}", va="center", ha="center", fontsize=9,
+                fontweight="bold", color=API_COL if r.diff > 0 else CAI_COL)
+    ax.text(hi * 1.30, -0.9, "gap (pt)", fontsize=8.4, color=MUTED, style="italic",
+            ha="center", va="center")
+    ax.set_yticks(ys)
+    ax.set_yticklabels([_clip(str(x), label_clip) for x in d["node"]], fontsize=9.4)
+    ax.invert_yaxis()
+    ax.set_xlim(0, hi * 1.40)
+    ax.set_xlabel("Share of conversations in that file", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.legend(loc="lower right", bbox_to_anchor=(0.88, 0.01), frameon=False, fontsize=9)
+    _api_badge(ax, above=True)
+    frame(fig, ax, plot_id, headline, subtitle, aei_api_src(both=True), AEI_METH, note)
+    save(fig, plot_id, AEI_DOMAIN)
+
+
+def build_aei_d07(_r=None):
+    """The headline difference between the two populations."""
+    c = _acsv("aei_compare.csv")
+    d = c[c.dimension == "overall"].copy()
+    # shares only, and behaviour rather than output: the means in years, hours
+    # and index points share no axis with a percentage, and the artifact split
+    # is its own dimension rather than a measure of how the model was used
+    keep = [n for n in d.node if n.endswith("_pct")
+            and n != "usage_pct" and not n.startswith("artifact_")]
+    d = d[d.node.isin(keep)].copy()
+    d["gap"] = d["diff"].abs()
+    d = d.sort_values("gap", ascending=False).head(10).sort_values("diff")
+    meta = _ameta()
+
+    subtitle = ("What it shows: the same measures over Anthropic's two published "
+                "populations — programmatic API traffic against consumer Claude.ai. "
+                "These are the ten largest gaps, and they are not small: the API is "
+                "automated, directive and almost entirely work, where the consumer "
+                "product is collaborative, iterative and half personal.")
+    note = ("This is the chart that decides whether a Claude.ai figure may stand in "
+            "for enterprise behaviour. It may not. Automation runs 94% on the API "
+            "against 49% on Claude.ai, and directive single-shot requests 83% against "
+            "31%. Anything estimated from consumer conversation and applied to "
+            f"enterprise workloads inherits that gap. {AEI_API_SCOPE}")
+
+    fig, ax = _cfig(subtitle, note, left=0.335, width=0.485, badge_above=True,
+                    source=aei_api_src(both=True))
+    ys = list(range(len(d)))
+    h = 0.36
+    ax.barh([y - h / 2 for y in ys], d["api"], height=h, color=API_COL,
+            edgecolor="white", linewidth=0.5, label="1P API", zorder=3)
+    ax.barh([y + h / 2 for y in ys], d["claude_ai"], height=h, color=CAI_COL,
+            edgecolor="white", linewidth=0.5, label="Claude.ai", zorder=3)
+    for y, r in zip(ys, d.itertuples()):
+        ax.text(r.api + 1.2, y - h / 2, f"{r.api:.0f}%", va="center", fontsize=8.6, color=INK)
+        ax.text(r.claude_ai + 1.2, y + h / 2, f"{r.claude_ai:.0f}%", va="center",
+                fontsize=8.6, color=INK)
+        ax.text(126, y, f"{r.diff:+.0f}", va="center", ha="center", fontsize=9.2,
+                fontweight="bold", color=API_COL if r.diff > 0 else CAI_COL)
+    ax.text(126, -0.9, "gap (pt)", fontsize=8.4, color=MUTED, style="italic",
+            ha="center", va="center")
+    pretty = {"collaboration_bucket_automation_pct": "Automation",
+              "collaboration_bucket_augmentation_pct": "Augmentation",
+              "collaboration_directive_pct": "Directive requests",
+              "collaboration_task_iteration_pct": "Task iteration",
+              "collaboration_learning_pct": "Learning",
+              "collaboration_feedback_loop_pct": "Feedback loop",
+              "collaboration_validation_pct": "Validation",
+              "collaboration_none_pct": "No collaboration",
+              "use_case_work_pct": "Used for work",
+              "use_case_personal_pct": "Used personally",
+              "use_case_coursework_pct": "Used for coursework",
+              "multitasking_pct": "More than one task",
+              "human_only_ability_pct": "A human could do it unaided"}
+    ax.set_yticks(ys)
+    ax.set_yticklabels([pretty.get(n, n.replace("_", " ")) for n in d["node"]], fontsize=9.6)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 138)
+    ax.set_xticks([0, 25, 50, 75, 100])
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.0f}%"))
+    ax.set_xlabel("Share of conversations in that file", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    # top rows are short bars, so the key sits clear of every label
+    ax.legend(loc="upper right", bbox_to_anchor=(0.82, 0.99), frameon=False, fontsize=9)
+    _api_badge(ax, above=True)
+    frame(fig, ax, "AEI-D07",
+          "API traffic is automated and directive; consumer traffic is neither",
+          subtitle, aei_api_src(both=True), AEI_METH, note)
+    save(fig, "AEI-D07", AEI_DOMAIN)
+
+
+def build_aei_d08(_r=None):
+    _paired("AEI-D08", "onet_gwa",
+            "What kind of work each population is doing",
+            "The API processes information; people ask Claude.ai for advice",
+            "the O*NET work activities where the two files diverge most.",
+            "Providing Consultation and Advice is the single largest activity on "
+            "Claude.ai and almost absent from the API, which instead processes and "
+            "analyses information. That is the clearest statement in the dataset of "
+            "what changes when a model is called by software rather than typed at.",
+            left=0.375, label_clip=42)
+
+
+def build_aei_d09(_r=None):
+    _paired("AEI-D09", "request",
+            "What each population asks for",
+            "Enterprises buy document processing; people ask for content",
+            "the request topics where the two files diverge most.",
+            "Document processing, business process work and data analysis lead the "
+            "API and barely register on Claude.ai, where content creation, learning "
+            "and hobbies dominate. The same model, bought two different ways.",
+            left=0.335, label_clip=40)
+
+
+AEI_API_DERIVED = {
+    "AEI-D07": build_aei_d07, "AEI-D08": build_aei_d08, "AEI-D09": build_aei_d09,
+}
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -4331,6 +4550,8 @@ BUILDERS.update({pid: (lambda _rows, _b=fn: _b())
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_rank(_p)) for pid in AEI_RANK})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_mix(_p)) for pid in AEI_MIX})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in AEI_DERIVED.items()})
+BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_api_rank(_p)) for pid in AEI_API_RANK})
+BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in AEI_API_DERIVED.items()})
 
 
 def main():

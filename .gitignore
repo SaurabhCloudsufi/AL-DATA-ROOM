@@ -40,6 +40,9 @@ price-history_*.csv
 model_prices_and_context_window.json
 
 # Public, source-linked disclosures travel with the site for reproducibility
+# The aei_*.csv rule above is for the raw releases and was catching the derived
+# tables too, which left ai-usage/ unable to rebuild without the 300 MB download.
+!ai-usage/data/aei_*.csv
 !inference-tokens/data/company_disclosures.csv
 !build/plot_index.csv
 !build/company_disclosures.csv

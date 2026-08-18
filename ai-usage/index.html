@@ -15,13 +15,14 @@
   <h1>AI Usage</h1>
   <p class="standfirst">What people actually do with a frontier model: what they ask for, what gets produced, which occupations the work belongs to, and where in the world it happens.</p>
   <dl class="meta">
-    <div><dt>Charts published</dt><dd>13</dd></div>
+    <div><dt>Charts published</dt><dd>18</dd></div>
   </dl>
 </header>
 
 <div class="toc"><h2>Contents</h2><ol>
 <li><a href="#anthropic-published-visualizations">Anthropic — Published Visualizations</a> <span class="count">9 of 9 published</span></li>
-<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">4 of 4 published</span></li>
+<li><a href="#anthropic-enterprise-api">Anthropic — Enterprise API</a> <span class="count">2 of 2 published</span></li>
+<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">7 of 7 published</span></li>
 </ol></div>
 <div class="section" id="anthropic-published-visualizations">
 <h2>Anthropic — Published Visualizations</h2>
@@ -225,9 +226,57 @@
 <p class="downloads"><a class="interactive" href="charts/AEI-10.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/AEI-10.svg" download>Download SVG</a><a href="charts/AEI-10.png" download>Download PNG</a></p>
 </section>
 </div>
+<div class="section" id="anthropic-enterprise-api">
+<h2>Anthropic — Enterprise API</h2>
+<p class="blurb">The same index over Anthropic&#x27;s other published population: 1P API traffic, excluding Claude Code. This is programmatic, paid usage rather than consumer conversation, published globally with no geographic breakdown. It is the file that speaks to enterprise workloads, and it behaves nothing like the consumer one.</p>
+<section class="chart" id="AEI-11">
+<div class="chart-head">
+<a class="pid" href="#AEI-11">AEI-11</a>
+<h3>API usage mapped to occupation groups</h3>
+</div>
+<p class="shows">What enterprise API traffic is doing, mapped onto the BLS occupational classification — the sector view of paid programmatic usage.</p>
+<div class="figure">
+<img src="charts/AEI-11.svg" alt="API usage mapped to occupation groups" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Anthropic — Economic Index (1P API)</dd></div>
+<div><dt>Granularity</dt><dd>One SOC major group</dd></div>
+<div><dt>Year</dt><dd>2026-04 – 2026-05</dd></div>
+<div><dt>Coverage</dt><dd>Top 15 of 22 groups, 2026-05</dd></div>
+<div><dt>Source files</dt><dd class="files">aei_1p_api_2026-06-26.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Absent cells left absent — Anthropic publishes a value only above an aggregation threshold and a geography sample floor; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://huggingface.co/datasets/Anthropic/EconomicIndex" rel="noopener">Anthropic Economic Index</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Anthropic&#x27;s published Economic Index data documentation</dd></div>
+<div><dt>Note</dt><dd>Computer and Mathematical leads; Office and Administrative Support runs well above its consumer share</dd></div>
+</dl>
+<p class="downloads"><a href="charts/AEI-11.svg" download>Download SVG</a><a href="charts/AEI-11.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="AEI-12">
+<div class="chart-head">
+<a class="pid" href="#AEI-12">AEI-12</a>
+<h3>What API traffic is asked to do</h3>
+</div>
+<p class="shows">The request topics behind enterprise API calls.</p>
+<div class="figure">
+<img src="charts/AEI-12.svg" alt="What API traffic is asked to do" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Anthropic — Economic Index (1P API)</dd></div>
+<div><dt>Granularity</dt><dd>One request topic</dd></div>
+<div><dt>Year</dt><dd>2026-04 – 2026-05</dd></div>
+<div><dt>Coverage</dt><dd>Top 15 of 20 major topics, 2026-05</dd></div>
+<div><dt>Source files</dt><dd class="files">aei_1p_api_2026-06-26.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Absent cells left absent — Anthropic publishes a value only above an aggregation threshold and a geography sample floor; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://huggingface.co/datasets/Anthropic/EconomicIndex" rel="noopener">Anthropic Economic Index</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Anthropic&#x27;s published Economic Index data documentation</dd></div>
+<div><dt>Note</dt><dd>Document processing and business-process work lead here and barely register on the consumer side</dd></div>
+</dl>
+<p class="downloads"><a href="charts/AEI-12.svg" download>Download SVG</a><a href="charts/AEI-12.png" download>Download PNG</a></p>
+</section>
+</div>
 <div class="section" id="derived-analysis">
 <h2>Derived Analysis</h2>
-<p class="blurb">Our own analysis of the same file — the published views held at a grain where they vary, and crossed against each other. A cell Anthropic did not publish is absent rather than zero: a value is released only where it clears an aggregation threshold and a geography sample floor, so a missing country is a suppressed one.</p>
+<p class="blurb">Our own analysis of the same two files — the published views held at a grain where they vary, and the API set against Claude.ai on the measures where they diverge. The two are never pooled: they are different populations, and the gap between them is the finding. A cell Anthropic did not publish is absent rather than zero, so a missing country is a suppressed one.</p>
 <section class="chart" id="AEI-D01">
 <div class="chart-head">
 <a class="pid" href="#AEI-D01">AEI-D01</a>
@@ -315,6 +364,72 @@
 <div><dt>Note</dt><dd>Depth is very uneven, and that governs which charts are possible at all</dd></div>
 </dl>
 <p class="downloads"><a href="charts/AEI-D06.svg" download>Download SVG</a><a href="charts/AEI-D06.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="AEI-D07">
+<div class="chart-head">
+<a class="pid" href="#AEI-D07">AEI-D07</a>
+<h3>How API and consumer traffic differ</h3>
+</div>
+<p class="shows">The same measures over Anthropic&#x27;s two published populations.</p>
+<div class="figure">
+<img src="charts/AEI-D07.svg" alt="How API and consumer traffic differ" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Anthropic — Economic Index (API and Claude.ai)</dd></div>
+<div><dt>Granularity</dt><dd>One measure, both files</dd></div>
+<div><dt>Year</dt><dd>2026-04 – 2026-05</dd></div>
+<div><dt>Coverage</dt><dd>10 largest gaps among share metrics, 2026-05</dd></div>
+<div><dt>Source files</dt><dd class="files">aei_1p_api_2026-06-26.csv + aei_claude_ai_2026-06-26.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">The two files are set side by side on shared category nodes and never pooled; they are different populations</dd></div>
+<div><dt>Source</dt><dd><a href="https://huggingface.co/datasets/Anthropic/EconomicIndex" rel="noopener">Anthropic Economic Index</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Anthropic&#x27;s published Economic Index data documentation</dd></div>
+<div><dt>Note</dt><dd>Automation runs 94% on the API against 49% on Claude.ai; a consumer figure cannot stand in for enterprise behaviour</dd></div>
+</dl>
+<p class="downloads"><a href="charts/AEI-D07.svg" download>Download SVG</a><a href="charts/AEI-D07.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="AEI-D08">
+<div class="chart-head">
+<a class="pid" href="#AEI-D08">AEI-D08</a>
+<h3>What kind of work each population is doing</h3>
+</div>
+<p class="shows">The O*NET work activities where the two files diverge most.</p>
+<div class="figure">
+<img src="charts/AEI-D08.svg" alt="What kind of work each population is doing" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Anthropic — Economic Index (API and Claude.ai)</dd></div>
+<div><dt>Granularity</dt><dd>One O*NET GWA, both files</dd></div>
+<div><dt>Year</dt><dd>2026-04 – 2026-05</dd></div>
+<div><dt>Coverage</dt><dd>12 largest gaps of 35 shared activities, 2026-05</dd></div>
+<div><dt>Source files</dt><dd class="files">aei_1p_api_2026-06-26.csv + aei_claude_ai_2026-06-26.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">The two files are set side by side on shared category nodes and never pooled; they are different populations</dd></div>
+<div><dt>Source</dt><dd><a href="https://huggingface.co/datasets/Anthropic/EconomicIndex" rel="noopener">Anthropic Economic Index</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Anthropic&#x27;s published Economic Index data documentation</dd></div>
+<div><dt>Note</dt><dd>Providing Consultation and Advice is the largest activity on Claude.ai and almost absent from the API</dd></div>
+</dl>
+<p class="downloads"><a href="charts/AEI-D08.svg" download>Download SVG</a><a href="charts/AEI-D08.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="AEI-D09">
+<div class="chart-head">
+<a class="pid" href="#AEI-D09">AEI-D09</a>
+<h3>What each population asks for</h3>
+</div>
+<p class="shows">The request topics where the two files diverge most.</p>
+<div class="figure">
+<img src="charts/AEI-D09.svg" alt="What each population asks for" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Anthropic — Economic Index (API and Claude.ai)</dd></div>
+<div><dt>Granularity</dt><dd>One request topic, both files</dd></div>
+<div><dt>Year</dt><dd>2026-04 – 2026-05</dd></div>
+<div><dt>Coverage</dt><dd>12 largest gaps of 20 shared topics, 2026-05</dd></div>
+<div><dt>Source files</dt><dd class="files">aei_1p_api_2026-06-26.csv + aei_claude_ai_2026-06-26.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">The two files are set side by side on shared category nodes and never pooled; they are different populations</dd></div>
+<div><dt>Source</dt><dd><a href="https://huggingface.co/datasets/Anthropic/EconomicIndex" rel="noopener">Anthropic Economic Index</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Anthropic&#x27;s published Economic Index data documentation</dd></div>
+<div><dt>Note</dt><dd>The same model, bought two different ways</dd></div>
+</dl>
+<p class="downloads"><a href="charts/AEI-D09.svg" download>Download SVG</a><a href="charts/AEI-D09.png" download>Download PNG</a></p>
 </section>
 </div>
 

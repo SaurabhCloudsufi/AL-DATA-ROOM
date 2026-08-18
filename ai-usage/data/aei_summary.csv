@@ -1,0 +1,2 @@
+source_file,api_source_file,rows,api_rows,periods,period_first,period_last,countries,subregions,us_states_with_index,metrics,categories
+aei_claude_ai_2026-06-26.csv,aei_1p_api_2026-06-26.csv,1636573,491705,2,2026-04-01,2026-05-01,121,652,51,53,4

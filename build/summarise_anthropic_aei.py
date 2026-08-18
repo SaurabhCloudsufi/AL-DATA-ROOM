@@ -4,6 +4,14 @@
 Reads the release exactly as published on Hugging Face into anthropic_aei/:
 
     aei_claude_ai_2026-06-26.csv    Claude chat and Cowork (Free, Pro, Max)
+    aei_1p_api_2026-06-26.csv       Anthropic 1P API calls, excluding Claude Code
+
+The two are never pooled. They are different populations - one is consumer
+conversation, the other is programmatic enterprise traffic - and on every
+measure that matters they behave differently: API traffic is 94% automated
+against 49%, 83% directive against 31%, and 84% work against 43%. Pooling them
+would average away the only thing the pair is good for. The API file is global
+only, with no geographic breakdown at all.
 
 One row of that file is one metric value for one geography and one category
 node - 1.6 million of them, 219 MB. This script reduces it to the small tables
@@ -37,6 +45,7 @@ REPO = Path(__file__).resolve().parent.parent
 DEFAULT_RAW = REPO / "anthropic_aei"
 OUT = REPO / "ai-usage" / "data"
 SOURCE = "aei_claude_ai_2026-06-26.csv"
+API_SOURCE = "aei_1p_api_2026-06-26.csv"
 
 # the metrics carried through to the per-node tables, in the order charts read
 NODE_METRICS = [
@@ -175,10 +184,74 @@ def main():
     cov.to_csv(OUT / "aei_coverage.csv", index=False)
     print(f"  wrote aei_coverage.csv ({len(cov)} slices)")
 
+    # ---- the API file, same shapes, kept strictly separate ---------------
+    api_path = raw / API_SOURCE
+    api = None
+    if api_path.exists():
+        api = pd.read_csv(api_path, low_memory=False)
+        print(f"  read {len(api):,} rows from {API_SOURCE}")
+        ag = api[api.geo_level == "global"]
+        ao = ag[ag.category_name == "overall"]
+
+        a_overall = ao.pivot_table(index="metric_id", columns="date_start",
+                                   values="value", aggfunc="first").reset_index()
+        a_overall.columns.name = None
+        if len(periods) == 2:
+            a_overall["delta"] = a_overall[periods[1]] - a_overall[periods[0]]
+        a_overall.to_csv(OUT / "aei_api_overall.csv", index=False)
+        print(f"  wrote aei_api_overall.csv ({len(a_overall)} metrics)")
+
+        for name, cat, lvl in [("aei_api_soc_major.csv", "soc_occupation", 1),
+                               ("aei_api_onet_gwa.csv", "onet", 3),
+                               ("aei_api_request_major.csv", "request", 2)]:
+            sub = ag[(ag.category_name == cat) & (ag.hierarchy_level == lvl)
+                     & (ag.date_start == latest)]
+            t = wide(sub).sort_values("pct", ascending=False)
+            t.to_csv(OUT / name, index=False)
+            print(f"  wrote {name} ({len(t)} nodes, {t['pct'].sum():.1f}% of API usage)")
+
+        aa = ao[(ao.date_start == latest) & ao.metric_id.str.startswith("artifact_")]
+        a_art = aa[["metric_id", "value"]].copy()
+        a_art["artifact"] = (a_art["metric_id"].str.replace("^artifact_", "", regex=True)
+                             .str.replace("_pct$", "", regex=True).str.replace("_", " "))
+        a_art[["artifact", "value"]].sort_values("value", ascending=False).to_csv(
+            OUT / "aei_api_artifacts.csv", index=False)
+        print(f"  wrote aei_api_artifacts.csv ({len(a_art)} artifact types)")
+
+        # ---- the pair, aligned on shared nodes only ----------------------
+        rows_cmp = []
+
+        def pair(dim, a_series, c_series):
+            for node in sorted(set(a_series.index) & set(c_series.index)):
+                rows_cmp.append({"dimension": dim, "node": node,
+                                 "api": float(a_series[node]),
+                                 "claude_ai": float(c_series[node]),
+                                 "diff": float(a_series[node] - c_series[node])})
+
+        pair("overall",
+             ao[ao.date_start == latest].set_index("metric_id")["value"],
+             o[o.date_start == latest].set_index("metric_id")["value"])
+        for dim, cat, lvl in [("request", "request", 2),
+                              ("soc_occupation", "soc_occupation", 1),
+                              ("onet_gwa", "onet", 3)]:
+            def leaf(frame):
+                d = frame[(frame.category_name == cat) & (frame.hierarchy_level == lvl)
+                          & (frame.date_start == latest) & (frame.metric_id == "pct")]
+                return d.set_index("node_name")["value"]
+            pair(dim, leaf(ag), leaf(g))
+        cmp_df = pd.DataFrame(rows_cmp)
+        cmp_df.to_csv(OUT / "aei_compare.csv", index=False)
+        print(f"  wrote aei_compare.csv ({len(cmp_df)} paired rows across "
+              f"{cmp_df.dimension.nunique()} dimensions)")
+    else:
+        print(f"  {API_SOURCE} not present - API and comparison tables skipped")
+
     # ---- provenance ------------------------------------------------------
     pd.DataFrame([{
         "source_file": SOURCE,
+        "api_source_file": API_SOURCE if api is not None else "",
         "rows": int(len(df)),
+        "api_rows": int(len(api)) if api is not None else 0,
         "periods": len(periods),
         "period_first": periods[0],
         "period_last": latest,
