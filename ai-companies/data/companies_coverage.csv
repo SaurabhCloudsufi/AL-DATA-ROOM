@@ -1,0 +1,78 @@
+company,metric,observations,first,last
+Anthropic,Revenue,15,2023-10-01,2026-07-31
+Anthropic,Active users,0,,
+Anthropic,Daily tokens,0,,
+Anthropic,Staff count,10,2022-08-15,2026-08-06
+Anthropic,Funding rounds,14,2021-05-28,2026-05-28
+Anthropic,Valuation,10,2021-05-28,2026-05-28
+Anthropic,Compute spend,5,2023-12-31,2025-12-31
+Cohere,Revenue,6,2023-12-31,2025-12-31
+Cohere,Active users,0,,
+Cohere,Daily tokens,0,,
+Cohere,Staff count,0,,
+Cohere,Funding rounds,0,,
+Cohere,Valuation,0,,
+Cohere,Compute spend,0,,
+DeepSeek,Revenue,1,2026-07-14,2026-07-14
+DeepSeek,Active users,1,2025-03-28,2025-03-28
+DeepSeek,Daily tokens,1,2025-02-28,2025-02-28
+DeepSeek,Staff count,2,2025-03-14,2026-06-26
+DeepSeek,Funding rounds,1,2026-06-16,2026-06-16
+DeepSeek,Valuation,1,2026-06-16,2026-06-16
+DeepSeek,Compute spend,0,,
+Google,Revenue,0,,
+Google,Active users,5,2025-03-15,2025-10-29
+Google,Daily tokens,4,2024-04-15,2025-09-30
+Google,Staff count,11,2013-12-31,2025-08-06
+Google,Funding rounds,0,,
+Google,Valuation,0,,
+Google,Compute spend,0,,
+Meta,Revenue,0,,
+Meta,Active users,8,2024-09-25,2025-10-29
+Meta,Daily tokens,0,,
+Meta,Staff count,4,2016-10-31,2025-07-17
+Meta,Funding rounds,0,,
+Meta,Valuation,0,,
+Meta,Compute spend,0,,
+MiniMax,Revenue,0,,
+MiniMax,Active users,0,,
+MiniMax,Daily tokens,0,,
+MiniMax,Staff count,1,2025-09-30,2025-09-30
+MiniMax,Funding rounds,2,2026-01-08,2026-03-31
+MiniMax,Valuation,2,2026-01-08,2026-03-31
+MiniMax,Compute spend,0,,
+Mistral AI,Revenue,2,2025-06-11,2026-01-31
+Mistral AI,Active users,0,,
+Mistral AI,Daily tokens,0,,
+Mistral AI,Staff count,2,2024-05-07,2025-09-09
+Mistral AI,Funding rounds,5,2023-06-13,2025-09-09
+Mistral AI,Valuation,5,2023-06-13,2025-09-09
+Mistral AI,Compute spend,0,,
+Moonshot AI,Revenue,2,2026-04-30,2026-06-30
+Moonshot AI,Active users,0,,
+Moonshot AI,Daily tokens,0,,
+Moonshot AI,Staff count,0,,
+Moonshot AI,Funding rounds,0,,
+Moonshot AI,Valuation,0,,
+Moonshot AI,Compute spend,0,,
+OpenAI,Revenue,16,2023-03-01,2026-08-13
+OpenAI,Active users,14,2023-03-25,2026-02-28
+OpenAI,Daily tokens,2,2024-02-09,2025-10-06
+OpenAI,Staff count,12,2016-12-31,2026-03-21
+OpenAI,Funding rounds,15,2019-03-11,2026-03-31
+OpenAI,Valuation,9,2021-07-01,2026-03-31
+OpenAI,Compute spend,5,2022-12-31,2025-12-31
+Z.ai (Zhipu),Revenue,6,2022-07-01,2025-10-01
+Z.ai (Zhipu),Active users,0,,
+Z.ai (Zhipu),Daily tokens,3,2023-12-31,2025-06-30
+Z.ai (Zhipu),Staff count,1,2025-06-30,2025-06-30
+Z.ai (Zhipu),Funding rounds,2,2026-01-08,2026-03-31
+Z.ai (Zhipu),Valuation,2,2026-01-08,2026-03-31
+Z.ai (Zhipu),Compute spend,0,,
+xAI,Revenue,4,2024-11-20,2025-09-30
+xAI,Active users,2,2025-03-28,2025-09-17
+xAI,Daily tokens,0,,
+xAI,Staff count,5,2023-07-12,2025-03-12
+xAI,Funding rounds,5,2024-05-27,2026-01-06
+xAI,Valuation,5,2024-05-27,2026-01-06
+xAI,Compute spend,0,,

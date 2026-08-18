@@ -1,0 +1,2 @@
+tracked_companies,revenue_observations,revenue_companies,revenue_interpolated,usage_observations,usage_active_users,usage_daily_tokens,staff_observations,staff_companies,funding_rounds_closed,valuation_observations,spend_observations,spend_companies,excluded_by_epoch_revenue,excluded_by_epoch_usage,excluded_by_epoch_staff,excluded_by_epoch_funding,excluded_by_epoch_spend,observed_to
+11,52,8,9,43,30,10,48,9,44,34,10,2,0,6,0,0,4,2026-08-13

@@ -1,0 +1,44 @@
+company,date,product,active_users,active_users_period,daily_tokens,daily_messages,confidence,source_type
+DeepSeek,2025-02-28,Chat and API for V3 and R1,,,788000000000.0,,Likely,Company disclosure
+DeepSeek,2025-03-28,DeepSeek,10000000.0,Daily,,50000000.0,Likely,Other
+Google,2024-04-15,Google (all AI products),,,323000000000.0,,Confident,Company disclosure
+Google,2025-03-15,Gemini,350000000.0,Monthly,,,Confident,Company disclosure
+Google,2025-03-28,Gemini,35000000.0,Daily,,140000000.0,Confident,Company disclosure
+Google,2025-04-30,Google (all AI products),,,16000000000000.0,,Confident,Company disclosure
+Google,2025-05-20,Gemini,400000000.0,Monthly,,,Confident,Company disclosure
+Google,2025-07-23,Google (all AI products),,,33000000000000.0,,Confident,Company disclosure
+Google,2025-07-23,Gemini,450000000.0,Monthly,,,Confident,Company disclosure
+Google,2025-09-30,Google (all AI products),,,43000000000000.0,,Confident,Company disclosure
+Google,2025-10-29,Gemini,650000000.0,Monthly,,,Confident,Company disclosure
+Meta,2024-09-25,Meta AI assistant,400000000.0,Monthly,,,Confident,Company disclosure
+Meta,2024-09-25,Meta AI assistant,185000000.0,Weekly,,,Confident,Company disclosure
+Meta,2024-10-30,Meta AI assistant,500000000.0,Monthly,,,Confident,Company disclosure
+Meta,2024-12-15,Meta AI assistant,600000000.0,Monthly,,,Confident,Company disclosure
+Meta,2025-01-29,Meta AI assistant,700000000.0,Monthly,,,Confident,Company disclosure
+Meta,2025-03-28,Meta AI assistant,100000000.0,Daily,,200000000.0,Likely,Other
+Meta,2025-05-28,Meta AI assistant,1000000000.0,Monthly,,,Confident,Company disclosure
+Meta,2025-10-29,Meta AI assistant,1000000000.0,Monthly,,,Confident,Company disclosure
+OpenAI,2023-03-25,ChatGPT,50000000.0,Weekly,,,Likely,Company disclosure
+OpenAI,2023-09-20,ChatGPT,80000000.0,Weekly,,,Likely,Company disclosure
+OpenAI,2024-02-09,All products,,,133000000000.0,,Confident,Company disclosure
+OpenAI,2024-03-20,ChatGPT,125000000.0,Weekly,,,Likely,Company disclosure
+OpenAI,2024-03-30,All products,100000000.0,Monthly,,,Uncertain,Media report
+OpenAI,2024-06-24,ChatGPT,,,,451000000.0,Confident,Company disclosure
+OpenAI,2024-06-30,All products,350000000.0,Monthly,,,Likely,Media report
+OpenAI,2024-09-15,ChatGPT,240000000.0,Weekly,,,Likely,Company disclosure
+OpenAI,2024-12-04,ChatGPT,300000000.0,Weekly,,1000000000.0,Confident,Company disclosure
+OpenAI,2025-03-13,ChatGPT,430000000.0,Weekly,,,Likely,Company disclosure
+OpenAI,2025-03-28,ChatGPT,160000000.0,Daily,,1200000000.0,Likely,Other
+OpenAI,2025-06-24,ChatGPT,,,,2627000000.0,Confident,Company disclosure
+OpenAI,2025-07-15,ChatGPT,770000000.0,Weekly,,,Confident,Company disclosure
+OpenAI,2025-08-04,ChatGPT,700000000.0,Weekly,,,Confident,Company disclosure
+OpenAI,2025-08-04,ChatGPT,,,,3000000000.0,Confident,Company disclosure
+OpenAI,2025-10-06,ChatGPT,800000000.0,Weekly,,,Confident,Company disclosure
+OpenAI,2025-10-06,API,,,8600000000000.0,,Confident,Company disclosure
+OpenAI,2025-12-09,ChatGPT,900000000.0,Weekly,,,Likely,Media report
+OpenAI,2026-02-28,ChatGPT,920000000.0,Weekly,,,Likely,Media report
+Z.ai (Zhipu),2023-12-31,Full company,,,2100000000.0,,Likely,Company disclosure
+Z.ai (Zhipu),2024-12-31,Full company,,,200000000000.0,,Likely,Company disclosure
+Z.ai (Zhipu),2025-06-30,Full company,,,4600000000000.0,,Likely,Company disclosure
+xAI,2025-03-28,Grok,15000000.0,Daily,,75000000.0,Likely,Other
+xAI,2025-09-17,Grok,64000000.0,Monthly,,,Confident,Media report

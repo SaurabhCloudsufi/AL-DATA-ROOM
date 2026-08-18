@@ -613,7 +613,7 @@ L 833.76 447.552
    <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="115.404806" transform="rotate(-0 30.24 115.404806)">window the source covers.</text>
   </g>
   <g id="text_35">
-   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="467.392256" transform="rotate(-0 30.24 467.392256)">Source: Epoch AI, AI Chip Components (CC-BY) — quarterly_by_designer.csv — epoch.ai/data/ai-chip-components</text>
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="467.392256" transform="rotate(-0 30.24 467.392256)">Source: Epoch AI, AI Chip Components (CC-BY) — quarterly_by_designer.csv + supply_denominators.csv — epoch.ai/data/ai-chip-components</text>
   </g>
   <g id="text_36">
    <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="483.117056" transform="rotate(-0 30.24 483.117056)">Methodology: Derivation follows Epoch AI's published AI Chip Components methodology; every figure is a Monte Carlo median over 10,000 draws</text>

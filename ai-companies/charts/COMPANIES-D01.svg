@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="604.8pt" viewBox="0 0 864 604.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 604.8 
+L 864 604.8 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 151.2 430.0128 
+L 635.04 430.0128 
+L 635.04 165.1104 
+L 151.2 165.1104 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 151.2 430.0128 
+L 151.2 165.1104 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="ma3a00a99b0" d="M 0 0 
+L 0 3.5 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="151.2" y="430.0128" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="151.2" y="444.610456" transform="rotate(-0 151.2 444.610456)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 241.450048 430.0128 
+L 241.450048 165.1104 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="241.450048" y="430.0128" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="241.450048" y="444.610456" transform="rotate(-0 241.450048 444.610456)">5</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 331.700095 430.0128 
+L 331.700095 165.1104 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="331.700095" y="430.0128" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="331.700095" y="444.610456" transform="rotate(-0 331.700095 444.610456)">10</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 421.950143 430.0128 
+L 421.950143 165.1104 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="421.950143" y="430.0128" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="421.950143" y="444.610456" transform="rotate(-0 421.950143 444.610456)">15</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 512.20019 430.0128 
+L 512.20019 165.1104 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="512.20019" y="430.0128" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="512.20019" y="444.610456" transform="rotate(-0 512.20019 444.610456)">20</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 602.450238 430.0128 
+L 602.450238 165.1104 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="602.450238" y="430.0128" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="602.450238" y="444.610456" transform="rotate(-0 602.450238 444.610456)">25</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="393.12" y="458.611238" transform="rotate(-0 393.12 458.611238)">Doubling time (months)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13">
+      <path d="M 151.2 197.774157 
+L 635.04 197.774157 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14">
+      <defs>
+       <path id="mdfe75e7a28" d="M 0 0 
+L -3.5 0 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="151.2" y="197.774157" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(99.013906 196.174963)">Anthropic</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(103.260062 207.456799)">Revenue</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_15">
+      <path d="M 151.2 264.299119 
+L 635.04 264.299119 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="151.2" y="264.299119" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(109.888531 262.699558)">OpenAI</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(103.260062 273.981394)">Revenue</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_17">
+      <path d="M 151.2 330.824081 
+L 635.04 330.824081 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="151.2" y="330.824081" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(109.888531 329.224153)">OpenAI</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(86.735156 340.506724)">Active users</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_19">
+      <path d="M 151.2 397.349043 
+L 635.04 397.349043 
+" clip-path="url(#p354ce98550)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="151.2" y="397.349043" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(109.888531 395.749116)">OpenAI</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(92.804031 407.031686)">Staff count</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 151.2 430.0128 
+L 151.2 165.1104 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 151.2 430.0128 
+L 635.04 430.0128 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 151.2 177.151418 
+L 213.937769 177.151418 
+L 213.937769 218.396895 
+L 151.2 218.396895 
+z
+" clip-path="url(#p354ce98550)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 151.2 243.676381 
+L 261.8971 243.676381 
+L 261.8971 284.921857 
+L 151.2 284.921857 
+z
+" clip-path="url(#p354ce98550)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 151.2 310.201343 
+L 292.952296 310.201343 
+L 292.952296 351.446819 
+L 151.2 351.446819 
+z
+" clip-path="url(#p354ce98550)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 151.2 376.726305 
+L 463.354839 376.726305 
+L 463.354839 417.971782 
+L 151.2 417.971782 
+z
+" clip-path="url(#p354ce98550)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_12">
+    <text style="font-style: italic; font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="632.6208" y="175.618592" transform="rotate(-0 632.6208 175.618592)">Series with observations but too few to fit:  Revenue 6,  Staff count 8,  Active users 4</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="220.255272" y="200.112047" transform="rotate(-0 220.255272 200.112047)">10.9x/year   r²=0.98   n=15</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="268.214603" y="266.637009" transform="rotate(-0 268.214603 266.637009)">3.9x/year   r²=0.97   n=16</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="299.269799" y="333.161972" transform="rotate(-0 299.269799 333.161972)">2.9x/year   r²=0.87   n=14</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="469.672342" y="399.686934" transform="rotate(-0 469.672342 399.686934)">1.6x/year   r²=0.96   n=12</text>
+   </g>
+   <g id="text_17">
+    <g id="patch_9">
+     <path d="M 151.2 160.985328 
+L 401.310656 160.985328 
+Q 405.132656 160.985328 405.132656 157.163328 
+L 405.132656 148.062617 
+Q 405.132656 144.240617 401.310656 144.240617 
+L 151.2 144.240617 
+Q 147.378 144.240617 147.378 148.062617 
+L 147.378 157.163328 
+Q 147.378 160.985328 151.2 160.985328 
+z
+" style="fill: #1f3864"/>
+    </g>
+    <text style="font-weight: 700; font-size: 9.1px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #ffffff" x="151.2" y="154.977195" transform="rotate(-0 151.2 154.977195)">  OBSERVED DATA ONLY  ·  projections excluded  </text>
+   </g>
+  </g>
+  <g id="line2d_21">
+   <path d="M 30.24 463.2768 
+L 833.76 463.2768 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linecap: square"/>
+  </g>
+  <g id="text_18">
+   <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #1f3864" x="30.24" y="24.911939" transform="rotate(-0 30.24 24.911939)">COMPANIES-D01</text>
+  </g>
+  <g id="text_19">
+   <text style="font-weight: 700; font-size: 15.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="30.24" y="55.323178" transform="rotate(-0 30.24 55.323178)">Only four series in the dataset are measured often enough to fit a trend</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="79.116806" transform="rotate(-0 30.24 79.116806)">What it shows: the growth rate behind each series Epoch's regression control can fit, as an annual multiple and the</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="97.260806" transform="rotate(-0 30.24 97.260806)">doubling time it implies. Only 4 of the tracked series reach the 12 observations a log-linear fit requires; every other</text>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="115.404806" transform="rotate(-0 30.24 115.404806)">company is measured too sparsely to carry a trend at all.</text>
+  </g>
+  <g id="text_23">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="483.117056" transform="rotate(-0 30.24 483.117056)">Source: Epoch AI, AI Companies (CC-BY) — ai_companies_revenue_reports.csv + ai_companies_staff_reports.csv +</text>
+  </g>
+  <g id="text_24">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="498.841856" transform="rotate(-0 30.24 498.841856)">        ai_companies_usage_reports.csv — epoch.ai/data/ai-companies</text>
+  </g>
+  <g id="text_25">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="514.566656" transform="rotate(-0 30.24 514.566656)">Methodology: Methodology reference pending final methodology document; derivation follows Epoch AI's published AI companies documentation</text>
+  </g>
+  <g id="text_26">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="530.139488" transform="rotate(-0 30.24 530.139488)">Note: Fitted by ordinary least squares through log10 of the metric against date, over the observed points only and never extended past the</text>
+  </g>
+  <g id="text_27">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="544.654688" transform="rotate(-0 30.24 544.654688)">      last of them. A doubling time is the fit restated, not a separate measurement. Anthropic's revenue fit is the steepest series in the</text>
+  </g>
+  <g id="text_28">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="559.169888" transform="rotate(-0 30.24 559.169888)">      entire dataset. Companies below the threshold are counted, not fitted - a two-point 'trend' is a line through two points, not a</text>
+  </g>
+  <g id="text_29">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="573.685088" transform="rotate(-0 30.24 573.685088)">      growth rate.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p354ce98550">
+   <rect x="151.2" y="165.1104" width="483.84" height="264.9024"/>
+  </clipPath>
+ </defs>
+</svg>

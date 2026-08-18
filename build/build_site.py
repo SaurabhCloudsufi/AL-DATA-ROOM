@@ -117,6 +117,33 @@ DOMAINS = [
         },
         "live": True,
     },
+    {
+        "slug": "ai-companies",
+        "title": "AI Companies",
+        "blurb": "The companies building the models: what they earn, what they raise, what "
+                 "they are worth, who they employ, how much they are used and what they "
+                 "spend on compute.",
+        "index": "build/plot_index_companies.csv",
+        "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "Epoch AI — Published Visualizations":
+                "Epoch publishes one configurable figure on this dataset — a metric "
+                "against the date it was reported, over a chosen tab, with controls for "
+                "linear or log scale and a fitted growth regression. These are that "
+                "figure at each of its settings, rebuilt from the downloaded CSVs "
+                "rather than screenshotted. Rows Epoch flags 'exclude from graph view' "
+                "are dropped here exactly as they are there, and the projection control "
+                "is off throughout.",
+            "Derived Analysis":
+                "Our own analysis of the same six files — questions the tabs cannot "
+                "answer, because they need two of them at once: revenue against "
+                "headcount, valuation against revenue, serving against training. Where "
+                "two observations are paired, each is matched to the nearest in time "
+                "within a stated window and unmatched rows are dropped, never stretched "
+                "to a convenient partner.",
+        },
+        "live": True,
+    },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
     {"slug": "model-pricing", "title": "Model Pricing", "live": False},
     {"slug": "energy", "title": "Energy", "live": False},

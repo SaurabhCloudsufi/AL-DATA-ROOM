@@ -1,0 +1,27 @@
+File,Drive_folder,Dataset,Used_by
+AzureLLMInferenceTrace_conv_2023.csv,<root>,Microsoft Azure — LLM inference production traces (2023),P-1
+AzureLLMInferenceTrace_code_2023.csv,<root>,Microsoft Azure — LLM inference production traces (2023),P-1
+AzureLLMInferenceTrace_conv_2024.csv,<root>,Microsoft Azure — LLM inference production traces (2024),P-2
+AzureLLMInferenceTrace_code_2024.csv,<root>,Microsoft Azure — LLM inference production traces (2024),P-2
+AzureLMMInferenceTrace_multimodal_2025.csv,<root>,Microsoft Azure — multimodal (LMM) inference traces (2025),P-3
+data_centers.csv,AI data centers,"Epoch AI, AI Data Centers",EPOCH-01..05 + DERIVED-01..03 + DERIVED-06
+data_center_timelines.csv,AI data centers,"Epoch AI, AI Data Centers",EPOCH-01..05 + DERIVED-01..03 + DERIVED-06
+data_center_chip_quantities.csv,AI data centers,"Epoch AI, AI Data Centers",DERIVED-04
+data_center_cooling_towers.csv,AI data centers,"Epoch AI, AI Data Centers",DERIVED-05
+data_center_chillers.csv,AI data centers,"Epoch AI, AI Data Centers",DERIVED-05
+notable_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-01..04 + 08..13 + D01..D08 + D10..D11
+frontier_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-05 + D09 + D11
+large_scale_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-06 + D11
+all_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-07 + D11
+quarterly_by_designer.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-01..04 + 07..14 + D01 + D04..D06
+cumulative_by_designer.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-05 + CHIP-06 + CHIP-D02
+cumulative_by_chip.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-D03
+supply_denominators.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-09..14 + D01 + D06
+quarterly_by_chip.csv,ai_chip_components,"Epoch AI, AI Chip Components",
+cumulative_supply_denominators.csv,ai_chip_components,"Epoch AI, AI Chip Components",
+ai_companies_revenue_reports.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-01..03 + D01..D03 + D06..D08
+ai_companies_usage_reports.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-04 + COMPANIES-05 + D01 + D07 + D08
+ai_companies_staff_reports.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-06 + COMPANIES-07 + D01 + D02 + D07 + D08
+ai_companies_funding_rounds.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-08 + COMPANIES-09 + D03 + D04 + D07
+ai_companies_compute_spend.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-10 + D05 + D06 + D07
+ai_companies.csv,ai_companies,"Epoch AI, AI Companies",

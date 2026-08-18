@@ -73,6 +73,28 @@ def load_disclosures():
         return list(csv.DictReader(f))
 
 
+FOOTER_WRAP = 133
+
+
+def _footer_lines(source, note):
+    """The footer as it will actually be drawn, wrapped to the figure width."""
+    src = textwrap.wrap(f"Source: {source}", FOOTER_WRAP,
+                        subsequent_indent="        ")
+    notes = textwrap.wrap(note, FOOTER_WRAP) if note else []
+    return src, notes
+
+
+def _footer_h(source, note):
+    """Height the footer needs, in figure fractions.
+
+    frame() draws the footer and _rect() and build_azure() reserve space above
+    it, so all three read this one number. A source naming five files wraps to
+    three lines; without this the last of them ran off the page.
+    """
+    src, notes = _footer_lines(source, note)
+    return 0.052 + 0.026 * (len(src) + 1 + len(notes))
+
+
 def frame(fig, ax, plot_id, title, subtitle, source, methodology, note):
     """Apply the standard chart furniture: ID, title, subtitle, footer block."""
     fig.text(0.035, 0.972, plot_id, ha="left", va="top", fontsize=10.5,
@@ -83,19 +105,21 @@ def frame(fig, ax, plot_id, title, subtitle, source, methodology, note):
         fig.text(0.035, 0.882 - i * 0.030, line, ha="left", va="top",
                  fontsize=10.2, color=MUTED)
 
-    note_lines = textwrap.wrap(note, 133) if note else []
+    src_lines, note_lines = _footer_lines(source, note)
     # footer grows upward from the bottom so long notes never spill off-page
-    footer_h = 0.052 + 0.026 * (2 + len(note_lines))
-    y = footer_h
+    y = _footer_h(source, note)
     fig.lines.append(plt.Line2D([0.035, 0.965], [y, y], transform=fig.transFigure,
                                 color=RULE, linewidth=0.8))
-    fig.text(0.035, y - 0.022, f"Source: {source}", ha="left", va="top",
+    cur = y - 0.022
+    for line in src_lines:
+        fig.text(0.035, cur, line, ha="left", va="top", fontsize=8.6, color=MUTED)
+        cur -= 0.026
+    fig.text(0.035, cur, f"Methodology: {methodology}", ha="left", va="top",
              fontsize=8.6, color=MUTED)
-    fig.text(0.035, y - 0.048, f"Methodology: {methodology}", ha="left", va="top",
-             fontsize=8.6, color=MUTED)
+    cur -= 0.026
     for i, line in enumerate(note_lines):
         prefix = "Note: " if i == 0 else "      "
-        fig.text(0.035, y - 0.074 - i * 0.024, prefix + line, ha="left", va="top",
+        fig.text(0.035, cur - i * 0.024, prefix + line, ha="left", va="top",
                  fontsize=8.4, color=MUTED, style="italic")
     ax.grid(axis="y", color=RULE, linewidth=0.7, alpha=0.9)
     ax.set_axisbelow(True)
@@ -398,6 +422,25 @@ AZURE_PLOTS = {
     },
 }
 
+# the exact published files each chart is built from, printed on its face. Same
+# names summarise_azure_traces.py reads, so a chart never claims a file the
+# derivation did not touch.
+AZURE_FILES = {
+    "conv_2023": "AzureLLMInferenceTrace_conv_2023.csv",
+    "code_2023": "AzureLLMInferenceTrace_code_2023.csv",
+    "conv_2024": "AzureLLMInferenceTrace_conv_2024.csv",
+    "code_2024": "AzureLLMInferenceTrace_code_2024.csv",
+    "multimodal_2025": "AzureLMMInferenceTrace_multimodal_2025.csv",
+}
+
+
+def azure_src(plot_id):
+    cfg = AZURE_PLOTS[plot_id]
+    return (cfg["source"] + " — "
+            + " + ".join(AZURE_FILES[t] for t, _ in cfg["traces"])
+            + " — github.com/Azure/AzurePublicDataset")
+
+
 KINDS = (("input", "Input tokens", "prior"), ("output", "Output tokens", "current"))
 
 
@@ -470,7 +513,7 @@ def build_azure(plot_id):
     fig = plt.figure(figsize=(12.0, fig_h))
 
     top = 0.882 - (n_sub - 1) * 0.030 - 0.105          # clear of subtitle + legend
-    bottom = 0.052 + 0.026 * (2 + n_note) + 0.055      # clear of the footer rule
+    bottom = _footer_h(azure_src(plot_id), note) + 0.055   # clear of the footer rule
     band = top - bottom
     gap = 0.24 * band if nrows > 1 else 0.0
     panel_h = (band - gap * (nrows - 1)) / nrows
@@ -555,7 +598,7 @@ def build_azure(plot_id):
                bbox_to_anchor=(0.070, top + 0.045), ncol=2, frameon=False,
                fontsize=9.8, handlelength=1.9, columnspacing=2.2)
 
-    frame(fig, axes[0][0], plot_id, cfg["title"], subtitle, cfg["source"],
+    frame(fig, axes[0][0], plot_id, cfg["title"], subtitle, azure_src(plot_id),
           "\u00a73.2 \u2014 What we measured; \u00a77.9 \u2014 De-duplication rule 3, "
           "sub-types", note)
     save(fig, plot_id)
@@ -765,11 +808,14 @@ def _observed_badge(ax, above=False):
 
 
 def _rect(subtitle, note, left=0.075, width=0.700, xlabel_room=0.058,
-          badge_above=False):
+          badge_above=False, source=None):
     n_sub = len(textwrap.wrap(subtitle, 122))
     n_note = len(textwrap.wrap(note, 133))
     top = 0.882 - (n_sub - 1) * 0.030 - 0.055 - (0.040 if badge_above else 0.0)
-    bottom = 0.052 + 0.026 * (2 + n_note) + xlabel_room
+    # a source long enough to wrap makes the footer taller; callers that know
+    # their source pass it so the axes clear the extra lines
+    bottom = (_footer_h(source, note) if source is not None
+              else 0.052 + 0.026 * (2 + n_note)) + xlabel_room
     return [left, bottom, width, top - bottom]
 
 
@@ -2049,9 +2095,13 @@ def build_chip(plot_id):
     ax.text(1.015, 0.98 - 0.062 * (len(series) + 1), setting, transform=ax.transAxes,
             ha="left", va="top", fontsize=8.3, color=MUTED, linespacing=1.55)
 
+    # supply_ys is set only where the world-supply line was actually drawn, so the
+    # credited files are the ones read rather than the ones the mode implies: the
+    # absolute component tabs draw that line too, not just the supply views
+    used_supply = cfg["mode"] == "supply" or supply_ys is not None
     frame(fig, ax, plot_id, cfg["title"], subtitle,
           chip_src([CHIP_FILES[cfg["period"]]]
-                   + (["supply_denominators.csv"] if cfg["mode"] == "supply" else [])),
+                   + (["supply_denominators.csv"] if used_supply else [])),
           CHIP_METH, note)
     save(fig, plot_id, CHIP_DOMAIN)
 
@@ -2934,7 +2984,12 @@ def build_md11(_r=None):
             "from chart to chart and is stated on each one.")
 
     fig = plt.figure(figsize=(12.0, 8.6))
-    ax = fig.add_axes(_rect(subtitle, note, left=0.215, width=0.640, xlabel_room=0.05))
+    ax = fig.add_axes(_rect(subtitle, note, left=0.215, width=0.640, xlabel_room=0.05,
+                            source=("Epoch AI, Data on AI Models (CC-BY) — "
+                                    + ", ".join(MODELS_SRC[d] for d in
+                                                ["notable", "frontier",
+                                                 "large_scale", "all"])
+                                    + " — epoch.ai/data/ai-models")))
     height = 0.78 / len(order)
     ys = list(range(len(fields)))[::-1]
     for i, ds in enumerate(order):
@@ -2977,6 +3032,810 @@ MODEL_DERIVED = {
 }
 
 
+# =========================================================== AI COMPANIES
+# Epoch AI publishes one configurable figure for AI Companies: a metric against
+# date, over a chosen tab (revenue, funding, staff, usage, compute spend), with
+# controls for linear/log scale and a fitted growth regression. COMPANIES-01 to
+# COMPANIES-10 are that figure at each of its distinct settings; COMPANIES-D01
+# onward ask what the explorer's settings cannot.
+COMPANIES_DOMAIN = "ai-companies"
+COMPANIES_DATA = REPO / COMPANIES_DOMAIN / "data"
+
+# must match summarise_epoch_companies.py, which refuses a fit below it
+MIN_C_FIT = 12
+
+COMPANIES_SRC = {
+    "revenue": "ai_companies_revenue_reports.csv",
+    "usage": "ai_companies_usage_reports.csv",
+    "staff": "ai_companies_staff_reports.csv",
+    "funding": "ai_companies_funding_rounds.csv",
+    "spend": "ai_companies_compute_spend.csv",
+    "companies": "ai_companies.csv",
+}
+COMPANIES_METH = ("Methodology reference pending final methodology document; derivation "
+                  "follows Epoch AI's published AI companies documentation")
+
+# One colour per company, held across every chart in the domain, so a reader who
+# learns the key on one figure keeps it on all of them.
+COMPANY_COLOUR = {
+    "OpenAI": "#1f3864",
+    "Anthropic": "#b4763a",
+    "Google": "#4a6fa5",
+    "Meta": "#6b8f71",
+    "xAI": "#7d5a7d",
+    "DeepSeek": "#4e8a8b",
+    "Mistral AI": "#a46b6b",
+    "Cohere": "#8a8f5c",
+    "Z.ai (Zhipu)": "#9aa9c4",
+    "MiniMax": "#55606e",
+    "Moonshot AI": "#5f7a99",
+}
+
+
+def companies_src(keys):
+    return ("Epoch AI, AI Companies (CC-BY) — "
+            + " + ".join(COMPANIES_SRC[k] for k in keys)
+            + " — epoch.ai/data/ai-companies")
+
+
+def _ccsv(name):
+    import pandas as pd
+    df = pd.read_csv(COMPANIES_DATA / name)
+    if "date" in df.columns:
+        df["date"] = pd.to_datetime(df["date"])
+    return df
+
+
+def _cmeta():
+    return _ccsv("companies_summary.csv").iloc[0]
+
+
+def _ccolour(name):
+    return COMPANY_COLOUR.get(name, RESIDUAL)
+
+
+def _cfinish(fig, ax, plot_id, title, subtitle, note, keys, badge_above=False):
+    _observed_badge(ax, above=badge_above)
+    frame(fig, ax, plot_id, title, subtitle, companies_src(keys),
+          COMPANIES_METH, note)
+    save(fig, plot_id, COMPANIES_DOMAIN)
+
+
+def _cfig(subtitle, note, left=0.078, width=0.660, xlabel_room=0.055,
+          figsize=(12.0, 8.4), badge_above=False, source=None):
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_axes(_rect(subtitle, note, left=left, width=width,
+                            xlabel_room=xlabel_room, badge_above=badge_above,
+                            source=source))
+    return fig, ax
+
+
+def _date_axis(ax, dates, pad_days=120):
+    """Year ticks across the observed span, with a little air at each end."""
+    import matplotlib.dates as mdates
+    from datetime import timedelta
+    lo, hi = min(dates), max(dates)
+    ax.set_xlim(lo - timedelta(days=pad_days), hi + timedelta(days=pad_days))
+    span = (hi - lo).days / 365.25
+    ax.xaxis.set_major_locator(mdates.YearLocator(1 if span <= 8 else 2))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+
+
+def _clegend(ax, title="Company"):
+    h, l = ax.get_legend_handles_labels()
+    if not h:
+        return 0
+    leg = ax.legend(h, l, loc="upper left", bbox_to_anchor=(1.015, 1.0),
+                    frameon=False, fontsize=9, title=title, title_fontsize=9.2,
+                    handlelength=1.6, borderaxespad=0)
+    ax.add_artist(leg)   # survives the next ax.legend() call
+    return len(h) + 1
+
+
+CAT_MARKER = {"R&D only": "^", "Inference only": "o", "R&D + inference": "s"}
+
+
+def _cseries(df, value_col, log=True, marker="o", connect=True, open_mask=None,
+             marker_col=None):
+    """Plot one line-and-marker series per company, largest company first.
+
+    marker_col splits each company's points by a second dimension - used where a
+    company reports more than one kind of figure on the same date, which would
+    otherwise stack two indistinguishable dots.
+    """
+    order = (df.groupby("company")[value_col].max()
+               .sort_values(ascending=False).index.tolist())
+    if marker_col:
+        for name in order:
+            sub = df[df["company"] == name]
+            plt.gca().scatter([], [], s=46, color=_ccolour(name),
+                              edgecolor="white", linewidth=0.8,
+                              label=f"{name}  (n={len(sub)})")
+            for cat, csub in sub.groupby(marker_col):
+                plt.gca().scatter(csub["date"], csub[value_col], s=52,
+                                  color=_ccolour(name), marker=CAT_MARKER.get(cat, "o"),
+                                  edgecolor="white", linewidth=0.8, zorder=4)
+        return order
+    for name in order:
+        sub = df[df["company"] == name].sort_values("date")
+        colour = _ccolour(name)
+        if connect and len(sub) > 1:
+            plt.gca().plot(sub["date"], sub[value_col], color=colour,
+                           linewidth=1.4, alpha=0.85, zorder=3)
+        if open_mask is not None:
+            solid = sub[~sub[open_mask]]
+            hollow = sub[sub[open_mask]]
+            plt.gca().scatter(solid["date"], solid[value_col], s=46, color=colour,
+                              edgecolor="white", linewidth=0.8, zorder=4,
+                              label=f"{name}  (n={len(sub)})")
+            if len(hollow):
+                plt.gca().scatter(hollow["date"], hollow[value_col], s=46,
+                                  facecolor="white", edgecolor=colour,
+                                  linewidth=1.5, zorder=4)
+        else:
+            plt.gca().scatter(sub["date"], sub[value_col], s=46, color=colour,
+                              marker=marker, edgecolor="white", linewidth=0.8,
+                              zorder=4, label=f"{name}  (n={len(sub)})")
+    return order
+
+
+# ------------------------------------------------- Epoch's figure, each setting
+CT = {   # one entry per tab/metric the explorer offers
+    "revenue": dict(
+        table="companies_revenue.csv", col="revenue_usd", keys=["revenue"],
+        ylabel="Annualised revenue (USD)", what="annualised revenue", fmt="usd", connect=True,
+        open_col="annualised_from_period",
+        open_note="Open markers are Epoch annualising a disclosed period figure "
+                  "(a reported quarter multiplied out) rather than a disclosed "
+                  "annual rate",
+        defn="Annualised revenue is the run rate Epoch records at that date - the "
+             "most recent period scaled to a year, not audited annual revenue.",
+    ),
+    "active_users": dict(
+        table="companies_usage.csv", col="active_users", keys=["usage"],
+        ylabel="Active users", what="active users", fmt="count", connect=True, open_col=None,
+        defn="Active users as each company reported them. The averaging window "
+             "differs by report - daily, weekly and monthly counts all appear "
+             "here and are not interchangeable.",
+    ),
+    "daily_tokens": dict(
+        table="companies_usage.csv", col="daily_tokens", keys=["usage"],
+        ylabel="Tokens processed per day", what="tokens processed per day", fmt="count", connect=True, open_col=None,
+        defn="Tokens processed per day, as disclosed. Scope differs by company - "
+             "some figures are one API, others every surface.",
+    ),
+    "staff_count": dict(
+        table="companies_staff.csv", col="staff_count", keys=["staff"],
+        ylabel="Staff count", what="headcount", fmt="count", connect=True, open_col="_division",
+        open_note="Open markers count an AI division or a single role rather than "
+                  "the whole company - the only figures published for Google and Meta",
+        defn="Headcount at the date of the report. For Google and Meta this is the "
+             "AI division, not the corporation.",
+    ),
+    "equity_usd": dict(
+        table="companies_funding.csv", col="equity_usd", keys=["funding"],
+        ylabel="Equity raised in the round (USD)", what="equity raised per round", fmt="usd", connect=False,
+        open_col=None,
+        defn="Equity raised in a single closed round. Rounds still in discussion "
+             "and the one cancelled round are excluded - they are not raised capital.",
+    ),
+    "valuation_usd": dict(
+        table="companies_funding.csv", col="valuation_usd", keys=["funding"],
+        ylabel="Post-money valuation (USD)", what="post-money valuation", fmt="usd", connect=True, open_col=None,
+        defn="Post-money valuation set by the round that closed on that date.",
+    ),
+    "amount_usd": dict(
+        table="companies_spend.csv", col="amount_usd", keys=["spend"],
+        ylabel="Compute spend (USD)", what="cloud compute spend", fmt="usd", connect=False, open_col=None,
+        marker_col="category_short",
+        defn="Cloud compute spend for the period, split by Epoch into R&D and "
+             "inference. A row may cover one category or both.",
+    ),
+}
+
+COMPANIES_PLOTS = {
+    "COMPANIES-01": dict(metric="revenue", log=True, trend=False,
+                         title="Annualised revenue of AI companies"),
+    "COMPANIES-02": dict(metric="revenue", log=False, trend=False,
+                         title="Annualised revenue of AI companies, linear scale"),
+    "COMPANIES-03": dict(metric="revenue", log=True, trend=True,
+                         title="Annualised revenue of AI companies, with fitted growth"),
+    "COMPANIES-04": dict(metric="active_users", log=True, trend=False,
+                         title="Active users of AI products"),
+    "COMPANIES-05": dict(metric="daily_tokens", log=True, trend=False,
+                         title="Tokens processed per day, by company"),
+    "COMPANIES-06": dict(metric="staff_count", log=True, trend=False,
+                         title="Staff at AI companies"),
+    "COMPANIES-07": dict(metric="staff_count", log=True, trend=True,
+                         title="Staff at AI companies, with fitted growth"),
+    "COMPANIES-08": dict(metric="equity_usd", log=True, trend=False,
+                         title="Equity raised per funding round"),
+    "COMPANIES-09": dict(metric="valuation_usd", log=True, trend=False,
+                         title="Post-money valuation of AI companies"),
+    "COMPANIES-10": dict(metric="amount_usd", log=True, trend=False,
+                         title="Cloud compute spend of AI companies"),
+}
+
+
+def _cdata(metric):
+    """The plotted frame for one metric, absent values left absent."""
+    cfg = CT[metric]
+    df = _ccsv(cfg["table"])
+    if metric == "equity_usd":
+        df = df[df["closed"]]
+    if metric == "staff_count":
+        df["_division"] = df["scope"].fillna("") != "Full company"
+    if metric == "amount_usd":
+        def short(c):
+            c = str(c)
+            has_r, has_i = "R&D" in c, "Inference" in c
+            return ("R&D + inference" if has_r and has_i
+                    else "R&D only" if has_r else "Inference only")
+        df["category_short"] = df["category"].map(short)
+    return df.dropna(subset=[cfg["col"]]).copy()
+
+
+def _ctrend_lines(ax, value_col, log):
+    """Overlay Epoch's regression control: log-linear fits, observed span only."""
+    from datetime import date, timedelta
+    if not log:
+        return []
+    fits = _ccsv("companies_trends.csv")
+    fits = fits[fits["metric"] == value_col]
+    drawn = []
+    for _, f in fits.iterrows():
+        def as_date(y):
+            return date(int(y), 1, 1) + timedelta(days=(y - int(y)) * 365.25)
+        xs = [f["x_min"], f["x_max"]]
+        ys = [10 ** (f["oom_per_year"] * x + f["intercept_log10"]) for x in xs]
+        # never drawn past the last observation: no projection, by house rule
+        ax.plot([as_date(x) for x in xs], ys, linestyle=(0, (5, 2.5)),
+                color=_ccolour(f["company"]), linewidth=1.8, alpha=0.95, zorder=5)
+        drawn.append(f)
+    return drawn
+
+
+def build_companies(plot_id):
+    cfg = COMPANIES_PLOTS[plot_id]
+    metric, tab = cfg["metric"], CT[cfg["metric"]]
+    df = _cdata(metric)
+    meta = _cmeta()
+    # a log axis cannot carry a zero. Those rows are real observations - a
+    # secondary sale raises no new equity - so they are dropped and counted,
+    # never quietly nudged onto the floor
+    zeroed = 0
+    if cfg["log"]:
+        zeroed = int((df[tab["col"]] <= 0).sum())
+        df = df[df[tab["col"]] > 0]
+    n, ncomp = len(df), df["company"].nunique()
+
+    setting = (f"Setting:  {tab['what'][0].upper() + tab['what'][1:]}\n"
+               f"Scale:  {'logarithmic' if cfg['log'] else 'linear'}\n"
+               f"Trend:  {'fitted' if cfg['trend'] else 'off'}\n"
+               f"Projection:  off")
+
+    subtitle = (f"What it shows: {tab['what']} for every AI company where "
+                f"Epoch records it, plotted at the date of the report. "
+                f"{n} observations across {ncomp} companies. {tab['defn']}")
+
+    note_bits = []
+    if cfg["log"]:
+        note_bits.append("The vertical axis is log-scaled because the values span "
+                         "several orders of magnitude; on a linear axis every "
+                         "company but the largest collapses onto the floor")
+    else:
+        note_bits.append("Linear scale, which is what the largest company looks "
+                         "like next to the rest - the same data as the log view "
+                         "and the reason Epoch defaults to log")
+    if tab.get("open_note"):
+        note_bits.append(tab["open_note"])
+    excl = int(meta[f"excluded_by_epoch_{'usage' if tab['keys'][0]=='usage' else tab['keys'][0]}"]) \
+        if f"excluded_by_epoch_{tab['keys'][0]}" in meta.index else 0
+    if excl:
+        note_bits.append(f"{excl} rows Epoch flagged 'exclude from graph view' are "
+                         f"dropped, as they are on Epoch's own figure")
+    if zeroed:
+        note_bits.append(f"{zeroed} rounds recorded at zero new equity - secondary "
+                         f"sales between existing shareholders - cannot sit on a log "
+                         f"axis and are dropped rather than floored")
+    note_bits.append("A company is absent from a chart wherever Epoch records no "
+                     "value - never imputed, back-filled or carried across")
+    note = ". ".join(note_bits) + "."
+
+    fig, ax = _cfig(subtitle, note, source=companies_src(tab["keys"]))
+    plt.sca(ax)
+    _cseries(df, tab["col"], log=cfg["log"], connect=tab["connect"],
+             open_mask=tab["open_col"], marker_col=tab.get("marker_col"))
+
+    fits = _ctrend_lines(ax, tab["col"], cfg["log"]) if cfg["trend"] else []
+
+    if cfg["log"]:
+        ax.set_yscale("log")
+        _decade_ticks(ax.yaxis, df[tab["col"]], AXIS_FMT[tab["fmt"]])
+    else:
+        ax.yaxis.set_major_formatter(plt.FuncFormatter(
+            lambda v, _p: AXIS_FMT[tab["fmt"]](v) or ("0" if v == 0 else "")))
+    _date_axis(ax, list(df["date"]))
+    ax.set_ylabel(tab["ylabel"], fontsize=10)
+    ax.set_xlabel("Date of report", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.grid(axis="x", color=RULE, linewidth=0.5, alpha=0.6)
+    ax.set_axisbelow(True)
+    rows = _clegend(ax)
+
+    if tab.get("marker_col"):
+        from matplotlib.lines import Line2D
+        keys = [Line2D([], [], linestyle="none", marker=m, color=MUTED,
+                       markersize=7, label=c) for c, m in CAT_MARKER.items()]
+        ax.legend(handles=keys, loc="upper left",
+                  bbox_to_anchor=(1.015, 1.0 - 0.062 * rows), frameon=False,
+                  fontsize=9, title="Spend category", title_fontsize=9.2,
+                  borderaxespad=0)
+        rows += len(keys) + 1
+
+    lines = [setting]
+    if fits:
+        lines.append("Fitted growth\n" + "\n".join(
+            f"{f['company']}:  {f['growth_per_year']:.1f}x/year\n"
+            f"    doubling {f['doubling_time_months']:.1f} mo,  "
+            f"r\u00b2={f['r_squared']:.2f},  n={int(f['n'])}"
+            for f in fits))
+    elif cfg["trend"]:
+        lines.append(f"No fit drawn: no company\nreaches the {MIN_C_FIT} observations\n"
+                     f"a trend line requires")
+    ax.text(1.015, 0.98 - 0.062 * rows, "\n\n".join(lines),
+            transform=ax.transAxes, ha="left", va="top", fontsize=8.3,
+            color=MUTED, linespacing=1.55)
+
+    _cfinish(fig, ax, plot_id, cfg["title"], subtitle, note, tab["keys"])
+
+
+# ------------------------------------------- Derived analysis (same raw files)
+def _nearest(target, ref, value_col, max_days=365):
+    """Attach each target row the closest reference observation in time.
+
+    Used where two Epoch tables are reported on different dates and a ratio only
+    means anything if the two sides are close together. Rows with no reference
+    inside the window are dropped, never matched to the nearest at any distance.
+    """
+    import pandas as pd
+    out = []
+    for company, sub in target.groupby("company"):
+        pool = ref[ref["company"] == company].dropna(subset=[value_col])
+        if pool.empty:
+            continue
+        for _, row in sub.iterrows():
+            gap = (pool["date"] - row["date"]).abs()
+            j = gap.idxmin()
+            if gap.loc[j] <= pd.Timedelta(days=max_days):
+                r = row.copy()
+                r["ref_value"] = pool.loc[j, value_col]
+                r["ref_date"] = pool.loc[j, "date"]
+                r["gap_days"] = int(gap.loc[j].days)
+                out.append(r)
+    return pd.DataFrame(out)
+
+
+def build_c_d01(_r=None):
+    """What growth the record can actually carry a trend for."""
+    import pandas as pd
+    fits = _ccsv("companies_trends.csv").sort_values("doubling_time_months")
+    cov = _ccsv("companies_coverage.csv")
+    label = {"revenue_usd": "Revenue", "staff_count": "Staff count",
+             "active_users": "Active users"}
+    short = {"Revenue": "Revenue", "Staff count": "Staff count",
+             "Active users": "Active users"}
+    below = {}
+    for metric, name in label.items():
+        c = cov[cov["metric"] == short[name]]
+        below[name] = int((c["observations"].between(1, MIN_C_FIT - 1)).sum())
+
+    subtitle = (f"What it shows: the growth rate behind each series Epoch's regression "
+                f"control can fit, as an annual multiple and the doubling time it "
+                f"implies. Only {len(fits)} of the tracked series reach the "
+                f"{MIN_C_FIT} observations a log-linear fit requires; every other "
+                f"company is measured too sparsely to carry a trend at all.")
+    note = ("Fitted by ordinary least squares through log10 of the metric against "
+            "date, over the observed points only and never extended past the last "
+            "of them. A doubling time is the fit restated, not a separate "
+            "measurement. Anthropic's revenue fit is the steepest series in the "
+            "entire dataset. Companies below the threshold are counted, not fitted "
+            "- a two-point 'trend' is a line through two points, not a growth rate.")
+
+    fig, ax = _cfig(subtitle, note, left=0.175, width=0.560, badge_above=True,
+                    source=companies_src(["revenue", "staff", "usage"]))
+    ys = range(len(fits))
+    for y, (_, f) in zip(ys, fits.iterrows()):
+        ax.barh(y, f["doubling_time_months"], height=0.62,
+                color=_ccolour(f["company"]), edgecolor="white", linewidth=0.6,
+                zorder=3)
+        ax.text(f["doubling_time_months"] + 0.35, y,
+                f"{f['growth_per_year']:.1f}x/year   r²={f['r_squared']:.2f}   "
+                f"n={int(f['n'])}", va="center", fontsize=9, color=INK, zorder=4)
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([f"{f['company']}\n{label[f['metric']]}"
+                        for _, f in fits.iterrows()], fontsize=9.4)
+    ax.invert_yaxis()
+    ax.set_xlabel("Doubling time (months)", fontsize=10)
+    ax.set_xlim(0, float(fits["doubling_time_months"].max()) * 1.55)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.text(0.995, 0.985,
+            "Series with observations but too few to fit:  "
+            + ",  ".join(f"{k} {v}" for k, v in below.items() if v),
+            transform=ax.transAxes, ha="right", va="top", fontsize=8.6,
+            color=MUTED, style="italic")
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "COMPANIES-D01",
+          "Only four series in the dataset are measured often enough to fit a trend",
+          subtitle, companies_src(["revenue", "staff", "usage"]), COMPANIES_METH, note)
+    save(fig, "COMPANIES-D01", COMPANIES_DOMAIN)
+
+
+def build_c_d02(_r=None):
+    """Revenue per employee, matched observation to observation."""
+    rev = _ccsv("companies_revenue.csv")
+    staff = _ccsv("companies_staff.csv")
+    staff = staff[staff["scope"] == "Full company"]
+    m = _nearest(rev, staff, "staff_count", max_days=365)
+    m["rpe"] = m["revenue_usd"] / m["ref_value"]
+
+    subtitle = (f"What it shows: annualised revenue divided by headcount, each revenue "
+                f"observation matched to the closest full-company staff figure within "
+                f"a year. {len(m)} matched pairs across {m['company'].nunique()} "
+                f"companies. Google and Meta are absent: Epoch records no revenue for "
+                f"their AI divisions, only headcount.")
+    note = (f"Both sides are point observations reported on their own dates, so each "
+            f"ratio carries the gap between them - median {int(m['gap_days'].median())} "
+            f"days, longest {int(m['gap_days'].max())}. Divisional headcounts are "
+            f"excluded because a division's staff against company-wide revenue is not "
+            f"a ratio of anything. Revenue is a run rate, so this is revenue per "
+            f"employee at an annualised rate, not booked revenue per employee.")
+
+    fig, ax = _cfig(subtitle, note, source=companies_src(["revenue", "staff"]))
+    plt.sca(ax)
+    _cseries(m, "rpe", connect=True)
+    ax.set_yscale("log")
+    _decade_ticks(ax.yaxis, m["rpe"], AXIS_FMT["usd"])
+    _date_axis(ax, list(m["date"]))
+    ax.set_ylabel("Annualised revenue per employee (USD)", fontsize=10)
+    ax.set_xlabel("Date of revenue report", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.grid(axis="x", color=RULE, linewidth=0.5, alpha=0.6)
+    ax.set_axisbelow(True)
+    _clegend(ax)
+    _cfinish(fig, ax, "COMPANIES-D02",
+             "Revenue per employee has risen roughly a hundredfold at the leaders",
+             subtitle, note, ["revenue", "staff"])
+
+
+def build_c_d03(_r=None):
+    """Valuation against the revenue nearest to it."""
+    fund = _ccsv("companies_funding.csv")
+    fund = fund[fund["closed"] & fund["valuation_usd"].notna()]
+    rev = _ccsv("companies_revenue.csv")
+    m = _nearest(fund, rev, "revenue_usd", max_days=365)
+    m["multiple"] = m["valuation_usd"] / m["ref_value"]
+
+    subtitle = (f"What it shows: post-money valuation divided by the annualised revenue "
+                f"recorded nearest to it, so the price of each round is expressed "
+                f"against the revenue it was struck on. {len(m)} rounds across "
+                f"{m['company'].nunique()} companies where both sides exist within a year.")
+    note = (f"A revenue multiple is only as good as the gap between the two dates - "
+            f"median {int(m['gap_days'].median())} days here - and at these growth "
+            f"rates revenue moves materially inside that gap. Valuations are set by a "
+            f"single negotiated round, not a market price. Rounds with no revenue "
+            f"observation within a year are dropped rather than matched to a distant one.")
+
+    fig, ax = _cfig(subtitle, note, source=companies_src(["funding", "revenue"]))
+    plt.sca(ax)
+    _cseries(m, "multiple", connect=True)
+    ax.set_yscale("log")
+    _decade_ticks(ax.yaxis, m["multiple"], lambda v: f"{v:,.0f}x" if v >= 1 else f"{v:g}x")
+    _date_axis(ax, list(m["date"]))
+    ax.set_ylabel("Post-money valuation as a multiple of annualised revenue", fontsize=10)
+    ax.set_xlabel("Date the round closed", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.grid(axis="x", color=RULE, linewidth=0.5, alpha=0.6)
+    ax.set_axisbelow(True)
+    _clegend(ax)
+    _cfinish(fig, ax, "COMPANIES-D03",
+             "Revenue multiples have compressed as revenue caught up with valuations",
+             subtitle, note, ["funding", "revenue"])
+
+
+def build_c_d04(_r=None):
+    """Cumulative equity raised, stepped at each closed round."""
+    fund = _ccsv("companies_funding.csv")
+    fund = fund[fund["closed"] & fund["equity_usd"].notna()].sort_values("date")
+    fund["cum"] = fund.groupby("company")["equity_usd"].cumsum()
+    totals = fund.groupby("company")["cum"].max().sort_values(ascending=False)
+
+    subtitle = (f"What it shows: equity raised, accumulated round by round, for every "
+                f"company Epoch records funding for. {len(fund)} closed rounds across "
+                f"{fund['company'].nunique()} companies. The step is the round; the "
+                f"height is everything raised to that date.")
+    note = ("Closed rounds only - rounds still in discussion and the one cancelled "
+            "round are excluded, because announced capital is not raised capital. "
+            "Debt is excluded: it is recorded separately by Epoch and is not equity. "
+            "Secondary sales appear as flat steps, since they transfer existing shares "
+            "between holders and put no new money into the company.")
+
+    fig, ax = _cfig(subtitle, note, source=companies_src(["funding"]))
+    for name in totals.index:
+        sub = fund[fund["company"] == name]
+        ax.step(sub["date"], sub["cum"], where="post", color=_ccolour(name),
+                linewidth=1.9, zorder=3,
+                label=f"{name}  ({AXIS_FMT['usd'](totals[name])})")
+        ax.scatter(sub["date"], sub["cum"], s=26, color=_ccolour(name),
+                   edgecolor="white", linewidth=0.7, zorder=4)
+    ax.set_yscale("log")
+    _decade_ticks(ax.yaxis, fund["cum"], AXIS_FMT["usd"])
+    _date_axis(ax, list(fund["date"]))
+    ax.set_ylabel("Cumulative equity raised (USD)", fontsize=10)
+    ax.set_xlabel("Date the round closed", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.grid(axis="x", color=RULE, linewidth=0.5, alpha=0.6)
+    ax.set_axisbelow(True)
+    _clegend(ax, title="Company  (total raised)")
+    _cfinish(fig, ax, "COMPANIES-D04",
+             "Cumulative equity raised, round by round",
+             subtitle, note, ["funding"])
+
+
+def build_c_d05(_r=None):
+    """The inference/R&D split, where both sides are recorded for one period."""
+    sp = _ccsv("companies_spend.csv")
+    # the two sides are usually on separate rows for the same period, so collapse
+    # to one row per company-period before pairing them
+    per = sp.groupby(["company", "date"], as_index=False).agg(
+        inference_usd=("inference_usd", "max"), rnd_usd=("rnd_usd", "max"))
+    both = per.dropna(subset=["inference_usd", "rnd_usd"]).copy()
+    both["total"] = both["inference_usd"] + both["rnd_usd"]
+    both["inf_share"] = both["inference_usd"] / both["total"] * 100
+    both = both.sort_values(["date", "company"])
+    labels = [f"{r['company']}\n{r['date']:%Y}" for _, r in both.iterrows()]
+    idx = list(range(len(both)))
+
+    subtitle = (f"What it shows: cloud compute spend split into training and research "
+                f"against serving, for the {len(both)} company-periods where Epoch "
+                f"records both sides. This is the split the published figure cannot "
+                f"show: its tab plots one amount per row, whichever category the row "
+                f"happens to cover.")
+    note = ("Only periods recording both an inference and an R&D figure can be split, "
+            "which is why so few bars appear - the rest of the compute spend table "
+            "gives one side or a combined total. Rows Epoch flags 'exclude from graph "
+            "view' are dropped. Inference here is cloud spend on serving, not the cost "
+            "of a token, and cannot be divided by token volume without a price.")
+
+    fig, ax = _cfig(subtitle, note, left=0.095, width=0.620, badge_above=True,
+                    xlabel_room=0.080, source=companies_src(["spend"]))
+    w = 0.56
+    ax.bar(idx, both["rnd_usd"] / 1e9, w, color="#1f3864", edgecolor="white",
+           linewidth=0.7, label="R&D compute", zorder=3)
+    ax.bar(idx, both["inference_usd"] / 1e9, w, bottom=both["rnd_usd"] / 1e9,
+           color="#b4763a", edgecolor="white", linewidth=0.7,
+           label="Inference compute", zorder=3)
+    for i, r in enumerate(both.itertuples()):
+        ax.text(i, r.total / 1e9 + 0.35, f"${r.total/1e9:,.1f}bn",
+                ha="center", va="bottom", fontsize=9, fontweight="bold", color=INK)
+        ax.text(i, r.rnd_usd / 1e9 + r.inference_usd / 2e9,
+                f"{r.inf_share:.0f}%", ha="center", va="center", fontsize=8.8,
+                color="white", fontweight="bold", zorder=5)
+    ax.set_xticks(idx)
+    ax.set_xticklabels(labels, fontsize=9.4)
+    ax.set_ylabel("Cloud compute spend (US$ billions)", fontsize=10)
+    ax.set_xlabel("Company and period", fontsize=10)
+    ax.set_xlim(-0.6, len(both) - 0.4)
+    ax.set_ylim(0, float(both["total"].max()) / 1e9 * 1.20)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"${v:,.0f}bn"))
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    h, l = ax.get_legend_handles_labels()
+    ax.legend(h[::-1], l[::-1], loc="upper left", bbox_to_anchor=(1.015, 1.0),
+              frameon=False, fontsize=9, title="Category", title_fontsize=9.2,
+              borderaxespad=0)
+    ax.text(1.015, 0.72, "White figure:  inference\nas a share of the two", 
+            transform=ax.transAxes, ha="left", va="top", fontsize=8.3,
+            color=MUTED, linespacing=1.55)
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "COMPANIES-D05",
+          "Serving is closing on research as a share of compute spend",
+          subtitle, companies_src(["spend"]), COMPANIES_METH, note)
+    save(fig, "COMPANIES-D05", COMPANIES_DOMAIN)
+
+
+def build_c_d06(_r=None):
+    """Compute spend against the revenue recorded nearest to it."""
+    sp = _ccsv("companies_spend.csv")
+    rev = _ccsv("companies_revenue.csv")
+    m = _nearest(sp, rev, "revenue_usd", max_days=270)
+    m["ratio"] = m["amount_usd"] / m["ref_value"] * 100
+
+    subtitle = (f"What it shows: each recorded compute spend against the annualised "
+                f"revenue nearest to it, as a percentage. {len(m)} matched pairs for "
+                f"{m['company'].nunique()} companies - the only two for which Epoch "
+                f"records compute spend at all.")
+    note = ("A spend figure covering one category is being compared with company-wide "
+            "revenue, so a bar is a floor on the true ratio wherever the row is not a "
+            "combined total. Revenue is an annualised run rate at a point in time and "
+            "spend is a period figure, so this is an indicative ratio, not a margin. "
+            "It says nothing about total cost: staff, data and non-cloud infrastructure "
+            "are outside this table entirely.")
+
+    fig, ax = _cfig(subtitle, note, left=0.095, width=0.620, badge_above=True,
+                    xlabel_room=0.080, source=companies_src(["spend", "revenue"]))
+    m = m.sort_values(["date", "company"])
+    idx = list(range(len(m)))
+    for i, r in enumerate(m.itertuples()):
+        ax.bar(i, r.ratio, 0.58, color=_ccolour(r.company), edgecolor="white",
+               linewidth=0.7, zorder=3)
+        ax.text(i, r.ratio + 1.5, f"{r.ratio:.0f}%", ha="center", va="bottom",
+                fontsize=9, fontweight="bold", color=INK)
+    ax.axhline(100, color=SERIES["scope"], linewidth=1.4, linestyle=(0, (5, 2.5)),
+               zorder=4)
+    ax.text(len(m) - 0.45, 102, "compute spend equals revenue", ha="right",
+            va="bottom", fontsize=8.8, color=SERIES["scope"], style="italic")
+    ax.set_xticks(idx)
+    ax.set_xticklabels([f"{r.company}\n{r.date:%Y}" for r in m.itertuples()],
+                       fontsize=9.2)
+    ax.set_ylabel("Compute spend as a share of annualised revenue", fontsize=10)
+    ax.set_xlabel("Company and period of the spend figure", fontsize=10)
+    ax.set_xlim(-0.6, len(m) - 0.4)
+    ax.set_ylim(0, max(float(m["ratio"].max()) * 1.18, 115))
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.0f}%"))
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "COMPANIES-D06",
+          "Compute spend against revenue, where both are on the record",
+          subtitle, companies_src(["spend", "revenue"]), COMPANIES_METH, note)
+    save(fig, "COMPANIES-D06", COMPANIES_DOMAIN)
+
+
+def build_c_d07(_r=None):
+    """What the record actually holds, company by metric."""
+    import numpy as np
+    cov = _ccsv("companies_coverage.csv")
+    grid = cov.pivot(index="company", columns="metric", values="observations")
+    metrics = ["Revenue", "Funding rounds", "Valuation", "Staff count",
+               "Active users", "Daily tokens", "Compute spend"]
+    grid = grid[metrics]
+    grid = grid.loc[grid.sum(axis=1).sort_values(ascending=False).index]
+    meta = _cmeta()
+
+    filled = int((grid > 0).sum().sum())
+    cells = grid.shape[0] * grid.shape[1]
+    subtitle = (f"What it shows: how many observations Epoch holds for each company on "
+                f"each metric. {filled} of {cells} company-metric cells carry any "
+                f"observation at all; the blank cells are why so many of the published "
+                f"views plot two or three companies rather than eleven.")
+    note = (f"A blank cell is an absence of disclosure, not a zero - the company has "
+            f"published nothing Epoch could record, which is not the same as having no "
+            f"revenue or no staff. Counts are observations, not companies or dollars, "
+            f"and one company disclosing often will outweigh one disclosing once. "
+            f"Tracked companies: {int(meta['tracked_companies'])}; "
+            f"record observed to {meta['observed_to']}.")
+
+    fig, ax = _cfig(subtitle, note, left=0.135, width=0.600, xlabel_room=0.075,
+                    badge_above=True,
+                    source=companies_src(["revenue", "funding", "staff", "usage", "spend"]))
+    vals = grid.to_numpy(dtype=float)
+    shown = np.where(vals > 0, vals, np.nan)
+    im = ax.imshow(shown, cmap="Blues", aspect="auto",
+                   vmin=0, vmax=float(np.nanmax(shown)))
+    for i in range(grid.shape[0]):
+        for j in range(grid.shape[1]):
+            v = vals[i, j]
+            if v > 0:
+                ax.text(j, i, f"{int(v)}", ha="center", va="center", fontsize=9.4,
+                        fontweight="bold",
+                        color="white" if v > np.nanmax(shown) * 0.55 else INK)
+            else:
+                ax.text(j, i, "—", ha="center", va="center", fontsize=9.4,
+                        color="#c9ced8")
+    ax.set_xticks(range(len(metrics)))
+    ax.set_xticklabels(metrics, fontsize=9.2, rotation=22, ha="right")
+    ax.set_yticks(range(grid.shape[0]))
+    ax.set_yticklabels(grid.index, fontsize=9.4)
+    ax.set_xticks([x - 0.5 for x in range(1, len(metrics))], minor=True)
+    ax.set_yticks([y - 0.5 for y in range(1, grid.shape[0])], minor=True)
+    ax.grid(which="minor", color="white", linewidth=1.6)
+    ax.tick_params(which="minor", length=0)
+    ax.grid(which="major", visible=False)
+    cb = fig.colorbar(im, ax=ax, fraction=0.028, pad=0.02)
+    cb.set_label("Observations recorded", fontsize=9)
+    cb.outline.set_visible(False)
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "COMPANIES-D07",
+          "The record is deep on two companies and thin on the other nine",
+          subtitle, companies_src(["revenue", "funding", "staff", "usage", "spend"]),
+          COMPANIES_METH, note)
+    save(fig, "COMPANIES-D07", COMPANIES_DOMAIN)
+
+
+def build_c_d08(_r=None):
+    """Who said it: the provenance of the record itself."""
+    import pandas as pd
+    frames = {"Revenue": _ccsv("companies_revenue.csv"),
+              "Usage": _ccsv("companies_usage.csv"),
+              "Staff": _ccsv("companies_staff.csv")}
+    order = ["Company disclosure", "Media report", "Other"]
+    colour = {"Company disclosure": "#1f3864", "Media report": "#b4763a",
+              "Other": "#9aa9c4"}
+
+    def bucket(v):
+        v = str(v)
+        if v == "nan":
+            return "Other"
+        if "Company disclosure" in v:
+            return "Company disclosure"
+        if "Media report" in v:
+            return "Media report"
+        return "Other"
+
+    rows = []
+    for name, df in frames.items():
+        b = df["source_type"].map(bucket).value_counts()
+        total = int(b.sum())
+        rows.append({"dataset": name, "total": total,
+                     **{k: int(b.get(k, 0)) for k in order}})
+    t = pd.DataFrame(rows)
+
+    disclosed = int(t["Company disclosure"].sum())
+    total = int(t["total"].sum())
+    subtitle = (f"What it shows: where each observation in the AI Companies record came "
+                f"from. {disclosed} of {total} observations across revenue, usage and "
+                f"staff are the company's own disclosure; the rest are journalism or "
+                f"filings reported at second hand.")
+    note = ("This is a chart about the evidence, not about AI. It matters because a "
+            "media-reported revenue figure and an audited disclosure carry very "
+            "different weight, and the published views plot both as identical dots. "
+            "Funding rounds and compute spend are omitted: Epoch does not record a "
+            "source type for them in the same form.")
+
+    fig, ax = _cfig(subtitle, note, left=0.115, width=0.620, badge_above=True,
+                    xlabel_room=0.068, source=companies_src(["revenue", "usage", "staff"]))
+    ys = range(len(t))
+    left = [0.0] * len(t)
+    for cat in order:
+        share = t[cat] / t["total"] * 100
+        ax.barh(list(ys), share, 0.56, left=left, color=colour[cat],
+                edgecolor="white", linewidth=0.7, label=cat, zorder=3)
+        for i, (s, l) in enumerate(zip(share, left)):
+            if s >= 8:
+                ax.text(l + s / 2, i, f"{s:.0f}%", ha="center", va="center",
+                        fontsize=9, color="white", fontweight="bold", zorder=5)
+        left = [a + b for a, b in zip(left, share)]
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([f"{r.dataset}\n{r.total} obs" for r in t.itertuples()],
+                       fontsize=9.6)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 100)
+    ax.set_xlabel("Share of observations in the dataset", fontsize=10)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.0f}%"))
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    h, l = ax.get_legend_handles_labels()
+    ax.legend(h, l, loc="upper left", bbox_to_anchor=(1.015, 1.0), frameon=False,
+              fontsize=9, title="Source of the figure", title_fontsize=9.2,
+              borderaxespad=0)
+    _observed_badge(ax, above=True)
+    frame(fig, ax, "COMPANIES-D08",
+          "Most of the record is the companies' own telling",
+          subtitle, companies_src(["revenue", "usage", "staff"]),
+          COMPANIES_METH, note)
+    save(fig, "COMPANIES-D08", COMPANIES_DOMAIN)
+
+
+COMPANIES_DERIVED = {
+    "COMPANIES-D01": build_c_d01, "COMPANIES-D02": build_c_d02,
+    "COMPANIES-D03": build_c_d03, "COMPANIES-D04": build_c_d04,
+    "COMPANIES-D05": build_c_d05, "COMPANIES-D06": build_c_d06,
+    "COMPANIES-D07": build_c_d07, "COMPANIES-D08": build_c_d08,
+}
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -2991,6 +3850,10 @@ BUILDERS.update({pid: (lambda _rows, _p=pid: build_chip(_p)) for pid in CHIP_PLO
 BUILDERS.update({"CHIP-D01": build_chip_d01, "CHIP-D02": build_chip_d02,
                  "CHIP-D03": build_chip_d03, "CHIP-D04": build_chip_d04,
                  "CHIP-D05": build_chip_d05, "CHIP-D06": build_chip_d06})
+BUILDERS.update({pid: (lambda _rows, _p=pid: build_companies(_p))
+                 for pid in COMPANIES_PLOTS})
+BUILDERS.update({pid: (lambda _rows, _b=fn: _b())
+                 for pid, fn in COMPANIES_DERIVED.items()})
 
 
 def main():

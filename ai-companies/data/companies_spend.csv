@@ -1,0 +1,11 @@
+company,date,amount_usd,category,period_type,inference_usd,rnd_usd,total_usd,confidence
+Anthropic,2023-12-31,285000000,"R&D cloud compute,Inference cloud compute",Year,,,285000000.0,Likely
+Anthropic,2024-12-31,1500000000,R&D cloud compute,Year,,1500000000.0,,Likely
+Anthropic,2024-12-31,2500000000,"R&D cloud compute,Inference cloud compute",Year,,,2500000000.0,Likely
+Anthropic,2025-12-31,4100000000,R&D cloud compute,Year,,4100000000.0,,Likely
+Anthropic,2025-12-31,2700000000,"R&D cloud compute,Inference cloud compute",Year,2700000000.0,,,Likely
+OpenAI,2022-12-31,416000000,"R&D cloud compute,Inference cloud compute,Data",Year,,,416000000.0,Likely
+OpenAI,2024-12-31,1800000000,Inference cloud compute,Year,1800000000.0,,,Likely
+OpenAI,2024-12-31,4000000000,R&D cloud compute,Year,,4000000000.0,,Likely
+OpenAI,2025-12-31,8300000000,R&D cloud compute,Year,,8300000000.0,,Likely
+OpenAI,2025-12-31,8000000000,Inference cloud compute,Year,8000000001.0,,,Likely

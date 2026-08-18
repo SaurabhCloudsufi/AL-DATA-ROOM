@@ -166,6 +166,69 @@ checked without the download. To rebuild from source, put the four files back in
 
 ---
 
+## AI Companies
+
+Epoch AI's record of the companies building the models — what they earn, what
+they raise, what they are worth, who they employ, how much they are used and
+what they spend on compute. Source:
+[Epoch AI, AI Companies](https://epoch.ai/data/ai-companies) (CC-BY), six files
+downloaded into `ai_companies/`:
+
+| File | Observations | What it is |
+|---|---|---|
+| `ai_companies_revenue_reports.csv` | 52 | Annualised revenue, dated, 8 companies |
+| `ai_companies_funding_rounds.csv` | 44 closed | Equity, debt and post-money valuation per round |
+| `ai_companies_staff_reports.csv` | 48 | Headcount, 9 companies, back to 2013 |
+| `ai_companies_usage_reports.csv` | 43 | Active users, daily tokens, daily messages |
+| `ai_companies_compute_spend.csv` | 10 | R&D and inference cloud spend, 2 companies |
+| `ai_companies.csv` | 11 | One row per tracked company |
+
+**18 charts**, in two sections:
+
+| IDs | Section | What they are |
+|---|---|---|
+| `COMPANIES-01` – `COMPANIES-10` | Epoch AI — Published Visualizations | Epoch publishes one configurable figure: a metric against the date it was reported, over a chosen tab, with controls for linear/log scale and a fitted growth regression. These are that figure at each of its settings — five tabs, seven metrics, both scales, regression on and off |
+| `COMPANIES-D01` – `COMPANIES-D08` | Derived Analysis | Questions the tabs cannot answer because they need two at once — growth rates the record can support, revenue per employee, valuation against revenue, cumulative equity, inference against R&D compute, compute against revenue, what the record holds, and where it came from |
+
+Three rules hold across all 18:
+
+- **Epoch's own exclusions are honoured.** Rows flagged `Exclude from graph view`
+  are dropped from every charted series, exactly as they are on Epoch's figure —
+  6 usage rows and 4 compute-spend rows. The counts are in
+  `companies_summary.csv` and stated on the charts affected.
+- **Nothing is projected.** Epoch's *Project trend* control is off throughout,
+  and no fitted line is drawn past the last observation.
+- **A company appears only where Epoch records the value.** Revenue exists for 8
+  of the 11 tracked companies, compute spend for 2. The rest are absent from
+  those charts, never imputed or back-filled. `COMPANIES-D07` plots that
+  coverage directly: 42 of 77 company-metric cells carry any observation at all.
+
+Growth is fitted by ordinary least squares through log10 of the metric against
+date, over the observed points only, and is **refused below 12 observations** —
+the same threshold the AI Models charts use. Only four series in the entire
+dataset clear it, which is what `COMPANIES-D01` is about. The two that matter:
+Anthropic's revenue grows 10.9x/year (doubling every 3.5 months, r² = 0.98) and
+OpenAI's 3.9x/year (doubling every 6.1 months, r² = 0.97).
+
+Where a chart pairs two tables — revenue against headcount, valuation against
+revenue — each observation is matched to the nearest one in time within a stated
+window (365 days, or 270 for compute spend) and unmatched rows are dropped
+rather than stretched to a convenient partner. Every such chart states the
+median gap between the two dates it paired.
+
+```bash
+python build/summarise_epoch_companies.py     # ai_companies/*.csv → ai-companies/data/
+python build/generate_charts.py COMPANIES-01 …  # derived tables → SVG + PNG
+python build/build_site.py                     # → ai-companies/index.html
+```
+
+As with every other working dataset here, the six raw Epoch CSVs stay out of the
+repository; `ai-companies/data/` carries the derived tables the charts read. To
+rebuild from source, put the six files back in `ai_companies/` from the link
+above.
+
+---
+
 ## Structure
 
 ```
@@ -186,6 +249,8 @@ ai-data-room/
 │   ├── update_excel_links.py    gallery URLs  →  workbook
 │   ├── plot_index.csv           the workbook catalogue (69 rows, unpublished)
 │   ├── plot_index_published.csv what the site actually renders
+│   ├── source_files_manifest.csv the source store, file by file
+│   ├── verify_source_files.py   every chart names the files it was built from
 │   └── company_disclosures.csv  23 verified company disclosures
 ├── notebooks/
 │   └── Inference_Tokens_Chart_Generation.ipynb
@@ -246,12 +311,15 @@ produces byte-identical SVG and PNG, so a git diff only ever shows a real change
 ## Adding a chart
 
 1. Add a row to `build/plot_index_published.csv` with its Plot ID, title, dataset,
-   granularity, year, source and methodology reference.
+   granularity, year, source, methodology reference and `Source_files`.
 2. Add a builder function in `build/generate_charts.py`, or a cell in the
    notebook, that loads the **real** source data. If the data is not available,
    request it rather than substituting another dataset.
-3. Save as `P-NN.svg` and `P-NN.png` in the domain's `charts/` directory.
+3. Save as `P-NN.svg` and `P-NN.png` in the domain's `charts/` directory. The
+   `Source:` line on the chart face must name the same files as `Source_files`.
 4. Run `build/build_site.py`. The chart appears on the page; nothing else moves.
+5. Run `build/verify_source_files.py`. It fails if the chart does not name the
+   files it was built from, or names one the source store does not hold.
 
 ## Adding a domain
 
@@ -260,6 +328,40 @@ index path, then create `<slug>/charts/`. The landing page and the new gallery
 are generated from there. No existing HTML changes, and no existing URL moves.
 
 ---
+
+## Source files
+
+Every chart names the file it was built from, in three places that must agree:
+on the chart face, in its plot index row (`Source_files`), and in the rendered
+gallery. A reader who wants to check a figure gets the file name off the chart
+itself — no need to open the repository or ask which download it came from.
+
+The names are the files as downloaded, in the project source store:
+
+**Source store:** https://drive.google.com/drive/folders/1oon2UYaOTBDiKUguQLlCf9Z3Pa_yvOz0
+
+| Folder | Files | Charts |
+|---|---|---|
+| *(root)* | the five `Azure*InferenceTrace_*.csv` releases | `P-1` – `P-3` |
+| `AI data centers` | `data_centers.csv`, `data_center_timelines.csv`, `data_center_chip_quantities.csv`, `data_center_cooling_towers.csv`, `data_center_chillers.csv` | `EPOCH-01` – `EPOCH-05`, `DERIVED-01` – `DERIVED-06` |
+| `ai_models` | `notable_ai_models.csv`, `frontier_ai_models.csv`, `large_scale_ai_models.csv`, `all_ai_models.csv` | `MODELS-01` – `MODELS-13`, `MODELS-D01` – `MODELS-D11` |
+| `ai_chip_components` | `quarterly_by_designer.csv`, `cumulative_by_designer.csv`, `cumulative_by_chip.csv`, `supply_denominators.csv` | `CHIP-01` – `CHIP-14`, `CHIP-D01` – `CHIP-D06` |
+| `ai_companies` | `ai_companies_revenue_reports.csv`, `ai_companies_funding_rounds.csv`, `ai_companies_staff_reports.csv`, `ai_companies_usage_reports.csv`, `ai_companies_compute_spend.csv`, `ai_companies.csv` | `COMPANIES-01` – `COMPANIES-10`, `COMPANIES-D01` – `COMPANIES-D08` |
+
+`build/source_files_manifest.csv` records that store file by file, and
+
+```bash
+python build/verify_source_files.py     # 76 charts checked, 0 failing
+```
+
+checks all 76 published charts against it. A chart that names no file, that
+names a different file on its face than in its index row, or that names a file
+the store does not hold, fails the check rather than reaching a client.
+
+A chart credits a file only where the build actually reads it. `CHIP-09`,
+`CHIP-11` and `CHIP-13` plot component consumption against Epoch's world-supply
+line, so they credit `supply_denominators.csv` alongside the designer file even
+though they are not share-of-supply views.
 
 ## Data and disclosure
 

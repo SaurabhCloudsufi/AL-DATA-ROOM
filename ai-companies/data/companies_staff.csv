@@ -1,0 +1,49 @@
+company,date,staff_count,scope,division,confidence,source_type
+Anthropic,2022-08-15,50,Full company,,Likely,Media report
+Anthropic,2023-01-01,85,Full company,,Likely,Media report
+Anthropic,2023-10-15,192,Full company,,Uncertain,Other
+Anthropic,2023-12-13,300,Full company,,Likely,Media report
+Anthropic,2024-05-30,500,Full company,,Likely,Media report
+Anthropic,2024-12-31,915,Full company,,Likely,Media report
+Anthropic,2024-12-31,521,Division/role,Research and development,Likely,Media report
+Anthropic,2025-05-23,1300,Full company,,Likely,Media report
+Anthropic,2025-12-02,2300,Full company,,Confident,Media report
+Anthropic,2026-08-06,3000,Full company,,Likely,Media report
+DeepSeek,2025-03-14,160,Full company,,Likely,Media report
+DeepSeek,2026-06-26,300,Full company,,Likely,Media report
+Google,2013-12-31,75,Division/role,DeepMind,Likely,Media report
+Google,2014-01-26,100,Division/role,DeepMind,Confident,Company disclosure
+Google,2016-03-13,200,Division/role,DeepMind,Likely,Media report
+Google,2016-12-29,350,Division/role,DeepMind,Likely,Company disclosure
+Google,2017-12-27,700,Division/role,DeepMind,Confident,Company disclosure
+Google,2021-05-21,1000,Division/role,DeepMind,Likely,Media report
+Google,2021-10-07,1000,Division/role,DeepMind,Likely,Media report
+Google,2024-05-16,2600,Full AI division,Google DeepMind,Likely,Media report
+Google,2024-05-31,4000,Full AI division,Google DeepMind,Uncertain,Media report
+Google,2025-03-19,5600,Full AI division,Google DeepMind,Likely,Media report
+Google,2025-08-06,6000,Full AI division,Google DeepMind,Likely,Media report
+Meta,2016-10-31,75,Division/role,FAIR,Confident,Company disclosure
+Meta,2018-11-08,200,Division/role,FAIR,Likely,Media report
+Meta,2025-04-01,1000,Division/role,FAIR,Likely,Media report
+Meta,2025-07-17,3400,,,,
+MiniMax,2025-09-30,385,Full company,,Confident,Company disclosure
+Mistral AI,2024-05-07,35,Full company,,Likely,Company disclosure
+Mistral AI,2025-09-09,350,Full company,,Likely,Media report
+OpenAI,2016-12-31,52,Full company,,Confident,Company disclosure
+OpenAI,2017-12-31,99,Full company,,Confident,Company disclosure
+OpenAI,2018-12-31,113,Full company,,Confident,Company disclosure
+OpenAI,2019-12-31,125,Full company,,Uncertain,Company disclosure
+OpenAI,2020-02-17,120,Full company,,Confident,Company disclosure
+OpenAI,2023-01-23,375,Full company,,Confident,Company disclosure
+OpenAI,2023-11-15,800,Full company,,Likely,Other
+OpenAI,2024-07-24,1500,Full company,,Likely,Media report
+OpenAI,2024-09-24,1700,Full company,,Likely,Media report
+OpenAI,2025-07-15,3000,Full company,,Likely,Other
+OpenAI,2025-12-30,4000,Full company,,Likely,Media report
+OpenAI,2026-03-21,4500,Full company,,Likely,Media report
+Z.ai (Zhipu),2025-06-30,883,Full company,,Confident,Company disclosure
+xAI,2023-07-12,12,Full company,,Likely,Company disclosure
+xAI,2024-06-19,15,Full company,,Likely,Media report
+xAI,2024-07-01,97,Full company,,Uncertain,Other
+xAI,2025-03-12,300,Full company,,Likely,Media report
+xAI,2025-03-12,900,Contractors,AI tutors (data contractors),Likely,Media report

@@ -147,7 +147,7 @@ PAGE = """<!doctype html>
     <div class="tip" id="tip"></div>
   </div>
   <div class="foot">Hover to read every owner at a date; click a legend entry to remove it from
-  the stack. Source: Epoch AI, AI Data Centers (CC-BY). Observed to __SNAP__; projected
+  the stack. Source: Epoch AI, AI Data Centers (CC-BY) — data_centers.csv + data_center_timelines.csv. Observed to __SNAP__; projected
   milestones excluded.</div>
 </div>
 <script>
