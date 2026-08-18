@@ -69,6 +69,54 @@ DOMAINS = [
         },
         "live": True,
     },
+    {
+        "slug": "ai-models",
+        "title": "AI Models",
+        "blurb": "The models themselves: how much compute, data, money, time and power "
+                 "went into training them, who built them, and what the record actually "
+                 "contains.",
+        "index": "build/plot_index_models.csv",
+        "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "Epoch AI — Published Visualizations":
+                "Epoch publishes one configurable figure on this dataset — a metric "
+                "against publication date, over a chosen release, optionally coloured "
+                "by domain, organization or country. These are that figure at each of "
+                "its settings, rebuilt from the downloaded CSVs rather than "
+                "screenshotted, with the point counts stated on every chart.",
+            "Derived Analysis":
+                "Our own analysis of the same four files — questions the published "
+                "figure does not answer. Same rule throughout: a model appears in a "
+                "chart only where Epoch records the value being plotted, and nothing "
+                "is imputed to fill a gap.",
+        },
+        "live": True,
+    },
+    {
+        "slug": "ai-chip-components",
+        "title": "AI Chip Components",
+        "blurb": "The three components AI accelerators are built from — advanced-node logic "
+                 "wafers, CoWoS packaging and HBM memory — and how much of the world's "
+                 "supply of each the leading AI chip designers consumed.",
+        "index": "build/plot_index_chip_components.csv",
+        "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "Epoch AI — Published Visualizations":
+                "Epoch publishes one configurable figure for this dataset: four tabs "
+                "(Total cost, Logic, Packaging, Memory) crossed with colour by component "
+                "or designer, absolute or share, quarterly or annual, running or "
+                "cumulative. These are that figure at each of its distinct settings, "
+                "rebuilt from the published CSVs rather than screenshotted. Complete "
+                "quarters only — the partial Q1 2026 in the download is excluded, and "
+                "Epoch's own Project trend control is disabled at source, so nothing "
+                "here is a projection.",
+            "Derived Analysis":
+                "Our own analysis of the same published files — questions the explorer's "
+                "settings cannot answer, including the uncertainty behind every median. "
+                "Same complete-quarters rule throughout.",
+        },
+        "live": True,
+    },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
     {"slug": "model-pricing", "title": "Model Pricing", "live": False},
     {"slug": "energy", "title": "Energy", "live": False},
@@ -202,7 +250,14 @@ def render_chart(slug, p):
     if lead:
         parts.append(f'<p class="shows">{e(lead)}</p>')
 
-    if has_svg:
+    if has_interactive(slug, pid):
+        # the interactive build is the figure where one exists; it reports its own
+        # height on load, so the fallback here only has to be close
+        parts.append('<div class="figure figure-live">')
+        parts.append(f'<iframe class="live" src="charts/{e(pid)}.html" '
+                     f'title="{e(title)} (interactive)" height="620" loading="lazy"></iframe>')
+        parts.append("</div>")
+    elif has_svg:
         parts.append('<div class="figure">')
         dims = svg_size(slug, pid)
         sz = f' width="{dims[0]:.0f}" height="{dims[1]:.0f}"' if dims else ""
@@ -225,6 +280,9 @@ def render_chart(slug, p):
         parts.append(f'<div><dt>Year</dt><dd>{e(p["Year"])}</dd></div>')
     if p.get("Coverage"):
         parts.append(f'<div><dt>Coverage</dt><dd>{e(p["Coverage"])}</dd></div>')
+    if p.get("Source_files"):
+        parts.append('<div><dt>Source files</dt>'
+                     f'<dd class="files">{e(p["Source_files"])}</dd></div>')
     if p.get("Data_treatment"):
         parts.append('<div><dt>Data treatment</dt>'
                      f'<dd class="treatment">{e(p["Data_treatment"])}</dd></div>')
@@ -245,7 +303,7 @@ def render_chart(slug, p):
         links = []
         if has_interactive(slug, pid):
             links.append(f'<a class="interactive" href="charts/{e(pid)}.html" '
-                         f'target="_blank" rel="noopener">Open interactive chart &#8599;</a>')
+                         f'target="_blank" rel="noopener">Open full screen &#8599;</a>')
         if has_svg:
             links.append(f'<a href="charts/{e(pid)}.svg" download>Download SVG</a>')
         if has_png:
@@ -327,6 +385,17 @@ def build_gallery(dom):
 </footer>
 
 </div>
+<script>
+// embedded charts post their rendered height; without this the iframe would
+// either clip the legend or leave a gap at some widths
+addEventListener('message', function (ev) {{
+  var d = ev.data;
+  if (!d || d.type !== 'aidr-height' || !d.id) return;
+  var f = document.querySelector('iframe.live[src="charts/' + d.id + '.html"]');
+  // ignore implausible measurements rather than collapsing the frame to a sliver
+  if (f && d.h > 200 && d.h < 4000) f.style.height = d.h + 'px';
+}});
+</script>
 </body>
 </html>
 """

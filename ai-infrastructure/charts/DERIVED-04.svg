@@ -2507,7 +2507,7 @@ L 833.76 473.2992
    <text style="fill: #6b7280; font: 10.2px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="30.24" y="96.195206" transform="rotate(-0 30.24 96.195206)">time.</text>
   </g>
   <g id="text_30">
-   <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="30.24" y="492.981056" transform="rotate(-0 30.24 492.981056)">Source: Epoch AI, AI Data Centers (CC-BY) — https://epoch.ai/data/ai-data-centers</text>
+   <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="30.24" y="492.981056" transform="rotate(-0 30.24 492.981056)">Source: Epoch AI, AI Data Centers (CC-BY) — data_center_chip_quantities.csv — epoch.ai/data/ai-data-centers</text>
   </g>
   <g id="text_31">
    <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="30.24" y="508.518656" transform="rotate(-0 30.24 508.518656)">Methodology: Methodology reference pending final methodology document; derivation follows Epoch AI's published data centers documentation</text>

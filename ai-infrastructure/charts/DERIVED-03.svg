@@ -703,7 +703,7 @@ L 819.864 426.24
    <text style="fill: #6b7280; font: 10.2px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="29.736" y="92.998406" transform="rotate(-0 29.736 92.998406)">sum exactly to the capital total, so the split is arithmetic rather than an estimate layered on top.</text>
   </g>
   <g id="text_44">
-   <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="29.736" y="445.446656" transform="rotate(-0 29.736 445.446656)">Source: Epoch AI, AI Data Centers (CC-BY) — https://epoch.ai/data/ai-data-centers</text>
+   <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="29.736" y="445.446656" transform="rotate(-0 29.736 445.446656)">Source: Epoch AI, AI Data Centers (CC-BY) — data_centers.csv + data_center_timelines.csv — epoch.ai/data/ai-data-centers</text>
   </g>
   <g id="text_45">
    <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="29.736" y="460.422656" transform="rotate(-0 29.736 460.422656)">Methodology: Methodology reference pending final methodology document; derivation follows Epoch AI's published data centers documentation</text>

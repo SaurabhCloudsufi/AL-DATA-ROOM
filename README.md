@@ -61,6 +61,111 @@ verified against the 2023 aggregates on every run.
 
 ---
 
+## AI Chip Components
+
+Epoch AI's estimates of how much advanced-node logic wafer capacity, CoWoS
+packaging and HBM memory the leading AI chip designers — NVIDIA, Google (TPUs),
+Amazon (Trainium) and AMD — consumed each quarter, and what share of world supply
+that was. Source: [Epoch AI, AI Chip Components](https://epoch.ai/data/ai-chip-components)
+(CC-BY).
+
+**20 charts**, in two sections:
+
+| IDs | Section | What they are |
+|---|---|---|
+| `CHIP-01` – `CHIP-14` | Epoch AI — Published Visualizations | Epoch's own configurable figure at each of its distinct settings: the four tabs (Total cost, Logic, Packaging, Memory) crossed with colour by component or designer, absolute or share, quarterly or annual, running or cumulative |
+| `CHIP-D01` – `CHIP-D06` | Derived Analysis | Questions the explorer's settings cannot answer — the three components on one axis, component mix by designer, chip-level concentration, the published uncertainty, packaging intensity, and demand growth against supply growth |
+
+Two rules hold across all 20:
+
+- **Complete quarters only.** The download runs to Q1 2026, but that quarter
+  carries 3 designers of 5 and 7 chip types of 17, with no supply denominator.
+  Charting it would show a collapse in demand that is missing coverage, not a
+  fall. The window is Q1 2024 – Q4 2025, which is also the range Epoch's own
+  chart covers. The excluded rows are counted in `chip_summary.csv`.
+- **Nothing is projected.** Epoch's own *Project trend* control is disabled at
+  source, and no value here is extrapolated, imputed or filled.
+
+Every quantity is published as a 5th percentile, median and 95th percentile,
+because Epoch's figures come out of a 10,000-draw Monte Carlo. All three are
+carried through `summarise_epoch_chip_components.py`; the charts plot medians and
+`CHIP-D04` plots the intervals. Medians do not add — Epoch simulates each
+aggregation separately — so each chart reads the file published at its own grain,
+and the two measured divergences (0.71% across grain, 0.44% across quarters) are
+recorded in `chip_summary.csv` and stated on the charts that are affected.
+
+```bash
+python build/summarise_epoch_chip_components.py   # raw CSVs → derived series
+python build/generate_charts.py CHIP-01 …          # derived series → SVG + PNG
+python build/build_site.py                         # → ai-chip-components/index.html
+```
+
+---
+
+## AI Models
+
+Epoch AI's record of the models themselves — how much compute, data, money, time
+and power went into training each one, who built it, and how it was released.
+Source: [Epoch AI, Data on AI Models](https://epoch.ai/data/ai-models) (CC-BY),
+four releases downloaded into `ai_models/`:
+
+| File | Models | What it is |
+|---|---|---|
+| `notable_ai_models.csv` | 1,043 | Epoch's notability threshold: a state-of-the-art result, over 1,000 citations, historical significance or significant use |
+| `frontier_ai_models.csv` | 137 | Top 10 by training compute at the time of release |
+| `large_scale_ai_models.csv` | 524 | Trained with more than 1e23 FLOP — the threshold used in several regulatory frameworks |
+| `all_ai_models.csv` | 3,574 | The full database, notable or not |
+
+**24 charts**, in two sections:
+
+| IDs | Section | What they are |
+|---|---|---|
+| `MODELS-01` – `MODELS-13` | Epoch AI — Published Visualizations | Epoch publishes one configurable figure: a metric against publication date, over a chosen release, optionally coloured by domain, organization or country. These are that figure at each of its settings — four releases, six metrics, three colourings, plus the metric-against-metric view |
+| `MODELS-D01` – `MODELS-D11` | Derived Analysis | Questions the published figure does not answer — doubling times by metric, where models come from, who builds them, industry against academia, how weights are released, training hardware by year, chips per run, cost against compute, hardware price-performance, domain mix, and what the record actually contains |
+
+One rule holds across all 24, and it is the reason the plotted count differs from
+chart to chart:
+
+> **A model appears in a chart only where Epoch records the value being plotted.**
+> Training compute is recorded for 534 of the 1,043 notable models, cost for 180.
+> The other rows are absent from those charts — never imputed, back-filled, or
+> carried across from a related model. Every chart states its own n against the
+> release total, and `MODELS-D11` plots the coverage of every field directly.
+
+Multi-valued fields (Domain, Country, Organization categorization) list one entry
+per contributing organisation and are collapsed by de-duplication, never by
+picking a winner: one distinct value keeps it, several become `Multinational` or
+`Industry-academia collaboration`, and a model tagged `Multimodal` is counted
+there rather than under each component domain.
+
+Trend lines are fitted by ordinary least squares through log10 of the metric
+against publication date, over the deep learning era (2010 onward) and over the
+plotted points only. Each is drawn with its n and r² on the chart face, is never
+extended past the last observation, and is refused entirely below 12 points. The
+frontier fit reproduces Epoch's published finding: 4.6× per year, doubling every
+5.4 months, r² = 0.97.
+
+`MODELS-01` to `MODELS-05` and `MODELS-13` also ship an interactive companion —
+hover a point to identify the model, click a legend entry to drop that group —
+generated by `generate_interactive_models.py` and checked end to end by
+`verify_interactive_models.mjs`.
+
+```bash
+python build/summarise_epoch_models.py        # ai_models/*.csv → ai-models/data/
+python build/generate_charts.py MODELS-01 …   # derived tables → SVG + PNG
+python build/generate_interactive_models.py   # → self-contained MODELS-NN.html
+python build/build_site.py                    # → ai-models/index.html
+node build/verify_interactive_models.mjs      # optional, needs jsdom
+```
+
+The four raw Epoch CSVs stay out of the repository, as with every other working
+dataset here; `ai-models/data/` carries the derived tables the charts read,
+including one row per model with every plotted value, so any figure can be
+checked without the download. To rebuild from source, put the four files back in
+`ai_models/` from the link above.
+
+---
+
 ## Structure
 
 ```

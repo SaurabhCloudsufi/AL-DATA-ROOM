@@ -89,5 +89,16 @@
 </footer>
 
 </div>
+<script>
+// embedded charts post their rendered height; without this the iframe would
+// either clip the legend or leave a gap at some widths
+addEventListener('message', function (ev) {
+  var d = ev.data;
+  if (!d || d.type !== 'aidr-height' || !d.id) return;
+  var f = document.querySelector('iframe.live[src="charts/' + d.id + '.html"]');
+  // ignore implausible measurements rather than collapsing the frame to a sliver
+  if (f && d.h > 200 && d.h < 4000) f.style.height = d.h + 'px';
+});
+</script>
 </body>
 </html>

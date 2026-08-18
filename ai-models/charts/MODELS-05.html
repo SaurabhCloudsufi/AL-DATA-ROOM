@@ -1,0 +1,229 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training compute of frontier AI models</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; }
+  #pg { padding:14px 16px 10px; background:#fff; color:#1a1a1a;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  body { background:#fff; color:#1a1a1a; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+         font-size:12px; border:0; background:none; padding:2px 3px; color:#1a1a1a; }
+  .lg .sw { width:11px; height:11px; border-radius:999px; flex:none; }
+  .lg[aria-pressed="true"] { opacity:.32; text-decoration:line-through; }
+  .lg:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .era { fill:#1f3864; opacity:.045; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px; box-shadow:0 4px 14px rgba(0,0,0,.10);
+          opacity:0; transition:opacity .08s; max-width:290px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">MODELS-05</span><h1>Training compute of frontier AI models</h1></div>
+<div class="sub">126 of 137 models in frontier_ai_models.csv record this value; the rest are absent. <span class="badge">RECORDED VALUES ONLY</span></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" viewBox="0 0 1000 520" role="img" aria-label="Training compute of frontier AI models"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Hover a point to identify the model; click a legend entry to remove that
+group. Source: Epoch AI, Data on AI Models (CC-BY) — frontier_ai_models.csv. Only models that record the
+plotted value appear; nothing is imputed.</div>
+</div>
+<script>
+const D = {"pts":[[1950.4983,40.0,0,"Theseus","Bell Laboratories","1950-07-02"],[1957.0,694894.9377361819,0,"Perceptron Mark I","Cornell Aeronautical Laboratory","1957-01-01"],[1959.0849,600000000.0,0,"Pandemonium (morse)","Massachusetts Institute of Technology (MIT)","1959-02-01"],[1959.4956,428400000.0,0,"Samuel Neural Checkers","IBM","1959-07-01"],[1960.2437,720000000.0,0,"Perceptron (1960)","Cornell Aeronautical Laboratory","1960-03-30"],[1960.4956,6600.0,0,"ADALINE","Stanford University","1960-06-30"],[1962.4134,1559250.0,0,"Linear Decision Functions","Bell Laboratories","1962-06-01"],[1963.0,22500000.0,0,"Print Recognition Logic","IBM","1963-01-01"],[1966.8323,105917060.0,0,"LTE speaker verification system","IBM","1966-11-01"],[1980.2491,273738240.0,0,"Neocognitron","NHK Broadcasting Science Research Laboratories","1980-04-01"],[1983.6653,324000000.0,0,"ASE+ACE","University of Massachusetts Amherst","1983-09-01"],[1986.6188,388800000.0,0,"Distributed representation NN","Carnegie Mellon University (CMU)","1986-08-15"],[1986.7474,673920000.0,0,"MLP with back-propagation","University of California San Diego","1986-10-01"],[1987.4271,27664065000.0,0,"NetTalk (dictionary)","Princeton University","1987-06-06"],[1987.4271,28328002560.0,0,"NetTalk (transcription)","Princeton University","1987-06-06"],[1987.4517,18032947200.0,0,"Translation-invariant MLP","Carnegie Mellon University (CMU)","1987-06-15"],[1989.46,27000000000.0,0,"Invariant image recognition","Complutense University of Madrid","1989-06-18"],[1989.9035,181440000000.0,0,"Handwritten digit recognition network","AT&T","1989-11-27"],[1989.9144,1496338054440.0,0,"Zip CNN","AT&T","1989-12-01"],[1990.4134,35811936000.0,0,"NETtalk reimplementation","Oregon State University","1990-06-01"],[1990.7474,78775200000.0,0,"SexNet compression","Organization not recorded","1990-10-01"],[1991.9172,75474000000.0,0,"Weight Decay","Organization not recorded","1991-12-02"],[1992.3313,18232157622832.703,0,"TD-Gammon","IBM","1992-05-01"],[1993.5804,12869570138112.0,0,"Siamese-TDNN","Bell Laboratories","1993-08-01"],[1994.9172,858730812676.0,0,"NeuroChess","Organization not recorded","1994-12-02"],[1994.9172,18621900000000.0,0,"Predictive Coding NN","Technical University of Munich","1994-12-02"],[1996.4216,881733600000.0,0,"MUSIC perceptron","Organization not recorded","1996-06-03"],[1997.8706,31512000000000.0,0,"LSTM","Technical University of Munich","1997-11-15"],[1998.8323,2810937600000.0,0,"LeNet-5","AT&T","1998-11-01"],[1999.4162,8013600000000.0,0,"RECONTRA-categorized","Organization not recorded","1999-06-02"],[2000.909,6339000000000000.0,0,"Neural LM","University of Montreal / Universit\u00e9 de Montr\u00e9al","2000-11-28"],[2000.909,51810000000000.0,0,"PoE MNIST","University College London (UCL)","2000-11-28"],[2001.9336,63000000000000.0,0,"Decision tree (classification)","Mitsubishi Electric Research Labs","2001-12-08"],[2003.1999,1666869200000000.0,0,"NPLM (AP News)","University of Montreal / Universit\u00e9 de Montr\u00e9al","2003-03-15"],[2003.1999,132076260000000.0,0,"NPLM (Brown)","University of Montreal / Universit\u00e9 de Montr\u00e9al","2003-03-15"],[2004.9172,2782080000000000.0,0,"LMICA","Organization not recorded","2004-12-01"],[2005.0137,115848000000000.0,0,"Hierarchical LM","Organization not recorded","2005-01-06"],[2006.4572,745200000000000.0,0,"SVM-CNN","New York University (NYU)","2006-06-17"],[2007.4709,7.7303808e+17,0,"KN-LM","Google","2007-06-22"],[2007.4709,1.4494464e+18,0,"SB-LM","Google","2007-06-22"],[2009.8898,3295150080000000.0,0,"LCNP LabelMe","University of Bonn","2009-11-22"],[2009.8898,4181852160000000.0,0,"LCNP MNIST","Organization not recorded","2009-11-22"],[2010.7337,1.7e+16,0,"KN5 LM + RNN 400/10 (WSJ)","Brno University of Technology","2010-09-26"],[2010.7337,5e+16,0,"RNN 1000/5 + RT09 LM (NIST RT05)","Brno University of Technology","2010-09-26"],[2010.7337,5.396e+16,0,"RNN LM","Johns Hopkins University","2010-09-26"],[2011.3231,3.672864e+16,0,"Deep Autoencoders","University of Toronto","2011-04-29"],[2011.7118,5.2e+16,0,"CNN Committee (MNIST)","IDSIA","2011-09-18"],[2012.4216,2.731968e+17,0,"Dropout (ImageNet)","University of Toronto","2012-06-03"],[2012.5284,6e+17,0,"Unsupervised High-level Feature Learner","Google","2012-07-12"],[2012.7474,4.7e+17,0,"AlexNet","University of Toronto","2012-09-30"],[2012.9227,4.78e+17,0,"DNN EM segmentation","IDSIA","2012-12-03"],[2013.0411,2.612736e+18,0,"DistBelief NNLM","Google","2013-01-16"],[2013.8624,5.32e+17,0,"Visualizing CNNs","New York University (NYU)","2013-11-12"],[2013.9254,1.340928e+18,0,"TransE","Universite de Technologie de Compi\u00e8gne \u2013 CNRS","2013-12-05"],[2014.46,3.411072e+18,0,"SPPNet","Microsoft","2014-06-18"],[2014.6653,1.5552e+18,0,"RNNsearch-50*","Jacobs University Bremen","2014-09-01"],[2014.6735,1.2291e+19,0,"VGG16","University of Oxford","2014-09-04"],[2014.6735,1.1e+19,0,"VGG19","University of Oxford","2014-09-04"],[2014.6899,5.6e+19,0,"Seq2Seq LSTM","Google","2014-09-10"],[2014.9199,2.97600000001e+20,0,"SNM-skip","Google","2014-12-03"],[2015.0986,2.397403008e+19,0,"MSRA (C, PReLU)","Microsoft Research","2015-02-06"],[2015.7474,3.8e+20,0,"AlphaGo Fan","DeepMind","2015-10-01"],[2015.8214,1.231108125e+19,0,"SAF R-CNN","Beijing Institute of Technology","2015-10-28"],[2015.9172,1e+20,0,"Inception v3","Google","2015-12-02"],[2015.9336,2.6e+19,0,"DeepSpeech2 (English)","Baidu Research - Silicon Valley AI Lab","2015-12-08"],[2016.0712,1.9e+21,0,"AlphaGo Lee","DeepMind","2016-01-27"],[2016.1123,1.0220883e+20,0,"BIG LSTM+CNN INPUTS","Google Brain","2016-02-11"],[2016.7365,6.620000000001e+21,0,"GNMT","Google","2016-09-26"],[2016.7666,4.36e+20,0,"Xception","Google","2016-10-07"],[2016.846,2.2e+21,0,"NASv3 (CIFAR-10)","Google Brain","2016-11-05"],[2017.5202,8.43e+20,0,"JFT","Google Research","2017-07-10"],[2017.6078,6.046095222592002e+20,0,"OpenAI TI7 DOTA 1v1","OpenAI","2017-08-11"],[2017.794,6.49439910290227e+20,0,"AlphaGo Zero","DeepMind","2017-10-18"],[2018.3313,8.74395e+21,0,"ResNeXt-101 32x48d","Facebook","2018-05-02"],[2018.7392,1.8e+21,0,"BigGAN-deep 512x512","Heriot-Watt University","2018-09-28"],[2019.1205,2.272000000071e+21,0,"GPT-2 (355M)","OpenAI","2019-02-14"],[2019.1205,4.9536e+21,0,"GPT-2 (774M)","OpenAI","2019-02-14"],[2019.4052,4.6386183e+21,0,"Grover-Mega","University of Washington","2019-05-29"],[2019.4134,6.19e+21,0,"XLNet","Carnegie Mellon University (CMU)","2019-06-01"],[2019.4956,8.5067e+21,0,"RoBERTa Large","Facebook","2019-07-01"],[2019.7091,2.2e+22,0,"Megatron-BERT","NVIDIA","2019-09-17"],[2019.7091,9.1e+21,0,"Megatron-LM (8.3B)","NVIDIA","2019-09-17"],[2019.8077,3.3e+22,0,"T5-11B","Google","2019-10-23"],[2019.8077,9.0000000001e+21,0,"T5-3B","Google","2019-10-23"],[2019.8268,1.0773400001e+23,0,"AlphaStar","DeepMind","2019-10-30"],[2019.8433,2.076e+22,0,"XLM-RoBERTa","Facebook AI","2019-11-05"],[2019.8597,2.612e+22,0,"Noisy Student (L2)","Carnegie Mellon University (CMU)","2019-11-11"],[2019.9473,6.7e+22,0,"OpenAI Five","OpenAI","2019-12-13"],[2020.0739,1.12e+23,0,"Meena","Google Brain","2020-01-28"],[2020.4052,3.14e+23,0,"GPT-3 175B (davinci)","OpenAI","2020-05-28"],[2020.46,3.3e+22,0,"iGPT-XL","OpenAI","2020-06-17"],[2020.4956,4.765e+22,0,"GShard (dense)","Google","2020-06-30"],[2020.8022,8.2e+22,0,"mT5-XXL","Google","2020-10-20"],[2021.0274,8.22e+22,0,"Switch","Google","2021-01-11"],[2021.4107,1.54350000000001e+24,0,"Wu Dao 2.0","Beijing Academy of Artificial Intelligence / BAAI","2021-05-31"],[2021.6078,3.7e+23,0,"Jurassic-1-Jumbo","AI21 Labs","2021-08-11"],[2021.6708,2.047e+24,0,"FLAN 137B","Google Research","2021-09-03"],[2021.6899,2.0000000001e+23,0,"HyperCLOVA 204B","NAVER","2021-09-10"],[2021.7748,8.586e+23,0,"Megatron-Turing NLG 530B","Microsoft","2021-10-11"],[2021.7775,3.5380000000001e+23,0,"Yuan 1.0","Inspur","2021-10-12"],[2021.9336,6.31e+23,0,"Gopher (280B)","DeepMind","2021-12-08"],[2021.95,1.6956e+24,0,"EXAONE 1.0","LG","2021-12-14"],[2021.9747,1.0421e+24,0,"ERNIE 3.0 Titan","Baidu","2021-12-23"],[2022.1999,2.578e+24,0,"GPT-3.5 (davinci-002)","OpenAI","2022-03-15"],[2022.2546,2.5272e+24,0,"PaLM (540B)","Google Research","2022-04-04"],[2022.4901,2.7415e+24,0,"Minerva (540B)","Google","2022-06-29"],[2022.7995,2.540000000001e+24,0,"Flan-PaLM 540B","Google","2022-10-20"],[2022.7995,2.53e+24,0,"U-PaLM (540B)","Google","2022-10-20"],[2023.1999,2.1e+25,0,"GPT-4 (Mar 2023)","OpenAI","2023-03-15"],[2023.271,3.89e+24,0,"SenseChat","SenseTime","2023-04-10"],[2023.3532,7.34e+24,0,"PaLM 2","Google","2023-05-10"],[2023.4463,2.1e+25,0,"GPT-4 (Jun 2023)","OpenAI","2023-06-13"],[2023.5229,3.866e+24,0,"Claude 2","Anthropic","2023-07-11"],[2023.679,3.76e+24,0,"Falcon-180B","Technology Innovation Institute","2023-09-06"],[2023.7392,4.7999999999999996e+24,0,"Amazon Titan","Amazon","2023-09-28"],[2023.8898,1.001e+25,0,"Inflection-2","Inflection AI","2023-11-22"],[2023.9281,5.0000000001e+25,0,"Gemini 1.0 Ultra","Google DeepMind","2023-12-06"],[2024.4517,1.7999999999999999e+25,0,"Nemotron-4 340B","NVIDIA","2024-06-14"],[2024.4682,2.700000000000001e+25,0,"Claude 3.5 Sonnet","Anthropic","2024-06-20"],[2024.5585,3.8e+25,0,"Llama 3.1-405B","Meta AI","2024-07-23"],[2024.616,2.9599999999999996e+25,0,"Grok-2","xAI","2024-08-13"],[2025.1287,3.5000000000000006e+26,0,"Grok 3","xAI","2025-02-17"],[2025.1561,3.8e+26,0,"GPT-4.5","OpenAI","2025-02-27"],[2025.2081,3.911001e+25,0,"Llama Nemotron Ultra 253B","NVIDIA","2025-03-18"],[2025.2574,5.18400000000001e+25,0,"Llama 4 Behemoth (preview)","Meta AI","2025-04-05"],[2025.5175,5.0000000000001e+26,0,"Grok 4","xAI","2025-07-09"]],"groups":[{"name":"Recorded models","color":"#1f3864","n":126}],"logX":false,"fit":[2010.7337440109513,2025.517453798768,0.6647555498417368,-1320.195936008419],"yLabel":"Training compute (FLOP)","yUnit":"pow10","xLabel":"Publication date"};
+
+function decadeTicks(lo, hi, target) {
+  const a = Math.floor(Math.log10(lo)), b = Math.ceil(Math.log10(hi));
+  if (b - a < 3) {
+    const out = [];
+    for (let e = a; e <= b; e++) for (const m of [1, 2, 5]) {
+      const v = m * Math.pow(10, e);
+      if (v >= lo / 1.6 && v <= hi * 1.6) out.push(v);
+    }
+    return out;
+  }
+  const stride = Math.max(1, Math.ceil((b - a + 1) / target));
+  const out = [];
+  for (let e = a; e <= b; e++) if ((b - e) % stride === 0) out.push(Math.pow(10, e));
+  return out;
+}
+
+function geometry(D, hidden, W, H, M) {
+  const shown = [];
+  for (let i = 0; i < D.pts.length; i++) if (!hidden.has(D.pts[i][2])) shown.push(i);
+  const xs = shown.map(i => D.pts[i][0]), ys = shown.map(i => D.pts[i][1]);
+  const yLo = Math.min.apply(null, ys), yHi = Math.max.apply(null, ys);
+  let xLo = Math.min.apply(null, xs), xHi = Math.max.apply(null, xs);
+  const sy = v => H - M.b - (Math.log10(v) - Math.log10(yLo))
+                  / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b);
+  let sx;
+  if (D.logX) {
+    sx = v => M.l + (Math.log10(v) - Math.log10(xLo))
+              / (Math.log10(xHi) - Math.log10(xLo) || 1) * (W - M.l - M.r);
+  } else {
+    const pad = (xHi - xLo) * 0.03;
+    xLo -= pad; xHi += pad;
+    sx = v => M.l + (v - xLo) / (xHi - xLo || 1) * (W - M.l - M.r);
+  }
+  return {
+    shown, sx, sy, xLo, xHi, yLo, yHi,
+    yTicks: decadeTicks(yLo, yHi, 8),
+    xTicks: D.logX ? decadeTicks(xLo, xHi, 8) : yearTicks(xLo, xHi),
+  };
+}
+
+function yearTicks(lo, hi) {
+  const span = hi - lo;
+  const step = span > 45 ? 10 : span > 18 ? 5 : span > 8 ? 2 : 1;
+  const out = [];
+  for (let y = Math.ceil(lo / step) * step; y <= hi; y += step) out.push(y);
+  return out;
+}
+
+function nearest(D, G, px, py, limit) {
+  let best = -1, bestD = limit * limit;
+  for (const i of G.shown) {
+    const dx = G.sx(D.pts[i][0]) - px, dy = G.sy(D.pts[i][1]) - py;
+    const d = dx * dx + dy * dy;
+    if (d < bestD) { bestD = d; best = i; }
+  }
+  return best;
+}
+
+const W=1000, H=520, M={l:82,r:18,t:16,b:52};
+const svg=document.getElementById('c'), tip=document.getElementById('tip'), lgw=document.getElementById('lg');
+const hidden=new Set();
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const SUP={'-':'\u207B','0':'\u2070','1':'\u00B9','2':'\u00B2','3':'\u00B3','4':'\u2074',
+           '5':'\u2075','6':'\u2076','7':'\u2077','8':'\u2078','9':'\u2079'};
+const sup=n=>String(n).split('').map(c=>SUP[c]||c).join('');
+function fmtLog(v){
+  const e=Math.round(Math.log10(v));
+  if(Math.abs(Math.log10(v)-e)<1e-9) return '10'+sup(e);
+  const f=Math.floor(Math.log10(v)), m=v/Math.pow(10,f);
+  return (Math.round(m*10)/10)+'\u00D7'+'10'+sup(f);
+}
+function fmtY(v){ return D.yUnit==='count' ? human(v) : fmtLog(v); }
+function human(v){
+  for(const [c,u] of [[1e12,'T'],[1e9,'B'],[1e6,'M'],[1e3,'k']])
+    if(v>=c) return (v/c).toLocaleString('en-US',{maximumFractionDigits:0})+u;
+  return v.toLocaleString('en-US',{maximumFractionDigits:0});
+}
+function fmtX(v){ return D.logX ? fmtLog(v) : String(Math.round(v)); }
+
+function drawLegend(){
+  lgw.innerHTML='';
+  if(D.groups.length<2) return;
+  D.groups.forEach((g,i)=>{
+    const b=document.createElement('button');
+    b.className='lg'; b.type='button';
+    b.setAttribute('aria-pressed', hidden.has(i)?'true':'false');
+    b.innerHTML='<span class="sw" style="background:'+g.color+'"></span>'+g.name+' ('+g.n+')';
+    // toggle in place rather than rebuilding the legend, so focus and the
+    // pressed state survive the click
+    b.onclick=()=>{
+      if(hidden.has(i)) hidden.delete(i);
+      else if(hidden.size < D.groups.length-1) hidden.add(i);
+      else return;                       // never leave the chart with nothing on it
+      b.setAttribute('aria-pressed', hidden.has(i)?'true':'false');
+      draw();
+    };
+    lgw.appendChild(b);
+  });
+}
+
+let G=null;
+function draw(){
+  G=geometry(D,hidden,W,H,M);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+  if(!D.logX && G.xLo < 2010){
+    const x=Math.max(M.l,G.sx(2010));
+    svg.appendChild(el('rect',{x:x,y:M.t,width:(W-M.r)-x,height:H-M.b-M.t,class:'era'}));
+    const t=el('text',{x:x+6,y:M.t+12,class:'axis'}); t.textContent='Deep learning era';
+    svg.appendChild(t);
+  }
+  G.yTicks.forEach(v=>{
+    const y=G.sy(v);
+    if(y<M.t-1||y>H-M.b+1) return;
+    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y,y2:y,class:'grid'}));
+    const t=el('text',{x:M.l-8,y:y+4,class:'axis','text-anchor':'end'});
+    t.textContent=fmtY(v); svg.appendChild(t);
+  });
+  G.xTicks.forEach(v=>{
+    const x=G.sx(v);
+    if(x<M.l-1||x>W-M.r+1) return;
+    svg.appendChild(el('line',{x1:x,x2:x,y1:M.t,y2:H-M.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-M.b+18,class:'axis','text-anchor':'middle'});
+    t.textContent=fmtX(v); svg.appendChild(t);
+  });
+  const xl=el('text',{x:(M.l+W-M.r)/2,y:H-M.b+40,class:'axlab','text-anchor':'middle'});
+  xl.textContent=D.xLabel; svg.appendChild(xl);
+  const yl=el('text',{x:0,y:0,class:'axlab','text-anchor':'middle',
+                      transform:'translate(16,'+((M.t+H-M.b)/2)+') rotate(-90)'});
+  yl.textContent=D.yLabel; svg.appendChild(yl);
+
+  G.shown.forEach(i=>{
+    const p=D.pts[i];
+    svg.appendChild(el('circle',{cx:G.sx(p[0]).toFixed(2),cy:G.sy(p[1]).toFixed(2),r:3.6,
+      fill:D.groups[p[2]].color,stroke:'#fff','stroke-width':.6,'fill-opacity':.85}));
+  });
+  if(D.fit && !D.logX){
+    const [x0,x1,slope,icept]=D.fit;
+    svg.appendChild(el('line',{x1:G.sx(x0),y1:G.sy(Math.pow(10,slope*x0+icept)),
+      x2:G.sx(x1),y2:G.sy(Math.pow(10,slope*x1+icept)),stroke:'#b4763a','stroke-width':2.2}));
+  }
+  const hl=el('circle',{id:'hl',r:6.5,fill:'none',stroke:'#1a1a1a','stroke-width':1.6,
+                        cx:-99,cy:-99}); svg.appendChild(hl);
+}
+
+function move(ev){
+  if(!G) return;
+  const r=svg.getBoundingClientRect();
+  const px=(ev.clientX-r.left)/r.width*W, py=(ev.clientY-r.top)/r.height*H;
+  const i=nearest(D,G,px,py,14);
+  const hl=document.getElementById('hl');
+  if(i<0){ tip.style.opacity=0; hl.setAttribute('cx',-99); return; }
+  const p=D.pts[i];
+  hl.setAttribute('cx',G.sx(p[0])); hl.setAttribute('cy',G.sy(p[1]));
+  tip.innerHTML='<b>'+p[3]+'</b><div class="m">'+p[4]+' &middot; '+p[5]+'</div>'
+    +'<div>'+D.yLabel+': '+fmtY(p[1])+'</div>'
+    +(D.logX?'<div>'+D.xLabel+': '+fmtLog(p[0])+'</div>':'');
+  tip.style.opacity=1;
+  const left=G.sx(p[0])/W*r.width, top=G.sy(p[1])/H*r.height;
+  tip.style.left=Math.min(Math.max(8,left+14), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top=Math.min(Math.max(8,top-10), r.height-tip.offsetHeight-8)+'px';
+}
+// pointer events rather than mouse events, so touch reads the same as hover
+svg.addEventListener('pointermove',move);
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
+  const hl=document.getElementById('hl'); if(hl) hl.setAttribute('cx',-99);});
+drawLegend(); draw();
+
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'MODELS-05',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>

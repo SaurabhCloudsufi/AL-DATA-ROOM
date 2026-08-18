@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="604.8pt" viewBox="0 0 864 604.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 604.8 
+L 864 604.8 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 70.848 372.5568 
+L 665.28 372.5568 
+L 665.28 140.9184 
+L 70.848 140.9184 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="ma3a00a99b0" d="M 0 0 
+L 0 3.5 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="114.343024" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(107.652868 387.639515)">Q1</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(102.381524 398.921351)">2024</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="186.834732" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(180.144575 387.639515)">Q2</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(174.873232 398.921351)">2024</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="259.326439" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(252.636283 387.639515)">Q3</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(247.364939 398.921351)">2024</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="331.818146" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(325.12799 387.639515)">Q4</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(319.856646 398.921351)">2024</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="404.309854" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(397.619697 387.639515)">Q1</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(392.348354 398.921351)">2025</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="476.801561" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(470.111405 387.639515)">Q2</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(464.840061 398.921351)">2025</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="549.293268" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(542.603112 387.639515)">Q3</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(537.331768 398.921351)">2025</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="621.784976" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(615.094819 387.639515)">Q4</text>
+      <text style="font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(609.823476 398.921351)">2025</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="368.064" y="413.718128" transform="rotate(-0 368.064 413.718128)">Quarter</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_9">
+      <path d="M 70.848 372.5568 
+L 665.28 372.5568 
+" clip-path="url(#p52e5b99d91)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <defs>
+       <path id="mdfe75e7a28" d="M 0 0 
+L -3.5 0 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="70.848" y="372.5568" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="63.848" y="376.356019" transform="rotate(-0 63.848 376.356019)">$0bn</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_11">
+      <path d="M 70.848 314.02359 
+L 665.28 314.02359 
+" clip-path="url(#p52e5b99d91)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="70.848" y="314.02359" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="63.848" y="317.822809" transform="rotate(-0 63.848 317.822809)">$5bn</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_13">
+      <path d="M 70.848 255.49038 
+L 665.28 255.49038 
+" clip-path="url(#p52e5b99d91)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="70.848" y="255.49038" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="63.848" y="259.289599" transform="rotate(-0 63.848 259.289599)">$10bn</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_15">
+      <path d="M 70.848 196.95717 
+L 665.28 196.95717 
+" clip-path="url(#p52e5b99d91)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="70.848" y="196.95717" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="63.848" y="200.756389" transform="rotate(-0 63.848 200.756389)">$15bn</text>
+     </g>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="25.672219" y="256.7376" transform="rotate(-90 25.672219 256.7376)">Component cost (US$ billions)</text>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 70.848 372.5568 
+L 70.848 140.9184 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 70.848 372.5568 
+L 665.28 372.5568 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 89.695844 372.5568 
+L 138.990205 372.5568 
+L 138.990205 367.199081 
+L 89.695844 367.199081 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 162.187551 372.5568 
+L 211.481912 372.5568 
+L 211.481912 365.746809 
+L 162.187551 365.746809 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 234.679259 372.5568 
+L 283.97362 372.5568 
+L 283.97362 362.919374 
+L 234.679259 362.919374 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 307.170966 372.5568 
+L 356.465327 372.5568 
+L 356.465327 358.172796 
+L 307.170966 358.172796 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 379.662673 372.5568 
+L 428.957034 372.5568 
+L 428.957034 356.062205 
+L 379.662673 356.062205 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 452.15438 372.5568 
+L 501.448741 372.5568 
+L 501.448741 354.893046 
+L 452.15438 354.893046 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 524.646088 372.5568 
+L 573.940449 372.5568 
+L 573.940449 350.470968 
+L 524.646088 350.470968 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 597.137795 372.5568 
+L 646.432156 372.5568 
+L 646.432156 346.308119 
+L 597.137795 346.308119 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 89.695844 367.199081 
+L 138.990205 367.199081 
+L 138.990205 360.051217 
+L 89.695844 360.051217 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 162.187551 365.746809 
+L 211.481912 365.746809 
+L 211.481912 356.66769 
+L 162.187551 356.66769 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 234.679259 362.919374 
+L 283.97362 362.919374 
+L 283.97362 350.349397 
+L 234.679259 350.349397 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 307.170966 358.172796 
+L 356.465327 358.172796 
+L 356.465327 340.44431 
+L 307.170966 340.44431 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 379.662673 356.062205 
+L 428.957034 356.062205 
+L 428.957034 336.211664 
+L 379.662673 336.211664 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 452.15438 354.893046 
+L 501.448741 354.893046 
+L 501.448741 333.815515 
+L 452.15438 333.815515 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 524.646088 350.470968 
+L 573.940449 350.470968 
+L 573.940449 324.22193 
+L 524.646088 324.22193 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 597.137795 346.308119 
+L 646.432156 346.308119 
+L 646.432156 316.18274 
+L 597.137795 316.18274 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 89.695844 360.051217 
+L 138.990205 360.051217 
+L 138.990205 340.386308 
+L 89.695844 340.386308 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 162.187551 356.66769 
+L 211.481912 356.66769 
+L 211.481912 329.587521 
+L 162.187551 329.587521 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 234.679259 350.349397 
+L 283.97362 350.349397 
+L 283.97362 311.135815 
+L 234.679259 311.135815 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 307.170966 340.44431 
+L 356.465327 340.44431 
+L 356.465327 284.150233 
+L 307.170966 284.150233 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 379.662673 336.211664 
+L 428.957034 336.211664 
+L 428.957034 271.354521 
+L 379.662673 271.354521 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_26">
+    <path d="M 452.15438 333.815515 
+L 501.448741 333.815515 
+L 501.448741 260.217913 
+L 452.15438 260.217913 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_27">
+    <path d="M 524.646088 324.22193 
+L 573.940449 324.22193 
+L 573.940449 222.131933 
+L 524.646088 222.131933 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_28">
+    <path d="M 597.137795 316.18274 
+L 646.432156 316.18274 
+L 646.432156 187.309914 
+L 597.137795 187.309914 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_29">
+    <path d="M 89.695844 340.386308 
+L 138.990205 340.386308 
+L 138.990205 334.678601 
+L 89.695844 334.678601 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_30">
+    <path d="M 162.187551 329.587521 
+L 211.481912 329.587521 
+L 211.481912 322.477898 
+L 162.187551 322.477898 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_31">
+    <path d="M 234.679259 311.135815 
+L 283.97362 311.135815 
+L 283.97362 302.454997 
+L 234.679259 302.454997 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_32">
+    <path d="M 307.170966 284.150233 
+L 356.465327 284.150233 
+L 356.465327 272.946637 
+L 307.170966 272.946637 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_33">
+    <path d="M 379.662673 271.354521 
+L 428.957034 271.354521 
+L 428.957034 257.09108 
+L 379.662673 257.09108 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_34">
+    <path d="M 452.15438 260.217913 
+L 501.448741 260.217913 
+L 501.448741 246.718139 
+L 452.15438 246.718139 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_35">
+    <path d="M 524.646088 222.131933 
+L 573.940449 222.131933 
+L 573.940449 205.935605 
+L 524.646088 205.935605 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_36">
+    <path d="M 597.137795 187.309914 
+L 646.432156 187.309914 
+L 646.432156 169.365221 
+L 597.137795 169.365221 
+z
+" clip-path="url(#p52e5b99d91)" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 8.3px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(674.19648 226.081853)">Epoch explorer settings</text>
+    <text style="font-size: 8.3px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(674.19648 239.750916)">Tab:  Total cost</text>
+    <text style="font-size: 8.3px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(674.19648 251.811853)">Colour by:  Component</text>
+    <text style="font-size: 8.3px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(674.19648 265.480916)">Show data as:  Absolute</text>
+    <text style="font-size: 8.3px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(674.19648 277.541853)">Show time as:  Quarterly</text>
+    <text style="font-size: 8.3px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(674.19648 291.210916)">Show cumulative:  no</text>
+    <text style="font-size: 8.3px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(674.19648 303.271853)">Project trend:  off (disabled at source)</text>
+   </g>
+   <g id="legend_1">
+    <g id="text_16">
+     <text style="font-size: 9.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="701.750746" y="151.508963" transform="rotate(-0 701.750746 151.508963)">Component</text>
+    </g>
+    <g id="patch_37">
+     <path d="M 677.79648 165.057713 
+L 691.29648 165.057713 
+L 691.29648 158.757713 
+L 677.79648 158.757713 
+z
+" style="fill: #9aa9c4; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="698.49648" y="165.057713" transform="rotate(-0 698.49648 165.057713)">Auxiliary</text>
+    </g>
+    <g id="patch_38">
+     <path d="M 677.79648 178.558416 
+L 691.29648 178.558416 
+L 691.29648 172.258416 
+L 677.79648 172.258416 
+z
+" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="698.49648" y="178.558416" transform="rotate(-0 698.49648 178.558416)">HBM memory</text>
+    </g>
+    <g id="patch_39">
+     <path d="M 677.79648 192.059119 
+L 691.29648 192.059119 
+L 691.29648 185.759119 
+L 677.79648 185.759119 
+z
+" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_19">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="698.49648" y="192.059119" transform="rotate(-0 698.49648 192.059119)">CoWoS packaging</text>
+    </g>
+    <g id="patch_40">
+     <path d="M 677.79648 205.559822 
+L 691.29648 205.559822 
+L 691.29648 199.259822 
+L 677.79648 199.259822 
+z
+" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.7; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_20">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="698.49648" y="205.559822" transform="rotate(-0 698.49648 205.559822)">Logic wafers</text>
+    </g>
+   </g>
+   <g id="text_21">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="114.343024" y="328.859043" transform="rotate(-0 114.343024 328.859043)">$3.2bn</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="186.834732" y="316.658341" transform="rotate(-0 186.834732 316.658341)">$4.3bn</text>
+   </g>
+   <g id="text_23">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="259.326439" y="296.635439" transform="rotate(-0 259.326439 296.635439)">$6.0bn</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="331.818146" y="267.12708" transform="rotate(-0 331.818146 267.12708)">$8.5bn</text>
+   </g>
+   <g id="text_25">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="404.309854" y="251.271522" transform="rotate(-0 404.309854 251.271522)">$9.9bn</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="476.801561" y="240.898581" transform="rotate(-0 476.801561 240.898581)">$10.7bn</text>
+   </g>
+   <g id="text_27">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="549.293268" y="200.116047" transform="rotate(-0 549.293268 200.116047)">$14.2bn</text>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="621.784976" y="163.545663" transform="rotate(-0 621.784976 163.545663)">$17.4bn</text>
+   </g>
+   <g id="text_29">
+    <g id="patch_41">
+     <path d="M 80.953344 164.264839 
+L 380.467047 164.264839 
+Q 384.289047 164.264839 384.289047 160.442839 
+L 384.289047 151.342128 
+Q 384.289047 147.520128 380.467047 147.520128 
+L 80.953344 147.520128 
+Q 77.131344 147.520128 77.131344 151.342128 
+L 77.131344 160.442839 
+Q 77.131344 164.264839 80.953344 164.264839 
+z
+" style="fill: #1f3864"/>
+    </g>
+    <text style="font-weight: 700; font-size: 9.1px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #ffffff" x="80.953344" y="158.256706" transform="rotate(-0 80.953344 158.256706)">  COMPLETE QUARTERS ONLY  ·  partial Q1 2026 excluded  </text>
+   </g>
+  </g>
+  <g id="line2d_17">
+   <path d="M 30.24 416.1024 
+L 833.76 416.1024 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linecap: square"/>
+  </g>
+  <g id="text_30">
+   <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #1f3864" x="30.24" y="24.911939" transform="rotate(-0 30.24 24.911939)">CHIP-01</text>
+  </g>
+  <g id="text_31">
+   <text style="font-weight: 700; font-size: 15.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="30.24" y="55.323178" transform="rotate(-0 30.24 55.323178)">Cost of AI chip components, by component</text>
+  </g>
+  <g id="text_32">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="79.116806" transform="rotate(-0 30.24 79.116806)">What it shows: Epoch AI's published figure at this setting — what the components inside those chips cost by the 4 tracked</text>
+  </g>
+  <g id="text_33">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="97.260806" transform="rotate(-0 30.24 97.260806)">AI chip designers (NVIDIA, Google, Amazon, AMD) in each quarter, rebuilt from the downloaded CSV. Q1 2024 to Q4 2025, the</text>
+  </g>
+  <g id="text_34">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="115.404806" transform="rotate(-0 30.24 115.404806)">full window the source covers.</text>
+  </g>
+  <g id="text_35">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="435.942656" transform="rotate(-0 30.24 435.942656)">Source: Epoch AI, AI Chip Components (CC-BY) — quarterly_by_designer.csv — epoch.ai/data/ai-chip-components</text>
+  </g>
+  <g id="text_36">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="451.667456" transform="rotate(-0 30.24 451.667456)">Methodology: Derivation follows Epoch AI's published AI Chip Components methodology; every figure is a Monte Carlo median over 10,000 draws</text>
+  </g>
+  <g id="text_37">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="467.240288" transform="rotate(-0 30.24 467.240288)">Note: Cost is the sum of the four published parts - logic wafers, CoWoS packaging, HBM and auxiliary - for the chips whose components were</text>
+  </g>
+  <g id="text_38">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="481.755488" transform="rotate(-0 30.24 481.755488)">      consumed in the quarter, not the price of the finished accelerator. "Other" - the rest of world supply - carries no AI chips and is</text>
+  </g>
+  <g id="text_39">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="496.270688" transform="rotate(-0 30.24 496.270688)">      excluded from every cost view here. Component totals are sums of the four designers' published medians. Epoch simulates each</text>
+  </g>
+  <g id="text_40">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="510.785888" transform="rotate(-0 30.24 510.785888)">      aggregation separately, so a median never adds exactly: the measured gap at the analogous grain is 0.71%. Reported, not reconciled.</text>
+  </g>
+  <g id="text_41">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="525.301088" transform="rotate(-0 30.24 525.301088)">      Every value is a Monte Carlo median; the published 5th-95th percentile range is wide and is charted separately in CHIP-D04. 3</text>
+  </g>
+  <g id="text_42">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="539.816288" transform="rotate(-0 30.24 539.816288)">      designer rows for Q1 2026 are excluded as partial - that quarter holds only AMD, Amazon, Google and would show a collapse in demand</text>
+  </g>
+  <g id="text_43">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="554.331488" transform="rotate(-0 30.24 554.331488)">      that is missing coverage, not a fall. Chip designers outside the tracked four (Meta, Microsoft, Tesla, Huawei and others) are not in</text>
+  </g>
+  <g id="text_44">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="568.846688" transform="rotate(-0 30.24 568.846688)">      the source at all.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p52e5b99d91">
+   <rect x="70.848" y="140.9184" width="594.432" height="231.6384"/>
+  </clipPath>
+ </defs>
+</svg>

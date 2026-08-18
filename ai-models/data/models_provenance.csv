@@ -1,0 +1,2 @@
+source,source_url,licence,files,latest_record_modified,latest_publication_date,imputation
+Epoch AI - Data on AI Models,https://epoch.ai/data/ai-models,CC-BY 4.0,notable_ai_models.csv + frontier_ai_models.csv + large_scale_ai_models.csv + all_ai_models.csv,2026-08-04,2026-07-31,none - a model is plotted for a metric only where Epoch records it

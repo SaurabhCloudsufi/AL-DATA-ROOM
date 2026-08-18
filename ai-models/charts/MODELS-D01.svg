@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="849.6pt" height="547.2pt" viewBox="0 0 849.6 547.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 547.2 
+L 849.6 547.2 
+L 849.6 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 216.648 386.8704 
+L 811.368 386.8704 
+L 811.368 127.4976 
+L 216.648 127.4976 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 216.648 386.8704 
+L 216.648 127.4976 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="ma3a00a99b0" d="M 0 0 
+L 0 3.5 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="216.648" y="386.8704" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="216.648" y="401.468056" transform="rotate(-0 216.648 401.468056)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 328.268193 386.8704 
+L 328.268193 127.4976 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="328.268193" y="386.8704" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="328.268193" y="401.468056" transform="rotate(-0 328.268193 401.468056)">5</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 439.888387 386.8704 
+L 439.888387 127.4976 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="439.888387" y="386.8704" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="439.888387" y="401.468056" transform="rotate(-0 439.888387 401.468056)">10</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 551.50858 386.8704 
+L 551.50858 127.4976 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="551.50858" y="386.8704" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="551.50858" y="401.468056" transform="rotate(-0 551.50858 401.468056)">15</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 663.128773 386.8704 
+L 663.128773 127.4976 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="663.128773" y="386.8704" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="663.128773" y="401.468056" transform="rotate(-0 663.128773 401.468056)">20</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 774.748967 386.8704 
+L 774.748967 127.4976 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="774.748967" y="386.8704" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="774.748967" y="401.468056" transform="rotate(-0 774.748967 401.468056)">25</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="514.008" y="415.468837" transform="rotate(-0 514.008 415.468837)">Doubling time (months), deep learning era fit</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13">
+      <path d="M 216.648 155.108911 
+L 811.368 155.108911 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14">
+      <defs>
+       <path id="mdfe75e7a28" d="M 0 0 
+L -3.5 0 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="216.648" y="155.108911" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="209.648" y="158.90813" transform="rotate(-0 209.648 158.90813)">Training compute (FLOP)</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_15">
+      <path d="M 216.648 206.146456 
+L 811.368 206.146456 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="216.648" y="206.146456" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="209.648" y="209.945674" transform="rotate(-0 209.648 209.945674)">Training dataset size</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_17">
+      <path d="M 216.648 257.184 
+L 811.368 257.184 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="216.648" y="257.184" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="209.648" y="260.983219" transform="rotate(-0 209.648 260.983219)">Training cost (2023 US$)</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_19">
+      <path d="M 216.648 308.221544 
+L 811.368 308.221544 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="216.648" y="308.221544" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="209.648" y="312.020372" transform="rotate(-0 209.648 312.020372)">Parameters</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_21">
+      <path d="M 216.648 359.259089 
+L 811.368 359.259089 
+" clip-path="url(#p0b92276dd0)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="216.648" y="359.259089" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: end; fill: #6b7280" x="209.648" y="363.058307" transform="rotate(-0 209.648 363.058307)">Training power draw</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 216.648 386.8704 
+L 216.648 127.4976 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 216.648 386.8704 
+L 811.368 386.8704 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 216.648 170.93055 
+L 344.356906 170.93055 
+L 344.356906 139.287273 
+L 216.648 139.287273 
+z
+" clip-path="url(#p0b92276dd0)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 216.648 221.968094 
+L 389.524981 221.968094 
+L 389.524981 190.324817 
+L 216.648 190.324817 
+z
+" clip-path="url(#p0b92276dd0)" style="fill: #b4763a; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 216.648 273.005639 
+L 437.539895 273.005639 
+L 437.539895 241.362361 
+L 216.648 241.362361 
+z
+" clip-path="url(#p0b92276dd0)" style="fill: #6b8f71; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 216.648 324.043183 
+L 453.262755 324.043183 
+L 453.262755 292.399906 
+L 216.648 292.399906 
+z
+" clip-path="url(#p0b92276dd0)" style="fill: #7d5a7d; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 216.648 375.080727 
+L 538.11827 375.080727 
+L 538.11827 343.43745 
+L 216.648 343.43745 
+z
+" clip-path="url(#p0b92276dd0)" style="fill: #4e8a8b; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="352.17032" y="157.499115" transform="rotate(-0 352.17032 157.499115)">5.7 months  ·  4.3× per year  ·  n=472  ·  r² = 0.65</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="397.338395" y="208.536659" transform="rotate(-0 397.338395 208.536659)">7.7 months  ·  2.9× per year  ·  n=567  ·  r² = 0.43</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="445.353309" y="259.574203" transform="rotate(-0 445.353309 259.574203)">9.9 months  ·  2.3× per year  ·  n=180  ·  r² = 0.36</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="461.076168" y="310.611747" transform="rotate(-0 461.076168 310.611747)">10.6 months  ·  2.2× per year  ·  n=634  ·  r² = 0.53</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 9.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="545.931684" y="361.649292" transform="rotate(-0 545.931684 361.649292)">14.4 months  ·  1.8× per year  ·  n=216  ·  r² = 0.27</text>
+   </g>
+  </g>
+  <g id="line2d_23">
+   <path d="M 29.736 433.3824 
+L 819.864 433.3824 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linecap: square"/>
+  </g>
+  <g id="text_18">
+   <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #1f3864" x="29.736" y="23.299139" transform="rotate(-0 29.736 23.299139)">MODELS-D01</text>
+  </g>
+  <g id="text_19">
+   <text style="font-weight: 700; font-size: 15.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="29.736" y="51.175978" transform="rotate(-0 29.736 51.175978)">Compute doubles twice as fast as the money and power behind it</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="72.320006" transform="rotate(-0 29.736 72.320006)">What it shows: how fast each measured quantity has doubled since 2010, fitted to the notable models that record it.</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="88.736006" transform="rotate(-0 29.736 88.736006)">Compute is not simply parameters multiplied by data — the three grow at visibly different rates, and the resources bought</text>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="105.152006" transform="rotate(-0 29.736 105.152006)">to produce it grow slower still.</text>
+  </g>
+  <g id="text_23">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="451.955456" transform="rotate(-0 29.736 451.955456)">Source: Epoch AI, Data on AI Models (CC-BY) — notable_ai_models.csv — epoch.ai/data/ai-models</text>
+  </g>
+  <g id="text_24">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="466.182656" transform="rotate(-0 29.736 466.182656)">Methodology: Methodology reference pending final methodology document; derivation follows Epoch AI's published AI models documentation</text>
+  </g>
+  <g id="text_25">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="480.257887" transform="rotate(-0 29.736 480.257887)">Note: Each fit is an ordinary least-squares line through log10 of the metric against publication date, over exactly the models that record</text>
+  </g>
+  <g id="text_26">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="493.390687" transform="rotate(-0 29.736 493.390687)">      that metric — a different subset for every bar, from 180 to 634 models, shown against each bar with its r². The r² values are low for</text>
+  </g>
+  <g id="text_27">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="506.523487" transform="rotate(-0 29.736 506.523487)">      cost and power, so those two doubling times describe a wide cloud, not a tight trend. Nothing is extrapolated past the last</text>
+  </g>
+  <g id="text_28">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="29.736" y="519.656287" transform="rotate(-0 29.736 519.656287)">      observation, and no missing value is filled: a model with no recorded cost is absent from the cost fit rather than assigned one.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p0b92276dd0">
+   <rect x="216.648" y="127.4976" width="594.72" height="259.3728"/>
+  </clipPath>
+ </defs>
+</svg>

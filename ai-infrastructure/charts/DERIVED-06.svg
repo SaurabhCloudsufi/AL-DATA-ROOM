@@ -815,7 +815,7 @@ L 819.864 467.5968
    <text style="fill: #6b7280; font: 10.2px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="29.736" y="95.129606" transform="rotate(-0 29.736 95.129606)">gap between the two is the rental market: labs run on capacity other companies built.</text>
   </g>
   <g id="text_36">
-   <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="29.736" y="487.120256" transform="rotate(-0 29.736 487.120256)">Source: Epoch AI, AI Data Centers (CC-BY) — https://epoch.ai/data/ai-data-centers</text>
+   <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="29.736" y="487.120256" transform="rotate(-0 29.736 487.120256)">Source: Epoch AI, AI Data Centers (CC-BY) — data_centers.csv + data_center_timelines.csv — epoch.ai/data/ai-data-centers</text>
   </g>
   <g id="text_37">
    <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="29.736" y="502.470656" transform="rotate(-0 29.736 502.470656)">Methodology: Methodology reference pending final methodology document; derivation follows Epoch AI's published data centers documentation</text>

@@ -1,0 +1,5 @@
+dataset,dataset_label,source_file,models,models_dated,models_with_compute,first_publication,last_publication,max_compute_flop,max_compute_model,organizations,countries
+notable,Notable AI models,notable_ai_models.csv,1043,1043,534,1950-07-02,2026-07-31,5.0000000000001e+26,Grok 4,238,24
+frontier,Frontier AI models,frontier_ai_models.csv,137,137,126,1950-07-02,2025-07-09,5.0000000000001e+26,Grok 4,55,13
+large_scale,Large-scale AI models,large_scale_ai_models.csv,524,524,314,2019-10-30,2026-07-31,5.0000000000001e+26,Grok 4,119,18
+all,All AI models,all_ai_models.csv,3574,3557,1402,1950-07-02,2026-07-31,5.0000000000001e+26,Grok 4,664,36

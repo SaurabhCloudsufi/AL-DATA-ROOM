@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Models — Visual Evidence Gallery — AI Data Room</title>
+<meta name="description" content="The models themselves: how much compute, data, money, time and power went into training them, who built them, and what the record actually contains.">
+<link rel="stylesheet" href="../inference-tokens/assets/style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow"><a href="../">AI Data Room</a> &nbsp;/&nbsp; Visual Evidence</p>
+  <h1>AI Models</h1>
+  <p class="standfirst">The models themselves: how much compute, data, money, time and power went into training them, who built them, and what the record actually contains.</p>
+  <dl class="meta">
+    <div><dt>Charts published</dt><dd>24</dd></div>
+  </dl>
+</header>
+
+<div class="toc"><h2>Contents</h2><ol>
+<li><a href="#epoch-ai-published-visualizations">Epoch AI — Published Visualizations</a> <span class="count">13 of 13 published</span></li>
+<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">11 of 11 published</span></li>
+</ol></div>
+<div class="section" id="epoch-ai-published-visualizations">
+<h2>Epoch AI — Published Visualizations</h2>
+<p class="blurb">Epoch publishes one configurable figure on this dataset — a metric against publication date, over a chosen release, optionally coloured by domain, organization or country. These are that figure at each of its settings, rebuilt from the downloaded CSVs rather than screenshotted, with the point counts stated on every chart.</p>
+<section class="chart" id="MODELS-01">
+<div class="chart-head">
+<a class="pid" href="#MODELS-01">MODELS-01</a>
+<h3>Training compute of notable AI models</h3>
+</div>
+<p class="shows">Epoch&#x27;s default published view: training compute against publication date over the notable models, with the deep learning era trend fitted to the plotted points.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/MODELS-01.html" title="Training compute of notable AI models (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>534 of 1,043 notable models record a training compute figure; the rest are absent rather than estimated</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/MODELS-01.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/MODELS-01.svg" download>Download SVG</a><a href="charts/MODELS-01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-02">
+<div class="chart-head">
+<a class="pid" href="#MODELS-02">MODELS-02</a>
+<h3>Training compute of notable AI models, by domain</h3>
+</div>
+<p class="shows">The same view with Epoch&#x27;s colour-by-domain option applied, so the language, vision and multimodal clouds separate.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/MODELS-02.html" title="Training compute of notable AI models, by domain (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Domain is recorded per model and can list several; a model tagged Multimodal is counted there rather than under each component domain</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/MODELS-02.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/MODELS-02.svg" download>Download SVG</a><a href="charts/MODELS-02.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-03">
+<div class="chart-head">
+<a class="pid" href="#MODELS-03">MODELS-03</a>
+<h3>Training compute of notable AI models, by organization</h3>
+</div>
+<p class="shows">The same view coloured by the organisation credited first on each model, top nine plus a pooled remainder.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/MODELS-03.html" title="Training compute of notable AI models, by organization (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Epoch lists several Google research groups separately, and they are not merged here — merging would be our judgement, not the source&#x27;s</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/MODELS-03.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/MODELS-03.svg" download>Download SVG</a><a href="charts/MODELS-03.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-04">
+<div class="chart-head">
+<a class="pid" href="#MODELS-04">MODELS-04</a>
+<h3>Training compute of notable AI models, by country</h3>
+</div>
+<p class="shows">The same view coloured by the country of the building organisation, with cross-border collaborations shown as Multinational.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/MODELS-04.html" title="Training compute of notable AI models, by country (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>A model with organisations in two countries is counted once as Multinational rather than split or assigned to the first</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/MODELS-04.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/MODELS-04.svg" download>Download SVG</a><a href="charts/MODELS-04.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-05">
+<div class="chart-head">
+<a class="pid" href="#MODELS-05">MODELS-05</a>
+<h3>Training compute of frontier AI models</h3>
+</div>
+<p class="shows">Epoch&#x27;s frontier release on the same axes — models that were in the top 10 by training compute when they were released.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/MODELS-05.html" title="Training compute of frontier AI models (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (frontier_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>137 models in the release, 126 with training compute; published 1950-07-02 to 2025-07-09</dd></div>
+<div><dt>Source files</dt><dd class="files">frontier_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>126 of 137 frontier models record a compute figure; the deep learning era fit is far tighter here than over notable models</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/MODELS-05.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/MODELS-05.svg" download>Download SVG</a><a href="charts/MODELS-05.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-06">
+<div class="chart-head">
+<a class="pid" href="#MODELS-06">MODELS-06</a>
+<h3>Training compute of large-scale AI models</h3>
+</div>
+<p class="shows">Epoch&#x27;s large-scale release: every model trained with more than 1e23 FLOP, the threshold used in several AI regulatory frameworks.</p>
+<div class="figure">
+<img src="charts/MODELS-06.svg" alt="Training compute of large-scale AI models" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (large_scale_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>524 models in the release, 314 with training compute; published 2019-10-30 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">large_scale_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>The 1e23 threshold is a floor on the vertical axis by construction, which is why the fit through this release is weak</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-06.svg" download>Download SVG</a><a href="charts/MODELS-06.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-07">
+<div class="chart-head">
+<a class="pid" href="#MODELS-07">MODELS-07</a>
+<h3>Training compute of all AI models in the database</h3>
+</div>
+<p class="shows">The full Epoch database on the same axes — notable and non-notable models together, 1950 to the snapshot.</p>
+<div class="figure">
+<img src="charts/MODELS-07.svg" alt="Training compute of all AI models in the database" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (all_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>3,574 models in the release, 1,402 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">all_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>1,402 of 3,574 models record a compute figure; coverage is thinnest here because most entries are not researched in depth</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-07.svg" download>Download SVG</a><a href="charts/MODELS-07.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-08">
+<div class="chart-head">
+<a class="pid" href="#MODELS-08">MODELS-08</a>
+<h3>Parameters of notable AI models</h3>
+</div>
+<p class="shows">The published figure with parameters on the vertical axis, one of the metrics Epoch&#x27;s axis menu offers.</p>
+<div class="figure">
+<img src="charts/MODELS-08.svg" alt="Parameters of notable AI models" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>714 of 1,043 notable models record a parameter count</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-08.svg" download>Download SVG</a><a href="charts/MODELS-08.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-09">
+<div class="chart-head">
+<a class="pid" href="#MODELS-09">MODELS-09</a>
+<h3>Training dataset size of notable AI models</h3>
+</div>
+<p class="shows">The same figure with training dataset size on the vertical axis.</p>
+<div class="figure">
+<img src="charts/MODELS-09.svg" alt="Training dataset size of notable AI models" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Dataset size is recorded in datapoints and mixes tokens, images and frames across domains, so compare within a domain rather than across</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-09.svg" download>Download SVG</a><a href="charts/MODELS-09.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-10">
+<div class="chart-head">
+<a class="pid" href="#MODELS-10">MODELS-10</a>
+<h3>Training cost of notable AI models</h3>
+</div>
+<p class="shows">The same figure with training compute cost on the vertical axis, in 2023 US dollars.</p>
+<div class="figure">
+<img src="charts/MODELS-10.svg" alt="Training cost of notable AI models" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>180 of 1,043 notable models record a cost, and most of those are Epoch&#x27;s estimates rather than disclosed spend</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-10.svg" download>Download SVG</a><a href="charts/MODELS-10.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-11">
+<div class="chart-head">
+<a class="pid" href="#MODELS-11">MODELS-11</a>
+<h3>Training power draw of notable AI models</h3>
+</div>
+<p class="shows">The same figure with the power drawn by the training run on the vertical axis.</p>
+<div class="figure">
+<img src="charts/MODELS-11.svg" alt="Training power draw of notable AI models" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>217 of 1,043 notable models record a power figure; it is the power of the training hardware, not of the facility</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-11.svg" download>Download SVG</a><a href="charts/MODELS-11.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-12">
+<div class="chart-head">
+<a class="pid" href="#MODELS-12">MODELS-12</a>
+<h3>Training time of notable AI models</h3>
+</div>
+<p class="shows">The same figure with training time in days on the vertical axis.</p>
+<div class="figure">
+<img src="charts/MODELS-12.svg" alt="Training time of notable AI models" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>242 of 1,043 notable models record a training time; no trend is fitted, because the cloud carries none</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-12.svg" download>Download SVG</a><a href="charts/MODELS-12.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-13">
+<div class="chart-head">
+<a class="pid" href="#MODELS-13">MODELS-13</a>
+<h3>Parameters against training compute, notable AI models</h3>
+</div>
+<p class="shows">Epoch&#x27;s figure with a metric on both axes rather than a date: parameters against training compute, coloured by domain.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/MODELS-13.html" title="Parameters against training compute, notable AI models (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>471 of 1,043 notable models record both values; the two are not independent, since some compute figures are derived from parameter counts</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/MODELS-13.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/MODELS-13.svg" download>Download SVG</a><a href="charts/MODELS-13.png" download>Download PNG</a></p>
+</section>
+</div>
+<div class="section" id="derived-analysis">
+<h2>Derived Analysis</h2>
+<p class="blurb">Our own analysis of the same four files — questions the published figure does not answer. Same rule throughout: a model appears in a chart only where Epoch records the value being plotted, and nothing is imputed to fill a gap.</p>
+<section class="chart" id="MODELS-D01">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D01">MODELS-D01</a>
+<h3>Compute doubles twice as fast as the money and power behind it</h3>
+</div>
+<p class="shows">Doubling times for every quantity the notable release measures, fitted over the deep learning era and ranked.</p>
+<div class="figure">
+<img src="charts/MODELS-D01.svg" alt="Compute doubles twice as fast as the money and power behind it" width="850" height="547" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One fitted trend per metric</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Each bar is fitted over a different subset — only the models recording that metric — and the r² is printed beside it</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D01.svg" download>Download SVG</a><a href="charts/MODELS-D01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D02">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D02">MODELS-D02</a>
+<h3>The United States publishes most notable models; China is the only close second</h3>
+</div>
+<p class="shows">Notable models published each year by the country of the building organisation, from 2012.</p>
+<div class="figure">
+<img src="charts/MODELS-D02.svg" alt="The United States publishes most notable models; China is the only close second" width="864" height="590" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, aggregated to publication year</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Counts of models Epoch judged notable, an editorial threshold rather than a census, and the final year is partial</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D02.svg" download>Download SVG</a><a href="charts/MODELS-D02.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D03">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D03">MODELS-D03</a>
+<h3>A handful of industry labs account for most notable models</h3>
+</div>
+<p class="shows">The 20 organisations credited on the most notable models, coloured by sector, with each one&#x27;s largest recorded training run.</p>
+<div class="figure">
+<img src="charts/MODELS-D03.svg" alt="A handful of industry labs account for most notable models" width="864" height="634" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per organisation</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Credit goes to the organisation listed first, which understates university involvement in co-published work</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D03.svg" download>Download SVG</a><a href="charts/MODELS-D03.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D04">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D04">MODELS-D04</a>
+<h3>Notable models moved from academia to industry, and stayed there</h3>
+</div>
+<p class="shows">The share of each year&#x27;s notable models coming from industry, academia, and the two working together.</p>
+<div class="figure">
+<img src="charts/MODELS-D04.svg" alt="Notable models moved from academia to industry, and stayed there" width="864" height="590" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, aggregated to publication year</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Every column is 100% of a different base; the count behind each is printed above it</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D04.svg" download>Download SVG</a><a href="charts/MODELS-D04.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D05">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D05">MODELS-D05</a>
+<h3>Fewer models stay unreleased; access increasingly runs through an API</h3>
+</div>
+<p class="shows">How each year&#x27;s notable models were released — open weights, API, hosted access, or never released.</p>
+<div class="figure">
+<img src="charts/MODELS-D05.svg" alt="Fewer models stay unreleased; access increasingly runs through an API" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, aggregated to publication year</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Accessibility is recorded as of Epoch&#x27;s last update to the row, so a model whose licence changed later still shows its recorded state</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D05.svg" download>Download SVG</a><a href="charts/MODELS-D05.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D06">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D06">MODELS-D06</a>
+<h3>Each accelerator generation carries the frontier for about three years</h3>
+</div>
+<p class="shows">The training hardware recorded for each year&#x27;s notable models, grouped into accelerator families.</p>
+<div class="figure">
+<img src="charts/MODELS-D06.svg" alt="Each accelerator generation carries the frontier for about three years" width="864" height="619" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, aggregated to publication year</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Hardware is recorded for 365 of 1,043 notable models, so this is a sample of the fleet and not a census</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D06.svg" download>Download SVG</a><a href="charts/MODELS-D06.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D07">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D07">MODELS-D07</a>
+<h3>Chip count explains part of the compute gap, but not most of it</h3>
+</div>
+<p class="shows">Accelerators used against the compute the run produced, for every notable model recording both.</p>
+<div class="figure">
+<img src="charts/MODELS-D07.svg" alt="Chip count explains part of the compute gap, but not most of it" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Chip count is sometimes the cluster size rather than the number used, so the horizontal axis is an upper bound</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D07.svg" download>Download SVG</a><a href="charts/MODELS-D07.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D08">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D08">MODELS-D08</a>
+<h3>Cost tracks compute, but spans three orders of magnitude at any scale</h3>
+</div>
+<p class="shows">Recorded training cost against recorded training compute, with the median rate drawn through it.</p>
+<div class="figure">
+<img src="charts/MODELS-D08.svg" alt="Cost tracks compute, but spans three orders of magnitude at any scale" width="850" height="590" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, plotted at its publication date</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>The median rate is a summary of the middle of the cloud, not a price; the cost figures are estimates for most rows</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D08.svg" download>Download SVG</a><a href="charts/MODELS-D08.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D09">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D09">MODELS-D09</a>
+<h3>Compute per dollar rises with each chip generation, unevenly</h3>
+</div>
+<p class="shows">Compute bought per dollar of hardware against the release date of the chip each frontier model trained on.</p>
+<div class="figure">
+<img src="charts/MODELS-D09.svg" alt="Compute per dollar rises with each chip generation, unevenly" width="850" height="576" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (frontier_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, at its hardware&#x27;s release date</dd></div>
+<div><dt>Coverage</dt><dd>137 models in the release, 126 with training compute; published 1950-07-02 to 2025-07-09</dd></div>
+<div><dt>Source files</dt><dd class="files">frontier_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>A specification ratio from peak throughput and list price, not realised performance — real utilisation runs 30-50% of peak</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D09.svg" download>Download SVG</a><a href="charts/MODELS-D09.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D10">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D10">MODELS-D10</a>
+<h3>Language and multimodal models took over from vision after 2020</h3>
+</div>
+<p class="shows">What each year&#x27;s notable models were built to do, by domain.</p>
+<div class="figure">
+<img src="charts/MODELS-D10.svg" alt="Language and multimodal models took over from vision after 2020" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (notable_ai_models.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One row per model, aggregated to publication year</dd></div>
+<div><dt>Coverage</dt><dd>1,043 models in the release, 534 with training compute; published 1950-07-02 to 2026-07-31</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>A multi-domain model is counted once, under Multimodal where tagged and otherwise under the first domain listed</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D10.svg" download>Download SVG</a><a href="charts/MODELS-D10.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MODELS-D11">
+<div class="chart-head">
+<a class="pid" href="#MODELS-D11">MODELS-D11</a>
+<h3>Most models record what they are; far fewer record what they cost</h3>
+</div>
+<p class="shows">The share of each Epoch release that records each field — the ceiling on every other chart in this domain.</p>
+<div class="figure">
+<img src="charts/MODELS-D11.svg" alt="Most models record what they are; far fewer record what they cost" width="864" height="619" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — Data on AI Models (all four releases)</dd></div>
+<div><dt>Granularity</dt><dd>One row per field and release</dd></div>
+<div><dt>Coverage</dt><dd>notable: 1,043; frontier: 137; large_scale: 524; all: 3,574</dd></div>
+<div><dt>Source files</dt><dd class="files">notable_ai_models.csv + frontier_ai_models.csv + large_scale_ai_models.csv + all_ai_models.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Plotted only where Epoch records the value; nothing imputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-models" rel="noopener">Epoch AI — Data on AI Models</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI models documentation</dd></div>
+<div><dt>Note</dt><dd>Two fields are not published at all in the large-scale release and are marked as such rather than shown as zero</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MODELS-D11.svg" download>Download SVG</a><a href="charts/MODELS-D11.png" download>Download PNG</a></p>
+</section>
+</div>
+
+<footer class="foot">
+  <p><strong>How to read this gallery.</strong> Every chart carries a stable Plot ID
+  matching the Dataset Register. Link straight to any chart by appending its ID, for
+  example <code>#P-59</code>. That address does not change as the gallery grows.</p>
+  <p><strong>Methodology references.</strong> Section references shown against each chart
+  are taken from the working methodology. They become links once that document is final.</p>
+</footer>
+
+</div>
+<script>
+// embedded charts post their rendered height; without this the iframe would
+// either clip the legend or leave a gap at some widths
+addEventListener('message', function (ev) {
+  var d = ev.data;
+  if (!d || d.type !== 'aidr-height' || !d.id) return;
+  var f = document.querySelector('iframe.live[src="charts/' + d.id + '.html"]');
+  // ignore implausible measurements rather than collapsing the frame to a sliver
+  if (f && d.h > 200 && d.h < 4000) f.style.height = d.h + 'px';
+});
+</script>
+</body>
+</html>

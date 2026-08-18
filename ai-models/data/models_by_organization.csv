@@ -1,0 +1,1078 @@
+dataset,organization,models,models_with_compute,median_compute_flop,max_compute_flop,org_category,country,first_publication,last_publication
+all,Google DeepMind,128,38,1.594946596230557e+22,5.0000000001e+25,Industry,United States of America,2014-12-10,2026-07-21
+all,OpenAI,126,44,9.705e+21,3.8e+26,Industry,United States of America,2016-12-05,2026-07-29
+all,Google,119,48,8.580000000049999e+21,7.34e+24,Industry,United States of America,2007-06-22,2026-05-19
+all,Alibaba,116,55,3.7800000000001e+23,1.512e+25,Industry,China,2021-03-05,2026-07-19
+all,Meta AI,97,60,8.099999999999999e+22,5.18400000000001e+25,Industry,United States of America,2017-07-25,2026-07-09
+all,NVIDIA,95,45,1.35e+22,3.911001e+25,Industry,United States of America,2017-10-27,2026-06-04
+all,Stanford University,68,22,4.345e+19,1.1e+23,Academia,United States of America,1960-06-30,2025-06-12
+all,Tsinghua University,63,28,1.802e+22,2.88e+24,Industry-academia collaboration,China,2016-06-21,2025-04-14
+all,Microsoft,62,41,1.28e+22,6.98511e+24,Industry,United States of America,2012-12-01,2026-06-02
+all,DeepMind,58,32,6.817938751451135e+20,6.31e+23,Industry,United Kingdom of Great Britain and Northern Ireland,2013-12-19,2025-05-14
+all,Facebook AI Research,48,28,4.7904e+20,1.6453571041e+24,Industry,Multinational,2014-12-24,2025-06-11
+all,ByteDance,46,11,9.6910000000001e+23,2.505e+25,Industry,China,2023-07-23,2026-02-12
+all,Carnegie Mellon University (CMU),43,22,5.2185e+18,2.612e+22,Academia,United States of America,1986-08-15,2024-09-09
+all,Mistral AI,41,3,1.152e+24,2.34e+24,Industry,France,2023-10-10,2026-04-29
+all,DeepSeek,40,24,1.5372e+24,9.702e+24,Industry,China,2024-01-05,2026-07-31
+all,Massachusetts Institute of Technology (MIT),39,15,1.08e+19,1.03514112e+22,Academia,United States of America,1955-03-01,2025-08-31
+all,University of Toronto,39,8,1.5496272e+17,3.024e+19,Academia,Canada,2001-04-01,2023-02-04
+all,University of Washington,38,20,1.3466948168144986e+19,5.5e+23,Industry-academia collaboration,United States of America,1989-11-27,2024-09-26
+all,Google Brain,34,16,1.292648456e+21,1.12e+23,Industry,United States of America,2016-02-11,2023-03-03
+all,Google Research,31,13,3.4912896e+22,2.5272e+24,Industry,United States of America,2017-06-12,2025-10-11
+all,Microsoft Research,31,15,2.1000000000000013e+21,9.3202015e+23,Industry,United States of America,2003-08-06,2024-12-12
+all,IBM,30,20,1.375016976e+21,1.215e+24,Industry,United States of America,1959-07-01,2025-10-02
+all,Stability AI,30,10,4.75e+22,2.91e+23,Industry,United Kingdom of Great Britain and Northern Ireland,2022-12-07,2025-03-25
+all,Allen Institute for AI,29,13,1.33583e+22,1.3e+24,Industry-academia collaboration,United States of America,2019-01-01,2026-04-05
+all,Anthropic,28,3,2.700000000000001e+25,3.3499999999999998e+25,Industry,United States of America,2023-02-15,2026-07-24
+all,Shanghai AI Lab,25,10,5.6400000005e+21,9.984e+23,Industry-academia collaboration,Multinational,2022-11-10,2025-11-17
+all,University of California (UC) Berkeley,25,5,3e+19,5.85e+20,Academia,United States of America,2006-03-09,2024-06-14
+all,Amazon,24,7,1.5405e+20,6.000010000000001e+24,Industry,United States of America,2019-04-08,2025-12-02
+all,Baidu,22,9,2.25e+22,2.82e+24,Industry,China,2017-12-01,2025-06-29
+all,MiniMax,22,4,3.66397815e+24,4.3240062e+24,Industry,China,2023-08-30,2026-06-01
+all,Hugging Face,21,10,7.2e+22,3.87e+23,Industry-academia collaboration,Multinational,2019-10-02,2024-05-03
+all,Z.ai (Zhipu AI),21,10,2.3399999999999998e+24,6.84e+24,Industry,China,2022-06-22,2026-06-16
+all,xAI,20,5,2.9599999999999996e+25,5.0000000000001e+26,Industry,United States of America,2023-11-04,2026-07-08
+all,Beijing Academy of Artificial Intelligence / BAAI,19,8,1.11047696e+22,9.86736e+24,Academia,China,2021-01-11,2025-10-30
+all,IDSIA,19,13,5.2e+16,3.89e+18,Academia,Switzerland,1999-01-02,2021-06-11
+all,New York University (NYU),19,8,1.403564745e+17,6e+20,Academia,United States of America,2004-06-27,2024-06-24
+all,University of California San Diego,19,8,4.536e+17,1.92e+21,Academia,United States of America,1986-01-03,2024-10-10
+all,Ant Group,18,8,5.205e+23,6.000001e+24,Industry,China,2020-02-28,2026-04-21
+all,EleutherAI,18,12,6.4690000000005e+21,9.31627008e+22,Research collective,Multinational,2021-03-21,2023-06-04
+all,University of Oxford,18,7,1.2291e+19,7.24e+21,Academia,United Kingdom of Great Britain and Northern Ireland,2003-06-18,2024-09-14
+all,LG AI Research,17,15,4.2568e+23,3.85e+24,Industry,Korea (Republic of),2023-07-19,2026-07-31
+all,University of Montreal / Université de Montréal,17,7,6339000000000000.0,5.184e+17,Academia,Canada,2000-11-28,2023-01-24
+all,AT&T,16,3,1496338054440.0,2810937600000.0,Industry,United States of America,1989-11-27,2009-09-21
+all,Peking University,16,8,5.6400000000000007e+20,8.412e+22,Industry-academia collaboration,China,2017-07-30,2024-11-15
+all,Technical University of Munich,16,14,2.8499999999999953e+21,7.37e+22,Academia,Multinational,1994-12-02,2024-09-09
+all,Chinese University of Hong Kong (CUHK),14,5,3.074112e+17,2.59999999999998e+21,Academia,Hong Kong,2014-11-28,2024-09-24
+all,Moonshot,14,5,4.1999999999999997e+24,2.0001e+25,Industry,China,2024-01-01,2026-07-16
+all,Sber,14,4,6.21321114015e+22,1.0699776e+23,Industry-academia collaboration,Russia,2023-04-24,2025-09-30
+all,Facebook,13,7,1.536e+21,8.74395e+21,Industry,United States of America,2014-08-24,2024-12-11
+all,Johns Hopkins University,13,3,9.864288e+17,6.62904e+19,Industry-academia collaboration,United States of America,2010-09-26,2024-09-28
+all,Princeton University,13,9,2.481192e+19,5.4270979e+23,Academia,United States of America,1987-06-06,2024-11-01
+all,Salesforce Research,13,11,1.94e+20,1.35e+22,Industry,United States of America,2016-11-04,2024-08-16
+all,University of Edinburgh,13,1,2.7570535e+18,2.7570535e+18,Academia,United Kingdom of Great Britain and Northern Ireland,1963-11-01,2021-02-09
+all,Apple,12,10,2.37973945e+22,4.3e+24,Industry,United States of America,2023-09-08,2025-09-23
+all,ETH Zurich,12,4,5.020064e+21,6.74e+24,Industry-academia collaboration,Switzerland,2016-07-12,2025-09-02
+all,Ecole Polytechnique F´ed´erale de Lausanne (EPFL),12,3,6.75e+17,2.69568e+20,Academia,Multinational,2016-12-22,2024-10-08
+all,KE Holdings Inc. (“Beike”),12,0,,,Industry,China,2023-03-26,2024-10-16
+all,Kunlun Inc.,12,1,2.5e+23,2.5e+23,Industry,China,2023-10-30,2025-08-01
+all,NTT Communication Science Laboratories,12,4,3.54615e+17,4.2e+22,Industry-academia collaboration,Japan,2017-09-26,2024-04-11
+all,SenseTime,12,1,3.89e+24,3.89e+24,Industry,Hong Kong,2015-06-07,2025-04-12
+all,China Telecom,11,4,6.42e+22,6.899999999999999e+24,Industry,China,2023-07-07,2024-11-08
+all,Chinese Academy of Sciences,11,5,8.016e+20,5.72e+22,Academia,Multinational,2014-07-15,2025-05-24
+all,Cohere,11,1,1.001e+22,1.001e+22,Industry,Canada,2023-03-01,2026-06-09
+all,Columbia University,11,7,1.27e+17,1.81149696e+21,Academia,United States of America,2003-11-15,2024-05-24
+all,Kuaishou Technology,11,0,,,Industry,China,2023-08-16,2025-09-26
+all,Nous Research,11,3,7.1497946e+20,1.03000000001e+21,Industry,United States of America,2023-11-01,2025-12-11
+all,Tencent,11,4,2.3461849999999998e+24,5.4e+24,Industry,China,2023-09-07,2026-04-23
+all,Microsoft Research Asia,10,5,8.58e+19,3.81e+21,Industry-academia collaboration,China,2016-09-17,2025-10-27
+all,NAVER,10,3,1.476e+23,2.0000000001e+23,Industry,Korea (Republic of),2019-12-04,2025-12-29
+all,Typhoon / SCB 10X,10,0,,,Industry,Thailand,2024-12-18,2025-05-05
+all,University of Southern California,10,1,1.03809024e+21,1.03809024e+21,Academia,United States of America,1999-07-02,2024-12-31
+all,Zhejiang University (ZJU),10,5,7.500000000000002e+19,6.21084672e+22,Academia,China,2019-11-20,2024-09-25
+all,AI Singapore,9,7,7.23e+23,8.0103891e+24,Government,Singapore,2023-12-01,2025-08-20
+all,Baichuan,9,6,1.014e+23,8.268e+23,Industry,China,2023-06-01,2025-01-26
+all,National University of Singapore,9,2,6.164595172e+20,1.2292301e+21,Academia,Multinational,2013-12-16,2025-03-13
+all,Runway,9,1,5e+22,5e+22,Industry,United States of America,2022-04-13,2025-12-01
+all,Salesforce,9,4,3.086e+22,8.02e+22,Industry,United States of America,2016-06-20,2024-09-06
+all,StepFun,9,4,2.23704e+24,4.1015808e+24,Industry,China,2024-03-01,2026-02-02
+all,University of Cambridge,9,2,4.38050943072e+20,8.76096e+20,Industry-academia collaboration,Multinational,1997-07-01,2024-09-09
+all,Xiaomi Corp,9,4,1.7904e+24,6.804e+24,Industry,China,2022-12-11,2026-04-23
+all,01.AI,8,7,6.1e+23,1.8e+24,Industry,China,2023-11-02,2024-10-18
+all,AI21 Labs,8,1,3.7e+23,3.7e+23,Industry,Israel,2021-08-11,2025-03-06
+all,Black Forest Labs,8,0,,,Industry,Germany,2024-08-01,2025-11-25
+all,Facebook AI,8,3,1.45152e+22,2.076e+22,Industry,United States of America,2019-05-02,2020-08-02
+all,Fudan University,8,1,6.67e+22,6.67e+22,Academia,China,2017-05-08,2025-10-21
+all,Shanghai Jiao Tong University,8,4,5.49794304e+20,8.18e+20,Academia,China,2022-03-24,2024-12-30
+all,Technology Innovation Institute,8,7,3.9391101e+23,3.76e+24,Government,United Arab Emirates,2023-03-15,2025-05-21
+all,Yandex,8,3,2.2e+23,7.3536e+23,Industry,Russia,2022-06-23,2025-08-25
+all,ElevenLabs,7,0,,,Industry,United States of America,2023-01-16,2025-06-03
+all,Harvard Medical School,7,0,,,Academia,United States of America,2021-10-27,2024-09-25
+all,Harvard University,7,4,1.10504e+19,2.26437e+20,Academia,United States of America,1952-01-08,2024-10-01
+all,Hume,7,0,,,Industry,United States of America,2024-04-18,2025-10-01
+all,Korea Advanced Institute of Science and Technology (KAIST),7,4,4.3053e+18,2.1570000001e+20,Academia,Korea (Republic of),2002-10-01,2024-10-04
+all,Langboat,7,0,,,Industry,China,2023-03-01,2023-12-28
+all,Large Model Systems Organization,7,0,,,Academia,United States of America,2023-03-30,2023-08-01
+all,LightOn,7,5,3.6832407e+21,2.4e+23,Industry,France,2021-10-16,2025-05-22
+all,Mila - Quebec AI (originally Montreal Institute for Learning Algorithms),7,3,2.145e+19,1.91e+21,Industry-academia collaboration,Multinational,2020-12-03,2024-02-07
+all,Perplexity,7,0,,,Industry,United States of America,2023-11-29,2025-02-18
+all,Tianjin University,7,4,3.17e+18,2.388e+19,Industry-academia collaboration,China,2019-01-31,2019-06-24
+all,University College London (UCL),7,5,501999999999999.94,9.7e+18,Academia,United Kingdom of Great Britain and Northern Ireland,1999-07-01,2022-10-05
+all,University of California Los Angeles (UCLA),7,4,1.557291058e+19,1.6e+23,Academia,United States of America,2018-04-14,2023-10-07
+all,University of Science and Technology of China (USTC),7,3,1.6000000000000008e+19,2.1e+19,Industry-academia collaboration,Multinational,2015-05-06,2024-10-09
+all,University of Texas at Austin,7,2,1.575000977724e+17,3.15e+17,Academia,United States of America,1995-11-27,2019-06-10
+all,Writer,7,1,9.6e+22,9.6e+22,Industry,United States of America,2023-03-01,2025-04-28
+all,360 Security Technology,6,2,2.835e+23,4.242e+23,Industry,China,2023-09-04,2025-04-14
+all,Beihang University,6,0,,,Academia,Multinational,2014-06-01,2024-06-28
+all,Huawei,6,5,1.287e+24,1.0692e+25,Industry,China,2022-10-12,2025-05-28
+all,IBM Research,6,5,7.07616e+21,3.0000000000001e+23,Industry-academia collaboration,Multinational,2020-12-05,2025-02-26
+all,INRIA,6,2,2.94243255e+20,3.7848651e+20,Academia,France,2005-06-25,2021-05-03
+all,Institute of Science and Technology Austria (ISTA),6,2,7.900065751839999e+22,1.58e+23,Academia,Austria,2022-10-31,2023-10-25
+all,MetaMind Inc,6,4,7295000000000000.0,1.6128e+16,Industry,United States of America,2013-12-11,2016-09-26
+all,Prime Intellect,6,4,3.0304511470000004e+22,1.326e+24,Industry,United States of America,2024-07-10,2026-02-19
+all,SK Telecom,6,2,9.00000675e+23,1.8e+24,Industry,Korea (Republic of),2021-11-15,2026-07-29
+all,Samsung,6,1,1.3e+20,1.3e+20,Industry,Korea (Republic of),2018-10-31,2024-11-21
+all,University of Wisconsin Madison,6,4,3.915389264e+22,7.807e+22,Academia,United States of America,2011-11-11,2024-09-23
+all,Adobe,5,0,,,Industry,United States of America,2023-03-21,2025-04-24
+all,Aleph Alpha,5,4,2.27402285e+23,4.43e+23,Industry,Germany,2022-08-15,2024-08-26
+all,Beijing Institute of Technology,5,1,1.231108125e+19,1.231108125e+19,Academia,China,2015-10-28,2024-06-28
+all,Cerebras Systems,5,5,2.3e+22,1.0372049e+23,Industry,United States of America,2023-03-21,2023-11-08
+all,Duke University,5,2,5.017e+17,1e+18,Academia,United States of America,2017-01-07,2024-08-11
+all,Fish Audio,5,3,2.6599104e+21,3.36e+22,Industry,United States of America,2024-11-09,2025-06-03
+all,Harbin Institute of Technology,5,0,,,Academia,China,2017-02-01,2024-11-02
+all,Inspur,5,2,2.65900000000005e+23,3.5380000000001e+23,Industry,China,2021-10-12,2024-11-29
+all,Kakao,5,3,1.05670656e+20,2.9113344e+20,Industry-academia collaboration,Korea (Republic of),2021-11-12,2024-01-16
+all,Lightricks,5,0,,,Industry,Israel,2024-12-30,2025-05-14
+all,LumaLabs,5,0,,,Industry,United States of America,2024-06-12,2025-01-23
+all,McGill University,5,3,1.1000000000000008e+20,4.3e+23,Industry-academia collaboration,Multinational,1988-08-01,2024-10-01
+all,Nanjing University,5,2,4.8538684708e+21,9.7e+21,Academia,China,2016-03-30,2024-09-24
+all,Saudi Data and Artificial Intelligence Authority,5,4,6.162e+23,1.062e+24,Industry-academia collaboration,Saudi Arabia,2022-09-14,2024-05-21
+all,Suno,5,0,,,Industry,United States of America,2023-04-15,2025-09-25
+all,Technion - Israel Institute of Technology,5,2,5.91492344e+18,1.1513908e+19,Industry-academia collaboration,Multinational,2011-10-03,2019-09-24
+all,The University of Hong Kong,5,1,3.3696e+17,3.3696e+17,Industry-academia collaboration,Multinational,2021-05-31,2025-02-07
+all,Toyota Technological Institute at Chicago,5,3,2.272000000071e+21,2.39e+21,Academia,United States of America,2019-05-02,2021-12-16
+all,UT Austin,5,0,,,Academia,United States of America,2002-06-01,2022-06-05
+all,University of Illinois Urbana-Champaign (UIUC),5,2,1.4359999999999998e+19,1.8999999999999996e+19,Industry-academia collaboration,United States of America,2010-01-01,2024-02-26
+all,University of Maryland,5,1,4.8098691e+17,4.8098691e+17,Academia,United States of America,2005-06-01,2024-04-10
+all,University of Siena,5,2,3.600003932160008e+23,7.20000786432e+23,Academia,Italy,2008-12-09,2024-08-12
+all,Yayi (Wenge),5,1,4.77e+23,4.77e+23,Industry,China,2023-06-03,2025-02-15
+all,iFlytek,5,0,,,Industry,China,2023-05-06,2025-03-03
+all,ASAPP,4,4,2.3546852e+19,3.564e+19,Industry,United States of America,2018-09-17,2021-02-24
+all,American University of Beirut,4,4,8.97910345e+20,2e+21,Academia,Lebanon,2020-03-30,2021-03-07
+all,BRIA AI,4,0,,,Industry,United States of America,2024-05-14,2025-02-15
+all,Bell Laboratories,4,3,1559250.0,12869570138112.0,Industry,United States of America,1950-07-02,1993-08-01
+all,Boston University,4,0,,,Academia,United States of America,2021-12-11,2023-08-14
+all,Brno University of Technology,4,3,1.7e+16,5e+16,Academia,Multinational,2010-09-26,2011-05-22
+all,Cornell University,4,0,,,Academia,United States of America,2002-05-28,2023-02-02
+all,Courant Institute of Mathematical Sciences,4,3,278721000000000.0,306000000000000.0,Academia,United States of America,2006-06-17,2017-03-31
+all,Cursor,4,2,3.0949999999999996e+25,3.87e+25,Industry,United States of America,2025-10-29,2026-05-18
+all,DP Technology,4,0,,,Industry,China,2023-07-12,2023-07-12
+all,Databricks,4,2,1.3053542944e+24,2.6e+24,Industry,United States of America,2023-04-12,2024-06-12
+all,Eindhoven University of Technology,4,1,1.178e+16,1.178e+16,Academia,Netherlands,2021-01-22,2021-01-22
+all,HiDream,4,0,,,Industry,China,2023-09-30,2025-04-25
+all,Huawei Noah's Ark Lab,4,4,2.6330737500000004e+22,4.67e+23,Industry,China,2021-04-25,2023-09-30
+all,IEEE,4,0,,,Industry,Multinational,1973-09-01,2016-06-17
+all,Ideogram,4,0,,,Industry,Canada,2024-02-28,2025-08-07
+all,MIT-IBM Watson AI Lab,4,4,3.2715e+20,7.8e+20,Industry-academia collaboration,United States of America,2020-04-27,2024-08-27
+all,Mahidol University,4,2,3.8850000000000003e+21,5.11e+21,Academia,Thailand,2024-04-08,2025-04-02
+all,Microsoft Research AI for Science,4,3,2.69568e+19,1.118208e+20,Industry,United States of America,2024-05-10,2025-01-16
+all,NEC Laboratories,4,1,52603200000000.0,52603200000000.0,Industry,United States of America,2004-12-01,2023-07-06
+all,Northeastern University (China),4,2,3.1950000000000143e+18,3.5000000000000287e+18,Academia,China,2020-05-06,2024-09-23
+all,Physical Intelligence,4,0,,,Industry,United States of America,2024-10-31,2026-04-16
+all,Pika Labs,4,0,,,Industry,United States of America,2024-10-15,2025-02-27
+all,PleIAs,4,4,1.62447338e+22,2.9907184e+22,Industry,France,2024-12-05,2025-04-25
+all,Preferred Networks Inc,4,2,6.584999999999999e+23,1.1999999999999999e+24,Industry,Japan,2018-02-16,2024-06-14
+all,RWKV Foundation,4,3,2.78e+22,4.983e+22,Industry-academia collaboration,Multinational,2023-05-22,2024-09-26
+all,Reka AI,4,3,6.3e+23,8.400010000000001e+24,Industry,United States of America,2024-04-15,2025-03-10
+all,Renmin University of China,4,1,5.413824e+18,5.413824e+18,Industry-academia collaboration,China,2023-03-06,2025-02-14
+all,Saarland University,4,0,,,Academia,Germany,2017-03-23,2017-08-23
+all,Samsung R&D Institute Russia,4,2,4.249e+16,5.188e+16,Industry,Russia,2018-11-12,2019-02-06
+all,Shandong University,4,1,2.59999999999998e+20,2.59999999999998e+20,Academia,China,2017-08-16,2024-09-28
+all,Singapore University of Technology & Design,4,3,7.24598784e+21,2.173796352e+22,Academia,Singapore,2014-01-01,2023-10-01
+all,Sun Yat-sen University,4,1,39168000000.0,39168000000.0,Industry-academia collaboration,China,2024-07-12,2024-09-18
+all,Technical University of Denmark,4,2,2.891331525672e+17,5.781024e+17,Academia,Denmark,2017-07-07,2023-06-05
+all,Tokyo Institute of Technology,4,1,3.7e+19,3.7e+19,Academia,Japan,2024-01-22,2024-10-10
+all,University of Bonn,4,3,1456277227200000.0,3295150080000000.0,Academia,Germany,2009-11-22,2024-11-24
+all,University of California Santa Barbara (UCSB),4,1,1.60209723904e+23,1.60209723904e+23,Academia,Multinational,2023-07-15,2024-10-11
+all,University of Freiburg,4,2,2.61216126e+17,4.716e+17,Academia,Germany,2015-05-18,2024-12-01
+all,University of Michigan,4,0,,,Academia,United States of America,2011-04-11,2019-08-13
+all,University of Missouri,4,1,9.5e+16,9.5e+16,Academia,United States of America,2018-05-01,2025-03-22
+all,University of Pittsburgh,4,1,4.7e+17,4.7e+17,Academia,United States of America,2017-03-28,2024-09-05
+all,University of Waterloo,4,4,2.6528667e+19,1.89e+23,Industry-academia collaboration,Multinational,2020-04-30,2024-07-10
+all,Upstage,4,2,1.2249999999999998e+24,1.3999999999999998e+24,Industry,Korea (Republic of),2023-12-23,2026-06-28
+all,Voyage AI,4,0,,,Industry,United States of America,2024-01-23,2025-05-20
+all,Wayve,4,2,4.3627507e+22,7.5609676e+22,Industry,United Kingdom of Great Britain and Northern Ireland,2023-09-29,2025-03-26
+all,West Lake Xinchen / Xinchen AI / 西湖心辰（杭州）科技有限公司,4,0,,,Industry,China,2022-08-15,2024-09-05
+all,vivo AI lab,4,4,6e+23,1.05e+24,Industry,China,2023-10-31,2023-11-02
+all,Adept,3,1,4.11246e+22,4.11246e+22,Industry,United States of America,2023-09-07,2024-01-24
+all,Alibaba DAMO Academy,3,0,,,Industry,China,2023-12-01,2024-10-21
+all,Anthrogen,3,1,1.1e+23,1.1e+23,Industry,United States of America,2025-10-18,2025-10-18
+all,Basecamp Research,3,1,5.05e+21,5.05e+21,Industry-academia collaboration,Multinational,2022-12-01,2024-03-06
+all,Beijing University of Posts and Telecommunications,3,3,1.938e+17,2.3175e+18,Academia,Multinational,2019-12-05,2019-12-05
+all,Ben-Gurion University,3,1,1.45e+17,1.45e+17,Academia,Israel,2017-08-29,2018-05-23
+all,California Institute of Technology,3,0,,,Academia,United States of America,1982-04-01,2003-10-13
+all,Cartesia,3,0,,,Industry,United States of America,2024-10-19,2025-06-04
+all,Character.ai,3,0,,,Industry,United States of America,2025-11-07,2025-11-07
+all,China Mobile,3,2,3.01380655e+23,4.3596131e+23,Industry,China,2023-10-12,2025-06-26
+all,China Unicom,3,0,,,Industry,China,2023-06-28,2025-01-15
+all,Cognition,3,0,,,Industry,United States of America,2025-05-06,2026-03-01
+all,Cohere for AI,3,2,4.172662e+21,6.688684e+21,Industry,Canada,2024-02-12,2024-10-24
+all,Deci AI,3,3,7.56e+21,1.026e+22,Industry,Israel,2023-08-15,2024-01-15
+all,EFFYIC (识因智能),3,0,,,Industry,China,2023-04-01,2024-01-15
+all,FPT Software AI Center,3,2,5.9328e+18,8.8992e+18,Industry-academia collaboration,Multinational,2021-10-16,2024-06-12
+all,Heidelberg University,3,1,1.05e+19,1.05e+19,Academia,Germany,2020-12-17,2021-12-20
+all,Inception Labs,3,0,,,Industry,United States of America,2025-02-27,2025-06-17
+all,Inflection AI,3,3,8.000001e+24,1.001e+25,Industry,United States of America,2023-06-23,2024-03-07
+all,InstaDeep,3,1,3.900000000000003e+22,3.900000000000003e+22,Industry,United Kingdom of Great Britain and Northern Ireland,2023-05-30,2024-09-24
+all,King Abdullah University of Science and Technology (KAUST),3,0,,,Academia,Multinational,2023-03-15,2024-07-24
+all,Korea University,3,2,2.280104976e+22,4.56e+22,Academia,Multinational,2020-12-23,2023-11-13
+all,Lenovo,3,0,,,Industry,China,2025-02-25,2025-05-09
+all,Ludwig Maximilian University of Munich,3,1,5e+22,5e+22,Academia,Germany,2022-08-22,2022-08-22
+all,Megvii Inc,3,1,6.34275e+20,6.34275e+20,Industry,China,2017-07-03,2024-10-21
+all,Midjourney,3,0,,,Industry,United States of America,2022-02-15,2025-04-03
+all,Mobvoi,3,0,,,Industry-academia collaboration,Multinational,2019-04-08,2023-11-04
+all,Mohamed bin Zayed University of Artificial Intelligence (MBZUAI),3,2,5.17272345e+22,5.55564e+22,Industry-academia collaboration,Multinational,2023-12-11,2025-09-09
+all,NCSOFT,3,3,6.72e+22,1.248e+23,Industry,Korea (Republic of),2023-08-16,2023-08-16
+all,National Science and Technology Council,3,0,,,Government,Taiwan,2024-04-29,2024-04-29
+all,National Taiwan University,3,0,,,Academia,Taiwan,2023-11-23,2023-11-29
+all,National Tsing Hua University,3,1,5.4e+17,5.4e+17,Industry-academia collaboration,Multinational,2020-12-25,2020-12-25
+all,Nexusflow,3,0,,,Industry,United States of America,2023-12-05,2024-11-14
+all,Northeastern University,3,1,1.07e+20,1.07e+20,Academia,United States of America,2018-02-24,2021-08-15
+all,Peng Cheng Laboratory,3,1,9.47e+18,9.47e+18,Academia,China,2021-05-20,2024-03-24
+all,Playground,3,0,,,Industry,United States of America,2023-12-02,2024-09-16
+all,Seoul National University,3,0,,,Academia,Korea (Republic of),2016-11-11,2021-09-03
+all,T-Bank,3,0,,,Industry,Russia,2024-12-11,2025-07-18
+all,Tel Aviv University,3,2,1.17632e+19,2.09664e+19,Industry-academia collaboration,Multinational,2014-06-23,2022-03-30
+all,Thinking Machines,3,1,1.845e+24,1.845e+24,Industry,United States of America,2026-05-11,2026-07-15
+all,Together,3,2,2.054e+22,4.1e+22,Industry,United States of America,2023-03-08,2023-11-27
+all,University of Chicago,3,1,1.42e+21,1.42e+21,Industry-academia collaboration,Multinational,1988-04-05,2022-10-11
+all,University of Florida,3,1,1.7100000000000148e+18,1.7100000000000148e+18,Academia,United States of America,2024-08-20,2024-09-24
+all,University of Massachusetts Amherst,3,2,9.43886700162e+17,1.8877734e+18,Academia,United States of America,1983-09-01,2022-10-28
+all,University of Tokyo,3,2,3.775e+18,4.05e+18,Academia,Japan,1972-11-30,2021-01-01
+all,Westlake University,3,2,3.7800684258e+21,7.56e+21,Academia,Multinational,2020-05-12,2024-06-03
+all,XVERSE Technology,3,1,1.24800000000001e+24,1.24800000000001e+24,Industry,China,2023-11-06,2024-04-02
+all,rinna,3,2,1.3381e+23,2.5562e+23,Industry,Japan,2022-01-19,2023-12-21
+all,1X,2,0,,,Industry,United States of America,2024-09-17,2025-06-09
+all,4Paradigm,2,0,,,Industry,China,2023-04-27,2024-11-29
+all,AI Sweden,2,2,3.923317675e+22,7.68e+22,Academia,Sweden,2022-06-25,2023-03-01
+all,AIRI Artificial Intelligence Research Institute,2,1,5.1777408e+20,5.1777408e+20,Industry-academia collaboration,Russia,2023-11-22,2024-06-02
+all,Abacus AI,2,0,,,Industry,United States of America,2024-07-03,2024-07-03
+all,Advanced Telecommunications Research Institute,2,0,,,Industry,Japan,1989-03-03,1997-11-01
+all,Arc Institute,2,2,1.1754e+24,2.25e+24,Industry-academia collaboration,United States of America,2025-02-19,2025-02-19
+all,AssemblyAI,2,0,,,Industry,,2024-04-03,2024-10-30
+all,AstraZeneca,2,0,,,Industry,Multinational,2024-02-21,2024-09-21
+all,Bangladesh University of Engineering and Technology,2,1,1.8354513e+19,1.8354513e+19,Academia,Multinational,2024-09-25,2024-11-18
+all,Beijing 58 Information Technology,2,0,,,Industry,China,2024-07-18,2024-12-27
+all,Brown University,2,0,,,Academia,United States of America,2001-07-06,2019-06-17
+all,CausalLM,2,0,,,,China,2023-10-22,2024-02-06
+all,Chan Zuckerberg Initiative,2,0,,,Industry-academia collaboration,United States of America,2023-10-10,2025-04-30
+all,Contextual AI,2,0,,,Industry-academia collaboration,Multinational,2024-04-17,2024-04-17
+all,Cornell Aeronautical Laboratory,2,2,360347447.4688681,720000000.0,Academia,United States of America,1957-01-01,1960-03-30
+all,Craiyon,2,2,1.144536544e+22,2.285273088e+22,Industry,United States of America,2021-10-26,2022-06-28
+all,CyberAgent,2,2,2.73447552e+22,5.46e+22,Industry,Japan,2023-05-15,2023-11-01
+all,Darktrace,2,1,4.579186e+20,4.579186e+20,Industry,United Kingdom of Great Britain and Northern Ireland,2025-04-16,2025-04-17
+all,DeepGenomics,2,1,1.2e+22,1.2e+22,Industry,Canada,2023-09-27,2025-05-16
+all,Deepgram,2,0,,,Industry,United States of America,2023-09-19,2025-04-15
+all,ESAT - PSI,2,0,,,Academia,Belgium,2018-05-01,2018-05-01
+all,EvolutionaryScale,2,2,5.3635e+23,1.07e+24,Industry-academia collaboration,United States of America,2024-06-25,2024-06-25
+all,Figure AI,2,0,,,Industry,United States of America,2025-02-20,2026-01-27
+all,French Engineering School ECE,2,0,,,Industry-academia collaboration,France,2024-04-01,2024-04-01
+all,Geely Automobile Research Institute (Ningbo) Company,2,0,,,Industry,China,2024-01-05,2024-03-09
+all,Georgia Institute of Technology,2,1,7.8e+20,7.8e+20,Academia,Multinational,2019-12-19,2024-04-02
+all,Ghent University,2,2,1.03e+16,1.28e+16,Academia,Belgium,2017-07-19,2017-07-19
+all,Ginkgo Bioworks,2,0,,,Industry,United States of America,2024-09-17,2024-10-07
+all,Google AI,2,1,1.83e+19,1.83e+19,Industry,Multinational,2018-04-26,2021-05-15
+all,Google Cloud,2,1,2.40576e+19,2.40576e+19,Industry,United States of America,2021-05-26,2023-12-13
+all,Hong Kong University of Science and Technology (HKUST),2,0,,,Academia,Hong Kong,2024-07-03,2025-03-11
+all,Huazhong University of Science and Technology,2,1,3.9798e+18,3.9798e+18,Academia,China,2020-10-16,2024-04-24
+all,Hunan University,2,0,,,Academia,China,2024-01-18,2024-09-07
+all,IDIAP,2,1,4.08e+17,4.08e+17,Academia,Switzerland,2019-05-14,2019-05-14
+all,Imperial College London,2,2,1.711499999999994e+19,3.399999999999988e+19,Academia,Multinational,2024-02-08,2024-05-24
+all,Insilico Medicine AI,2,0,,,Industry,Hong Kong,2023-02-02,2024-07-05
+all,Intel Labs,2,1,5.337e+16,5.337e+16,Industry,United States of America,2018-03-04,2023-08-30
+all,Jagiellonian University,2,2,4.712252832e+19,9.393905664e+19,Academia,Multinational,2017-01-23,2017-10-31
+all,Johannes Kepler University Linz,2,1,2.56e+18,2.56e+18,Academia,Austria,2020-07-16,2024-05-07
+all,KT,2,1,1.1999999999999999e+24,1.1999999999999999e+24,Industry,Korea (Republic of),2023-10-31,2023-11-15
+all,Konan Technology,2,2,1.054356e+23,1.722e+23,Industry,Korea (Republic of),2023-08-15,2023-12-15
+all,LG,2,2,8.478003900749999e+23,1.6956e+24,Industry,Korea (Republic of),2021-12-14,2023-10-01
+all,LINE Corporation,2,1,2.8e+19,2.8e+19,Industry,Japan,2022-06-01,2023-08-14
+all,Lenovo Research,2,0,,,Industry,China,2021-04-04,2021-04-04
+all,Leonardo AI,2,0,,,Industry,Australia,2024-06-12,2025-09-10
+all,Max Planck Institute for Intelligent Systems,2,2,6.4806539616e+20,1.296e+21,Academia,Germany,2016-12-23,2022-05-05
+all,Mianbi Intelligence,2,1,1.1999999999999999e+24,1.1999999999999999e+24,Industry,China,2023-08-29,2024-09-06
+all,Moonvalley,2,0,,,Industry,Canada,2025-03-12,2025-08-14
+all,MosaicML,2,2,1.15500000000005e+23,1.8900000000001e+23,Industry,United States of America,2023-05-05,2023-06-22
+all,NASA,2,1,2.9474214e+21,2.9474214e+21,Industry-academia collaboration,United States of America,2023-12-01,2025-08-20
+all,NERSC,2,1,1.58e+18,1.58e+18,Industry-academia collaboration,United States of America,2020-06-01,2024-09-16
+all,NHK Broadcasting Science Research Laboratories,2,1,273738240.0,273738240.0,Industry,Japan,1980-04-01,1984-04-01
+all,NIO,2,0,,,Industry,China,2024-04-12,2024-07-27
+all,Nanbeige LLM Lab,2,2,3.225e+23,4.05e+23,Industry,China,2023-11-01,2024-05-28
+all,Nanyang Technological University,2,0,,,Academia,Singapore,2023-05-05,2023-11-07
+all,Naver AI Lab,2,0,,,Industry,Korea (Republic of),2020-06-15,2020-06-15
+all,NetEase,2,0,,,Industry,China,2023-07-28,2023-07-28
+all,Northwestern University,2,2,1.076345e+16,2.1024e+16,Academia,United States of America,2018-01-01,2018-04-27
+all,OpenBMB (Open Lab for Big Model Base),2,0,,,,China,2024-08-06,2025-06-09
+all,Oregon State University,2,1,35811936000.0,35811936000.0,Academia,United States of America,1990-06-01,2023-05-29
+all,Pennsylvania State University,2,1,276440230000000.0,276440230000000.0,Academia,United States of America,2020-04-04,2024-10-12
+all,Peptone,2,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2024-09-09,2024-09-09
+all,Qilin Hesheng Network Technology Co.,2,0,,,Industry,China,2023-04-18,2024-04-02
+all,RWTH Aachen University,2,1,1.66e+16,1.66e+16,Academia,Germany,2012-09-01,2012-09-09
+all,Recraft,2,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2024-03-13,2024-10-30
+all,Rhymes AI,2,2,1.04229235e+23,1.428e+23,Industry,United States of America,2024-10-08,2024-10-20
+all,Ruhr University Bochum,2,1,2.22e+18,2.22e+18,Academia,Multinational,2022-06-13,2022-06-13
+all,Saama,2,0,,,,United States of America,2025-01-14,2025-01-14
+all,SambaNova Systems,2,2,4.4869e+23,8.1168e+23,Industry,United States of America,2024-04-08,2024-04-08
+all,Sarvam,2,0,,,Industry,India,2024-08-13,2024-08-30
+all,Shannon.AI,2,1,5.2587456e+19,5.2587456e+19,Industry-academia collaboration,Multinational,2021-10-17,2021-10-17
+all,ShengShu,2,1,1.992646656e+22,1.992646656e+22,Industry,China,2023-05-30,2024-11-13
+all,SoundAI,2,0,,,Industry,China,2023-12-01,2024-07-18
+all,SpeakLeash,2,0,,,Industry-academia collaboration,Poland,2024-08-28,2024-10-24
+all,Speechmatics,2,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2021-08-23,2021-09-07
+all,Texas A&M,2,0,,,Academia,Multinational,2022-04-19,2022-09-18
+all,Tik Tok,2,0,,,Industry-academia collaboration,Multinational,2024-10-20,2024-10-20
+all,Trillion Labs,2,2,1.9399999999999998e+23,2.95e+23,Industry,Korea (Republic of),2025-04-21,2025-08-01
+all,UC Davis,2,1,1.2e+19,1.2e+19,Academia,Multinational,1997-12-01,2020-10-14
+all,UC Irvine,2,0,,,Academia,United States of America,2008-06-23,2016-05-08
+all,University Paris-Saclay,2,2,9.000000000000006e+17,9.000000000000006e+17,Academia,Multinational,2024-04-13,2024-04-13
+all,University of Amsterdam,2,2,550089900000000.0,624979800000000.0,Academia,Multinational,2013-12-20,2014-12-22
+all,University of Bern,2,0,,,Academia,Multinational,2007-09-23,2007-12-03
+all,University of Electronic Science and Technology of China,2,0,,,Academia,China,2019-01-01,2019-06-17
+all,University of Geneva,2,1,8.0490594e+20,8.0490594e+20,Academia,Multinational,1967-11-01,2024-05-20
+all,University of Liverpool,2,0,,,Academia,Multinational,2020-07-29,2020-07-29
+all,University of Manchester,2,2,4.848e+16,7.296e+16,Academia,United Kingdom of Great Britain and Northern Ireland,2018-05-22,2018-05-22
+all,University of Minnesota,2,0,,,Academia,United States of America,2000-07-14,2023-05-17
+all,University of Notre Dame,2,0,,,Academia,United States of America,2021-09-05,2022-10-04
+all,University of Rochester,2,0,,,Academia,United States of America,2000-09-01,2023-04-03
+all,University of Sheffield,2,2,3375681855000000.0,6528000000000000.0,Academia,United Kingdom of Great Britain and Northern Ireland,2021-06-04,2021-06-04
+all,University of Technology Sydney,2,1,7.200353201209069e+23,7.200353201209069e+23,Academia,Australia,2017-10-22,2024-02-15
+all,University of Warwick,2,1,1e+17,1e+17,Academia,United Kingdom of Great Britain and Northern Ireland,2014-09-23,2014-12-18
+all,University of Zagreb,2,1,1.0500000000000004e+21,1.0500000000000004e+21,Academia,Croatia,1976-07-01,2024-02-29
+all,West Virginia University,2,0,,,Academia,United States of America,2019-07-17,2024-10-11
+all,Xerox,2,0,,,Industry,United States of America,1995-01-01,2007-07-16
+all,Yahoo Research,2,0,,,Industry,United States of America,2009-08-07,2010-07-01
+all,Yale School of Medicine,2,0,,,Academia,United States of America,2024-02-20,2024-02-20
+all,ZTE,2,0,,,Industry,China,2024-07-16,2025-05-12
+all,Zhejiang Lab,2,0,,,Academia,Multinational,2024-04-20,2024-09-17
+all,Zyphra,2,1,8.82e+22,8.82e+22,Industry,United States of America,2024-05-26,2025-02-10
+all,deepset,2,2,1.8363801399999998e+21,2.2444646e+21,Industry-academia collaboration,Germany,2020-10-21,2020-10-21
+all,hexgrad,2,2,1.6848e+20,1.6848e+20,,,2024-12-25,2025-01-27
+all,310.ai,1,1,9.6585178e+22,9.6585178e+22,Industry,United States of America,2024-07-15,2024-07-15
+all,AI inside,1,0,,,Industry,Japan,2023-06-08,2023-06-08
+all,Aalborg University,1,0,,,Academia,Multinational,1991-06-24,1991-06-24
+all,Aalto University,1,0,,,Academia,Multinational,2013-12-20,2013-12-20
+all,Aarhus university,1,0,,,Academia,Denmark,2024-08-22,2024-08-22
+all,Abeja,1,0,,,Industry,Japan,2022-07-27,2022-07-27
+all,Academia Sinica,1,1,1.74258e+17,1.74258e+17,Academia,Taiwan,2024-02-29,2024-02-29
+all,Alan Turing Institute,1,0,,,Government,United Kingdom of Great Britain and Northern Ireland,1992-10-01,1992-10-01
+all,Amazon Machine Learning Solutions Lab,1,0,,,Industry,United States of America,2021-09-21,2021-09-21
+all,Amazon Web Services (AWS),1,0,,,,,2025-12-02,2025-12-02
+all,Aristotle University of Thessaloniki,1,1,1.1725747e+20,1.1725747e+20,Academia,Greece,2021-11-04,2021-11-04
+all,Baidu Research - Silicon Valley AI Lab,1,1,2.6e+19,2.6e+19,Industry,United States of America,2015-12-08,2015-12-08
+all,Bar-Ilan University,1,1,1.9e+20,1.9e+20,Academia,Israel,2022-09-18,2022-09-18
+all,Barcelona Institute of Science and Technology,1,0,,,Academia,Spain,2024-03-16,2024-03-16
+all,Beijing Beida Software Engineering Co.,1,0,,,Industry,China,2024-07-18,2024-07-18
+all,Beijing Bitauto Interactive Advertising Company Limited,1,0,,,Industry,China,2024-05-13,2024-05-13
+all,Beijing Lingxin Intelligent Technology Co.,1,0,,,Industry,China,2023-07-25,2023-07-25
+all,Beijing Lituo Feiyuan Technology Co.,1,0,,,Industry,China,2024-05-13,2024-05-13
+all,Beijing OrionStar Technology Co.,1,0,,,Industry,China,2024-01-21,2024-01-21
+all,Beijing University of Chemical Technology,1,0,,,Academia,China,2024-09-19,2024-09-19
+all,Beijing Weimeng Chuangke Network Technology,1,0,,,Industry,China,2024-07-20,2024-07-20
+all,Beijing Yuanshi Technology Co.,1,0,,,,China,2024-05-13,2024-05-13
+all,Beijing Zhijing Yunchuang Technology Co.,1,0,,,Industry,China,2024-07-18,2024-07-18
+all,Beijing Zhizhe Tianxia Technology,1,0,,,Industry,China,2023-11-04,2023-11-04
+all,Ben-Gurion University of the Negev,1,1,4.56e+17,4.56e+17,Academia,Israel,2017-08-29,2017-08-29
+all,BioGeometry,1,0,,,Industry-academia collaboration,Multinational,2024-09-06,2024-09-06
+all,Biological Cybernetics,1,1,5184000.0,5184000.0,Industry,Japan,1975-09-01,1975-09-01
+all,Bloomberg,1,1,2.36e+23,2.36e+23,Industry-academia collaboration,United States of America,2023-03-30,2023-03-30
+all,Bosch Center for Artificial Intelligence,1,0,,,Industry-academia collaboration,Germany,2021-03-19,2021-03-19
+all,Caldera AI,1,0,,,Research collective,,2023-05-27,2023-05-27
+all,Capital One,1,0,,,Industry,United States of America,2019-06-13,2019-06-13
+all,Carleton University,1,1,2.6990346e+19,2.6990346e+19,Academia,Canada,2020-02-08,2020-02-08
+all,CassetteAI,1,0,,,Industry,United States of America,2025-03-27,2025-03-27
+all,Central South University,1,0,,,Industry-academia collaboration,Multinational,2024-09-04,2024-09-04
+all,CentraleSupelec,1,1,1.1e+19,1.1e+19,Academia,France,2024-09-13,2024-09-13
+all,Centre de Recherche en Automatique de Nancy (CRAN),1,0,,,Academia,Multinational,2006-02-02,2006-02-02
+all,Cerenaut,1,0,,,,Australia,2019-05-28,2019-05-28
+all,Chai discovery,1,1,7.7605724e+21,7.7605724e+21,Industry,United States of America,2024-10-15,2024-10-15
+all,Chandar Research Lab,1,1,1.1000000000000008e+22,1.1000000000000008e+22,Industry-academia collaboration,Multinational,2024-09-23,2024-09-23
+all,Charité-Universitätsmedizin Berlin,1,0,,,Academia,Multinational,2024-09-10,2024-09-10
+all,Chengdu Tasi Technology Co.,1,0,,,Industry,China,2025-02-18,2025-02-18
+all,Chengdu University of Traditional Chinese Medicine,1,0,,,Academia,China,2024-04-12,2024-04-12
+all,Chengdu Xiaoduo Technology Co.,1,0,,,Industry,China,2024-05-09,2024-05-09
+all,China Post Consumer Finance Co.,1,0,,,Industry,China,2024-04-02,2024-04-02
+all,Chongqing University,1,0,,,Industry-academia collaboration,China,2024-09-28,2024-09-28
+all,Cisco,1,1,1.2242448e+24,1.2242448e+24,Industry,United States of America,2025-04-28,2025-04-28
+all,City University of New York,1,0,,,Academia,United States of America,2024-09-09,2024-09-09
+all,Clemson University,1,0,,,Academia,Multinational,2024-09-06,2024-09-06
+all,Cleveland Clinic,1,0,,,Industry-academia collaboration,United States of America,2024-10-08,2024-10-08
+all,CloudWalk Technology,1,0,,,Industry-academia collaboration,China,2023-05-18,2023-05-18
+all,Collaborations Pharmaceuticals,1,0,,,Industry,United States of America,2022-03-07,2022-03-07
+all,Collège de France,1,0,,,Academia,France,2011-08-31,2011-08-31
+all,Complutense University of Madrid,1,1,27000000000.0,27000000000.0,Academia,Spain,1989-06-18,1989-06-18
+all,Cosine,1,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2024-08-12,2024-08-12
+all,Covariant,1,1,2.4e+20,2.4e+20,Industry,United States of America,2024-03-11,2024-03-11
+all,CreditEase,1,0,,,Industry,China,2024-11-29,2024-11-29
+all,Dahan Software / Hanweb,1,0,,,Industry,China,2024-09-11,2024-09-11
+all,Dahua Technology,1,0,,,Industry,China,2023-10-25,2023-10-25
+all,Dalian University of Technology,1,0,,,Industry-academia collaboration,China,2021-04-04,2021-04-04
+all,DeepL,1,0,,,Industry,Germany,2024-07-16,2024-07-16
+all,DeepLang AI,1,0,,,Industry,China,2023-11-01,2023-11-01
+all,DeepOrigin,1,0,,,Industry,United States of America,2024-05-08,2024-05-08
+all,DeepScale,1,0,,,Academia,United States of America,2016-02-24,2016-02-24
+all,Drahim,1,0,,,,Saudi Arabia,2022-06-30,2022-06-30
+all,Dreamfold,1,1,7.646000000001e+21,7.646000000001e+21,Industry-academia collaboration,Multinational,2024-05-30,2024-05-30
+all,Du Xiaoman,1,0,,,Industry,China,2023-05-19,2023-05-19
+all,EURECOM,1,0,,,Academia,France,1994-06-01,1994-06-01
+all,Earth Species Project,1,1,1.4108774e+21,1.4108774e+21,Research collective,United States of America,2024-11-11,2024-11-11
+all,Elyza,1,0,,,Industry,Japan,2023-12-27,2023-12-27
+all,Equall.ai,1,0,,,Industry,United States of America,2024-07-28,2024-07-28
+all,European Bioinformatics Institute,1,0,,,Industry-academia collaboration,Multinational,2024-09-18,2024-09-18
+all,FASHN AI,1,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2025-03-27,2025-03-27
+all,Factory,1,0,,,Industry,United States of America,2024-06-22,2024-06-22
+all,FlagAlpha,1,0,,,Research collective,China,2023-06-25,2023-06-25
+all,Flatiron Institute,1,0,,,Industry-academia collaboration,Multinational,2021-05-26,2021-05-26
+all,Fox Chase Cancer Center,1,0,,,Academia,United States of America,2024-10-12,2024-10-12
+all,Foxconn,1,0,,,Industry,Taiwan,2025-03-10,2025-03-10
+all,Fraunhofer Heinrich Hertz Institute,1,1,6.37e+17,6.37e+17,Research collective,Germany,2019-09-04,2019-09-04
+all,Fujitsu,1,0,,,Industry,Multinational,2024-09-30,2024-09-30
+all,FutureHouse,1,0,,,,United States of America,2025-06-05,2025-06-05
+all,G42,1,1,9.654e+23,9.654e+23,Industry,United Arab Emirates,2024-08-05,2024-08-05
+all,Galixir Technologies,1,0,,,Industry-academia collaboration,Multinational,2024-04-02,2024-04-02
+all,Generalist,1,0,,,Industry,United States of America,2025-11-04,2025-11-04
+all,Genmo,1,0,,,Industry,United States of America,2024-10-22,2024-10-22
+all,George Washington University,1,0,,,Academia,United States of America,2024-09-22,2024-09-22
+all,Goethe University Frankfurt,1,0,,,Academia,Germany,2024-09-11,2024-09-11
+all,Gray Swan,1,0,,,Industry,United States of America,2024-07-16,2024-07-16
+all,Graz University of Technology,1,0,,,Academia,Multinational,2016-06-01,2016-06-01
+all,Griffith University,1,1,1.822e+16,1.822e+16,Academia,Multinational,2016-10-28,2016-10-28
+all,Guangdong-Hong Kong-Macao Joint Laboratory of Human-Machine Intelligence-Synergy Systems,1,0,,,Industry-academia collaboration,China,2023-05-30,2023-05-30
+all,Guangzhou AI Public Computing Center,1,0,,,Industry-academia collaboration,China,2024-07-22,2024-07-22
+all,Guangzhou Lingju Information Technology Co Ltd.,1,0,,,Industry,China,2025-03-28,2025-03-28
+all,HEC Montreal,1,0,,,Academia,Canada,2023-01-24,2023-01-24
+all,Haiper,1,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2024-10-29,2024-10-29
+all,Hangzhou EZVIZ Software Co.,1,0,,,Industry,China,2025-06-26,2025-06-26
+all,Hangzhou Institute of Medicine,1,0,,,Academia,China,2024-10-13,2024-10-13
+all,Harmonic,1,0,,,Industry,United States of America,2024-09-07,2024-09-07
+all,Harrison.ai,1,0,,,Industry,Australia,2024-09-05,2024-09-05
+all,Hebrew University of Jerusalem,1,1,6.5e+19,6.5e+19,Industry-academia collaboration,Multinational,2022-02-10,2022-02-10
+all,Hedra AI,1,0,,,Industry,United States of America,2025-03-06,2025-03-06
+all,Heinrich Heine University,1,0,,,Academia,Multinational,2024-09-26,2024-09-26
+all,Helsinki University of Technology,1,0,,,Academia,Finland,1981-07-25,1981-07-25
+all,Henan University,1,1,1.8710548688e+22,1.8710548688e+22,Academia,China,2023-03-23,2023-03-23
+all,Henan University of Technology,1,0,,,Industry-academia collaboration,China,2022-05-23,2022-05-23
+all,Heriot-Watt University,1,1,1.8e+21,1.8e+21,Industry-academia collaboration,United Kingdom of Great Britain and Northern Ireland,2018-09-28,2018-09-28
+all,High-Performance Language Technologies (HPLT),1,1,2.052e+23,2.052e+23,Industry-academia collaboration,Multinational,2023-12-14,2023-12-14
+all,Hisense,1,0,,,Industry,China,2024-03-15,2024-03-15
+all,Hokkaido University,1,0,,,Academia,Japan,2024-09-19,2024-09-19
+all,Hong Kong Baptist University,1,0,,,Industry-academia collaboration,Multinational,2022-07-15,2022-07-15
+all,Hong Kong Polytechnic University,1,1,2.7713e+19,2.7713e+19,Academia,Hong Kong,2024-09-24,2024-09-24
+all,Huddersfield University,1,0,,,Academia,United Kingdom of Great Britain and Northern Ireland,2024-10-23,2024-10-23
+all,Hungarian Research Centre for Linguistics,1,1,5.8e+21,5.8e+21,Academia,Hungary,2023-08-23,2023-08-23
+all,IDEA CCNL,1,1,5.1e+22,5.1e+22,Academia,China,2022-10-31,2022-10-31
+all,INSAIT,1,1,4.36e+23,4.36e+23,Academia,Multinational,2025-04-23,2025-04-23
+all,Illuin Technology,1,0,,,Industry-academia collaboration,Multinational,2024-07-05,2024-07-05
+all,Indian Institute of Science Education and Research,1,0,,,Government,India,2024-09-24,2024-09-24
+all,Indian Institute of Technology Delhi,1,0,,,Academia,India,2020-05-17,2020-05-17
+all,Indian Statistical Institute,1,1,1403117760.0,1403117760.0,Academia,India,1992-09-01,1992-09-01
+all,Indiana University Bloomington,1,0,,,Academia,United States of America,2020-10-22,2020-10-22
+all,Indosat,1,0,,,Industry-academia collaboration,Multinational,2024-11-14,2024-11-14
+all,"Indraprastha Institute of Information Technology
+Delhi",1,1,1.8397012e+16,1.8397012e+16,Academia,India,2024-09-24,2024-09-24
+all,Infinigence AI,1,1,3.6e+22,3.6e+22,Industry-academia collaboration,China,2024-06-12,2024-06-12
+all,Institute for Advanced Study,1,0,,,Academia,United States of America,1954-07-02,1954-07-02
+all,Instituto de Ciencias Aplicadas y Technologia,1,0,,,Academia,Mexico,2004-07-30,2004-07-30
+all,Intel,1,0,,,Industry-academia collaboration,United States of America,2023-11-13,2023-11-13
+all,Intelligent Internet,1,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2025-05-15,2025-05-15
+all,International School for Advanced Studies,1,1,1.799999999999987e+18,1.799999999999987e+18,Academia,Multinational,2020-11-16,2020-11-16
+all,Isfahan University of Technology,1,0,,,Academia,Iran (Islamic Republic of),2024-09-24,2024-09-24
+all,JD.com,1,0,,,Industry,China,2023-07-13,2023-07-13
+all,JURA Bio,1,0,,,Industry-academia collaboration,United States of America,2024-09-13,2024-09-13
+all,Jacobs University Bremen,1,1,1.5552e+18,1.5552e+18,Academia,Multinational,2014-09-01,2014-09-01
+all,Jane Street,1,1,2.32e+19,2.32e+19,Industry,United States of America,2019-02-27,2019-02-27
+all,Jenni,1,1,7.9e+19,7.9e+19,Industry,Singapore,2022-10-09,2022-10-09
+all,Jeonbuk National University,1,0,,,Academia,Korea (Republic of),2024-11-01,2024-11-01
+all,Jiangnan University,1,0,,,Academia,Multinational,2016-11-16,2016-11-16
+all,Jiangsu Huizhi Intelligent Digital Technology Co.,1,0,,,Industry,China,2024-07-23,2024-07-23
+all,Johannes Kepler University,1,0,,,Academia,Multinational,2021-10-21,2021-10-21
+all,K.D. Feddersen (KDF),1,1,4.03e+22,4.03e+22,Industry,China,2023-08-01,2023-08-01
+all,KARAKURI Inc.,1,0,,,Industry,Japan,2024-01-26,2024-01-26
+all,KU Leuven,1,1,982800000000000.0,982800000000000.0,Industry-academia collaboration,Multinational,2018-09-24,2018-09-24
+all,Kansas State University,1,1,2.11e+17,2.11e+17,Academia,United States of America,2024-08-16,2024-08-16
+all,Kyoto University,1,0,,,Industry-academia collaboration,Japan,2024-09-14,2024-09-14
+all,LAION,1,1,7.8410000000001e+22,7.8410000000001e+22,Research collective,Germany,2022-09-15,2022-09-15
+all,LMMs-Lab,1,0,,,Research collective,,2024-07-16,2024-07-16
+all,LORIA,1,1,7.690547e+18,7.690547e+18,Industry-academia collaboration,Multinational,2020-02-21,2020-02-21
+all,Lehigh University,1,0,,,Industry-academia collaboration,United States of America,2023-05-23,2023-05-23
+all,Lightblue,1,0,,,Industry,Japan,2023-12-29,2023-12-29
+all,LinkedIn,1,0,,,Industry,United States of America,2018-09-18,2018-09-18
+all,Linköping University,1,0,,,Academia,Sweden,2024-10-09,2024-10-09
+all,Liquid,1,0,,,Industry,United States of America,2024-09-30,2024-09-30
+all,Luminary Cloud,1,0,,,Industry,Multinational,2025-04-09,2025-04-09
+all,MTS,1,0,,,Industry,Russia,2024-03-25,2024-03-25
+all,Magic,1,0,,,Industry,United States of America,2023-06-06,2023-06-06
+all,Maluuba,1,0,,,Industry,Multinational,2017-06-13,2017-06-13
+all,Marin,1,1,6.12e+23,6.12e+23,Research collective,United States of America,2025-05-19,2025-05-19
+all,Matsuo Lab,1,1,3.6e+22,3.6e+22,,Japan,2023-08-04,2023-08-04
+all,Max Planck Institute of Biochemistry,1,1,7.616995200001001e+21,7.616995200001001e+21,Academia,Germany,2024-01-26,2024-01-26
+all,Meituan Inc,1,1,3.726e+24,3.726e+24,Industry,China,2025-09-01,2025-09-01
+all,Meituan University,1,1,2.8e+20,2.8e+20,Academia,China,2021-05-25,2021-05-25
+all,Michigan State University,1,1,8649021100000000.0,8649021100000000.0,Industry-academia collaboration,Multinational,2019-07-12,2019-07-12
+all,Mitsubishi Electric Research Labs,1,1,63000000000000.0,63000000000000.0,Industry,United States of America,2001-12-08,2001-12-08
+all,Moore Threads,1,0,,,Industry,China,2024-08-09,2024-08-09
+all,Moscow Institute of Physics and Technology,1,1,6.7839792e+18,6.7839792e+18,Industry-academia collaboration,Russia,2022-07-14,2022-07-14
+all,Murdoch University,1,0,,,Academia,Australia,2019-04-18,2019-04-18
+all,NC AI,1,0,,,Industry,Korea (Republic of),2025-12-30,2025-12-30
+all,NEC Corporation,1,0,,,Industry,Japan,2024-04-24,2024-04-24
+all,Nanhu Brain-Computer Interface Institute,1,0,,,Academia,China,2024-10-11,2024-10-11
+all,Nanjing Agricultural University,1,0,,,Academia,China,2024-09-22,2024-09-22
+all,Nankai University,1,1,3.8047968e+19,3.8047968e+19,Academia,Multinational,2019-08-22,2019-08-22
+all,Nara Institute of Science and Technology,1,1,1.49682e+17,1.49682e+17,Academia,Multinational,2018-09-28,2018-09-28
+all,National Cancer Institute,1,1,53460000.0,53460000.0,Government,United States of America,1992-10-16,1992-10-16
+all,National Chiao Tung University,1,1,226690156032.0183,226690156032.0183,Academia,Taiwan,1998-05-15,1998-05-15
+all,National Institute of Advanced Industrial Science and Technology (AIST),1,1,5.1450348e+18,5.1450348e+18,Academia,Japan,2021-01-01,2021-01-01
+all,National Research University Higher School of Economics,1,0,,,Industry-academia collaboration,Russia,2018-06-26,2018-06-26
+all,National Supercomputer Center in Tianjin,1,0,,,Government,China,2023-05-18,2023-05-18
+all,Naver Clova,1,1,3.456e+18,3.456e+18,Industry,Korea (Republic of),2022-11-22,2022-11-22
+all,Netflix,1,0,,,Industry,United States of America,2015-12-01,2015-12-01
+all,Nixtla,1,0,,,Industry,United States of America,2024-05-27,2024-05-27
+all,Nostrum Biodiscovery,1,1,2.28096e+19,2.28096e+19,Industry-academia collaboration,Spain,2023-08-06,2023-08-06
+all,Numenta,1,1,275400000000000.0,275400000000000.0,Industry,Multinational,2019-12-02,2019-12-02
+all,Ohio State University,1,1,2.59999999999998e+19,2.59999999999998e+19,,United States of America,2023-08-23,2023-08-23
+all,Oncode Institute,1,0,,,Academia,Netherlands,2024-07-15,2024-07-15
+all,OpenGPT-X,1,1,2.1444092e+23,2.1444092e+23,Industry-academia collaboration,Germany,2025-08-21,2025-08-21
+all,OpenLM Research,1,1,7.8e+22,7.8e+22,Research collective,United States of America,2023-05-01,2023-05-01
+all,OpenProtein.ai,1,1,2.3000000000000197e+20,2.3000000000000197e+20,Industry,Singapore,2023-06-09,2023-06-09
+all,Oppo Mobile Telecommunications,1,0,,,Industry,China,2023-11-16,2023-11-16
+all,POSTECH,1,1,3.8680312e+22,3.8680312e+22,Industry-academia collaboration,Multinational,2023-06-19,2023-06-19
+all,Papla Media,1,0,,,Industry,Poland,2025-03-31,2025-03-31
+all,Pinterest,1,1,1.656e+20,1.656e+20,Industry,United States of America,2023-05-31,2023-05-31
+all,PixVerse AI,1,0,,,Industry,China,2025-05-13,2025-05-13
+all,Poolside,1,0,,,Industry,United States of America,2024-12-02,2024-12-02
+all,Pragmatic Theory Inc.,1,0,,,Industry,Canada,2009-08-01,2009-08-01
+all,Prescient Design,1,1,1.078272e+19,1.078272e+19,Industry,United States of America,2024-05-15,2024-05-15
+all,Profluent Bio,1,0,,,Industry-academia collaboration,United States of America,2024-10-09,2024-10-09
+all,Purdue University,1,1,1080000.0,1080000.0,Academia,United States of America,1965-10-01,1965-10-01
+all,Recursion Pharmaceuticals,1,1,3.18e+19,3.18e+19,Industry,United States of America,2024-11-05,2024-11-05
+all,Rednote,1,1,1.2164856e+24,1.2164856e+24,Industry,China,2025-07-06,2025-07-06
+all,Refact AI,1,1,1.152e+22,1.152e+22,Industry,United Kingdom of Great Britain and Northern Ireland,2023-08-29,2023-08-29
+all,Regeneron,1,0,,,Industry,United States of America,2024-10-12,2024-10-12
+all,Rensselaer Polytechnic Institute,1,0,,,Academia,Multinational,2024-09-24,2024-09-24
+all,Resemble AI,1,0,,,Industry,United States of America,2025-09-04,2025-09-04
+all,Rock AI / Shanghai Stonehill Technology,1,0,,,Industry,China,2024-01-26,2024-01-26
+all,Ruliad,1,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2024-11-27,2024-11-27
+all,Rutgers University,1,1,2.2374144e+20,2.2374144e+20,Industry-academia collaboration,United States of America,2019-06-14,2019-06-14
+all,SaltLux,1,0,,,Industry,Korea (Republic of),2024-05-27,2024-05-27
+all,Samsung SAIT AI Lab,1,1,3.07742976e+20,3.07742976e+20,Industry,Korea (Republic of),2025-10-06,2025-10-06
+all,Sandia Corporation,1,0,,,Industry,United States of America,1959-12-01,1959-12-01
+all,Sapient Intelligence,1,0,,,,Singapore,2025-08-04,2025-08-04
+all,Sapienza Università di Roma,1,1,4531200000.0,4531200000.0,Academia,Italy,1994-01-07,1994-01-07
+all,Saudi Aramco,1,1,1.05e+25,1.05e+25,Industry-academia collaboration,Saudi Arabia,2024-03-04,2024-03-04
+all,Science Applications International Corporation / SAIC,1,0,,,Industry,United States of America,1989-01-01,1989-01-01
+all,Sea AI Lab,1,1,1.7726e+23,1.7726e+23,Academia,Singapore,2024-04-04,2024-04-04
+all,Sensifai,1,0,,,Industry-academia collaboration,Multinational,2016-08-22,2016-08-22
+all,Shanghai Digivio Information Technology Co.,1,0,,,Industry,China,2024-05-13,2024-05-13
+all,Shanghai Kuanyu Digital Technology Co.,1,0,,,Industry,China,2024-06-27,2024-06-27
+all,Shanghai Lingyi Artificial Intelligence Technology Co.,1,0,,,Industry,China,2025-02-21,2025-02-21
+all,Shanghai Ocean University,1,0,,,Academia,China,2024-09-23,2024-09-23
+all,Shanghai Qi Zhi institute,1,0,,,Academia,Multinational,2023-09-12,2023-09-12
+all,Shanghai Shuheng Information Technology Co.,1,0,,,Industry,China,2024-11-29,2024-11-29
+all,Shanghai Tech University,1,1,3.1054234e+22,3.1054234e+22,Industry-academia collaboration,China,2024-05-30,2024-05-30
+all,Shanghai Xingzhi Technology Co.,1,0,,,Industry,China,2024-10-31,2024-10-31
+all,ShanghaiTech University,1,1,1e+19,1e+19,Academia,China,2023-11-02,2023-11-02
+all,Shape Therapeutics,1,0,,,Industry,United States of America,2024-09-28,2024-09-28
+all,Shenzhen Honor Software Technology,1,0,,,Industry,China,2024-01-10,2024-01-10
+all,Shenzhen Research Institue of Big Data,1,0,,,Academia,Multinational,2023-05-24,2023-05-24
+all,Shiyin Intelligent Technology Co.,1,0,,,Industry,China,2024-01-17,2024-01-17
+all,Shuchi Information Technology ( Shanghai ) Co.,1,0,,,Industry,China,2024-01-31,2024-01-31
+all,Sichuan University,1,0,,,Academia,China,2024-09-09,2024-09-09
+all,Silo AI,1,1,2.574e+23,2.574e+23,Industry-academia collaboration,Finland,2024-04-04,2024-04-04
+all,Snowflake,1,1,3.8347175e+23,3.8347175e+23,Industry,United States of America,2024-04-24,2024-04-24
+all,Softbank,1,0,,,Industry,Japan,2025-09-09,2025-09-09
+all,Soochow University,1,0,,,Academia,Taiwan,2024-09-20,2024-09-20
+all,Soongsil University,1,0,,,Academia,Korea (Republic of),2004-06-01,2004-06-01
+all,Sorbonne University,1,0,,,Industry-academia collaboration,France,2024-09-25,2024-09-25
+all,South China University of Technology,1,0,,,Academia,China,2024-09-14,2024-09-14
+all,Southwest Petroleum University,1,0,,,Academia,China,2024-10-13,2024-10-13
+all,Stockholm University,1,0,,,Industry-academia collaboration,Sweden,2024-10-12,2024-10-12
+all,Stockmark,1,1,1.716e+22,1.716e+22,Industry,Japan,2023-10-23,2023-10-23
+all,Suzhou Jueqing Diyu Intelligent Technology,1,0,,,Industry,China,2024-12-25,2024-12-25
+all,TAL Education Group (Xueersi),1,0,,,Industry,China,2023-08-24,2023-08-24
+all,TU Darmstadt,1,0,,,Academia,Germany,2021-02-18,2021-02-18
+all,Technische Hochschule Ingolstadt,1,1,8.2898899e+21,8.2898899e+21,Industry-academia collaboration,Multinational,2023-09-29,2023-09-29
+all,Technische Universitat Berlin,1,0,,,Industry-academia collaboration,Multinational,2023-04-20,2023-04-20
+all,Tecorigin LTD,1,0,,,Industry-academia collaboration,China,2024-08-30,2024-08-30
+all,TensorTour,1,0,,,Industry,United States of America,2023-11-07,2023-11-07
+all,Thunder Software Technology Co.,1,0,,,Industry,China,2024-01-17,2024-01-17
+all,Tianjin Medical University,1,1,2.51092992e+21,2.51092992e+21,Academia,China,2024-01-15,2024-01-15
+all,Tigerobo,1,1,1.02e+24,1.02e+24,Industry,China,2023-09-06,2023-09-06
+all,Tohoku University,1,1,2.9640000000001e+22,2.9640000000001e+22,Industry-academia collaboration,Japan,2024-05-10,2024-05-10
+all,Tokyo Medical and Dental University,1,0,,,Academia,Japan,1969-05-01,1969-05-01
+all,Tongji University,1,1,3.5e+18,3.5e+18,Academia,China,2023-01-02,2023-01-02
+all,Transwarp Technology,1,0,,,Industry,China,2023-11-24,2023-11-24
+all,Trend Micro,1,0,,,Industry,Multinational,2025-04-21,2025-04-21
+all,Troy Information Technology Co.,1,0,,,Industry,China,2025-03-19,2025-03-19
+all,Twitter,1,0,,,Industry,United States of America,2017-05-25,2017-05-25
+all,Uber AI,1,0,,,Industry,United States of America,2020-04-27,2020-04-27
+all,Ukrainian Catholic University,1,1,8.64e+23,8.64e+23,Academia,Multinational,2025-10-25,2025-10-25
+all,Ulm University,1,0,,,,Germany,2022-05-31,2022-05-31
+all,Ultralytics,1,0,,,Industry,United States of America,2024-01-10,2024-01-10
+all,Unisound,1,0,,,Industry,China,2023-05-24,2023-05-24
+all,Universidad Nacional de Cordoba,1,1,90842400000000.0,90842400000000.0,Industry-academia collaboration,Multinational,2013-06-12,2013-06-12
+all,Universidade de Lisboa (ULisboa),1,1,1.2e+22,1.2e+22,Industry-academia collaboration,Multinational,2021-09-01,2021-09-01
+all,Universite de Technologie de Compiègne – CNRS,1,1,1.340928e+18,1.340928e+18,Industry-academia collaboration,Multinational,2013-12-05,2013-12-05
+all,University Medicine Greifswald,1,0,,,Academia,Multinational,2024-09-24,2024-09-24
+all,University of Adelaide,1,0,,,Academia,Australia,2016-11-20,2016-11-20
+all,University of Alberta,1,1,1.446336e+19,1.446336e+19,Academia,Multinational,2017-01-06,2017-01-06
+all,University of Bayreuth,1,1,4.1e+21,4.1e+21,Academia,Germany,2022-07-27,2022-07-27
+all,University of Bologna,1,0,,,Academia,Italy,2024-09-07,2024-09-07
+all,University of British Columbia (UBC),1,0,,,Industry-academia collaboration,Canada,2024-12-03,2024-12-03
+all,University of California Davis,1,0,,,Academia,Multinational,2024-10-10,2024-10-10
+all,University of Canterbury,1,0,,,Academia,New Zealand,1963-06-01,1963-06-01
+all,University of Central Florida,1,0,,,Academia,United States of America,2024-09-02,2024-09-02
+all,University of Chinese Academy of Sciences,1,1,2.8735486e+22,2.8735486e+22,Industry-academia collaboration,Multinational,2024-02-27,2024-02-27
+all,University of Delaware,1,0,,,Academia,United States of America,2023-06-09,2023-06-09
+all,University of Erlangen - Nuremburg,1,0,,,Academia,Germany,1996-08-05,1996-08-05
+all,University of Exeter,1,1,3.3900690258459335e+20,3.3900690258459335e+20,Academia,United Kingdom of Great Britain and Northern Ireland,2024-07-15,2024-07-15
+all,University of Genoa,1,0,,,Academia,Italy,1961-09-01,1961-09-01
+all,University of Glasgow,1,0,,,Academia,United Kingdom of Great Britain and Northern Ireland,2023-04-08,2023-04-08
+all,University of Guelph,1,0,,,Industry-academia collaboration,Canada,2017-08-15,2017-08-15
+all,University of Hyderabad,1,1,2006640000000000.0,2006640000000000.0,Academia,India,2018-11-15,2018-11-15
+all,University of Kansas,1,0,,,Academia,United States of America,1973-11-01,1973-11-01
+all,University of London,1,0,,,Academia,United Kingdom of Great Britain and Northern Ireland,1989-01-01,1989-01-01
+all,University of Lubeck,1,0,,,Academia,Germany,2008-11-19,2008-11-19
+all,University of Luxembourg,1,0,,,Industry-academia collaboration,Multinational,2024-10-08,2024-10-08
+all,University of Montpellier,1,1,1e+20,1e+20,Industry-academia collaboration,France,2022-08-13,2022-08-13
+all,University of Oulu,1,0,,,Industry-academia collaboration,Multinational,2006-12-01,2006-12-01
+all,University of Pennsylvania,1,0,,,Academia,United States of America,1995-06-26,1995-06-26
+all,University of San Francisco,1,1,2.72538e+17,2.72538e+17,Academia,Multinational,2018-01-18,2018-01-18
+all,University of Sussex,1,0,,,Academia,United Kingdom of Great Britain and Northern Ireland,2004-07-01,2004-07-01
+all,University of Trento,1,0,,,Academia,Multinational,2013-04-02,2013-04-02
+all,University of Turku,1,0,,,Industry-academia collaboration,Multinational,2023-11-03,2023-11-03
+all,University of Virginia,1,0,,,Academia,United States of America,2024-09-16,2024-09-16
+all,Université Paris-Est,1,0,,,Academia,France,2016-09-19,2016-09-19
+all,Université de Lille,1,0,,,Academia,Multinational,2024-11-11,2024-11-11
+all,Utrecht University,1,1,3.5e+20,3.5e+20,Academia,Netherlands,2023-01-27,2023-01-27
+all,Valence Labs,1,1,4.26816e+18,4.26816e+18,Industry-academia collaboration,Canada,2024-09-10,2024-09-10
+all,Vector Institute,1,0,,,Academia,Multinational,2024-09-13,2024-09-13
+all,Veed,1,0,,,Industry,United Kingdom of Great Britain and Northern Ireland,2025-09-15,2025-09-15
+all,Verily Research,1,0,,,Industry,United States of America,2024-06-26,2024-06-26
+all,Vilnius University,1,1,4.3e+18,4.3e+18,Academia,Multinational,2021-03-04,2021-03-04
+all,Virginia Tech (Virginia Polytechnic Institute and State University),1,0,,,Academia,United States of America,2024-07-28,2024-07-28
+all,Visual Computing Institute,1,0,,,Academia,Germany,2017-11-21,2017-11-21
+all,Warsaw University,1,0,,,Academia,Poland,2007-08-12,2007-08-12
+all,Waseda University,1,1,1.4e+20,1.4e+20,Academia,Japan,2022-04-07,2022-04-07
+all,WeChat AI,1,1,2.484338688e+22,2.484338688e+22,Industry,China,2023-05-16,2023-05-16
+all,Weitu AI,1,0,,,Industry,Hong Kong,2024-04-09,2024-04-09
+all,Wolfram Research,1,1,3.900846548437782e+22,3.900846548437782e+22,Industry-academia collaboration,Multinational,2024-02-12,2024-02-12
+all,Wuhan University,1,1,7.76e+22,7.76e+22,Academia,Multinational,2022-12-04,2022-12-04
+all,Wuxi Sixiang Digital Intelligence Technology Co.,1,0,,,Industry,China,2024-12-15,2024-12-15
+all,X-Mechanics,1,0,,,Research collective,United States of America,2021-07-22,2021-07-22
+all,Xerox Research Centre Europe (XRCE),1,0,,,Industry,France,2010-09-05,2010-09-05
+all,Xiaoyu Intelligence Information Technology (Yunnan) Co.,1,0,,,Industry,China,2024-05-13,2024-05-13
+all,Xinhua Zhiyun Technology Co.,1,0,,,Industry,China,2024-10-21,2024-10-21
+all,Xi’an Jiaotong University,1,1,7.547904e+20,7.547904e+20,Industry-academia collaboration,China,2023-09-20,2023-09-20
+all,YDS Pharmatech,1,0,,,Industry,United States of America,2024-09-30,2024-09-30
+all,Yale School of Public Health,1,0,,,Academia,United States of America,2024-08-22,2024-08-22
+all,York University,1,0,,,Academia,Canada,2016-04-30,2016-04-30
+all,Zhejiang Lianxin Digital Co.,1,0,,,Industry,China,2024-04-27,2024-04-27
+all,Zhengzhou University,1,0,,,Academia,China,2023-02-27,2023-02-27
+all,Zhijiang Lab,1,0,,,,China,2024-10-30,2024-10-30
+all,Zhixin Shuchuang (Chongqing) Technology Co.,1,0,,,Industry,China,2024-04-23,2024-04-23
+all,Zhuhai Wujiefangzhou Intelligent Technology,1,0,,,Industry,China,2024-05-31,2024-05-31
+all,Zhuiyi Technology,1,1,2.162688e+18,2.162688e+18,Industry,China,2023-11-08,2023-11-08
+all,Zhujian Intelligence,1,0,,,Industry,China,2023-12-27,2023-12-27
+all,Zhuoshi Technology,1,0,,,Industry,China,2024-03-20,2024-03-20
+all,École des Ponts ParisTech,1,0,,,Academia,France,2018-03-21,2018-03-21
+frontier,Google,18,18,7.8100000000505e+21,7.34e+24,,United States of America,2007-06-22,2023-05-10
+frontier,OpenAI,17,10,1.905e+23,3.8e+26,,United States of America,2017-08-11,2025-03-27
+frontier,DeepMind,5,5,1.9e+21,6.31e+23,,United Kingdom of Great Britain and Northern Ireland,2015-10-01,2021-12-08
+frontier,Carnegie Mellon University (CMU),4,4,3.095000000009017e+21,2.612e+22,,United States of America,1986-08-15,2019-11-11
+frontier,IBM,4,4,267158530.0,18232157622832.703,,United States of America,1959-07-01,1992-05-01
+frontier,NVIDIA,4,4,9.010999999999999e+24,3.911001e+25,,United States of America,2019-09-17,2025-03-18
+frontier,AT&T,3,3,1496338054440.0,2810937600000.0,,United States of America,1989-11-27,1998-11-01
+frontier,Anthropic,3,2,1.5433000000000004e+25,2.700000000000001e+25,,United States of America,2023-07-11,2024-06-20
+frontier,Bell Laboratories,3,3,1559250.0,12869570138112.0,,United States of America,1950-07-02,1993-08-01
+frontier,Google Brain,3,3,2.2e+21,1.12e+23,,United States of America,2016-02-11,2020-01-28
+frontier,Google Research,3,3,2.047e+24,2.5272e+24,,United States of America,2017-07-10,2022-04-04
+frontier,University of Montreal / Université de Montréal,3,3,1666869200000000.0,6339000000000000.0,,Canada,2000-11-28,2003-03-15
+frontier,University of Toronto,3,3,2.731968e+17,4.7e+17,,Canada,2011-04-29,2012-09-30
+frontier,xAI,3,3,3.5000000000000006e+26,5.0000000000001e+26,,United States of America,2024-08-13,2025-07-09
+frontier,Brno University of Technology,2,2,3.35e+16,5e+16,,Multinational,2010-09-26,2010-09-26
+frontier,Cornell Aeronautical Laboratory,2,2,360347447.4688681,720000000.0,,United States of America,1957-01-01,1960-03-30
+frontier,Facebook,2,2,8.625325e+21,8.74395e+21,,United States of America,2018-05-02,2019-07-01
+frontier,Google DeepMind,2,1,5.0000000001e+25,5.0000000001e+25,,United States of America,2023-12-06,2024-02-15
+frontier,IDSIA,2,2,2.65e+17,4.78e+17,,Switzerland,2011-09-18,2012-12-03
+frontier,Meta AI,2,2,4.492000000000005e+25,5.18400000000001e+25,,United States of America,2024-07-23,2025-04-05
+frontier,Microsoft,2,2,4.29301705536e+23,8.586e+23,,Multinational,2014-06-18,2021-10-11
+frontier,New York University (NYU),2,2,2.663726e+17,5.32e+17,,United States of America,2006-06-17,2013-11-12
+frontier,Princeton University,2,2,27996033780.0,28328002560.0,,United States of America,1987-06-06,1987-06-06
+frontier,Technical University of Munich,2,2,25066950000000.0,31512000000000.0,,Germany,1994-12-02,1997-11-15
+frontier,University of Oxford,2,2,1.16455e+19,1.2291e+19,,United Kingdom of Great Britain and Northern Ireland,2014-09-04,2014-09-04
+frontier,Z.ai (Zhipu AI),2,0,,,,China,2024-01-17,2024-08-29
+frontier,AI21 Labs,1,1,3.7e+23,3.7e+23,,Israel,2021-08-11,2021-08-11
+frontier,Amazon,1,1,4.7999999999999996e+24,4.7999999999999996e+24,,United States of America,2023-09-28,2023-09-28
+frontier,Baidu,1,1,1.0421e+24,1.0421e+24,,China,2021-12-23,2021-12-23
+frontier,Baidu Research - Silicon Valley AI Lab,1,1,2.6e+19,2.6e+19,,United States of America,2015-12-08,2015-12-08
+frontier,Beijing Academy of Artificial Intelligence / BAAI,1,1,1.54350000000001e+24,1.54350000000001e+24,,China,2021-05-31,2021-05-31
+frontier,Beijing Institute of Technology,1,1,1.231108125e+19,1.231108125e+19,,Multinational,2015-10-28,2015-10-28
+frontier,Complutense University of Madrid,1,1,27000000000.0,27000000000.0,,Spain,1989-06-18,1989-06-18
+frontier,Facebook AI,1,1,2.076e+22,2.076e+22,,United States of America,2019-11-05,2019-11-05
+frontier,Heriot-Watt University,1,1,1.8e+21,1.8e+21,,United Kingdom of Great Britain and Northern Ireland,2018-09-28,2018-09-28
+frontier,Inflection AI,1,1,1.001e+25,1.001e+25,,United States of America,2023-11-22,2023-11-22
+frontier,Inspur,1,1,3.5380000000001e+23,3.5380000000001e+23,,China,2021-10-12,2021-10-12
+frontier,Jacobs University Bremen,1,1,1.5552e+18,1.5552e+18,,Multinational,2014-09-01,2014-09-01
+frontier,Johns Hopkins University,1,1,5.396e+16,5.396e+16,,United States of America,2010-09-26,2010-09-26
+frontier,LG,1,1,1.6956e+24,1.6956e+24,,Korea (Republic of),2021-12-14,2021-12-14
+frontier,Massachusetts Institute of Technology (MIT),1,1,600000000.0,600000000.0,,United States of America,1959-02-01,1959-02-01
+frontier,Microsoft Research,1,1,2.397403008e+19,2.397403008e+19,,United States of America,2015-02-06,2015-02-06
+frontier,Mitsubishi Electric Research Labs,1,1,63000000000000.0,63000000000000.0,,United States of America,2001-12-08,2001-12-08
+frontier,NAVER,1,1,2.0000000001e+23,2.0000000001e+23,,Korea (Republic of),2021-09-10,2021-09-10
+frontier,NHK Broadcasting Science Research Laboratories,1,1,273738240.0,273738240.0,,Japan,1980-04-01,1980-04-01
+frontier,Oregon State University,1,1,35811936000.0,35811936000.0,,United States of America,1990-06-01,1990-06-01
+frontier,SenseTime,1,1,3.89e+24,3.89e+24,,Hong Kong,2023-04-10,2023-04-10
+frontier,Stanford University,1,1,6600.0,6600.0,,United States of America,1960-06-30,1960-06-30
+frontier,Technology Innovation Institute,1,1,3.76e+24,3.76e+24,,United Arab Emirates,2023-09-06,2023-09-06
+frontier,Universite de Technologie de Compiègne – CNRS,1,1,1.340928e+18,1.340928e+18,,Multinational,2013-12-05,2013-12-05
+frontier,University College London (UCL),1,1,51810000000000.0,51810000000000.0,,United Kingdom of Great Britain and Northern Ireland,2000-11-28,2000-11-28
+frontier,University of Bonn,1,1,3295150080000000.0,3295150080000000.0,,Germany,2009-11-22,2009-11-22
+frontier,University of California San Diego,1,1,673920000.0,673920000.0,,United States of America,1986-10-01,1986-10-01
+frontier,University of Massachusetts Amherst,1,1,324000000.0,324000000.0,,United States of America,1983-09-01,1983-09-01
+frontier,University of Washington,1,1,4.6386183e+21,4.6386183e+21,,United States of America,2019-05-29,2019-05-29
+large_scale,Alibaba,42,35,8.64e+23,1.512e+25,,China,2023-09-28,2025-09-10
+large_scale,OpenAI,39,10,1.5634999999999998e+24,3.8e+26,,United States of America,2020-05-28,2026-04-23
+large_scale,Meta AI,28,25,5.79e+23,5.18400000000001e+25,,United States of America,2022-05-02,2025-11-20
+large_scale,Google DeepMind,22,4,1.269e+24,5.0000000001e+25,,United States of America,2023-11-16,2026-02-19
+large_scale,NVIDIA,20,15,1.53e+24,3.911001e+25,,United States of America,2023-08-06,2026-06-04
+large_scale,Anthropic,18,3,2.700000000000001e+25,3.3499999999999998e+25,,United States of America,2023-02-15,2026-04-16
+large_scale,ByteDance,16,7,1.388556e+24,2.505e+25,,China,2023-08-18,2025-08-21
+large_scale,DeepSeek,15,15,3.3e+24,9.702e+24,,China,2024-01-05,2026-07-31
+large_scale,Google,14,10,3.5931556217e+23,7.34e+24,,United States of America,2021-12-13,2025-05-20
+large_scale,Mistral AI,12,3,1.152e+24,2.34e+24,,France,2023-10-10,2025-05-28
+large_scale,Z.ai (Zhipu AI),12,7,2.88e+24,6.84e+24,,China,2024-01-17,2026-02-17
+large_scale,MiniMax,11,4,3.66397815e+24,4.3240062e+24,,China,2023-08-30,2025-06-18
+large_scale,Amazon,10,3,4.7999999999999996e+24,6.000010000000001e+24,,United States of America,2022-06-24,2025-04-30
+large_scale,Ant Group,9,6,5.205e+23,6.000001e+24,,China,2023-07-15,2025-10-10
+large_scale,IBM,8,8,2.795e+23,1.215e+24,,United States of America,2023-11-30,2025-10-02
+large_scale,xAI,8,5,2.9599999999999996e+25,5.0000000000001e+26,,United States of America,2023-11-04,2026-04-17
+large_scale,Baidu,7,3,1.0421e+24,2.82e+24,,China,2021-12-23,2025-06-29
+large_scale,Kuaishou Technology,7,0,,,,China,2023-08-16,2025-05-29
+large_scale,LG AI Research,7,6,1.385e+24,3.85e+24,,Korea (Republic of),2023-07-19,2026-04-09
+large_scale,01.AI,6,6,6.722e+23,1.8e+24,,China,2023-11-02,2024-10-18
+large_scale,Allen Institute for AI,6,5,4.6e+23,1.3e+24,,United States of America,2024-02-01,2025-11-20
+large_scale,ElevenLabs,6,0,,,,United States of America,2023-01-16,2025-06-03
+large_scale,Runway,6,0,,,,United States of America,2023-02-06,2025-04-09
+large_scale,Technology Innovation Institute,6,6,4.90955505e+23,3.76e+24,,United Arab Emirates,2023-03-15,2025-05-21
+large_scale,Beijing Academy of Artificial Intelligence / BAAI,5,2,5.705430000000005e+24,9.86736e+24,,China,2021-05-31,2025-10-30
+large_scale,Microsoft,5,5,4.032e+23,6.98511e+24,,United States of America,2021-10-11,2026-06-02
+large_scale,Moonshot,5,4,4.388e+24,2.0001e+25,,China,2024-09-01,2026-07-16
+large_scale,Tencent,5,4,2.3461849999999998e+24,5.4e+24,,China,2023-09-07,2025-03-15
+large_scale,Xiaomi Corp,5,5,2.43e+24,6.804e+24,,China,2025-06-04,2026-04-23
+large_scale,Apple,4,4,4.6863e+23,4.3e+24,,United States of America,2024-03-14,2024-07-29
+large_scale,Cohere,4,0,,,,Canada,2023-03-01,2025-03-13
+large_scale,DeepMind,4,4,4.070050000000005e+23,6.31e+23,,United Kingdom of Great Britain and Northern Ireland,2019-10-30,2022-03-29
+large_scale,Facebook AI Research,4,4,3.5905310301e+23,1.6453571041e+24,,Multinational,2024-04-30,2024-05-16
+large_scale,Huawei,4,3,3.0888e+24,1.0692e+25,,China,2023-07-07,2025-05-28
+large_scale,SenseTime,4,1,3.89e+24,3.89e+24,,Hong Kong,2023-04-10,2025-04-12
+large_scale,Stability AI,4,1,2.91e+23,2.91e+23,,United Kingdom of Great Britain and Northern Ireland,2023-07-04,2024-10-29
+large_scale,Tsinghua University,4,4,7.15e+23,2.88e+24,,China,2022-08-04,2025-04-14
+large_scale,vivo AI lab,4,4,6e+23,1.05e+24,,China,2023-10-31,2023-11-02
+large_scale,360 Security Technology,3,1,1.428e+23,1.428e+23,,China,2023-09-04,2024-11-29
+large_scale,AI21 Labs,3,1,3.7e+23,3.7e+23,,Israel,2021-08-11,2024-08-22
+large_scale,Aleph Alpha,3,3,3.5461e+23,4.43e+23,,Germany,2022-08-15,2024-08-26
+large_scale,Baichuan,3,3,2.03e+23,8.268e+23,,China,2023-08-09,2023-09-20
+large_scale,China Telecom,3,1,6.899999999999999e+24,6.899999999999999e+24,,China,2023-07-07,2024-10-18
+large_scale,Google Research,3,3,5.09607936e+23,2.5272e+24,,United States of America,2022-04-04,2022-06-22
+large_scale,Hugging Face,3,3,3.65664e+23,3.87e+23,,United States of America,2022-07-11,2024-02-29
+large_scale,Inflection AI,3,3,8.000001e+24,1.001e+25,,United States of America,2023-06-23,2024-03-07
+large_scale,LightOn,3,1,2.4e+23,2.4e+23,,France,2022-04-12,2023-12-15
+large_scale,NAVER,3,2,1.73800000005e+23,2.0000000001e+23,,Korea (Republic of),2021-09-10,2023-08-24
+large_scale,Reka AI,3,3,6.3e+23,8.400010000000001e+24,,United States of America,2024-04-15,2024-04-18
+large_scale,Samsung,3,0,,,,Korea (Republic of),2023-11-08,2023-11-08
+large_scale,StepFun,3,2,2.3627904e+24,4.1015808e+24,,China,2024-03-01,2025-02-24
+large_scale,Yandex,3,2,4.7768e+23,7.3536e+23,,Russia,2022-06-23,2025-02-25
+large_scale,iFlytek,3,0,,,,China,2023-10-24,2025-03-03
+large_scale,Adept,2,0,,,,United States of America,2023-10-17,2024-01-24
+large_scale,Adobe,2,0,,,,United States of America,2023-03-21,2024-10-14
+large_scale,Arc Institute,2,2,1.1754e+24,2.25e+24,,United States of America,2025-02-19,2025-02-19
+large_scale,China Mobile,2,2,3.01380655e+23,4.3596131e+23,,China,2023-10-12,2024-06-15
+large_scale,Google Brain,2,1,1.12e+23,1.12e+23,,United States of America,2020-01-28,2022-10-05
+large_scale,Ideogram,2,0,,,,Canada,2024-02-28,2025-03-26
+large_scale,Inspur,2,2,2.65900000000005e+23,3.5380000000001e+23,,China,2021-10-12,2023-11-27
+large_scale,Microsoft Research,2,1,9.3202015e+23,9.3202015e+23,,United States of America,2022-06-13,2024-12-12
+large_scale,Midjourney,2,0,,,,United States of America,2022-02-15,2024-07-30
+large_scale,Nanbeige LLM Lab,2,2,3.225e+23,4.05e+23,,China,2023-11-01,2024-05-28
+large_scale,NetEase,2,0,,,,China,2023-07-28,2023-07-28
+large_scale,Preferred Networks Inc,2,2,6.584999999999999e+23,1.1999999999999999e+24,,Japan,2023-09-28,2024-06-14
+large_scale,Salesforce,2,0,,,,United States of America,2023-02-27,2023-05-03
+large_scale,Shanghai AI Lab,2,2,6.552e+23,9.984e+23,,Multinational,2023-07-06,2024-01-12
+large_scale,Upstage,2,2,1.2249999999999998e+24,1.3999999999999998e+24,,Korea (Republic of),2025-12-31,2026-06-28
+large_scale,XVERSE Technology,2,1,1.24800000000001e+24,1.24800000000001e+24,,China,2023-11-06,2023-12-08
+large_scale,Yayi (Wenge),2,1,4.77e+23,4.77e+23,,China,2023-12-22,2025-02-15
+large_scale,AI inside,1,0,,,,Japan,2023-06-08,2023-06-08
+large_scale,Anthrogen,1,1,1.1e+23,1.1e+23,,United States of America,2025-10-18,2025-10-18
+large_scale,Bloomberg,1,1,2.36e+23,2.36e+23,,United States of America,2023-03-30,2023-03-30
+large_scale,Cerebras Systems,1,1,1.0372049e+23,1.0372049e+23,,Multinational,2023-11-08,2023-11-08
+large_scale,Cisco,1,1,1.2242448e+24,1.2242448e+24,,United States of America,2025-04-28,2025-04-28
+large_scale,Cursor,1,1,3.87e+25,3.87e+25,,United States of America,2026-05-18,2026-05-18
+large_scale,Dahua Technology,1,0,,,,China,2023-10-25,2023-10-25
+large_scale,Databricks,1,1,2.6e+24,2.6e+24,,United States of America,2024-03-27,2024-03-27
+large_scale,DeepLang AI,1,0,,,,China,2023-11-01,2023-11-01
+large_scale,ETH Zurich,1,1,6.74e+24,6.74e+24,,Switzerland,2025-09-02,2025-09-02
+large_scale,EvolutionaryScale,1,1,1.07e+24,1.07e+24,,United States of America,2024-06-25,2024-06-25
+large_scale,G42,1,1,9.654e+23,9.654e+23,,United Arab Emirates,2024-08-05,2024-08-05
+large_scale,High-Performance Language Technologies (HPLT),1,1,2.052e+23,2.052e+23,,Multinational,2023-12-14,2023-12-14
+large_scale,Hisense,1,0,,,,China,2024-03-15,2024-03-15
+large_scale,Hong Kong Baptist University,1,0,,,,Multinational,2022-07-15,2022-07-15
+large_scale,Huawei Noah's Ark Lab,1,1,4.67e+23,4.67e+23,,China,2023-03-20,2023-03-20
+large_scale,IBM Research,1,1,3.0000000000001e+23,3.0000000000001e+23,,United States of America,2024-05-31,2024-05-31
+large_scale,INSAIT,1,1,4.36e+23,4.36e+23,,Multinational,2025-04-23,2025-04-23
+large_scale,JD.com,1,0,,,,China,2023-07-13,2023-07-13
+large_scale,KT,1,1,1.1999999999999999e+24,1.1999999999999999e+24,,Korea (Republic of),2023-10-31,2023-10-31
+large_scale,Konan Technology,1,1,1.722e+23,1.722e+23,,Korea (Republic of),2023-12-15,2023-12-15
+large_scale,Kunlun Inc.,1,1,2.5e+23,2.5e+23,,China,2023-10-30,2023-10-30
+large_scale,LG,1,1,1.6956e+24,1.6956e+24,,Korea (Republic of),2021-12-14,2021-12-14
+large_scale,Leonardo AI,1,0,,,,Australia,2024-06-12,2024-06-12
+large_scale,Marin,1,1,6.12e+23,6.12e+23,,United States of America,2025-05-19,2025-05-19
+large_scale,Meituan Inc,1,1,3.726e+24,3.726e+24,,China,2025-09-01,2025-09-01
+large_scale,Mianbi Intelligence,1,1,1.1999999999999999e+24,1.1999999999999999e+24,,China,2023-08-29,2023-08-29
+large_scale,MosaicML,1,1,1.8900000000001e+23,1.8900000000001e+23,,United States of America,2023-06-22,2023-06-22
+large_scale,NCSOFT,1,1,1.248e+23,1.248e+23,,Korea (Republic of),2023-08-16,2023-08-16
+large_scale,NEC Laboratories,1,0,,,,United States of America,2023-07-06,2023-07-06
+large_scale,NTT Communication Science Laboratories,1,0,,,,Japan,2023-12-01,2023-12-01
+large_scale,National University of Singapore,1,0,,,,Singapore,2023-09-27,2023-09-27
+large_scale,OpenGPT-X,1,1,2.1444092e+23,2.1444092e+23,,Germany,2025-08-21,2025-08-21
+large_scale,Prime Intellect,1,1,1.326e+24,1.326e+24,,United States of America,2026-02-19,2026-02-19
+large_scale,Qilin Hesheng Network Technology Co.,1,0,,,,China,2023-04-18,2023-04-18
+large_scale,Rednote,1,1,1.2164856e+24,1.2164856e+24,,China,2025-07-06,2025-07-06
+large_scale,Rhymes AI,1,1,1.428e+23,1.428e+23,,United States of America,2024-10-08,2024-10-08
+large_scale,SK Telecom,1,1,1.8e+24,1.8e+24,,Korea (Republic of),2026-07-29,2026-07-29
+large_scale,Saudi Aramco,1,1,1.05e+25,1.05e+25,,Saudi Arabia,2024-03-04,2024-03-04
+large_scale,Saudi Data and Artificial Intelligence Authority,1,1,1.0608e+24,1.0608e+24,,Saudi Arabia,2024-05-21,2024-05-21
+large_scale,Sber,1,1,1.0699776e+23,1.0699776e+23,,Russia,2023-04-24,2023-04-24
+large_scale,Silo AI,1,1,2.574e+23,2.574e+23,,Finland,2024-04-04,2024-04-04
+large_scale,Snowflake,1,1,3.8347175e+23,3.8347175e+23,,United States of America,2024-04-24,2024-04-24
+large_scale,TAL Education Group (Xueersi),1,0,,,,China,2023-08-24,2023-08-24
+large_scale,Thinking Machines,1,1,1.845e+24,1.845e+24,,United States of America,2026-07-15,2026-07-15
+large_scale,Tigerobo,1,1,1.02e+24,1.02e+24,,China,2023-09-06,2023-09-06
+large_scale,Trillion Labs,1,1,2.95e+23,2.95e+23,,Korea (Republic of),2025-08-01,2025-08-01
+large_scale,Ukrainian Catholic University,1,1,8.64e+23,8.64e+23,,Multinational,2025-10-25,2025-10-25
+large_scale,University of Waterloo,1,1,1.89e+23,1.89e+23,,Multinational,2024-07-10,2024-07-10
+notable,Google,73,37,7.6e+21,7.34e+24,Industry,United States of America,2007-06-22,2026-05-19
+notable,OpenAI,65,22,7.0220000000000005e+22,3.8e+26,Industry,United States of America,2016-12-05,2026-04-23
+notable,Google DeepMind,44,8,1.5309475439999998e+22,5.0000000001e+25,Industry,United States of America,2015-09-09,2026-04-15
+notable,DeepMind,38,24,6.817938751451135e+20,6.31e+23,Industry,United Kingdom of Great Britain and Northern Ireland,2013-12-19,2023-01-10
+notable,Meta AI,38,26,1.22e+23,5.18400000000001e+25,Industry,United States of America,2017-07-25,2026-04-08
+notable,Alibaba,34,18,2.2975e+24,1.512e+25,Industry,China,2021-03-05,2026-07-19
+notable,NVIDIA,26,20,1.555e+22,1.7999999999999999e+25,Industry,United States of America,2017-10-27,2026-06-04
+notable,Stanford University,26,10,4.855689235e+20,1.1e+23,Academia,United States of America,1960-06-30,2024-06-13
+notable,Microsoft,22,11,7e+19,8.586e+23,Industry,United States of America,2012-12-01,2026-06-02
+notable,Carnegie Mellon University (CMU),20,14,3.07e+18,2.612e+22,Academia,United States of America,1986-08-15,2023-12-01
+notable,Facebook AI Research,20,14,4.050005e+21,3.366e+22,Industry,Multinational,2016-07-15,2023-04-14
+notable,Anthropic,18,3,2.700000000000001e+25,3.3499999999999998e+25,Industry,United States of America,2023-03-14,2026-07-24
+notable,University of Toronto,18,5,3.672864e+16,4.7e+17,Academia,Canada,2006-07-18,2017-03-15
+notable,Google Brain,17,9,4.262e+21,1.12e+23,Industry,United States of America,2016-11-05,2022-05-23
+notable,Google Research,17,11,7.3e+22,2.5272e+24,Industry,United States of America,2017-06-12,2023-12-23
+notable,Tsinghua University,17,11,2.68e+22,6.2e+23,Industry-academia collaboration,China,2016-06-21,2025-02-03
+notable,Baidu,13,5,9.9e+21,1.0421e+24,Industry,China,2017-12-01,2025-03-16
+notable,University of Washington,13,10,4.7430576e+18,1.8144e+22,Industry-academia collaboration,United States of America,1989-11-27,2023-10-09
+notable,University of Oxford,12,5,1.2291e+19,7.24e+21,Academia,United Kingdom of Great Britain and Northern Ireland,2013-10-01,2022-12-19
+notable,AT&T,11,3,1496338054440.0,2810937600000.0,Industry,United States of America,1989-11-27,2009-09-21
+notable,ByteDance,11,4,3.468275992912e+24,2.505e+25,Industry,China,2024-02-23,2026-02-12
+notable,IBM,10,7,18232157622832.703,4.290048e+17,Industry,United States of America,1959-07-01,2021-06-24
+notable,Massachusetts Institute of Technology (MIT),10,5,7.2e+19,1.03514112e+22,Academia,United States of America,1955-03-01,2022-10-04
+notable,Microsoft Research,10,4,2.523701504e+19,7.24598784e+21,Industry,United States of America,2005-08-07,2022-06-13
+notable,University of California (UC) Berkeley,10,3,7.840125000000001e+19,5.85e+20,Academia,United States of America,2013-11-11,2024-05-20
+notable,University of Montreal / Université de Montréal,10,5,1666869200000000.0,5.184e+17,Academia,Canada,2000-11-28,2014-06-10
+notable,DeepSeek,9,8,3.3e+24,9.702e+24,Industry,China,2024-06-17,2026-04-24
+notable,Facebook,9,5,3.87072e+21,8.74395e+21,Industry,United States of America,2018-05-02,2023-12-08
+notable,Moonshot,8,4,4.999999999999999e+24,2.0001e+25,Industry,China,2024-01-01,2026-07-16
+notable,New York University (NYU),8,6,1.1924604e+17,6e+20,Academia,United States of America,2004-06-27,2024-06-24
+notable,Salesforce Research,8,7,6.8866472e+17,1.35e+22,Industry,United States of America,2016-11-04,2023-05-11
+notable,Z.ai (Zhipu AI),8,5,4.42e+24,6.84e+24,Industry,China,2023-10-27,2026-04-07
+notable,xAI,8,4,1.8980000000000004e+26,5.0000000000001e+26,Industry,United States of America,2023-11-04,2026-02-17
+notable,Allen Institute for AI,7,5,8.926848e+19,1.0999999999999999e+24,Industry-academia collaboration,United States of America,2019-01-01,2026-04-05
+notable,LG AI Research,7,6,2.105000000000005e+24,3.85e+24,Industry,Korea (Republic of),2024-12-09,2026-07-31
+notable,University of Edinburgh,7,0,,,Academia,United Kingdom of Great Britain and Northern Ireland,1968-07-01,2021-02-09
+notable,Facebook AI,6,2,1.0382e+22,2.076e+22,Industry,United States of America,2019-05-02,2019-11-13
+notable,IDSIA,6,5,2.6e+16,4.78e+17,Academia,Switzerland,1999-01-02,2012-12-03
+notable,Mistral AI,6,1,7.74e+23,7.74e+23,Industry,France,2023-12-11,2025-03-06
+notable,University of California San Diego,6,2,6.00000000033696e+18,1.2e+19,Academia,United States of America,1986-01-03,2020-02-07
+notable,Amazon,5,5,2.04374016e+23,6.000010000000001e+24,Industry,United States of America,2019-04-08,2024-12-03
+notable,Chinese Academy of Sciences,5,3,3.4153451e+16,8.016e+20,Academia,Multinational,2014-07-15,2021-08-11
+notable,Technical University of Munich,5,5,6.5e+21,3.9e+22,Academia,Multinational,1994-12-02,2023-01-16
+notable,Apple,4,3,4.86e+23,4.3e+24,Industry,United States of America,2024-03-14,2024-07-29
+notable,Bell Laboratories,4,3,1559250.0,12869570138112.0,Industry,United States of America,1950-07-02,1993-08-01
+notable,Chinese University of Hong Kong (CUHK),4,2,3.2005427e+19,6.4e+19,Academia,Hong Kong,2014-11-28,2017-07-21
+notable,Hugging Face,4,3,8.46e+22,3.65664e+23,Industry-academia collaboration,Multinational,2019-10-02,2023-05-09
+notable,Korea Advanced Institute of Science and Technology (KAIST),4,3,1.06e+16,2.1570000001e+20,Academia,Korea (Republic of),2017-08-14,2022-11-28
+notable,Princeton University,4,2,27996033780.0,28328002560.0,Academia,United States of America,1987-06-06,2022-05-18
+notable,Shanghai AI Lab,4,3,3.04e+22,9.984e+23,Academia,Multinational,2022-11-10,2025-11-17
+notable,Tencent,4,2,4.4461849999999996e+24,5.4e+24,Industry,China,2024-09-05,2026-04-23
+notable,01.AI,3,3,1.5e+24,1.8e+24,Industry,China,2023-11-02,2024-10-18
+notable,Beijing Academy of Artificial Intelligence / BAAI,3,1,1.501e+22,1.501e+22,Academia,China,2022-11-12,2022-11-28
+notable,Character.ai,3,0,,,Industry,United States of America,2025-11-07,2025-11-07
+notable,Heidelberg University,3,1,1.05e+19,1.05e+19,Academia,Germany,2020-12-17,2021-12-20
+notable,IEEE,3,0,,,Industry,Multinational,2014-08-06,2016-06-17
+notable,INRIA,3,0,,,Academia,France,2005-06-25,2006-06-17
+notable,Johns Hopkins University,3,1,5.396e+16,5.396e+16,Academia,United States of America,2010-09-26,2017-04-27
+notable,Microsoft Research Asia,3,3,8.58e+19,1.1e+21,Industry,China,2016-09-17,2021-11-18
+notable,NAVER,3,1,2.0000000001e+23,2.0000000001e+23,Industry,Korea (Republic of),2019-12-04,2025-12-29
+notable,National University of Singapore,3,0,,,Academia,Singapore,2013-12-16,2023-09-27
+notable,Peking University,3,1,2.775e+18,2.775e+18,Industry-academia collaboration,China,2017-07-30,2021-09-06
+notable,Runway,3,1,5e+22,5e+22,Industry,United States of America,2022-04-13,2023-03-20
+notable,Salesforce,3,2,2.14e+21,2.72e+21,Industry,United States of America,2021-11-01,2023-05-20
+notable,SenseTime,3,0,,,Industry-academia collaboration,Multinational,2015-06-07,2024-07-06
+notable,Stability AI,3,1,5e+22,5e+22,Industry,United Kingdom of Great Britain and Northern Ireland,2023-07-04,2025-01-08
+notable,Toyota Technological Institute at Chicago,3,1,2.39e+21,2.39e+21,Industry-academia collaboration,United States of America,2019-05-02,2020-02-09
+notable,UT Austin,3,0,,,Academia,United States of America,2007-06-01,2022-06-05
+notable,University College London (UCL),3,2,3.4525905e+16,6.9e+16,Academia,United Kingdom of Great Britain and Northern Ireland,2000-11-28,2022-10-05
+notable,University of Bonn,3,3,1456277227200000.0,3295150080000000.0,Academia,Germany,2009-11-22,2010-09-15
+notable,University of Southern California,3,0,,,Industry-academia collaboration,United States of America,1999-07-02,2024-12-31
+notable,University of Texas at Austin,3,2,1.575000977724e+17,3.15e+17,Academia,United States of America,1995-11-27,2019-06-10
+notable,AI21 Labs,2,1,3.7e+23,3.7e+23,Industry,Israel,2021-08-11,2024-08-22
+notable,ASAPP,2,2,1.6086852e+19,2.1173704e+19,Industry,United States of America,2018-09-17,2021-02-24
+notable,Beihang University,2,0,,,Academia,China,2014-06-01,2021-09-21
+notable,Beijing Institute of Technology,2,1,1.231108125e+19,1.231108125e+19,Academia,Multinational,2015-10-28,2019-07-22
+notable,Beijing University of Posts and Telecommunications,2,2,1.26049391e+17,1.938e+17,Academia,Multinational,2019-12-05,2019-12-05
+notable,Brown University,2,0,,,Academia,United States of America,2001-07-06,2019-06-17
+notable,California Institute of Technology,2,0,,,Academia,United States of America,1982-04-01,2003-01-01
+notable,Columbia University,2,1,1.27e+17,1.27e+17,Academia,United States of America,2018-05-03,2023-10-11
+notable,Cornell Aeronautical Laboratory,2,2,360347447.4688681,720000000.0,Academia,United States of America,1957-01-01,1960-03-30
+notable,Cursor,2,2,3.0949999999999996e+25,3.87e+25,Industry,United States of America,2026-03-19,2026-05-18
+notable,Duke University,2,1,3400000000000000.0,3400000000000000.0,Academia,Multinational,2017-01-07,2017-09-15
+notable,ETH Zurich,2,0,,,Academia,Multinational,2019-06-15,2023-10-26
+notable,Huawei,2,2,5.3659e+24,1.0692e+25,Industry,China,2023-07-05,2025-04-10
+notable,Inflection AI,2,2,9.005000500000001e+24,1.001e+25,Industry,United States of America,2023-11-22,2024-03-07
+notable,Inspur,2,1,3.5380000000001e+23,3.5380000000001e+23,Industry,China,2021-10-12,2024-08-29
+notable,Jagiellonian University,2,2,4.712252832e+19,9.393905664e+19,Academia,Multinational,2017-01-23,2017-10-31
+notable,Korea University,2,2,2.280104976e+22,4.56e+22,Academia,Korea (Republic of),2020-12-23,2023-11-13
+notable,Kunlun Inc.,2,1,2.5e+23,2.5e+23,Industry,China,2023-10-30,2025-08-01
+notable,McGill University,2,2,2.1500000000000013e+23,4.3e+23,Academia,Canada,1988-08-01,2022-08-10
+notable,Megvii Inc,2,1,6.34275e+20,6.34275e+20,Industry,China,2017-07-03,2021-08-06
+notable,MiniMax,2,0,,,Industry,China,2025-10-27,2025-12-23
+notable,NEC Laboratories,2,0,,,Industry,United States of America,2008-07-05,2011-11-08
+notable,NHK Broadcasting Science Research Laboratories,2,1,273738240.0,273738240.0,Industry,Japan,1980-04-01,1984-04-01
+notable,NTT Communication Science Laboratories,2,2,3.3459e+17,6.66e+17,Industry,Japan,2017-09-26,2018-08-30
+notable,Nanjing University,2,1,9.7e+21,9.7e+21,Academia,China,2020-02-28,2023-03-29
+notable,SK Telecom,2,1,1.8e+24,1.8e+24,Industry,Korea (Republic of),2025-12-30,2026-07-29
+notable,Samsung,2,1,1.3e+20,1.3e+20,Industry,Korea (Republic of),2018-10-31,2022-11-18
+notable,Saudi Data and Artificial Intelligence Authority,2,1,1.062e+24,1.062e+24,Industry-academia collaboration,Saudi Arabia,2022-09-14,2024-05-21
+notable,Technical University of Denmark,2,1,5.781024e+17,5.781024e+17,Academia,Denmark,2017-07-07,2018-09-10
+notable,Technology Innovation Institute,2,2,2e+24,3.76e+24,Government,United Arab Emirates,2023-03-15,2023-09-06
+notable,Tel Aviv University,2,1,2.56e+18,2.56e+18,Academia,Multinational,2014-06-23,2019-04-04
+notable,Thinking Machines,2,1,1.845e+24,1.845e+24,Industry,United States of America,2026-05-11,2026-07-15
+notable,University of Amsterdam,2,2,550089900000000.0,624979800000000.0,Academia,Multinational,2013-12-20,2014-12-22
+notable,University of Bern,2,0,,,Academia,Multinational,2007-09-23,2007-12-03
+notable,University of California Los Angeles (UCLA),2,2,8.00131448805e+22,1.6e+23,Academia,Multinational,2020-03-11,2023-10-07
+notable,University of Cambridge,2,1,5886144000000000.0,5886144000000000.0,Academia,United Kingdom of Great Britain and Northern Ireland,2006-05-07,2015-12-16
+notable,University of Chicago,2,1,1.42e+21,1.42e+21,Industry-academia collaboration,Multinational,1988-04-05,2022-10-11
+notable,University of Illinois Urbana-Champaign (UIUC),2,1,9.72e+18,9.72e+18,Academia,United States of America,2010-01-01,2020-09-01
+notable,University of Warwick,2,1,1e+17,1e+17,Academia,United Kingdom of Great Britain and Northern Ireland,2014-09-23,2014-12-18
+notable,University of Wisconsin Madison,2,2,7.80595e+22,7.807e+22,Industry-academia collaboration,United States of America,2023-04-17,2023-11-05
+notable,Upstage,2,2,1.2249999999999998e+24,1.3999999999999998e+24,Industry,Korea (Republic of),2025-12-31,2026-06-28
+notable,Writer,2,0,,,Industry,United States of America,2024-01-01,2024-10-09
+notable,Xiaomi Corp,2,1,6.804e+24,6.804e+24,Industry,China,2026-03-18,2026-04-23
+notable,Adobe,1,0,,,Industry,United States of America,2023-03-21,2023-03-21
+notable,Advanced Telecommunications Research Institute,1,0,,,Industry,Japan,1997-11-01,1997-11-01
+notable,Alan Turing Institute,1,0,,,Government,United Kingdom of Great Britain and Northern Ireland,1992-10-01,1992-10-01
+notable,Ant Group,1,1,6.000001e+24,6.000001e+24,Industry,China,2025-10-10,2025-10-10
+notable,Ben-Gurion University of the Negev,1,1,4.56e+17,4.56e+17,Academia,Israel,2017-08-29,2017-08-29
+notable,Biological Cybernetics,1,1,5184000.0,5184000.0,Industry,Japan,1975-09-01,1975-09-01
+notable,Bloomberg,1,1,2.36e+23,2.36e+23,Industry-academia collaboration,United States of America,2023-03-30,2023-03-30
+notable,Capital One,1,0,,,Industry,United States of America,2019-06-13,2019-06-13
+notable,Carleton University,1,1,2.6990346e+19,2.6990346e+19,Academia,Canada,2020-02-08,2020-02-08
+notable,Centre de Recherche en Automatique de Nancy (CRAN),1,0,,,Academia,Multinational,2006-02-02,2006-02-02
+notable,Cerebras Systems,1,1,4.8946763e+22,4.8946763e+22,Industry-academia collaboration,Multinational,2023-08-29,2023-08-29
+notable,Chai discovery,1,1,7.7605724e+21,7.7605724e+21,Industry,United States of America,2024-10-15,2024-10-15
+notable,China Telecom,1,1,6.899999999999999e+24,6.899999999999999e+24,Industry,China,2024-09-20,2024-09-20
+notable,Cognition,1,0,,,Industry,United States of America,2026-03-01,2026-03-01
+notable,Cohere,1,0,,,Industry,Canada,2023-11-02,2023-11-02
+notable,Cohere for AI,1,0,,,Industry-academia collaboration,Multinational,2024-02-12,2024-02-12
+notable,Collaborations Pharmaceuticals,1,0,,,Industry,United States of America,2022-03-07,2022-03-07
+notable,Complutense University of Madrid,1,1,27000000000.0,27000000000.0,Academia,Spain,1989-06-18,1989-06-18
+notable,Cornell University,1,0,,,Industry-academia collaboration,United States of America,2002-05-28,2002-05-28
+notable,Courant Institute of Mathematical Sciences,1,0,,,Academia,Multinational,2017-03-31,2017-03-31
+notable,Databricks,1,1,2.6e+24,2.6e+24,Industry,United States of America,2024-03-27,2024-03-27
+notable,DeepL,1,0,,,Industry,Germany,2024-07-16,2024-07-16
+notable,DeepScale,1,0,,,Academia,United States of America,2016-02-24,2016-02-24
+notable,EleutherAI,1,1,9.31627008e+22,9.31627008e+22,Research collective,United States of America,2022-02-09,2022-02-09
+notable,EvolutionaryScale,1,1,1.07e+24,1.07e+24,Industry-academia collaboration,United States of America,2024-06-25,2024-06-25
+notable,Fraunhofer Heinrich Hertz Institute,1,1,6.37e+17,6.37e+17,Research collective,Germany,2019-09-04,2019-09-04
+notable,Fudan University,1,0,,,Industry-academia collaboration,Multinational,2017-05-08,2017-05-08
+notable,Georgia Institute of Technology,1,1,7.8e+20,7.8e+20,Industry-academia collaboration,Multinational,2019-12-19,2019-12-19
+notable,Google Cloud,1,1,2.40576e+19,2.40576e+19,Industry,United States of America,2021-05-26,2021-05-26
+notable,Griffith University,1,1,1.822e+16,1.822e+16,Academia,Multinational,2016-10-28,2016-10-28
+notable,Harbin Institute of Technology,1,0,,,Industry-academia collaboration,Multinational,2017-02-01,2017-02-01
+notable,Harrison.ai,1,0,,,Industry,Australia,2024-09-05,2024-09-05
+notable,Harvard Medical School,1,0,,,Academia,Multinational,2021-10-27,2021-10-27
+notable,Harvard University,1,0,,,Academia,United States of America,1952-01-08,1952-01-08
+notable,Hebrew University of Jerusalem,1,1,6.5e+19,6.5e+19,Industry-academia collaboration,Multinational,2022-02-10,2022-02-10
+notable,Helsinki University of Technology,1,0,,,Academia,Finland,1981-07-25,1981-07-25
+notable,Huawei Noah's Ark Lab,1,1,4.67e+23,4.67e+23,Industry,China,2023-03-20,2023-03-20
+notable,IDIAP,1,1,4.08e+17,4.08e+17,Academia,Switzerland,2019-05-14,2019-05-14
+notable,Inception Labs,1,0,,,Industry,United States of America,2025-02-27,2025-02-27
+notable,Institute for Advanced Study,1,0,,,Academia,United States of America,1954-07-02,1954-07-02
+notable,Intel Labs,1,1,5.337e+16,5.337e+16,Industry,United States of America,2023-08-30,2023-08-30
+notable,Jacobs University Bremen,1,1,1.5552e+18,1.5552e+18,Academia,Multinational,2014-09-01,2014-09-01
+notable,Jane Street,1,1,2.32e+19,2.32e+19,Industry,United States of America,2019-02-27,2019-02-27
+notable,Jiangnan University,1,0,,,Academia,Multinational,2016-11-16,2016-11-16
+notable,Johannes Kepler University Linz,1,0,,,Academia,Multinational,2020-07-16,2020-07-16
+notable,KU Leuven,1,1,982800000000000.0,982800000000000.0,Industry-academia collaboration,Multinational,2018-09-24,2018-09-24
+notable,King Abdullah University of Science and Technology (KAUST),1,0,,,Academia,Multinational,2023-03-15,2023-03-15
+notable,LORIA,1,1,7.690547e+18,7.690547e+18,Industry-academia collaboration,Multinational,2020-02-21,2020-02-21
+notable,MIT-IBM Watson AI Lab,1,1,6.237e+20,6.237e+20,Industry-academia collaboration,United States of America,2020-04-29,2020-04-29
+notable,Magic,1,0,,,Industry,United States of America,2023-06-06,2023-06-06
+notable,Maluuba,1,0,,,Industry,Multinational,2017-06-13,2017-06-13
+notable,Max Planck Institute for Intelligent Systems,1,1,1.3079231999999998e+17,1.3079231999999998e+17,Academia,Germany,2016-12-23,2016-12-23
+notable,Meituan Inc,1,1,3.726e+24,3.726e+24,Industry,China,2025-09-01,2025-09-01
+notable,MetaMind Inc,1,1,7490000000000000.0,7490000000000000.0,Industry,United States of America,2016-09-26,2016-09-26
+notable,Midjourney,1,0,,,Industry,United States of America,2022-02-15,2022-02-15
+notable,Mila - Quebec AI (originally Montreal Institute for Learning Algorithms),1,1,1.91e+21,1.91e+21,Industry-academia collaboration,Multinational,2021-06-09,2021-06-09
+notable,Mitsubishi Electric Research Labs,1,1,63000000000000.0,63000000000000.0,Industry,United States of America,2001-12-08,2001-12-08
+notable,Mobvoi,1,0,,,Industry-academia collaboration,Multinational,2019-04-08,2019-04-08
+notable,NC AI,1,0,,,Industry,Korea (Republic of),2025-12-30,2025-12-30
+notable,Nankai University,1,1,3.8047968e+19,3.8047968e+19,Academia,Multinational,2019-08-22,2019-08-22
+notable,National Cancer Institute,1,1,53460000.0,53460000.0,Government,United States of America,1992-10-16,1992-10-16
+notable,Netflix,1,0,,,Industry,United States of America,2015-12-01,2015-12-01
+notable,Northeastern University,1,1,1.07e+20,1.07e+20,Academia,United States of America,2021-08-15,2021-08-15
+notable,Northeastern University (China),1,0,,,Industry-academia collaboration,China,2020-05-06,2020-05-06
+notable,Oppo Mobile Telecommunications,1,0,,,Industry,China,2023-11-16,2023-11-16
+notable,Oregon State University,1,1,35811936000.0,35811936000.0,Academia,United States of America,1990-06-01,1990-06-01
+notable,Peng Cheng Laboratory,1,1,9.47e+18,9.47e+18,Academia,Multinational,2021-05-20,2021-05-20
+notable,Perplexity,1,0,,,Industry,United States of America,2023-11-29,2023-11-29
+notable,Physical Intelligence,1,0,,,Industry,United States of America,2025-11-17,2025-11-17
+notable,Pragmatic Theory Inc.,1,0,,,Industry,Canada,2009-08-01,2009-08-01
+notable,Prime Intellect,1,0,,,Industry,United States of America,2025-01-17,2025-01-17
+notable,Purdue University,1,1,1080000.0,1080000.0,Academia,United States of America,1965-10-01,1965-10-01
+notable,RWTH Aachen University,1,1,1.66e+16,1.66e+16,Academia,Germany,2012-09-09,2012-09-09
+notable,Reka AI,1,1,8.400010000000001e+24,8.400010000000001e+24,Industry,United States of America,2024-04-15,2024-04-15
+notable,Samsung R&D Institute Russia,1,1,5.188e+16,5.188e+16,Industry,Russia,2018-11-12,2018-11-12
+notable,Sandia Corporation,1,0,,,Industry,United States of America,1959-12-01,1959-12-01
+notable,Sapient Intelligence,1,0,,,,Singapore,2025-08-04,2025-08-04
+notable,Sapienza Università di Roma,1,1,4531200000.0,4531200000.0,Academia,Italy,1994-01-07,1994-01-07
+notable,Saudi Aramco,1,1,1.05e+25,1.05e+25,Industry-academia collaboration,Saudi Arabia,2024-03-04,2024-03-04
+notable,Science Applications International Corporation / SAIC,1,0,,,Industry,United States of America,1989-01-01,1989-01-01
+notable,Sensifai,1,0,,,Industry-academia collaboration,Multinational,2016-08-22,2016-08-22
+notable,Seoul National University,1,0,,,Academia,Korea (Republic of),2017-06-10,2017-06-10
+notable,Shandong University,1,0,,,Academia,Multinational,2017-08-16,2017-08-16
+notable,Shanghai Qi Zhi institute,1,0,,,Academia,Multinational,2023-09-12,2023-09-12
+notable,Shannon.AI,1,1,5.2587456e+19,5.2587456e+19,Industry-academia collaboration,Multinational,2021-10-17,2021-10-17
+notable,Singapore University of Technology & Design,1,1,4.4e+16,4.4e+16,Industry-academia collaboration,Singapore,2014-09-14,2014-09-14
+notable,Suno,1,0,,,Industry,United States of America,2024-11-19,2024-11-19
+notable,TU Darmstadt,1,0,,,Academia,Germany,2021-02-18,2021-02-18
+notable,Technion - Israel Institute of Technology,1,0,,,Industry-academia collaboration,Multinational,2011-10-03,2011-10-03
+notable,TensorTour,1,0,,,Industry,United States of America,2023-11-07,2023-11-07
+notable,Tokyo Medical and Dental University,1,0,,,Academia,Japan,1969-05-01,1969-05-01
+notable,Twitter,1,0,,,Industry,United States of America,2017-05-25,2017-05-25
+notable,UC Irvine,1,0,,,Academia,United States of America,2016-05-08,2016-05-08
+notable,Uber AI,1,0,,,Industry,United States of America,2020-04-27,2020-04-27
+notable,Universite de Technologie de Compiègne – CNRS,1,1,1.340928e+18,1.340928e+18,Industry-academia collaboration,Multinational,2013-12-05,2013-12-05
+notable,University of Alberta,1,1,1.446336e+19,1.446336e+19,Academia,Multinational,2017-01-06,2017-01-06
+notable,University of Freiburg,1,1,5.0832252e+16,5.0832252e+16,Academia,Germany,2015-05-18,2015-05-18
+notable,University of Hyderabad,1,1,2006640000000000.0,2006640000000000.0,Academia,India,2018-11-15,2018-11-15
+notable,University of Kansas,1,0,,,Academia,United States of America,1973-11-01,1973-11-01
+notable,University of London,1,0,,,Academia,United Kingdom of Great Britain and Northern Ireland,1989-01-01,1989-01-01
+notable,University of Lubeck,1,0,,,Academia,Germany,2008-11-19,2008-11-19
+notable,University of Manchester,1,1,7.296e+16,7.296e+16,Industry-academia collaboration,United Kingdom of Great Britain and Northern Ireland,2018-05-22,2018-05-22
+notable,University of Maryland,1,1,4.8098691e+17,4.8098691e+17,Academia,United States of America,2015-08-07,2015-08-07
+notable,University of Massachusetts Amherst,1,1,324000000.0,324000000.0,Academia,United States of America,1983-09-01,1983-09-01
+notable,University of Michigan,1,0,,,Academia,Multinational,2016-10-08,2016-10-08
+notable,University of Minnesota,1,0,,,Industry-academia collaboration,United States of America,2023-05-17,2023-05-17
+notable,University of Oulu,1,0,,,Industry-academia collaboration,Multinational,2006-12-01,2006-12-01
+notable,University of Siena,1,1,1614600000.0,1614600000.0,Academia,Italy,2008-12-09,2008-12-09
+notable,University of Trento,1,0,,,Academia,Multinational,2013-04-02,2013-04-02
+notable,University of Turku,1,0,,,Industry-academia collaboration,Multinational,2023-11-03,2023-11-03
+notable,University of Zagreb,1,0,,,Academia,Croatia,1976-07-01,1976-07-01
+notable,Université Paris-Est,1,0,,,Academia,France,2016-09-19,2016-09-19
+notable,Utrecht University,1,1,3.5e+20,3.5e+20,Academia,Netherlands,2023-01-27,2023-01-27
+notable,Visual Computing Institute,1,0,,,Academia,Germany,2017-11-21,2017-11-21
+notable,Waseda University,1,1,1.4e+20,1.4e+20,Academia,Japan,2022-04-07,2022-04-07
+notable,Westlake University,1,1,7.56e+21,7.56e+21,Academia,Multinational,2023-08-05,2023-08-05
+notable,Wuhan University,1,1,7.76e+22,7.76e+22,Academia,Multinational,2022-12-04,2022-12-04
+notable,Yahoo Research,1,0,,,Industry,United States of America,2009-08-07,2009-08-07
+notable,York University,1,0,,,Academia,Canada,2016-04-30,2016-04-30
+notable,Zhejiang University (ZJU),1,0,,,Academia,China,2022-01-23,2022-01-23
+notable,Zhuiyi Technology,1,1,2.162688e+18,2.162688e+18,Industry,China,2023-11-08,2023-11-08
+notable,deepset,1,1,1.42829568e+21,1.42829568e+21,Industry-academia collaboration,Germany,2020-10-21,2020-10-21
+notable,rinna,1,1,2.5562e+23,2.5562e+23,Industry,Japan,2023-12-21,2023-12-21

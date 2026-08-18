@@ -1,0 +1,2396 @@
+dataset,dimension,year,category,models
+notable,country,1950,United States of America,1
+notable,country,1952,United States of America,1
+notable,country,1954,United States of America,1
+notable,country,1955,United States of America,2
+notable,country,1957,United States of America,1
+notable,country,1959,United States of America,3
+notable,country,1960,United States of America,2
+notable,country,1962,United States of America,2
+notable,country,1963,United States of America,1
+notable,country,1965,United States of America,1
+notable,country,1966,United States of America,1
+notable,country,1968,United Kingdom of Great Britain and Northern Ireland,2
+notable,country,1969,Japan,1
+notable,country,1973,United States of America,1
+notable,country,1975,Japan,1
+notable,country,1976,Croatia,1
+notable,country,1980,Japan,1
+notable,country,1981,Finland,1
+notable,country,1982,United States of America,1
+notable,country,1983,United States of America,1
+notable,country,1984,Japan,1
+notable,country,1986,United States of America,4
+notable,country,1987,United States of America,3
+notable,country,1988,Canada,1
+notable,country,1988,Multinational,1
+notable,country,1989,Spain,1
+notable,country,1989,United Kingdom of Great Britain and Northern Ireland,1
+notable,country,1989,United States of America,5
+notable,country,1990,United States of America,2
+notable,country,1992,United Kingdom of Great Britain and Northern Ireland,1
+notable,country,1992,United States of America,3
+notable,country,1993,United States of America,2
+notable,country,1994,Germany,1
+notable,country,1994,Italy,1
+notable,country,1994,United States of America,1
+notable,country,1995,United States of America,2
+notable,country,1996,United States of America,2
+notable,country,1997,Germany,1
+notable,country,1997,Japan,1
+notable,country,1997,United States of America,1
+notable,country,1998,United States of America,1
+notable,country,1999,Switzerland,1
+notable,country,1999,United States of America,1
+notable,country,2000,Canada,1
+notable,country,2000,United Kingdom of Great Britain and Northern Ireland,1
+notable,country,2001,United States of America,3
+notable,country,2002,United States of America,1
+notable,country,2003,Canada,2
+notable,country,2003,United States of America,2
+notable,country,2004,United States of America,1
+notable,country,2005,France,1
+notable,country,2005,United States of America,1
+notable,country,2006,Canada,2
+notable,country,2006,France,1
+notable,country,2006,Multinational,4
+notable,country,2006,United Kingdom of Great Britain and Northern Ireland,1
+notable,country,2006,United States of America,1
+notable,country,2007,Multinational,2
+notable,country,2007,United States of America,4
+notable,country,2008,Canada,2
+notable,country,2008,Germany,1
+notable,country,2008,Italy,1
+notable,country,2008,United States of America,2
+notable,country,2009,Canada,3
+notable,country,2009,Germany,1
+notable,country,2009,United States of America,7
+notable,country,2010,Canada,4
+notable,country,2010,Germany,2
+notable,country,2010,United States of America,4
+notable,country,2011,Canada,2
+notable,country,2011,Multinational,1
+notable,country,2011,Switzerland,4
+notable,country,2011,United States of America,4
+notable,country,2012,Canada,5
+notable,country,2012,Germany,1
+notable,country,2012,Multinational,3
+notable,country,2012,Switzerland,1
+notable,country,2012,United States of America,3
+notable,country,2013,Canada,1
+notable,country,2013,Multinational,3
+notable,country,2013,Netherlands,1
+notable,country,2013,Singapore,1
+notable,country,2013,United Kingdom of Great Britain and Northern Ireland,2
+notable,country,2013,United States of America,11
+notable,country,2014,Canada,3
+notable,country,2014,China,2
+notable,country,2014,Hong Kong,2
+notable,country,2014,Multinational,7
+notable,country,2014,Singapore,1
+notable,country,2014,United Kingdom of Great Britain and Northern Ireland,6
+notable,country,2014,United States of America,12
+notable,country,2015,Germany,1
+notable,country,2015,Multinational,7
+notable,country,2015,United Kingdom of Great Britain and Northern Ireland,4
+notable,country,2015,United States of America,16
+notable,country,2016,Canada,1
+notable,country,2016,China,1
+notable,country,2016,France,1
+notable,country,2016,Germany,1
+notable,country,2016,Hong Kong,1
+notable,country,2016,Multinational,12
+notable,country,2016,United Kingdom of Great Britain and Northern Ireland,4
+notable,country,2016,United States of America,28
+notable,country,2017,China,4
+notable,country,2017,Denmark,1
+notable,country,2017,Germany,1
+notable,country,2017,Hong Kong,1
+notable,country,2017,Israel,1
+notable,country,2017,Japan,1
+notable,country,2017,Korea (Republic of),3
+notable,country,2017,Multinational,16
+notable,country,2017,United Kingdom of Great Britain and Northern Ireland,10
+notable,country,2017,United States of America,17
+notable,country,2018,China,1
+notable,country,2018,India,1
+notable,country,2018,Japan,1
+notable,country,2018,Korea (Republic of),1
+notable,country,2018,Multinational,6
+notable,country,2018,Russia,1
+notable,country,2018,United Kingdom of Great Britain and Northern Ireland,4
+notable,country,2018,United States of America,22
+notable,country,2019,Germany,1
+notable,country,2019,Multinational,20
+notable,country,2019,Switzerland,2
+notable,country,2019,United Kingdom of Great Britain and Northern Ireland,5
+notable,country,2019,United States of America,40
+notable,country,2020,Canada,1
+notable,country,2020,China,5
+notable,country,2020,Germany,2
+notable,country,2020,Multinational,12
+notable,country,2020,United Kingdom of Great Britain and Northern Ireland,4
+notable,country,2020,United States of America,26
+notable,country,2021,China,14
+notable,country,2021,Germany,2
+notable,country,2021,Israel,1
+notable,country,2021,Korea (Republic of),1
+notable,country,2021,Multinational,24
+notable,country,2021,United Kingdom of Great Britain and Northern Ireland,4
+notable,country,2021,United States of America,33
+notable,country,2022,China,6
+notable,country,2022,Japan,1
+notable,country,2022,Korea (Republic of),3
+notable,country,2022,Multinational,17
+notable,country,2022,Saudi Arabia,1
+notable,country,2022,United Kingdom of Great Britain and Northern Ireland,10
+notable,country,2022,United States of America,53
+notable,country,2023,Canada,1
+notable,country,2023,China,19
+notable,country,2023,France,1
+notable,country,2023,Japan,1
+notable,country,2023,Korea (Republic of),1
+notable,country,2023,Multinational,24
+notable,country,2023,Netherlands,1
+notable,country,2023,Singapore,2
+notable,country,2023,United Arab Emirates,2
+notable,country,2023,United Kingdom of Great Britain and Northern Ireland,1
+notable,country,2023,United States of America,66
+notable,country,2024,Australia,1
+notable,country,2024,China,27
+notable,country,2024,France,4
+notable,country,2024,Germany,1
+notable,country,2024,Hong Kong,1
+notable,country,2024,Israel,1
+notable,country,2024,Korea (Republic of),1
+notable,country,2024,Multinational,7
+notable,country,2024,Saudi Arabia,2
+notable,country,2024,United Kingdom of Great Britain and Northern Ireland,1
+notable,country,2024,United States of America,52
+notable,country,2025,China,33
+notable,country,2025,France,1
+notable,country,2025,Korea (Republic of),8
+notable,country,2025,Multinational,4
+notable,country,2025,Singapore,1
+notable,country,2025,United States of America,59
+notable,country,2026,China,19
+notable,country,2026,Korea (Republic of),4
+notable,country,2026,Multinational,1
+notable,country,2026,United States of America,26
+notable,domain,1950,Robotics,1
+notable,domain,1952,Robotics,1
+notable,domain,1954,Mathematics,1
+notable,domain,1955,Other,1
+notable,domain,1955,Vision,1
+notable,domain,1957,Other,1
+notable,domain,1959,Games,1
+notable,domain,1959,Language,1
+notable,domain,1959,Vision,1
+notable,domain,1960,Vision,2
+notable,domain,1962,Mathematics,1
+notable,domain,1962,Other,1
+notable,domain,1963,Vision,1
+notable,domain,1965,Robotics,1
+notable,domain,1966,Speech,1
+notable,domain,1968,Games,2
+notable,domain,1969,Medicine,1
+notable,domain,1973,Vision,1
+notable,domain,1975,Other,1
+notable,domain,1976,Vision,1
+notable,domain,1980,Vision,1
+notable,domain,1981,Mathematics,1
+notable,domain,1982,Other,1
+notable,domain,1983,Robotics,1
+notable,domain,1984,Other,1
+notable,domain,1986,Mathematics,1
+notable,domain,1986,Other,2
+notable,domain,1986,Vision,1
+notable,domain,1987,Speech,2
+notable,domain,1988,Language,1
+notable,domain,1988,Speech,1
+notable,domain,1989,Driving,1
+notable,domain,1989,Robotics,1
+notable,domain,1989,Speech,1
+notable,domain,1989,Vision,4
+notable,domain,1990,Other,2
+notable,domain,1990,Speech,1
+notable,domain,1990,Vision,3
+notable,domain,1991,Speech,1
+notable,domain,1992,Biology,1
+notable,domain,1992,Games,1
+notable,domain,1992,Medicine,1
+notable,domain,1992,Vision,1
+notable,domain,1993,Language,1
+notable,domain,1993,Vision,2
+notable,domain,1994,Games,1
+notable,domain,1994,Language,1
+notable,domain,1994,Materials science,1
+notable,domain,1994,Recommendation,1
+notable,domain,1994,Vision,2
+notable,domain,1995,Vision,2
+notable,domain,1996,Vision,3
+notable,domain,1997,Games,1
+notable,domain,1997,Language,1
+notable,domain,1997,Speech,1
+notable,domain,1997,Vision,1
+notable,domain,1998,Vision,1
+notable,domain,1999,Language,4
+notable,domain,2000,Language,1
+notable,domain,2000,Vision,1
+notable,domain,2001,Language,1
+notable,domain,2001,Mathematics,1
+notable,domain,2001,Vision,1
+notable,domain,2002,Language,1
+notable,domain,2003,Language,3
+notable,domain,2003,Vision,1
+notable,domain,2004,Vision,2
+notable,domain,2005,Language,1
+notable,domain,2005,Search,1
+notable,domain,2005,Vision,1
+notable,domain,2006,Games,1
+notable,domain,2006,Other,1
+notable,domain,2006,Video,1
+notable,domain,2006,Vision,6
+notable,domain,2007,Language,3
+notable,domain,2007,Recommendation,1
+notable,domain,2007,Vision,2
+notable,domain,2008,Language,2
+notable,domain,2008,Other,2
+notable,domain,2008,Recommendation,1
+notable,domain,2008,Vision,1
+notable,domain,2009,Other,1
+notable,domain,2009,Recommendation,6
+notable,domain,2009,Speech,1
+notable,domain,2009,Vision,5
+notable,domain,2010,Language,1
+notable,domain,2010,Other,1
+notable,domain,2010,Recommendation,1
+notable,domain,2010,Vision,7
+notable,domain,2011,Language,4
+notable,domain,2011,Vision,7
+notable,domain,2012,Language,3
+notable,domain,2012,Other,1
+notable,domain,2012,Speech,2
+notable,domain,2012,Vision,7
+notable,domain,2013,Games,1
+notable,domain,2013,Language,7
+notable,domain,2013,Speech,3
+notable,domain,2013,Vision,8
+notable,domain,2014,Games,2
+notable,domain,2014,Image generation,1
+notable,domain,2014,Language,9
+notable,domain,2014,Multimodal,1
+notable,domain,2014,Speech,1
+notable,domain,2014,Video,3
+notable,domain,2014,Vision,16
+notable,domain,2015,Games,4
+notable,domain,2015,Language,3
+notable,domain,2015,Recommendation,1
+notable,domain,2015,Robotics,1
+notable,domain,2015,Speech,1
+notable,domain,2015,Vision,19
+notable,domain,2016,3D modeling,1
+notable,domain,2016,Biology,1
+notable,domain,2016,Games,4
+notable,domain,2016,Language,8
+notable,domain,2016,Recommendation,1
+notable,domain,2016,Speech,4
+notable,domain,2016,Vision,30
+notable,domain,2017,3D modeling,2
+notable,domain,2017,Biology,1
+notable,domain,2017,Games,9
+notable,domain,2017,Image generation,1
+notable,domain,2017,Language,19
+notable,domain,2017,Recommendation,1
+notable,domain,2017,Speech,1
+notable,domain,2017,Video,1
+notable,domain,2017,Vision,20
+notable,domain,2018,Biology,1
+notable,domain,2018,Games,2
+notable,domain,2018,Image generation,2
+notable,domain,2018,Language,24
+notable,domain,2018,Robotics,1
+notable,domain,2018,Speech,1
+notable,domain,2018,Vision,6
+notable,domain,2019,3D modeling,1
+notable,domain,2019,Audio,1
+notable,domain,2019,Biology,3
+notable,domain,2019,Games,7
+notable,domain,2019,Image generation,2
+notable,domain,2019,Language,38
+notable,domain,2019,Recommendation,1
+notable,domain,2019,Robotics,2
+notable,domain,2019,Speech,1
+notable,domain,2019,Vision,12
+notable,domain,2020,Biology,5
+notable,domain,2020,Earth science,1
+notable,domain,2020,Games,3
+notable,domain,2020,Image generation,1
+notable,domain,2020,Language,27
+notable,domain,2020,Multimodal,1
+notable,domain,2020,Robotics,1
+notable,domain,2020,Speech,5
+notable,domain,2020,Vision,6
+notable,domain,2021,Biology,7
+notable,domain,2021,Earth science,1
+notable,domain,2021,Games,4
+notable,domain,2021,Image generation,7
+notable,domain,2021,Language,30
+notable,domain,2021,Medicine,1
+notable,domain,2021,Multimodal,7
+notable,domain,2021,Robotics,1
+notable,domain,2021,Search,1
+notable,domain,2021,Speech,4
+notable,domain,2021,Vision,15
+notable,domain,2022,Audio,1
+notable,domain,2022,Biology,12
+notable,domain,2022,Earth science,1
+notable,domain,2022,Games,3
+notable,domain,2022,Image generation,13
+notable,domain,2022,Language,40
+notable,domain,2022,Medicine,1
+notable,domain,2022,Multimodal,6
+notable,domain,2022,Other,1
+notable,domain,2022,Robotics,1
+notable,domain,2022,Speech,3
+notable,domain,2022,Video,3
+notable,domain,2022,Vision,6
+notable,domain,2023,Audio,6
+notable,domain,2023,Biology,10
+notable,domain,2023,Earth science,2
+notable,domain,2023,Games,1
+notable,domain,2023,Image generation,7
+notable,domain,2023,Language,44
+notable,domain,2023,Materials science,1
+notable,domain,2023,Mathematics,1
+notable,domain,2023,Medicine,1
+notable,domain,2023,Multimodal,25
+notable,domain,2023,Robotics,7
+notable,domain,2023,Speech,2
+notable,domain,2023,Video,5
+notable,domain,2023,Vision,7
+notable,domain,2024,3D modeling,1
+notable,domain,2024,Audio,1
+notable,domain,2024,Biology,4
+notable,domain,2024,Earth science,1
+notable,domain,2024,Image generation,2
+notable,domain,2024,Language,42
+notable,domain,2024,Mathematics,3
+notable,domain,2024,Multimodal,29
+notable,domain,2024,Robotics,6
+notable,domain,2024,Video,5
+notable,domain,2024,Vision,4
+notable,domain,2025,3D modeling,2
+notable,domain,2025,Earth science,1
+notable,domain,2025,Image generation,5
+notable,domain,2025,Language,50
+notable,domain,2025,Mathematics,2
+notable,domain,2025,Multimodal,36
+notable,domain,2025,Recommendation,1
+notable,domain,2025,Robotics,1
+notable,domain,2025,Video,4
+notable,domain,2025,Vision,3
+notable,domain,2026,Audio,1
+notable,domain,2026,Image generation,3
+notable,domain,2026,Language,28
+notable,domain,2026,Multimodal,16
+notable,domain,2026,Vision,1
+notable,org_category,1950,Industry,1
+notable,org_category,1952,Academia,1
+notable,org_category,1954,Academia,1
+notable,org_category,1955,Academia,2
+notable,org_category,1957,Academia,1
+notable,org_category,1959,Academia,1
+notable,org_category,1959,Industry,2
+notable,org_category,1960,Academia,2
+notable,org_category,1962,Academia,1
+notable,org_category,1962,Industry,1
+notable,org_category,1963,Industry,1
+notable,org_category,1965,Academia,1
+notable,org_category,1966,Industry,1
+notable,org_category,1968,Academia,2
+notable,org_category,1969,Academia,1
+notable,org_category,1973,Academia,1
+notable,org_category,1975,Industry,1
+notable,org_category,1976,Academia,1
+notable,org_category,1980,Industry,1
+notable,org_category,1981,Academia,1
+notable,org_category,1982,Academia,1
+notable,org_category,1983,Academia,1
+notable,org_category,1984,Industry,1
+notable,org_category,1986,Academia,4
+notable,org_category,1987,Academia,3
+notable,org_category,1988,Academia,1
+notable,org_category,1988,Industry-academia collaboration,1
+notable,org_category,1989,Academia,4
+notable,org_category,1989,Industry,3
+notable,org_category,1990,Academia,2
+notable,org_category,1992,Government,2
+notable,org_category,1992,Industry,2
+notable,org_category,1993,Industry,2
+notable,org_category,1994,Academia,3
+notable,org_category,1995,Academia,1
+notable,org_category,1995,Industry,1
+notable,org_category,1996,Academia,1
+notable,org_category,1996,Industry,1
+notable,org_category,1997,Academia,1
+notable,org_category,1997,Industry,2
+notable,org_category,1998,Industry,1
+notable,org_category,1999,Academia,1
+notable,org_category,1999,Industry-academia collaboration,1
+notable,org_category,2000,Academia,2
+notable,org_category,2001,Academia,2
+notable,org_category,2001,Industry,1
+notable,org_category,2002,Industry-academia collaboration,1
+notable,org_category,2003,Academia,4
+notable,org_category,2004,Academia,1
+notable,org_category,2005,Academia,1
+notable,org_category,2005,Industry,1
+notable,org_category,2006,Academia,8
+notable,org_category,2006,Industry-academia collaboration,1
+notable,org_category,2007,Academia,3
+notable,org_category,2007,Industry,3
+notable,org_category,2008,Academia,4
+notable,org_category,2008,Industry,2
+notable,org_category,2009,Academia,5
+notable,org_category,2009,Industry,6
+notable,org_category,2010,Academia,8
+notable,org_category,2010,Industry,1
+notable,org_category,2010,Industry-academia collaboration,1
+notable,org_category,2011,Academia,8
+notable,org_category,2011,Industry-academia collaboration,3
+notable,org_category,2012,Academia,8
+notable,org_category,2012,Industry,3
+notable,org_category,2012,Industry-academia collaboration,2
+notable,org_category,2013,Academia,10
+notable,org_category,2013,Industry,7
+notable,org_category,2013,Industry-academia collaboration,2
+notable,org_category,2014,Academia,21
+notable,org_category,2014,Industry,5
+notable,org_category,2014,Industry-academia collaboration,7
+notable,org_category,2015,Academia,9
+notable,org_category,2015,Industry,13
+notable,org_category,2015,Industry-academia collaboration,6
+notable,org_category,2016,Academia,18
+notable,org_category,2016,Industry,21
+notable,org_category,2016,Industry-academia collaboration,10
+notable,org_category,2017,Academia,18
+notable,org_category,2017,Industry,26
+notable,org_category,2017,Industry-academia collaboration,11
+notable,org_category,2018,Academia,4
+notable,org_category,2018,Industry,23
+notable,org_category,2018,Industry-academia collaboration,10
+notable,org_category,2019,Academia,12
+notable,org_category,2019,Industry,30
+notable,org_category,2019,Industry-academia collaboration,24
+notable,org_category,2019,Research collective,2
+notable,org_category,2020,Academia,9
+notable,org_category,2020,Industry,25
+notable,org_category,2020,Industry-academia collaboration,16
+notable,org_category,2021,Academia,9
+notable,org_category,2021,Industry,46
+notable,org_category,2021,Industry-academia collaboration,23
+notable,org_category,2021,Research collective,1
+notable,org_category,2022,Academia,17
+notable,org_category,2022,Industry,50
+notable,org_category,2022,Industry-academia collaboration,23
+notable,org_category,2022,Research collective,1
+notable,org_category,2023,Academia,18
+notable,org_category,2023,Government,2
+notable,org_category,2023,Industry,69
+notable,org_category,2023,Industry-academia collaboration,30
+notable,org_category,2024,Academia,3
+notable,org_category,2024,Industry,81
+notable,org_category,2024,Industry-academia collaboration,14
+notable,org_category,2025,Academia,2
+notable,org_category,2025,Industry,97
+notable,org_category,2025,Industry-academia collaboration,5
+notable,org_category,2025,Research collective,1
+notable,org_category,2026,Industry,49
+notable,org_category,2026,Industry-academia collaboration,1
+notable,model_accessibility,1976,Unreleased,1
+notable,model_accessibility,1988,Unreleased,1
+notable,model_accessibility,1997,Unreleased,1
+notable,model_accessibility,2005,Unreleased,1
+notable,model_accessibility,2006,Unreleased,2
+notable,model_accessibility,2008,Open weights (unrestricted),1
+notable,model_accessibility,2009,Unreleased,2
+notable,model_accessibility,2010,Unreleased,3
+notable,model_accessibility,2011,Unreleased,4
+notable,model_accessibility,2012,Unreleased,6
+notable,model_accessibility,2013,Unreleased,2
+notable,model_accessibility,2014,Open weights (unrestricted),1
+notable,model_accessibility,2014,Unreleased,5
+notable,model_accessibility,2015,Open weights (unrestricted),5
+notable,model_accessibility,2015,Unreleased,11
+notable,model_accessibility,2016,Hosted access (no API),1
+notable,model_accessibility,2016,Open weights (non-commercial),2
+notable,model_accessibility,2016,Open weights (restricted use),1
+notable,model_accessibility,2016,Open weights (unrestricted),8
+notable,model_accessibility,2016,Unreleased,18
+notable,model_accessibility,2017,Hosted access (no API),1
+notable,model_accessibility,2017,Open weights (unrestricted),1
+notable,model_accessibility,2017,Unreleased,24
+notable,model_accessibility,2018,Hosted access (no API),1
+notable,model_accessibility,2018,Open weights (non-commercial),2
+notable,model_accessibility,2018,Open weights (unrestricted),7
+notable,model_accessibility,2018,Unreleased,20
+notable,model_accessibility,2019,Open weights (non-commercial),8
+notable,model_accessibility,2019,Open weights (restricted use),1
+notable,model_accessibility,2019,Open weights (unrestricted),22
+notable,model_accessibility,2019,Unreleased,37
+notable,model_accessibility,2020,API access,1
+notable,model_accessibility,2020,Open weights (non-commercial),2
+notable,model_accessibility,2020,Open weights (unrestricted),26
+notable,model_accessibility,2020,Unreleased,21
+notable,model_accessibility,2021,API access,4
+notable,model_accessibility,2021,Hosted access (no API),5
+notable,model_accessibility,2021,Open weights (non-commercial),8
+notable,model_accessibility,2021,Open weights (unrestricted),33
+notable,model_accessibility,2021,Unreleased,29
+notable,model_accessibility,2022,API access,8
+notable,model_accessibility,2022,Hosted access (no API),5
+notable,model_accessibility,2022,Open weights (non-commercial),10
+notable,model_accessibility,2022,Open weights (restricted use),1
+notable,model_accessibility,2022,Open weights (unrestricted),30
+notable,model_accessibility,2022,Unreleased,36
+notable,model_accessibility,2023,API access,20
+notable,model_accessibility,2023,Hosted access (no API),4
+notable,model_accessibility,2023,Open weights (non-commercial),18
+notable,model_accessibility,2023,Open weights (restricted use),19
+notable,model_accessibility,2023,Open weights (unrestricted),22
+notable,model_accessibility,2023,Unreleased,36
+notable,model_accessibility,2024,API access,30
+notable,model_accessibility,2024,Hosted access (no API),13
+notable,model_accessibility,2024,Open weights (non-commercial),9
+notable,model_accessibility,2024,Open weights (restricted use),14
+notable,model_accessibility,2024,Open weights (unrestricted),15
+notable,model_accessibility,2024,Unreleased,16
+notable,model_accessibility,2025,API access,46
+notable,model_accessibility,2025,Hosted access (no API),8
+notable,model_accessibility,2025,Open weights (non-commercial),5
+notable,model_accessibility,2025,Open weights (restricted use),10
+notable,model_accessibility,2025,Open weights (unrestricted),27
+notable,model_accessibility,2025,Unreleased,7
+notable,model_accessibility,2026,API access,24
+notable,model_accessibility,2026,Hosted access (no API),2
+notable,model_accessibility,2026,Open weights (non-commercial),1
+notable,model_accessibility,2026,Open weights (restricted use),3
+notable,model_accessibility,2026,Open weights (unrestricted),14
+notable,model_accessibility,2026,Unreleased,2
+notable,hardware_family,2009,NVIDIA Tesla S1070,1
+notable,hardware_family,2011,NVIDIA consumer / workstation GPU,5
+notable,hardware_family,2012,NVIDIA consumer / workstation GPU,6
+notable,hardware_family,2013,NVIDIA Tesla K20X,1
+notable,hardware_family,2013,NVIDIA consumer / workstation GPU,1
+notable,hardware_family,2014,NVIDIA Tesla C2075,1
+notable,hardware_family,2014,NVIDIA consumer / workstation GPU,4
+notable,hardware_family,2015,NVIDIA Tesla K20m,1
+notable,hardware_family,2015,NVIDIA Tesla K40c,2
+notable,hardware_family,2015,NVIDIA Tesla K40m,1
+notable,hardware_family,2015,NVIDIA Tesla K40s,1
+notable,hardware_family,2015,NVIDIA Tesla K40t,1
+notable,hardware_family,2015,NVIDIA consumer / workstation GPU,3
+notable,hardware_family,2016,NVIDIA Tesla K40c,2
+notable,hardware_family,2016,NVIDIA consumer / workstation GPU,5
+notable,hardware_family,2016,NVIDIA datacenter (pre-Volta),2
+notable,hardware_family,2017,Google TPU (version unstated),2
+notable,hardware_family,2017,Google TPU v2,1
+notable,hardware_family,2017,NVIDIA Tesla K40t,1
+notable,hardware_family,2017,NVIDIA consumer / workstation GPU,1
+notable,hardware_family,2017,NVIDIA datacenter (pre-Volta),5
+notable,hardware_family,2018,Google TPU v2,3
+notable,hardware_family,2018,Google TPU v3,1
+notable,hardware_family,2018,NVIDIA V100,6
+notable,hardware_family,2018,NVIDIA consumer / workstation GPU,2
+notable,hardware_family,2018,NVIDIA datacenter (pre-Volta),5
+notable,hardware_family,2019,Google TPU v3,10
+notable,hardware_family,2019,NVIDIA Tesla V100S PCIe 32 GB,1
+notable,hardware_family,2019,NVIDIA V100,11
+notable,hardware_family,2019,NVIDIA consumer / workstation GPU,3
+notable,hardware_family,2019,NVIDIA datacenter (pre-Volta),2
+notable,hardware_family,2020,Google TPU v2,1
+notable,hardware_family,2020,Google TPU v3,11
+notable,hardware_family,2020,NVIDIA V100,13
+notable,hardware_family,2020,NVIDIA consumer / workstation GPU,4
+notable,hardware_family,2021,Google TPU v3,15
+notable,hardware_family,2021,Google TPU v4,2
+notable,hardware_family,2021,NVIDIA A100 / A800,14
+notable,hardware_family,2021,NVIDIA V100,22
+notable,hardware_family,2021,NVIDIA consumer / workstation GPU,1
+notable,hardware_family,2021,NVIDIA datacenter (pre-Volta),1
+notable,hardware_family,2022,Google TPU v3,4
+notable,hardware_family,2022,Google TPU v4,12
+notable,hardware_family,2022,NVIDIA A100 / A800,26
+notable,hardware_family,2022,NVIDIA V100,5
+notable,hardware_family,2022,NVIDIA consumer / workstation GPU,4
+notable,hardware_family,2023,AMD Instinct / Radeon,1
+notable,hardware_family,2023,AWS Trainium / Inferentia,1
+notable,hardware_family,2023,Cerebras CS-2,1
+notable,hardware_family,2023,Google TPU v3,2
+notable,hardware_family,2023,Google TPU v4,8
+notable,hardware_family,2023,Google TPU v5,2
+notable,hardware_family,2023,Huawei Ascend,1
+notable,hardware_family,2023,NVIDIA A10 PCIe,1
+notable,hardware_family,2023,NVIDIA A100 / A800,37
+notable,hardware_family,2023,NVIDIA H100 / H800 / H200,1
+notable,hardware_family,2023,NVIDIA V100,10
+notable,hardware_family,2023,NVIDIA consumer / workstation GPU,5
+notable,hardware_family,2024,Google TPU v3,1
+notable,hardware_family,2024,Google TPU v4,5
+notable,hardware_family,2024,Google TPU v5,2
+notable,hardware_family,2024,NVIDIA A100 / A800,10
+notable,hardware_family,2024,NVIDIA H100 / H800 / H200,20
+notable,hardware_family,2024,NVIDIA consumer / workstation GPU,1
+notable,hardware_family,2025,Google TPU v6,2
+notable,hardware_family,2025,Google TPU v7,1
+notable,hardware_family,2025,Huawei Ascend,1
+notable,hardware_family,2025,NVIDIA A100 / A800,2
+notable,hardware_family,2025,NVIDIA Blackwell (B200 / GB200),1
+notable,hardware_family,2025,NVIDIA H100 / H800 / H200,14
+notable,hardware_family,2026,Huawei Ascend,1
+notable,hardware_family,2026,NVIDIA Blackwell (B200 / GB200),5
+notable,hardware_family,2026,NVIDIA H100 / H800 / H200,3
+notable,open_weights,1976,No,1
+notable,open_weights,1988,No,1
+notable,open_weights,1997,No,1
+notable,open_weights,2005,No,1
+notable,open_weights,2006,No,2
+notable,open_weights,2008,Yes,1
+notable,open_weights,2009,No,2
+notable,open_weights,2010,No,3
+notable,open_weights,2011,No,4
+notable,open_weights,2012,No,6
+notable,open_weights,2013,No,2
+notable,open_weights,2014,No,5
+notable,open_weights,2014,Yes,1
+notable,open_weights,2015,No,11
+notable,open_weights,2015,Yes,5
+notable,open_weights,2016,No,19
+notable,open_weights,2016,Yes,11
+notable,open_weights,2017,No,25
+notable,open_weights,2017,Yes,1
+notable,open_weights,2018,No,21
+notable,open_weights,2018,Yes,9
+notable,open_weights,2019,No,37
+notable,open_weights,2019,Yes,31
+notable,open_weights,2020,No,22
+notable,open_weights,2020,Yes,28
+notable,open_weights,2021,No,38
+notable,open_weights,2021,Yes,41
+notable,open_weights,2022,No,49
+notable,open_weights,2022,Yes,41
+notable,open_weights,2023,No,60
+notable,open_weights,2023,Yes,59
+notable,open_weights,2024,No,59
+notable,open_weights,2024,Yes,38
+notable,open_weights,2025,No,61
+notable,open_weights,2025,Yes,42
+notable,open_weights,2026,No,28
+notable,open_weights,2026,Yes,18
+notable,confidence,1950,Confident,1
+notable,confidence,1954,Unknown,1
+notable,confidence,1955,Unknown,1
+notable,confidence,1957,Likely,1
+notable,confidence,1959,Likely,1
+notable,confidence,1959,Speculative,1
+notable,confidence,1960,Confident,1
+notable,confidence,1960,Speculative,1
+notable,confidence,1962,Speculative,1
+notable,confidence,1962,Unknown,1
+notable,confidence,1963,Speculative,1
+notable,confidence,1965,Speculative,1
+notable,confidence,1966,Likely,1
+notable,confidence,1968,Unknown,2
+notable,confidence,1969,Confident,1
+notable,confidence,1973,Confident,1
+notable,confidence,1975,Confident,1
+notable,confidence,1976,Unknown,1
+notable,confidence,1980,Confident,1
+notable,confidence,1983,Likely,1
+notable,confidence,1984,Speculative,1
+notable,confidence,1986,Confident,2
+notable,confidence,1986,Unknown,2
+notable,confidence,1987,Confident,3
+notable,confidence,1988,Confident,1
+notable,confidence,1988,Unknown,1
+notable,confidence,1989,Confident,6
+notable,confidence,1989,Unknown,1
+notable,confidence,1990,Confident,5
+notable,confidence,1990,Likely,1
+notable,confidence,1991,Confident,1
+notable,confidence,1992,Confident,1
+notable,confidence,1992,Likely,2
+notable,confidence,1992,Speculative,1
+notable,confidence,1993,Confident,1
+notable,confidence,1993,Likely,1
+notable,confidence,1994,Confident,1
+notable,confidence,1994,Likely,2
+notable,confidence,1994,Speculative,2
+notable,confidence,1995,Likely,1
+notable,confidence,1996,Confident,3
+notable,confidence,1997,Confident,2
+notable,confidence,1997,Speculative,1
+notable,confidence,1998,Confident,1
+notable,confidence,1999,Likely,2
+notable,confidence,2000,Confident,2
+notable,confidence,2001,Likely,1
+notable,confidence,2001,Unknown,2
+notable,confidence,2003,Confident,2
+notable,confidence,2003,Unknown,2
+notable,confidence,2004,Confident,2
+notable,confidence,2005,Confident,2
+notable,confidence,2006,Confident,1
+notable,confidence,2006,Unknown,6
+notable,confidence,2007,Likely,2
+notable,confidence,2007,Unknown,2
+notable,confidence,2008,Confident,2
+notable,confidence,2008,Speculative,1
+notable,confidence,2008,Unknown,2
+notable,confidence,2009,Confident,7
+notable,confidence,2009,Likely,1
+notable,confidence,2010,Confident,4
+notable,confidence,2010,Speculative,2
+notable,confidence,2010,Unknown,2
+notable,confidence,2011,Confident,3
+notable,confidence,2011,Likely,4
+notable,confidence,2011,Unknown,3
+notable,confidence,2012,Confident,5
+notable,confidence,2012,Likely,2
+notable,confidence,2012,Speculative,2
+notable,confidence,2012,Unknown,2
+notable,confidence,2013,Confident,7
+notable,confidence,2013,Likely,5
+notable,confidence,2013,Speculative,2
+notable,confidence,2013,Unknown,2
+notable,confidence,2014,Confident,12
+notable,confidence,2014,Likely,7
+notable,confidence,2014,Speculative,2
+notable,confidence,2014,Unknown,6
+notable,confidence,2015,Confident,14
+notable,confidence,2015,Likely,4
+notable,confidence,2015,Speculative,1
+notable,confidence,2015,Unknown,6
+notable,confidence,2016,Confident,19
+notable,confidence,2016,Likely,10
+notable,confidence,2016,Speculative,2
+notable,confidence,2016,Unknown,12
+notable,confidence,2017,Confident,18
+notable,confidence,2017,Likely,11
+notable,confidence,2017,Speculative,2
+notable,confidence,2017,Unknown,19
+notable,confidence,2018,Confident,17
+notable,confidence,2018,Likely,12
+notable,confidence,2018,Speculative,3
+notable,confidence,2018,Unknown,3
+notable,confidence,2019,Confident,32
+notable,confidence,2019,Likely,12
+notable,confidence,2019,Speculative,8
+notable,confidence,2019,Unknown,7
+notable,confidence,2020,Confident,27
+notable,confidence,2020,Likely,7
+notable,confidence,2020,Speculative,7
+notable,confidence,2020,Unknown,5
+notable,confidence,2021,Confident,50
+notable,confidence,2021,Likely,17
+notable,confidence,2021,Speculative,7
+notable,confidence,2021,Unknown,2
+notable,confidence,2022,Confident,50
+notable,confidence,2022,Likely,19
+notable,confidence,2022,Speculative,6
+notable,confidence,2022,Unknown,13
+notable,confidence,2023,Confident,57
+notable,confidence,2023,Likely,30
+notable,confidence,2023,Speculative,14
+notable,confidence,2023,Unknown,18
+notable,confidence,2024,Confident,49
+notable,confidence,2024,Likely,11
+notable,confidence,2024,Speculative,14
+notable,confidence,2024,Unknown,22
+notable,confidence,2025,Confident,39
+notable,confidence,2025,Likely,24
+notable,confidence,2025,Speculative,7
+notable,confidence,2025,Unknown,36
+notable,confidence,2026,Confident,20
+notable,confidence,2026,Likely,29
+notable,confidence,2026,Speculative,1
+frontier,country,1950,United States of America,1
+frontier,country,1957,United States of America,1
+frontier,country,1959,United States of America,2
+frontier,country,1960,United States of America,2
+frontier,country,1962,United States of America,1
+frontier,country,1963,United States of America,1
+frontier,country,1966,United States of America,1
+frontier,country,1980,Japan,1
+frontier,country,1983,United States of America,1
+frontier,country,1986,United States of America,2
+frontier,country,1987,United States of America,3
+frontier,country,1989,Spain,1
+frontier,country,1989,United States of America,2
+frontier,country,1990,United States of America,1
+frontier,country,1992,United States of America,1
+frontier,country,1993,United States of America,1
+frontier,country,1994,Germany,1
+frontier,country,1997,Germany,1
+frontier,country,1998,United States of America,1
+frontier,country,2000,Canada,1
+frontier,country,2000,United Kingdom of Great Britain and Northern Ireland,1
+frontier,country,2001,United States of America,1
+frontier,country,2003,Canada,2
+frontier,country,2006,United States of America,1
+frontier,country,2007,United States of America,2
+frontier,country,2009,Germany,1
+frontier,country,2010,Multinational,2
+frontier,country,2010,United States of America,1
+frontier,country,2011,Canada,1
+frontier,country,2011,Switzerland,1
+frontier,country,2012,Canada,2
+frontier,country,2012,Switzerland,1
+frontier,country,2012,United States of America,1
+frontier,country,2013,Multinational,1
+frontier,country,2013,United States of America,2
+frontier,country,2014,Multinational,2
+frontier,country,2014,United Kingdom of Great Britain and Northern Ireland,2
+frontier,country,2014,United States of America,2
+frontier,country,2015,Multinational,2
+frontier,country,2015,United Kingdom of Great Britain and Northern Ireland,1
+frontier,country,2015,United States of America,2
+frontier,country,2016,United Kingdom of Great Britain and Northern Ireland,1
+frontier,country,2016,United States of America,4
+frontier,country,2017,United Kingdom of Great Britain and Northern Ireland,1
+frontier,country,2017,United States of America,2
+frontier,country,2018,United Kingdom of Great Britain and Northern Ireland,1
+frontier,country,2018,United States of America,1
+frontier,country,2019,United Kingdom of Great Britain and Northern Ireland,1
+frontier,country,2019,United States of America,12
+frontier,country,2020,United States of America,5
+frontier,country,2021,China,3
+frontier,country,2021,Israel,1
+frontier,country,2021,Korea (Republic of),2
+frontier,country,2021,United Kingdom of Great Britain and Northern Ireland,1
+frontier,country,2021,United States of America,3
+frontier,country,2022,United States of America,5
+frontier,country,2023,Hong Kong,1
+frontier,country,2023,United Arab Emirates,1
+frontier,country,2023,United States of America,8
+frontier,country,2024,China,2
+frontier,country,2024,United States of America,10
+frontier,country,2025,United States of America,7
+frontier,domain,1950,Robotics,1
+frontier,domain,1957,Other,1
+frontier,domain,1959,Games,1
+frontier,domain,1959,Language,1
+frontier,domain,1960,Vision,2
+frontier,domain,1962,Mathematics,1
+frontier,domain,1963,Vision,1
+frontier,domain,1966,Speech,1
+frontier,domain,1980,Vision,1
+frontier,domain,1983,Robotics,1
+frontier,domain,1986,Mathematics,1
+frontier,domain,1986,Other,1
+frontier,domain,1987,Speech,2
+frontier,domain,1989,Vision,3
+frontier,domain,1990,Speech,1
+frontier,domain,1990,Vision,1
+frontier,domain,1991,Speech,1
+frontier,domain,1992,Games,1
+frontier,domain,1993,Vision,1
+frontier,domain,1994,Games,1
+frontier,domain,1994,Language,1
+frontier,domain,1996,Vision,1
+frontier,domain,1997,Language,1
+frontier,domain,1998,Vision,1
+frontier,domain,1999,Language,1
+frontier,domain,2000,Language,1
+frontier,domain,2000,Vision,1
+frontier,domain,2001,Vision,1
+frontier,domain,2003,Language,2
+frontier,domain,2004,Vision,1
+frontier,domain,2005,Language,1
+frontier,domain,2006,Vision,1
+frontier,domain,2007,Language,2
+frontier,domain,2009,Vision,2
+frontier,domain,2010,Language,1
+frontier,domain,2010,Speech,2
+frontier,domain,2011,Vision,2
+frontier,domain,2012,Vision,4
+frontier,domain,2013,Language,2
+frontier,domain,2013,Vision,1
+frontier,domain,2014,Language,3
+frontier,domain,2014,Vision,3
+frontier,domain,2015,Games,1
+frontier,domain,2015,Speech,1
+frontier,domain,2015,Vision,3
+frontier,domain,2016,Games,1
+frontier,domain,2016,Language,2
+frontier,domain,2016,Vision,2
+frontier,domain,2017,Games,2
+frontier,domain,2017,Vision,1
+frontier,domain,2018,Image generation,1
+frontier,domain,2018,Vision,1
+frontier,domain,2019,Games,2
+frontier,domain,2019,Language,10
+frontier,domain,2019,Vision,1
+frontier,domain,2020,Language,4
+frontier,domain,2020,Vision,1
+frontier,domain,2021,Language,8
+frontier,domain,2021,Multimodal,2
+frontier,domain,2022,Language,5
+frontier,domain,2023,Language,6
+frontier,domain,2023,Multimodal,4
+frontier,domain,2024,Language,4
+frontier,domain,2024,Multimodal,8
+frontier,domain,2025,Language,1
+frontier,domain,2025,Multimodal,6
+frontier,model_accessibility,2006,Unreleased,1
+frontier,model_accessibility,2010,Unreleased,1
+frontier,model_accessibility,2011,Unreleased,1
+frontier,model_accessibility,2012,Unreleased,2
+frontier,model_accessibility,2015,Unreleased,2
+frontier,model_accessibility,2016,Hosted access (no API),1
+frontier,model_accessibility,2016,Unreleased,1
+frontier,model_accessibility,2017,Unreleased,1
+frontier,model_accessibility,2018,Open weights (non-commercial),1
+frontier,model_accessibility,2018,Open weights (unrestricted),1
+frontier,model_accessibility,2019,Open weights (non-commercial),1
+frontier,model_accessibility,2019,Open weights (unrestricted),7
+frontier,model_accessibility,2019,Unreleased,5
+frontier,model_accessibility,2020,API access,1
+frontier,model_accessibility,2020,Open weights (unrestricted),2
+frontier,model_accessibility,2020,Unreleased,2
+frontier,model_accessibility,2021,API access,3
+frontier,model_accessibility,2021,Hosted access (no API),2
+frontier,model_accessibility,2021,Open weights (unrestricted),1
+frontier,model_accessibility,2021,Unreleased,4
+frontier,model_accessibility,2022,API access,1
+frontier,model_accessibility,2022,Unreleased,4
+frontier,model_accessibility,2023,API access,8
+frontier,model_accessibility,2023,Hosted access (no API),1
+frontier,model_accessibility,2023,Open weights (restricted use),1
+frontier,model_accessibility,2024,API access,10
+frontier,model_accessibility,2024,Open weights (restricted use),1
+frontier,model_accessibility,2024,Open weights (unrestricted),1
+frontier,model_accessibility,2025,API access,5
+frontier,model_accessibility,2025,Open weights (restricted use),1
+frontier,model_accessibility,2025,Unreleased,1
+frontier,hardware_family,2011,NVIDIA consumer / workstation GPU,2
+frontier,hardware_family,2012,NVIDIA consumer / workstation GPU,3
+frontier,hardware_family,2013,NVIDIA consumer / workstation GPU,1
+frontier,hardware_family,2014,NVIDIA consumer / workstation GPU,3
+frontier,hardware_family,2015,NVIDIA Tesla K40t,1
+frontier,hardware_family,2015,NVIDIA consumer / workstation GPU,2
+frontier,hardware_family,2016,NVIDIA Tesla K40s,1
+frontier,hardware_family,2016,NVIDIA datacenter (pre-Volta),2
+frontier,hardware_family,2017,Google TPU (version unstated),1
+frontier,hardware_family,2017,NVIDIA datacenter (pre-Volta),1
+frontier,hardware_family,2018,Google TPU v3,1
+frontier,hardware_family,2018,NVIDIA V100,1
+frontier,hardware_family,2019,Google TPU v3,6
+frontier,hardware_family,2019,NVIDIA Tesla V100S PCIe 32 GB,1
+frontier,hardware_family,2019,NVIDIA V100,3
+frontier,hardware_family,2019,NVIDIA datacenter (pre-Volta),1
+frontier,hardware_family,2020,Google TPU v3,2
+frontier,hardware_family,2020,NVIDIA V100,2
+frontier,hardware_family,2021,Google TPU v3,3
+frontier,hardware_family,2021,NVIDIA A100 / A800,3
+frontier,hardware_family,2021,NVIDIA V100,1
+frontier,hardware_family,2022,Google TPU v4,4
+frontier,hardware_family,2022,NVIDIA A100 / A800,1
+frontier,hardware_family,2023,Google TPU v4,2
+frontier,hardware_family,2023,NVIDIA A100 / A800,4
+frontier,hardware_family,2023,NVIDIA H100 / H800 / H200,1
+frontier,hardware_family,2024,Google TPU v4,1
+frontier,hardware_family,2024,NVIDIA H100 / H800 / H200,3
+frontier,hardware_family,2025,NVIDIA H100 / H800 / H200,2
+frontier,open_weights,2006,No,1
+frontier,open_weights,2010,No,1
+frontier,open_weights,2011,No,1
+frontier,open_weights,2012,No,2
+frontier,open_weights,2015,No,2
+frontier,open_weights,2016,No,2
+frontier,open_weights,2017,No,1
+frontier,open_weights,2018,Yes,2
+frontier,open_weights,2019,No,5
+frontier,open_weights,2019,Yes,8
+frontier,open_weights,2020,No,3
+frontier,open_weights,2020,Yes,2
+frontier,open_weights,2021,No,9
+frontier,open_weights,2021,Yes,1
+frontier,open_weights,2022,No,5
+frontier,open_weights,2023,No,9
+frontier,open_weights,2023,Yes,1
+frontier,open_weights,2024,No,10
+frontier,open_weights,2024,Yes,2
+frontier,open_weights,2025,No,6
+frontier,open_weights,2025,Yes,1
+frontier,confidence,1950,Confident,1
+frontier,confidence,1957,Likely,1
+frontier,confidence,1959,Likely,1
+frontier,confidence,1959,Speculative,1
+frontier,confidence,1960,Confident,1
+frontier,confidence,1960,Speculative,1
+frontier,confidence,1962,Speculative,1
+frontier,confidence,1963,Speculative,1
+frontier,confidence,1966,Likely,1
+frontier,confidence,1980,Confident,1
+frontier,confidence,1983,Likely,1
+frontier,confidence,1986,Confident,2
+frontier,confidence,1987,Confident,3
+frontier,confidence,1989,Confident,3
+frontier,confidence,1990,Confident,2
+frontier,confidence,1991,Confident,1
+frontier,confidence,1992,Speculative,1
+frontier,confidence,1993,Likely,1
+frontier,confidence,1994,Confident,1
+frontier,confidence,1994,Speculative,1
+frontier,confidence,1996,Confident,1
+frontier,confidence,1997,Confident,1
+frontier,confidence,1998,Confident,1
+frontier,confidence,1999,Likely,1
+frontier,confidence,2000,Confident,2
+frontier,confidence,2001,Likely,1
+frontier,confidence,2003,Confident,2
+frontier,confidence,2004,Confident,1
+frontier,confidence,2005,Confident,1
+frontier,confidence,2006,Confident,1
+frontier,confidence,2007,Likely,2
+frontier,confidence,2009,Confident,2
+frontier,confidence,2010,Confident,1
+frontier,confidence,2010,Likely,1
+frontier,confidence,2010,Speculative,1
+frontier,confidence,2011,Confident,1
+frontier,confidence,2011,Likely,1
+frontier,confidence,2012,Confident,3
+frontier,confidence,2012,Likely,1
+frontier,confidence,2013,Confident,1
+frontier,confidence,2013,Likely,1
+frontier,confidence,2013,Speculative,1
+frontier,confidence,2014,Confident,4
+frontier,confidence,2014,Likely,1
+frontier,confidence,2014,Speculative,1
+frontier,confidence,2015,Confident,2
+frontier,confidence,2015,Likely,3
+frontier,confidence,2016,Confident,1
+frontier,confidence,2016,Likely,3
+frontier,confidence,2016,Speculative,1
+frontier,confidence,2017,Confident,3
+frontier,confidence,2018,Confident,1
+frontier,confidence,2018,Likely,1
+frontier,confidence,2019,Confident,10
+frontier,confidence,2019,Likely,1
+frontier,confidence,2019,Speculative,2
+frontier,confidence,2020,Confident,4
+frontier,confidence,2020,Likely,1
+frontier,confidence,2021,Confident,7
+frontier,confidence,2021,Speculative,3
+frontier,confidence,2022,Confident,4
+frontier,confidence,2022,Speculative,1
+frontier,confidence,2023,Confident,2
+frontier,confidence,2023,Likely,4
+frontier,confidence,2023,Speculative,3
+frontier,confidence,2023,Unknown,1
+frontier,confidence,2024,Confident,3
+frontier,confidence,2024,Likely,1
+frontier,confidence,2024,Speculative,7
+frontier,confidence,2024,Unknown,1
+frontier,confidence,2025,Likely,4
+frontier,confidence,2025,Speculative,3
+large_scale,country,2019,United Kingdom of Great Britain and Northern Ireland,1
+large_scale,country,2020,United States of America,2
+large_scale,country,2021,China,3
+large_scale,country,2021,Israel,1
+large_scale,country,2021,Korea (Republic of),3
+large_scale,country,2021,United Kingdom of Great Britain and Northern Ireland,1
+large_scale,country,2021,United States of America,2
+large_scale,country,2022,China,1
+large_scale,country,2022,France,1
+large_scale,country,2022,Germany,2
+large_scale,country,2022,Multinational,2
+large_scale,country,2022,Russia,1
+large_scale,country,2022,United Kingdom of Great Britain and Northern Ireland,2
+large_scale,country,2022,United States of America,21
+large_scale,country,2023,Canada,2
+large_scale,country,2023,China,46
+large_scale,country,2023,France,5
+large_scale,country,2023,Hong Kong,1
+large_scale,country,2023,Israel,1
+large_scale,country,2023,Japan,3
+large_scale,country,2023,Korea (Republic of),8
+large_scale,country,2023,Multinational,4
+large_scale,country,2023,Russia,1
+large_scale,country,2023,Singapore,1
+large_scale,country,2023,United Arab Emirates,2
+large_scale,country,2023,United Kingdom of Great Britain and Northern Ireland,1
+large_scale,country,2023,United States of America,46
+large_scale,country,2024,Australia,1
+large_scale,country,2024,Canada,2
+large_scale,country,2024,China,58
+large_scale,country,2024,Finland,1
+large_scale,country,2024,France,6
+large_scale,country,2024,Germany,1
+large_scale,country,2024,Hong Kong,1
+large_scale,country,2024,Israel,1
+large_scale,country,2024,Japan,1
+large_scale,country,2024,Korea (Republic of),3
+large_scale,country,2024,Multinational,6
+large_scale,country,2024,Russia,1
+large_scale,country,2024,Saudi Arabia,2
+large_scale,country,2024,United Arab Emirates,4
+large_scale,country,2024,United Kingdom of Great Britain and Northern Ireland,3
+large_scale,country,2024,United States of America,77
+large_scale,country,2025,Canada,2
+large_scale,country,2025,China,79
+large_scale,country,2025,France,3
+large_scale,country,2025,Germany,1
+large_scale,country,2025,Hong Kong,2
+large_scale,country,2025,Korea (Republic of),4
+large_scale,country,2025,Multinational,3
+large_scale,country,2025,Russia,1
+large_scale,country,2025,Switzerland,1
+large_scale,country,2025,United Arab Emirates,1
+large_scale,country,2025,United States of America,68
+large_scale,country,2026,China,8
+large_scale,country,2026,Korea (Republic of),3
+large_scale,country,2026,United States of America,16
+large_scale,domain,2019,Games,1
+large_scale,domain,2020,Language,2
+large_scale,domain,2021,Language,8
+large_scale,domain,2021,Multimodal,2
+large_scale,domain,2022,Image generation,3
+large_scale,domain,2022,Language,21
+large_scale,domain,2022,Multimodal,2
+large_scale,domain,2022,Speech,1
+large_scale,domain,2022,Video,2
+large_scale,domain,2023,Audio,2
+large_scale,domain,2023,Biology,1
+large_scale,domain,2023,Image generation,5
+large_scale,domain,2023,Language,89
+large_scale,domain,2023,Multimodal,13
+large_scale,domain,2023,Robotics,1
+large_scale,domain,2023,Speech,5
+large_scale,domain,2023,Video,3
+large_scale,domain,2023,Vision,1
+large_scale,domain,2024,Audio,1
+large_scale,domain,2024,Biology,1
+large_scale,domain,2024,Image generation,7
+large_scale,domain,2024,Language,113
+large_scale,domain,2024,Multimodal,30
+large_scale,domain,2024,Speech,2
+large_scale,domain,2024,Video,13
+large_scale,domain,2024,Vision,1
+large_scale,domain,2025,Biology,3
+large_scale,domain,2025,Image generation,7
+large_scale,domain,2025,Language,84
+large_scale,domain,2025,Multimodal,41
+large_scale,domain,2025,Other,1
+large_scale,domain,2025,Robotics,1
+large_scale,domain,2025,Speech,8
+large_scale,domain,2025,Video,17
+large_scale,domain,2025,Vision,1
+large_scale,domain,2026,Language,17
+large_scale,domain,2026,Multimodal,10
+large_scale,model_accessibility,2019,Unreleased,1
+large_scale,model_accessibility,2020,API access,1
+large_scale,model_accessibility,2020,Unreleased,1
+large_scale,model_accessibility,2021,API access,4
+large_scale,model_accessibility,2021,Hosted access (no API),2
+large_scale,model_accessibility,2021,Unreleased,4
+large_scale,model_accessibility,2022,API access,6
+large_scale,model_accessibility,2022,Hosted access (no API),3
+large_scale,model_accessibility,2022,Open weights (non-commercial),4
+large_scale,model_accessibility,2022,Open weights (restricted use),1
+large_scale,model_accessibility,2022,Open weights (unrestricted),3
+large_scale,model_accessibility,2022,Unreleased,11
+large_scale,model_accessibility,2023,API access,35
+large_scale,model_accessibility,2023,Hosted access (no API),10
+large_scale,model_accessibility,2023,Open weights (non-commercial),7
+large_scale,model_accessibility,2023,Open weights (restricted use),20
+large_scale,model_accessibility,2023,Open weights (unrestricted),16
+large_scale,model_accessibility,2023,Unreleased,21
+large_scale,model_accessibility,2024,API access,42
+large_scale,model_accessibility,2024,Hosted access (no API),17
+large_scale,model_accessibility,2024,Open weights (non-commercial),13
+large_scale,model_accessibility,2024,Open weights (restricted use),41
+large_scale,model_accessibility,2024,Open weights (unrestricted),38
+large_scale,model_accessibility,2024,Unreleased,13
+large_scale,model_accessibility,2025,API access,56
+large_scale,model_accessibility,2025,Hosted access (no API),5
+large_scale,model_accessibility,2025,Open weights (non-commercial),5
+large_scale,model_accessibility,2025,Open weights (restricted use),25
+large_scale,model_accessibility,2025,Open weights (unrestricted),64
+large_scale,model_accessibility,2025,Unreleased,5
+large_scale,model_accessibility,2026,API access,11
+large_scale,model_accessibility,2026,Hosted access (no API),1
+large_scale,model_accessibility,2026,Open weights (non-commercial),1
+large_scale,model_accessibility,2026,Open weights (restricted use),2
+large_scale,model_accessibility,2026,Open weights (unrestricted),11
+large_scale,hardware_family,2019,Google TPU v3,1
+large_scale,hardware_family,2020,Google TPU v3,1
+large_scale,hardware_family,2020,NVIDIA V100,1
+large_scale,hardware_family,2021,Google TPU v3,1
+large_scale,hardware_family,2021,Google TPU v4,1
+large_scale,hardware_family,2021,NVIDIA A100 / A800,4
+large_scale,hardware_family,2021,NVIDIA V100,1
+large_scale,hardware_family,2022,Google TPU v3,1
+large_scale,hardware_family,2022,Google TPU v4,7
+large_scale,hardware_family,2022,NVIDIA A100 / A800,11
+large_scale,hardware_family,2023,AMD Instinct / Radeon,1
+large_scale,hardware_family,2023,Cerebras CS-2,1
+large_scale,hardware_family,2023,Google TPU v4,6
+large_scale,hardware_family,2023,Google TPU v5,1
+large_scale,hardware_family,2023,Huawei Ascend,1
+large_scale,hardware_family,2023,NVIDIA A100 / A800,27
+large_scale,hardware_family,2023,NVIDIA H100 / H800 / H200,3
+large_scale,hardware_family,2024,AMD Instinct / Radeon,1
+large_scale,hardware_family,2024,Cerebras CS-2,1
+large_scale,hardware_family,2024,Google TPU v4,3
+large_scale,hardware_family,2024,Google TPU v5,5
+large_scale,hardware_family,2024,Google TPU v6,1
+large_scale,hardware_family,2024,NVIDIA A100 / A800,10
+large_scale,hardware_family,2024,NVIDIA H100 / H800 / H200,43
+large_scale,hardware_family,2025,Google TPU v5,1
+large_scale,hardware_family,2025,Google TPU v7,1
+large_scale,hardware_family,2025,Huawei Ascend,4
+large_scale,hardware_family,2025,NVIDIA A100 / A800,1
+large_scale,hardware_family,2025,NVIDIA Blackwell (B200 / GB200),4
+large_scale,hardware_family,2025,NVIDIA GH200,1
+large_scale,hardware_family,2025,NVIDIA H100 / H800 / H200,26
+large_scale,hardware_family,2026,Huawei Ascend,1
+large_scale,hardware_family,2026,NVIDIA Blackwell (B200 / GB200),5
+large_scale,hardware_family,2026,NVIDIA H100 / H800 / H200,2
+large_scale,confidence,2019,Confident,1
+large_scale,confidence,2020,Confident,2
+large_scale,confidence,2021,Confident,7
+large_scale,confidence,2021,Speculative,3
+large_scale,confidence,2022,Confident,17
+large_scale,confidence,2022,Likely,6
+large_scale,confidence,2022,Speculative,3
+large_scale,confidence,2022,Unknown,4
+large_scale,confidence,2023,Confident,52
+large_scale,confidence,2023,Likely,26
+large_scale,confidence,2023,Speculative,10
+large_scale,confidence,2023,Unknown,32
+large_scale,confidence,2024,Confident,98
+large_scale,confidence,2024,Likely,18
+large_scale,confidence,2024,Speculative,15
+large_scale,confidence,2024,Unknown,36
+large_scale,confidence,2025,Confident,76
+large_scale,confidence,2025,Likely,36
+large_scale,confidence,2025,Speculative,6
+large_scale,confidence,2025,Unknown,46
+large_scale,confidence,2025,Unverified,1
+large_scale,confidence,2026,Confident,3
+large_scale,confidence,2026,Likely,22
+large_scale,confidence,2026,Speculative,1
+large_scale,confidence,2026,Unverified,1
+all,country,1950,United States of America,1
+all,country,1952,United States of America,1
+all,country,1954,United States of America,1
+all,country,1955,United States of America,2
+all,country,1957,United States of America,1
+all,country,1959,United States of America,3
+all,country,1960,United States of America,2
+all,country,1961,Italy,1
+all,country,1962,United States of America,2
+all,country,1963,New Zealand,1
+all,country,1963,United Kingdom of Great Britain and Northern Ireland,1
+all,country,1963,United States of America,1
+all,country,1965,United States of America,1
+all,country,1966,United States of America,1
+all,country,1967,Switzerland,1
+all,country,1968,United Kingdom of Great Britain and Northern Ireland,2
+all,country,1969,Japan,1
+all,country,1970,United States of America,1
+all,country,1972,Japan,1
+all,country,1973,Multinational,1
+all,country,1973,United States of America,1
+all,country,1975,Japan,1
+all,country,1976,Croatia,1
+all,country,1976,United States of America,1
+all,country,1980,Japan,1
+all,country,1981,Finland,1
+all,country,1982,United States of America,1
+all,country,1983,United States of America,1
+all,country,1984,Japan,1
+all,country,1984,United States of America,1
+all,country,1986,United States of America,6
+all,country,1987,United States of America,3
+all,country,1988,Canada,1
+all,country,1988,Multinational,1
+all,country,1988,United States of America,2
+all,country,1989,Multinational,1
+all,country,1989,Spain,1
+all,country,1989,United Kingdom of Great Britain and Northern Ireland,1
+all,country,1989,United States of America,7
+all,country,1990,United States of America,2
+all,country,1991,Multinational,1
+all,country,1991,United States of America,1
+all,country,1992,India,1
+all,country,1992,United Kingdom of Great Britain and Northern Ireland,1
+all,country,1992,United States of America,3
+all,country,1993,United States of America,3
+all,country,1994,France,1
+all,country,1994,Germany,1
+all,country,1994,Italy,1
+all,country,1994,United States of America,1
+all,country,1995,United States of America,5
+all,country,1996,Germany,1
+all,country,1996,United States of America,2
+all,country,1997,Germany,1
+all,country,1997,Japan,1
+all,country,1997,Multinational,1
+all,country,1997,United States of America,3
+all,country,1998,Taiwan,1
+all,country,1998,United States of America,3
+all,country,1999,Multinational,1
+all,country,1999,Switzerland,1
+all,country,1999,United States of America,3
+all,country,2000,Canada,1
+all,country,2000,Switzerland,1
+all,country,2000,United Kingdom of Great Britain and Northern Ireland,1
+all,country,2000,United States of America,2
+all,country,2001,Multinational,1
+all,country,2001,United States of America,3
+all,country,2002,Korea (Republic of),1
+all,country,2002,Multinational,1
+all,country,2002,United States of America,4
+all,country,2003,Canada,2
+all,country,2003,Multinational,3
+all,country,2003,United Kingdom of Great Britain and Northern Ireland,1
+all,country,2003,United States of America,4
+all,country,2004,Korea (Republic of),1
+all,country,2004,Mexico,1
+all,country,2004,United Kingdom of Great Britain and Northern Ireland,1
+all,country,2004,United States of America,4
+all,country,2005,France,1
+all,country,2005,Multinational,1
+all,country,2005,United States of America,6
+all,country,2006,Canada,2
+all,country,2006,France,1
+all,country,2006,Multinational,5
+all,country,2006,United Kingdom of Great Britain and Northern Ireland,1
+all,country,2006,United States of America,8
+all,country,2007,Canada,2
+all,country,2007,Multinational,2
+all,country,2007,Poland,1
+all,country,2007,United States of America,5
+all,country,2008,Canada,4
+all,country,2008,Germany,1
+all,country,2008,Italy,1
+all,country,2008,Multinational,1
+all,country,2008,United States of America,5
+all,country,2009,Canada,4
+all,country,2009,Germany,1
+all,country,2009,Multinational,1
+all,country,2009,United States of America,14
+all,country,2010,Canada,4
+all,country,2010,France,1
+all,country,2010,Germany,2
+all,country,2010,Multinational,5
+all,country,2010,Switzerland,1
+all,country,2010,United States of America,6
+all,country,2011,Canada,2
+all,country,2011,France,1
+all,country,2011,Multinational,2
+all,country,2011,Switzerland,4
+all,country,2011,United States of America,8
+all,country,2012,Canada,7
+all,country,2012,Germany,2
+all,country,2012,Multinational,3
+all,country,2012,Switzerland,2
+all,country,2012,United Kingdom of Great Britain and Northern Ireland,1
+all,country,2012,United States of America,8
+all,country,2013,Canada,4
+all,country,2013,Multinational,5
+all,country,2013,Netherlands,1
+all,country,2013,Singapore,1
+all,country,2013,Switzerland,1
+all,country,2013,United Kingdom of Great Britain and Northern Ireland,2
+all,country,2013,United States of America,15
+all,country,2014,Canada,3
+all,country,2014,China,2
+all,country,2014,Hong Kong,2
+all,country,2014,Multinational,11
+all,country,2014,Singapore,2
+all,country,2014,Switzerland,1
+all,country,2014,United Kingdom of Great Britain and Northern Ireland,6
+all,country,2014,United States of America,17
+all,country,2015,Germany,1
+all,country,2015,Multinational,13
+all,country,2015,Switzerland,1
+all,country,2015,United Kingdom of Great Britain and Northern Ireland,4
+all,country,2015,United States of America,24
+all,country,2016,Australia,1
+all,country,2016,Canada,7
+all,country,2016,China,1
+all,country,2016,France,1
+all,country,2016,Germany,1
+all,country,2016,Hong Kong,1
+all,country,2016,Korea (Republic of),1
+all,country,2016,Multinational,26
+all,country,2016,Switzerland,3
+all,country,2016,United Kingdom of Great Britain and Northern Ireland,4
+all,country,2016,United States of America,46
+all,country,2017,Australia,1
+all,country,2017,Belgium,2
+all,country,2017,Canada,2
+all,country,2017,China,4
+all,country,2017,Denmark,1
+all,country,2017,Germany,5
+all,country,2017,Hong Kong,1
+all,country,2017,Israel,2
+all,country,2017,Japan,2
+all,country,2017,Korea (Republic of),4
+all,country,2017,Multinational,24
+all,country,2017,United Kingdom of Great Britain and Northern Ireland,12
+all,country,2017,United States of America,31
+all,country,2018,Belgium,2
+all,country,2018,China,4
+all,country,2018,France,1
+all,country,2018,India,1
+all,country,2018,Israel,2
+all,country,2018,Japan,5
+all,country,2018,Korea (Republic of),1
+all,country,2018,Multinational,21
+all,country,2018,Russia,3
+all,country,2018,United Kingdom of Great Britain and Northern Ireland,12
+all,country,2018,United States of America,46
+all,country,2019,Australia,2
+all,country,2019,Canada,1
+all,country,2019,China,13
+all,country,2019,Germany,3
+all,country,2019,Israel,1
+all,country,2019,Japan,3
+all,country,2019,Multinational,38
+all,country,2019,Russia,2
+all,country,2019,Switzerland,4
+all,country,2019,United Kingdom of Great Britain and Northern Ireland,7
+all,country,2019,United States of America,94
+all,country,2020,Canada,2
+all,country,2020,China,10
+all,country,2020,Germany,3
+all,country,2020,India,1
+all,country,2020,Korea (Republic of),2
+all,country,2020,Lebanon,3
+all,country,2020,Multinational,39
+all,country,2020,United Kingdom of Great Britain and Northern Ireland,5
+all,country,2020,United States of America,61
+all,country,2021,China,29
+all,country,2021,France,2
+all,country,2021,Germany,5
+all,country,2021,Greece,1
+all,country,2021,Hong Kong,1
+all,country,2021,Israel,1
+all,country,2021,Japan,4
+all,country,2021,Korea (Republic of),6
+all,country,2021,Lebanon,1
+all,country,2021,Multinational,56
+all,country,2021,Netherlands,4
+all,country,2021,Switzerland,2
+all,country,2021,United Kingdom of Great Britain and Northern Ireland,12
+all,country,2021,United States of America,85
+all,country,2022,China,21
+all,country,2022,France,2
+all,country,2022,Germany,10
+all,country,2022,Israel,2
+all,country,2022,Japan,5
+all,country,2022,Korea (Republic of),7
+all,country,2022,Multinational,43
+all,country,2022,Russia,2
+all,country,2022,Saudi Arabia,2
+all,country,2022,Singapore,1
+all,country,2022,Sweden,1
+all,country,2022,United Kingdom of Great Britain and Northern Ireland,17
+all,country,2022,United States of America,117
+all,country,2023,Austria,3
+all,country,2023,Canada,7
+all,country,2023,China,134
+all,country,2023,Denmark,1
+all,country,2023,France,5
+all,country,2023,Hong Kong,3
+all,country,2023,Hungary,1
+all,country,2023,Israel,3
+all,country,2023,Japan,12
+all,country,2023,Korea (Republic of),21
+all,country,2023,Multinational,90
+all,country,2023,Netherlands,1
+all,country,2023,Russia,6
+all,country,2023,Saudi Arabia,1
+all,country,2023,Singapore,9
+all,country,2023,Spain,1
+all,country,2023,Sweden,1
+all,country,2023,Switzerland,1
+all,country,2023,Taiwan,3
+all,country,2023,United Arab Emirates,3
+all,country,2023,United Kingdom of Great Britain and Northern Ireland,17
+all,country,2023,United States of America,189
+all,country,2024,Australia,2
+all,country,2024,Austria,1
+all,country,2024,Canada,8
+all,country,2024,China,285
+all,country,2024,Denmark,1
+all,country,2024,Finland,1
+all,country,2024,France,20
+all,country,2024,Germany,11
+all,country,2024,Hong Kong,11
+all,country,2024,India,4
+all,country,2024,Iran (Islamic Republic of),1
+all,country,2024,Israel,5
+all,country,2024,Italy,5
+all,country,2024,Japan,11
+all,country,2024,Korea (Republic of),11
+all,country,2024,Multinational,137
+all,country,2024,Netherlands,1
+all,country,2024,Poland,2
+all,country,2024,Russia,11
+all,country,2024,Saudi Arabia,5
+all,country,2024,Singapore,7
+all,country,2024,Spain,1
+all,country,2024,Sweden,2
+all,country,2024,Switzerland,3
+all,country,2024,Taiwan,5
+all,country,2024,Thailand,10
+all,country,2024,United Arab Emirates,4
+all,country,2024,United Kingdom of Great Britain and Northern Ireland,32
+all,country,2024,United States of America,318
+all,country,2025,Australia,1
+all,country,2025,Canada,10
+all,country,2025,China,175
+all,country,2025,France,25
+all,country,2025,Germany,5
+all,country,2025,Hong Kong,2
+all,country,2025,Israel,6
+all,country,2025,Japan,1
+all,country,2025,Korea (Republic of),17
+all,country,2025,Multinational,39
+all,country,2025,Poland,1
+all,country,2025,Russia,9
+all,country,2025,Singapore,2
+all,country,2025,Switzerland,2
+all,country,2025,Taiwan,1
+all,country,2025,Thailand,4
+all,country,2025,United Arab Emirates,3
+all,country,2025,United Kingdom of Great Britain and Northern Ireland,7
+all,country,2025,United States of America,258
+all,country,2026,Canada,1
+all,country,2026,China,36
+all,country,2026,France,1
+all,country,2026,Korea (Republic of),4
+all,country,2026,Multinational,1
+all,country,2026,United States of America,57
+all,domain,1950,Robotics,1
+all,domain,1952,Robotics,1
+all,domain,1954,Mathematics,1
+all,domain,1955,Other,1
+all,domain,1955,Vision,1
+all,domain,1957,Other,1
+all,domain,1959,Games,1
+all,domain,1959,Language,1
+all,domain,1959,Vision,1
+all,domain,1960,Vision,2
+all,domain,1961,Other,1
+all,domain,1962,Mathematics,1
+all,domain,1962,Other,1
+all,domain,1963,Games,1
+all,domain,1963,Robotics,1
+all,domain,1963,Vision,1
+all,domain,1965,Robotics,1
+all,domain,1966,Speech,1
+all,domain,1967,Games,1
+all,domain,1968,Games,2
+all,domain,1969,Medicine,1
+all,domain,1970,Vision,1
+all,domain,1972,Other,1
+all,domain,1973,Games,1
+all,domain,1973,Vision,1
+all,domain,1975,Other,1
+all,domain,1976,Speech,1
+all,domain,1976,Vision,1
+all,domain,1980,Vision,1
+all,domain,1981,Mathematics,1
+all,domain,1982,Other,1
+all,domain,1983,Robotics,1
+all,domain,1984,Language,1
+all,domain,1984,Other,1
+all,domain,1986,Language,1
+all,domain,1986,Mathematics,1
+all,domain,1986,Other,2
+all,domain,1986,Speech,1
+all,domain,1986,Vision,1
+all,domain,1987,Speech,2
+all,domain,1988,Games,1
+all,domain,1988,Language,1
+all,domain,1988,Mathematics,1
+all,domain,1988,Speech,1
+all,domain,1989,Driving,2
+all,domain,1989,Mathematics,1
+all,domain,1989,Robotics,1
+all,domain,1989,Speech,2
+all,domain,1989,Vision,4
+all,domain,1990,Other,2
+all,domain,1990,Speech,1
+all,domain,1990,Vision,3
+all,domain,1991,Language,1
+all,domain,1991,Medicine,1
+all,domain,1991,Speech,1
+all,domain,1992,Biology,1
+all,domain,1992,Games,1
+all,domain,1992,Medicine,1
+all,domain,1992,Speech,1
+all,domain,1992,Vision,1
+all,domain,1993,Language,1
+all,domain,1993,Other,1
+all,domain,1993,Vision,3
+all,domain,1994,Games,1
+all,domain,1994,Language,2
+all,domain,1994,Materials science,1
+all,domain,1994,Recommendation,1
+all,domain,1994,Vision,2
+all,domain,1995,Language,1
+all,domain,1995,Other,2
+all,domain,1995,Vision,2
+all,domain,1996,Language,1
+all,domain,1996,Vision,3
+all,domain,1997,Games,1
+all,domain,1997,Language,2
+all,domain,1997,Speech,1
+all,domain,1997,Vision,3
+all,domain,1998,Recommendation,1
+all,domain,1998,Speech,1
+all,domain,1998,Vision,2
+all,domain,1999,Language,4
+all,domain,1999,Recommendation,1
+all,domain,1999,Vision,2
+all,domain,2000,Language,2
+all,domain,2000,Mathematics,1
+all,domain,2000,Recommendation,1
+all,domain,2000,Vision,1
+all,domain,2001,Language,1
+all,domain,2001,Mathematics,1
+all,domain,2001,Vision,2
+all,domain,2002,Language,4
+all,domain,2002,Other,1
+all,domain,2002,Recommendation,1
+all,domain,2003,Language,4
+all,domain,2003,Recommendation,2
+all,domain,2003,Vision,4
+all,domain,2004,Driving,1
+all,domain,2004,Language,1
+all,domain,2004,Vision,6
+all,domain,2005,Biology,1
+all,domain,2005,Language,2
+all,domain,2005,Robotics,1
+all,domain,2005,Search,1
+all,domain,2005,Speech,1
+all,domain,2005,Vision,3
+all,domain,2006,Driving,2
+all,domain,2006,Games,1
+all,domain,2006,Language,1
+all,domain,2006,Other,2
+all,domain,2006,Speech,1
+all,domain,2006,Video,1
+all,domain,2006,Vision,9
+all,domain,2007,Language,3
+all,domain,2007,Other,1
+all,domain,2007,Recommendation,3
+all,domain,2007,Vision,3
+all,domain,2008,Driving,1
+all,domain,2008,Language,5
+all,domain,2008,Other,3
+all,domain,2008,Recommendation,1
+all,domain,2008,Vision,2
+all,domain,2009,3D modeling,1
+all,domain,2009,Language,4
+all,domain,2009,Other,2
+all,domain,2009,Recommendation,6
+all,domain,2009,Speech,1
+all,domain,2009,Vision,8
+all,domain,2010,Language,2
+all,domain,2010,Other,2
+all,domain,2010,Recommendation,1
+all,domain,2010,Speech,3
+all,domain,2010,Vision,11
+all,domain,2011,Games,1
+all,domain,2011,Language,6
+all,domain,2011,Other,1
+all,domain,2011,Vision,9
+all,domain,2012,Audio,1
+all,domain,2012,Language,11
+all,domain,2012,Other,1
+all,domain,2012,Speech,2
+all,domain,2012,Vision,8
+all,domain,2013,Games,1
+all,domain,2013,Language,12
+all,domain,2013,Speech,4
+all,domain,2013,Vision,12
+all,domain,2014,Games,2
+all,domain,2014,Image generation,1
+all,domain,2014,Language,16
+all,domain,2014,Multimodal,1
+all,domain,2014,Other,1
+all,domain,2014,Recommendation,1
+all,domain,2014,Speech,2
+all,domain,2014,Video,3
+all,domain,2014,Vision,17
+all,domain,2015,Games,4
+all,domain,2015,Image generation,2
+all,domain,2015,Language,10
+all,domain,2015,Recommendation,1
+all,domain,2015,Robotics,1
+all,domain,2015,Speech,3
+all,domain,2015,Video,2
+all,domain,2015,Vision,21
+all,domain,2016,3D modeling,1
+all,domain,2016,Biology,1
+all,domain,2016,Games,4
+all,domain,2016,Image generation,2
+all,domain,2016,Language,32
+all,domain,2016,Mathematics,1
+all,domain,2016,Recommendation,2
+all,domain,2016,Speech,4
+all,domain,2016,Video,2
+all,domain,2016,Vision,43
+all,domain,2017,3D modeling,2
+all,domain,2017,Biology,1
+all,domain,2017,Games,9
+all,domain,2017,Image generation,5
+all,domain,2017,Language,39
+all,domain,2017,Recommendation,1
+all,domain,2017,Speech,3
+all,domain,2017,Video,1
+all,domain,2017,Vision,30
+all,domain,2018,Biology,4
+all,domain,2018,Games,2
+all,domain,2018,Image generation,8
+all,domain,2018,Language,60
+all,domain,2018,Recommendation,1
+all,domain,2018,Robotics,3
+all,domain,2018,Speech,1
+all,domain,2018,Vision,18
+all,domain,2019,3D modeling,2
+all,domain,2019,Audio,1
+all,domain,2019,Biology,8
+all,domain,2019,Games,8
+all,domain,2019,Image generation,8
+all,domain,2019,Language,106
+all,domain,2019,Materials science,4
+all,domain,2019,Multimodal,1
+all,domain,2019,Recommendation,1
+all,domain,2019,Robotics,3
+all,domain,2019,Speech,2
+all,domain,2019,Vision,24
+all,domain,2020,Biology,17
+all,domain,2020,Earth science,2
+all,domain,2020,Games,3
+all,domain,2020,Image generation,4
+all,domain,2020,Language,82
+all,domain,2020,Multimodal,1
+all,domain,2020,Recommendation,1
+all,domain,2020,Robotics,1
+all,domain,2020,Speech,5
+all,domain,2020,Vision,10
+all,domain,2021,Biology,24
+all,domain,2021,Earth science,1
+all,domain,2021,Games,4
+all,domain,2021,Image generation,16
+all,domain,2021,Language,110
+all,domain,2021,Materials science,1
+all,domain,2021,Mathematics,1
+all,domain,2021,Medicine,1
+all,domain,2021,Multimodal,19
+all,domain,2021,Recommendation,4
+all,domain,2021,Robotics,1
+all,domain,2021,Search,1
+all,domain,2021,Speech,6
+all,domain,2021,Vision,18
+all,domain,2022,Audio,1
+all,domain,2022,Biology,38
+all,domain,2022,Earth science,1
+all,domain,2022,Games,3
+all,domain,2022,Image generation,24
+all,domain,2022,Language,123
+all,domain,2022,Materials science,3
+all,domain,2022,Medicine,2
+all,domain,2022,Multimodal,9
+all,domain,2022,Other,1
+all,domain,2022,Recommendation,1
+all,domain,2022,Robotics,3
+all,domain,2022,Speech,6
+all,domain,2022,Video,5
+all,domain,2022,Vision,9
+all,domain,2023,3D modeling,1
+all,domain,2023,Audio,10
+all,domain,2023,Biology,53
+all,domain,2023,Earth science,3
+all,domain,2023,Games,2
+all,domain,2023,Image generation,29
+all,domain,2023,Language,300
+all,domain,2023,Materials science,1
+all,domain,2023,Mathematics,3
+all,domain,2023,Medicine,3
+all,domain,2023,Multimodal,52
+all,domain,2023,Recommendation,1
+all,domain,2023,Robotics,10
+all,domain,2023,Speech,15
+all,domain,2023,Video,8
+all,domain,2023,Vision,19
+all,domain,2024,3D modeling,4
+all,domain,2024,Astronomy,1
+all,domain,2024,Audio,9
+all,domain,2024,Biology,224
+all,domain,2024,Driving,1
+all,domain,2024,Earth science,3
+all,domain,2024,Games,7
+all,domain,2024,Image generation,49
+all,domain,2024,Language,352
+all,domain,2024,Materials science,4
+all,domain,2024,Mathematics,5
+all,domain,2024,Medicine,4
+all,domain,2024,Multimodal,120
+all,domain,2024,Other,3
+all,domain,2024,Psychology,1
+all,domain,2024,Recommendation,1
+all,domain,2024,Robotics,16
+all,domain,2024,Search,1
+all,domain,2024,Speech,30
+all,domain,2024,Video,39
+all,domain,2024,Vision,39
+all,domain,2025,3D modeling,8
+all,domain,2025,Audio,4
+all,domain,2025,Biology,12
+all,domain,2025,Earth science,7
+all,domain,2025,Games,1
+all,domain,2025,Image generation,32
+all,domain,2025,Language,263
+all,domain,2025,Materials science,3
+all,domain,2025,Mathematics,5
+all,domain,2025,Medicine,1
+all,domain,2025,Multimodal,108
+all,domain,2025,Other,2
+all,domain,2025,Recommendation,1
+all,domain,2025,Robotics,15
+all,domain,2025,Speech,31
+all,domain,2025,Video,52
+all,domain,2025,Vision,17
+all,domain,2026,Audio,2
+all,domain,2026,Image generation,4
+all,domain,2026,Language,52
+all,domain,2026,Multimodal,32
+all,domain,2026,Robotics,3
+all,domain,2026,Speech,2
+all,domain,2026,Vision,1
+all,org_category,1950,Industry,1
+all,org_category,1952,Academia,1
+all,org_category,1954,Academia,1
+all,org_category,1955,Academia,2
+all,org_category,1957,Academia,1
+all,org_category,1959,Academia,1
+all,org_category,1959,Industry,2
+all,org_category,1960,Academia,2
+all,org_category,1961,Academia,1
+all,org_category,1962,Academia,1
+all,org_category,1962,Industry,1
+all,org_category,1963,Academia,2
+all,org_category,1963,Industry,1
+all,org_category,1965,Academia,1
+all,org_category,1966,Industry,1
+all,org_category,1967,Academia,1
+all,org_category,1968,Academia,2
+all,org_category,1969,Academia,1
+all,org_category,1970,Academia,1
+all,org_category,1972,Academia,1
+all,org_category,1973,Academia,1
+all,org_category,1973,Industry,1
+all,org_category,1975,Industry,1
+all,org_category,1976,Academia,2
+all,org_category,1980,Industry,1
+all,org_category,1981,Academia,1
+all,org_category,1982,Academia,1
+all,org_category,1983,Academia,1
+all,org_category,1984,Academia,1
+all,org_category,1984,Industry,1
+all,org_category,1986,Academia,6
+all,org_category,1987,Academia,3
+all,org_category,1988,Academia,3
+all,org_category,1988,Industry-academia collaboration,1
+all,org_category,1989,Academia,6
+all,org_category,1989,Industry,3
+all,org_category,1989,Industry-academia collaboration,1
+all,org_category,1990,Academia,2
+all,org_category,1991,Academia,2
+all,org_category,1992,Academia,1
+all,org_category,1992,Government,2
+all,org_category,1992,Industry,2
+all,org_category,1993,Industry,3
+all,org_category,1994,Academia,4
+all,org_category,1995,Academia,2
+all,org_category,1995,Industry,3
+all,org_category,1996,Academia,2
+all,org_category,1996,Industry,1
+all,org_category,1997,Academia,4
+all,org_category,1997,Industry,2
+all,org_category,1998,Academia,2
+all,org_category,1998,Industry,1
+all,org_category,1998,Industry-academia collaboration,1
+all,org_category,1999,Academia,2
+all,org_category,1999,Industry,1
+all,org_category,1999,Industry-academia collaboration,2
+all,org_category,2000,Academia,5
+all,org_category,2001,Academia,3
+all,org_category,2001,Industry,1
+all,org_category,2002,Academia,4
+all,org_category,2002,Industry,1
+all,org_category,2002,Industry-academia collaboration,1
+all,org_category,2003,Academia,9
+all,org_category,2003,Industry,1
+all,org_category,2004,Academia,6
+all,org_category,2004,Industry-academia collaboration,1
+all,org_category,2005,Academia,6
+all,org_category,2005,Industry,1
+all,org_category,2005,Industry-academia collaboration,1
+all,org_category,2006,Academia,16
+all,org_category,2006,Industry-academia collaboration,1
+all,org_category,2007,Academia,6
+all,org_category,2007,Industry,4
+all,org_category,2008,Academia,8
+all,org_category,2008,Industry,2
+all,org_category,2008,Industry-academia collaboration,2
+all,org_category,2009,Academia,12
+all,org_category,2009,Industry,7
+all,org_category,2009,Industry-academia collaboration,1
+all,org_category,2010,Academia,15
+all,org_category,2010,Industry,3
+all,org_category,2010,Industry-academia collaboration,1
+all,org_category,2011,Academia,14
+all,org_category,2011,Industry-academia collaboration,3
+all,org_category,2012,Academia,14
+all,org_category,2012,Industry,7
+all,org_category,2012,Industry-academia collaboration,2
+all,org_category,2013,Academia,17
+all,org_category,2013,Industry,9
+all,org_category,2013,Industry-academia collaboration,3
+all,org_category,2014,Academia,22
+all,org_category,2014,Industry,11
+all,org_category,2014,Industry-academia collaboration,11
+all,org_category,2015,Academia,14
+all,org_category,2015,Industry,18
+all,org_category,2015,Industry-academia collaboration,11
+all,org_category,2016,Academia,40
+all,org_category,2016,Industry,37
+all,org_category,2016,Industry-academia collaboration,15
+all,org_category,2017,Academia,39
+all,org_category,2017,Industry,32
+all,org_category,2017,Industry-academia collaboration,20
+all,org_category,2018,Academia,31
+all,org_category,2018,Industry,36
+all,org_category,2018,Industry-academia collaboration,31
+all,org_category,2019,Academia,51
+all,org_category,2019,Industry,59
+all,org_category,2019,Industry-academia collaboration,55
+all,org_category,2019,Research collective,2
+all,org_category,2020,Academia,31
+all,org_category,2020,Industry,45
+all,org_category,2020,Industry-academia collaboration,50
+all,org_category,2021,Academia,52
+all,org_category,2021,Industry,82
+all,org_category,2021,Industry-academia collaboration,65
+all,org_category,2021,Research collective,10
+all,org_category,2022,Academia,52
+all,org_category,2022,Industry,102
+all,org_category,2022,Industry-academia collaboration,72
+all,org_category,2022,Research collective,2
+all,org_category,2023,Academia,95
+all,org_category,2023,Government,6
+all,org_category,2023,Industry,298
+all,org_category,2023,Industry-academia collaboration,104
+all,org_category,2023,Research collective,6
+all,org_category,2024,Academia,177
+all,org_category,2024,Government,13
+all,org_category,2024,Industry,538
+all,org_category,2024,Industry-academia collaboration,182
+all,org_category,2024,Research collective,4
+all,org_category,2025,Academia,15
+all,org_category,2025,Government,3
+all,org_category,2025,Industry,479
+all,org_category,2025,Industry-academia collaboration,60
+all,org_category,2025,Research collective,6
+all,org_category,2026,Industry,99
+all,org_category,2026,Industry-academia collaboration,1
+all,model_accessibility,1972,Unreleased,1
+all,model_accessibility,1976,Unreleased,1
+all,model_accessibility,1988,Unreleased,1
+all,model_accessibility,1993,Unreleased,1
+all,model_accessibility,1997,Unreleased,1
+all,model_accessibility,1999,Unreleased,2
+all,model_accessibility,2003,Unreleased,2
+all,model_accessibility,2004,Unreleased,1
+all,model_accessibility,2005,Unreleased,3
+all,model_accessibility,2006,Unreleased,4
+all,model_accessibility,2008,Open weights (unrestricted),1
+all,model_accessibility,2008,Unreleased,1
+all,model_accessibility,2009,Unreleased,5
+all,model_accessibility,2010,Unreleased,5
+all,model_accessibility,2011,Unreleased,4
+all,model_accessibility,2012,Unreleased,13
+all,model_accessibility,2013,Unreleased,5
+all,model_accessibility,2014,Open weights (unrestricted),1
+all,model_accessibility,2014,Unreleased,12
+all,model_accessibility,2015,Open weights (unrestricted),7
+all,model_accessibility,2015,Unreleased,16
+all,model_accessibility,2016,Hosted access (no API),1
+all,model_accessibility,2016,Open weights (non-commercial),2
+all,model_accessibility,2016,Open weights (restricted use),1
+all,model_accessibility,2016,Open weights (unrestricted),9
+all,model_accessibility,2016,Unreleased,33
+all,model_accessibility,2017,Hosted access (no API),1
+all,model_accessibility,2017,Open weights (unrestricted),5
+all,model_accessibility,2017,Unreleased,45
+all,model_accessibility,2018,Hosted access (no API),1
+all,model_accessibility,2018,Open weights (non-commercial),3
+all,model_accessibility,2018,Open weights (unrestricted),23
+all,model_accessibility,2018,Unreleased,50
+all,model_accessibility,2019,Hosted access (no API),1
+all,model_accessibility,2019,Open weights (non-commercial),11
+all,model_accessibility,2019,Open weights (restricted use),1
+all,model_accessibility,2019,Open weights (unrestricted),40
+all,model_accessibility,2019,Unreleased,110
+all,model_accessibility,2020,API access,1
+all,model_accessibility,2020,Open weights (non-commercial),4
+all,model_accessibility,2020,Open weights (unrestricted),47
+all,model_accessibility,2020,Unreleased,59
+all,model_accessibility,2021,API access,10
+all,model_accessibility,2021,Hosted access (no API),5
+all,model_accessibility,2021,Open weights (non-commercial),14
+all,model_accessibility,2021,Open weights (restricted use),1
+all,model_accessibility,2021,Open weights (unrestricted),64
+all,model_accessibility,2021,Unreleased,100
+all,model_accessibility,2022,API access,14
+all,model_accessibility,2022,Hosted access (no API),10
+all,model_accessibility,2022,Open weights (non-commercial),22
+all,model_accessibility,2022,Open weights (restricted use),12
+all,model_accessibility,2022,Open weights (unrestricted),71
+all,model_accessibility,2022,Unreleased,78
+all,model_accessibility,2023,API access,60
+all,model_accessibility,2023,Hosted access (no API),18
+all,model_accessibility,2023,Open weights (non-commercial),58
+all,model_accessibility,2023,Open weights (restricted use),69
+all,model_accessibility,2023,Open weights (unrestricted),139
+all,model_accessibility,2023,Unreleased,104
+all,model_accessibility,2024,API access,131
+all,model_accessibility,2024,Hosted access (no API),46
+all,model_accessibility,2024,Open weights (non-commercial),76
+all,model_accessibility,2024,Open weights (restricted use),125
+all,model_accessibility,2024,Open weights (unrestricted),204
+all,model_accessibility,2024,Unreleased,115
+all,model_accessibility,2025,API access,142
+all,model_accessibility,2025,Hosted access (no API),36
+all,model_accessibility,2025,Open weights (non-commercial),36
+all,model_accessibility,2025,Open weights (restricted use),79
+all,model_accessibility,2025,Open weights (unrestricted),185
+all,model_accessibility,2025,Unreleased,52
+all,model_accessibility,2026,API access,45
+all,model_accessibility,2026,Hosted access (no API),4
+all,model_accessibility,2026,Open weights (non-commercial),2
+all,model_accessibility,2026,Open weights (restricted use),14
+all,model_accessibility,2026,Open weights (unrestricted),24
+all,model_accessibility,2026,Unreleased,5
+all,hardware_family,2004,Intel Pentium 4 2.40,1
+all,hardware_family,2005,Intel Pentium 4 HT 630,1
+all,hardware_family,2009,NVIDIA Tesla S1070,1
+all,hardware_family,2010,NVIDIA consumer / workstation GPU,1
+all,hardware_family,2011,NVIDIA consumer / workstation GPU,5
+all,hardware_family,2012,NVIDIA consumer / workstation GPU,6
+all,hardware_family,2013,NVIDIA Tesla K20X,1
+all,hardware_family,2013,NVIDIA consumer / workstation GPU,1
+all,hardware_family,2014,NVIDIA Tesla C2075,1
+all,hardware_family,2014,NVIDIA Tesla K20c,1
+all,hardware_family,2014,NVIDIA consumer / workstation GPU,4
+all,hardware_family,2015,NVIDIA Tesla K20m,1
+all,hardware_family,2015,NVIDIA Tesla K40c,2
+all,hardware_family,2015,NVIDIA Tesla K40m,1
+all,hardware_family,2015,NVIDIA Tesla K40s,1
+all,hardware_family,2015,NVIDIA Tesla K40t,1
+all,hardware_family,2015,NVIDIA consumer / workstation GPU,4
+all,hardware_family,2016,NVIDIA Tesla K40c,2
+all,hardware_family,2016,NVIDIA Tesla K40s,2
+all,hardware_family,2016,NVIDIA consumer / workstation GPU,7
+all,hardware_family,2016,NVIDIA datacenter (pre-Volta),3
+all,hardware_family,2017,Google TPU (version unstated),2
+all,hardware_family,2017,Google TPU v2,1
+all,hardware_family,2017,NVIDIA Tesla K40s,1
+all,hardware_family,2017,NVIDIA Tesla K40t,1
+all,hardware_family,2017,NVIDIA consumer / workstation GPU,2
+all,hardware_family,2017,NVIDIA datacenter (pre-Volta),5
+all,hardware_family,2018,Google TPU v2,3
+all,hardware_family,2018,Google TPU v3,3
+all,hardware_family,2018,NVIDIA Tesla K40s,1
+all,hardware_family,2018,NVIDIA V100,7
+all,hardware_family,2018,NVIDIA consumer / workstation GPU,6
+all,hardware_family,2018,NVIDIA datacenter (pre-Volta),9
+all,hardware_family,2019,Google TPU v3,15
+all,hardware_family,2019,NVIDIA Tesla V100S PCIe 32 GB,1
+all,hardware_family,2019,NVIDIA V100,24
+all,hardware_family,2019,NVIDIA consumer / workstation GPU,13
+all,hardware_family,2019,NVIDIA datacenter (pre-Volta),11
+all,hardware_family,2020,Google TPU v2,2
+all,hardware_family,2020,Google TPU v3,16
+all,hardware_family,2020,NVIDIA V100,35
+all,hardware_family,2020,NVIDIA consumer / workstation GPU,9
+all,hardware_family,2020,NVIDIA datacenter (pre-Volta),3
+all,hardware_family,2021,Google TPU v2,1
+all,hardware_family,2021,Google TPU v3,25
+all,hardware_family,2021,Google TPU v4,2
+all,hardware_family,2021,Huawei Ascend,1
+all,hardware_family,2021,NVIDIA A100 / A800,26
+all,hardware_family,2021,NVIDIA Tesla V100S PCIe 32 GB,1
+all,hardware_family,2021,NVIDIA V100,52
+all,hardware_family,2021,NVIDIA consumer / workstation GPU,8
+all,hardware_family,2021,NVIDIA datacenter (pre-Volta),2
+all,hardware_family,2022,Google TPU v2,1
+all,hardware_family,2022,Google TPU v3,10
+all,hardware_family,2022,Google TPU v4,16
+all,hardware_family,2022,Huawei Ascend,1
+all,hardware_family,2022,NVIDIA A100 / A800,55
+all,hardware_family,2022,NVIDIA A40 PCIe,1
+all,hardware_family,2022,NVIDIA H100 / H800 / H200,1
+all,hardware_family,2022,NVIDIA V100,17
+all,hardware_family,2022,NVIDIA consumer / workstation GPU,9
+all,hardware_family,2022,NVIDIA datacenter (pre-Volta),1
+all,hardware_family,2023,AMD Instinct / Radeon,2
+all,hardware_family,2023,AWS Trainium / Inferentia,1
+all,hardware_family,2023,Cerebras CS-2,5
+all,hardware_family,2023,Google TPU v3,4
+all,hardware_family,2023,Google TPU v4,17
+all,hardware_family,2023,Google TPU v5,2
+all,hardware_family,2023,Huawei Ascend,2
+all,hardware_family,2023,NVIDIA A10 PCIe,1
+all,hardware_family,2023,NVIDIA A100 / A800,141
+all,hardware_family,2023,NVIDIA A30 PCIe,1
+all,hardware_family,2023,NVIDIA A40 PCIe,1
+all,hardware_family,2023,NVIDIA H100 / H800 / H200,6
+all,hardware_family,2023,NVIDIA V100,24
+all,hardware_family,2023,NVIDIA consumer / workstation GPU,18
+all,hardware_family,2024,AMD Instinct / Radeon,4
+all,hardware_family,2024,Cerebras CS-2,1
+all,hardware_family,2024,Google TPU v3,3
+all,hardware_family,2024,Google TPU v4,17
+all,hardware_family,2024,Google TPU v5,17
+all,hardware_family,2024,Google TPU v6,1
+all,hardware_family,2024,Huawei Ascend,1
+all,hardware_family,2024,MTT S4000,1
+all,hardware_family,2024,NVIDIA A100 / A800,138
+all,hardware_family,2024,NVIDIA A10G,1
+all,hardware_family,2024,NVIDIA A30 PCIe,1
+all,hardware_family,2024,NVIDIA A40 PCIe,3
+all,hardware_family,2024,NVIDIA GH200,2
+all,hardware_family,2024,NVIDIA H100 / H800 / H200,110
+all,hardware_family,2024,NVIDIA Tesla T4,1
+all,hardware_family,2024,NVIDIA V100,8
+all,hardware_family,2024,NVIDIA consumer / workstation GPU,37
+all,hardware_family,2024,NVIDIA datacenter (pre-Volta),1
+all,hardware_family,2025,AMD Instinct / Radeon,1
+all,hardware_family,2025,Google TPU v4,6
+all,hardware_family,2025,Google TPU v5,11
+all,hardware_family,2025,Google TPU v6,5
+all,hardware_family,2025,Google TPU v7,1
+all,hardware_family,2025,Huawei Ascend,4
+all,hardware_family,2025,NVIDIA A100 / A800,36
+all,hardware_family,2025,NVIDIA Blackwell (B200 / GB200),7
+all,hardware_family,2025,NVIDIA GH200,2
+all,hardware_family,2025,NVIDIA H100 / H800 / H200,79
+all,hardware_family,2025,NVIDIA V100,1
+all,hardware_family,2025,NVIDIA consumer / workstation GPU,1
+all,hardware_family,2026,Huawei Ascend,1
+all,hardware_family,2026,NVIDIA Blackwell (B200 / GB200),8
+all,hardware_family,2026,NVIDIA H100 / H800 / H200,3
+all,open_weights,1972,No,1
+all,open_weights,1976,No,1
+all,open_weights,1988,No,1
+all,open_weights,1993,No,1
+all,open_weights,1997,No,1
+all,open_weights,1999,No,2
+all,open_weights,2003,No,2
+all,open_weights,2004,No,1
+all,open_weights,2005,No,3
+all,open_weights,2006,No,4
+all,open_weights,2008,No,1
+all,open_weights,2008,Yes,1
+all,open_weights,2009,No,5
+all,open_weights,2010,No,5
+all,open_weights,2011,No,4
+all,open_weights,2012,No,13
+all,open_weights,2013,No,5
+all,open_weights,2014,No,12
+all,open_weights,2014,Yes,1
+all,open_weights,2015,No,16
+all,open_weights,2015,Yes,7
+all,open_weights,2016,No,34
+all,open_weights,2016,Yes,12
+all,open_weights,2017,No,46
+all,open_weights,2017,Yes,5
+all,open_weights,2018,No,51
+all,open_weights,2018,Yes,26
+all,open_weights,2019,No,111
+all,open_weights,2019,Yes,52
+all,open_weights,2020,No,60
+all,open_weights,2020,Yes,51
+all,open_weights,2021,No,115
+all,open_weights,2021,Yes,79
+all,open_weights,2022,No,102
+all,open_weights,2022,Yes,105
+all,open_weights,2023,No,182
+all,open_weights,2023,Yes,266
+all,open_weights,2024,No,292
+all,open_weights,2024,Yes,405
+all,open_weights,2025,No,230
+all,open_weights,2025,Yes,300
+all,open_weights,2026,No,54
+all,open_weights,2026,Yes,40
+all,confidence,1950,Confident,1
+all,confidence,1954,Unknown,1
+all,confidence,1955,Unknown,1
+all,confidence,1957,Likely,1
+all,confidence,1959,Likely,1
+all,confidence,1959,Speculative,1
+all,confidence,1960,Confident,1
+all,confidence,1960,Speculative,1
+all,confidence,1961,Unknown,1
+all,confidence,1962,Speculative,1
+all,confidence,1962,Unknown,1
+all,confidence,1963,Speculative,1
+all,confidence,1963,Unknown,2
+all,confidence,1965,Speculative,1
+all,confidence,1966,Likely,1
+all,confidence,1968,Unknown,2
+all,confidence,1969,Confident,1
+all,confidence,1970,Unknown,1
+all,confidence,1972,Unknown,1
+all,confidence,1973,Confident,1
+all,confidence,1975,Confident,1
+all,confidence,1976,Confident,1
+all,confidence,1976,Unknown,1
+all,confidence,1980,Confident,1
+all,confidence,1983,Likely,1
+all,confidence,1984,Speculative,1
+all,confidence,1984,Unknown,1
+all,confidence,1986,Confident,2
+all,confidence,1986,Unknown,3
+all,confidence,1987,Confident,3
+all,confidence,1988,Confident,1
+all,confidence,1988,Unknown,2
+all,confidence,1989,Confident,8
+all,confidence,1989,Unknown,2
+all,confidence,1990,Confident,5
+all,confidence,1990,Likely,1
+all,confidence,1991,Confident,1
+all,confidence,1992,Confident,2
+all,confidence,1992,Likely,2
+all,confidence,1992,Speculative,1
+all,confidence,1993,Confident,2
+all,confidence,1993,Likely,1
+all,confidence,1993,Speculative,1
+all,confidence,1994,Confident,1
+all,confidence,1994,Likely,2
+all,confidence,1994,Speculative,2
+all,confidence,1995,Likely,1
+all,confidence,1995,Unknown,1
+all,confidence,1996,Confident,3
+all,confidence,1997,Confident,2
+all,confidence,1997,Speculative,1
+all,confidence,1997,Unknown,1
+all,confidence,1998,Confident,1
+all,confidence,1999,Likely,2
+all,confidence,1999,Speculative,1
+all,confidence,1999,Unknown,1
+all,confidence,2000,Confident,2
+all,confidence,2000,Unknown,1
+all,confidence,2001,Confident,1
+all,confidence,2001,Likely,1
+all,confidence,2001,Unknown,2
+all,confidence,2002,Unknown,3
+all,confidence,2003,Confident,2
+all,confidence,2003,Speculative,1
+all,confidence,2003,Unknown,4
+all,confidence,2004,Confident,3
+all,confidence,2004,Unknown,2
+all,confidence,2005,Confident,3
+all,confidence,2005,Likely,1
+all,confidence,2005,Speculative,1
+all,confidence,2006,Confident,2
+all,confidence,2006,Likely,1
+all,confidence,2006,Unknown,8
+all,confidence,2007,Likely,3
+all,confidence,2007,Unknown,3
+all,confidence,2008,Confident,3
+all,confidence,2008,Speculative,1
+all,confidence,2008,Unknown,5
+all,confidence,2009,Confident,8
+all,confidence,2009,Likely,2
+all,confidence,2009,Speculative,1
+all,confidence,2009,Unknown,3
+all,confidence,2010,Confident,6
+all,confidence,2010,Likely,2
+all,confidence,2010,Speculative,2
+all,confidence,2010,Unknown,6
+all,confidence,2011,Confident,3
+all,confidence,2011,Likely,4
+all,confidence,2011,Unknown,6
+all,confidence,2012,Confident,5
+all,confidence,2012,Likely,4
+all,confidence,2012,Speculative,3
+all,confidence,2012,Unknown,6
+all,confidence,2013,Confident,10
+all,confidence,2013,Likely,6
+all,confidence,2013,Speculative,2
+all,confidence,2013,Unknown,6
+all,confidence,2014,Confident,16
+all,confidence,2014,Likely,7
+all,confidence,2014,Speculative,2
+all,confidence,2014,Unknown,10
+all,confidence,2015,Confident,21
+all,confidence,2015,Likely,4
+all,confidence,2015,Speculative,1
+all,confidence,2015,Unknown,10
+all,confidence,2016,Confident,36
+all,confidence,2016,Likely,14
+all,confidence,2016,Speculative,6
+all,confidence,2016,Unknown,27
+all,confidence,2017,Confident,32
+all,confidence,2017,Likely,13
+all,confidence,2017,Speculative,5
+all,confidence,2017,Unknown,29
+all,confidence,2018,Confident,39
+all,confidence,2018,Likely,26
+all,confidence,2018,Speculative,9
+all,confidence,2018,Unknown,14
+all,confidence,2019,Confident,84
+all,confidence,2019,Likely,25
+all,confidence,2019,Speculative,16
+all,confidence,2019,Unknown,20
+all,confidence,2020,Confident,74
+all,confidence,2020,Likely,17
+all,confidence,2020,Speculative,8
+all,confidence,2020,Unknown,13
+all,confidence,2021,Confident,125
+all,confidence,2021,Likely,36
+all,confidence,2021,Speculative,20
+all,confidence,2021,Unknown,18
+all,confidence,2022,Confident,137
+all,confidence,2022,Likely,40
+all,confidence,2022,Speculative,15
+all,confidence,2022,Unknown,27
+all,confidence,2023,Confident,291
+all,confidence,2023,Likely,104
+all,confidence,2023,Speculative,35
+all,confidence,2023,Unknown,90
+all,confidence,2024,Confident,553
+all,confidence,2024,Likely,107
+all,confidence,2024,Speculative,33
+all,confidence,2024,Unknown,251
+all,confidence,2025,Confident,285
+all,confidence,2025,Likely,85
+all,confidence,2025,Speculative,18
+all,confidence,2025,Unknown,188
+all,confidence,2026,Confident,51
+all,confidence,2026,Likely,49
+all,confidence,2026,Speculative,1

@@ -1535,7 +1535,7 @@ L 833.76 406.1232
    <text style="fill: #6b7280; font: 10.2px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="30.24" y="108.996806" transform="rotate(-0 30.24 108.996806)">at the snapshot rather than running to 2030.</text>
   </g>
   <g id="text_22">
-   <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="30.24" y="425.171456" transform="rotate(-0 30.24 425.171456)">Source: Epoch AI, AI Data Centers (CC-BY) — https://epoch.ai/data/ai-data-centers</text>
+   <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="30.24" y="425.171456" transform="rotate(-0 30.24 425.171456)">Source: Epoch AI, AI Data Centers (CC-BY) — data_centers.csv + data_center_timelines.csv — epoch.ai/data/ai-data-centers</text>
   </g>
   <g id="text_23">
    <text style="fill: #6b7280; font: 8.6px 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start" x="30.24" y="439.960256" transform="rotate(-0 30.24 439.960256)">Methodology: Methodology reference pending final methodology document; derivation follows Epoch AI's published data centers documentation</text>

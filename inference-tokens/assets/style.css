@@ -207,3 +207,8 @@ a.pid:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 /* interactive companion sits with the downloads but reads as the primary action */
 .downloads a.interactive { background: #1f3864; color: #fff; border-color: #1f3864; }
 .downloads a.interactive:hover { background: #16294a; border-color: #16294a; }
+
+/* embedded interactive chart; height is set by the chart itself on load */
+.figure-live { border: 1px solid #d7dbe2; border-radius: 6px; overflow: hidden; background: #fff; }
+iframe.live { display: block; width: 100%; border: 0; }
+.facts dd.files { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }

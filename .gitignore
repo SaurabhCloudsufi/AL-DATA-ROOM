@@ -23,6 +23,9 @@ token.json
 # Large staged source files that stay in the private project store
 AzureLLMInferenceTrace*.csv
 AzureLMMInferenceTrace*.csv
+# Epoch AI model releases as downloaded (~10 MB, CC-BY, re-downloadable from
+# epoch.ai/data/ai-models). The derived tables in ai-models/data/ are committed.
+/ai_models/
 aei_*.csv
 rankings_*.csv
 app_rankings_*.csv
