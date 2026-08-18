@@ -4017,6 +4017,9 @@ def build_aei_rank(plot_id):
 
 
 # ---- the headline splits, read off the overall row ------------------------
+# Automation against augmentation was published here as AEI-05 and withdrawn: two
+# bars at 51.4 and 48.6 are two numbers rather than a chart, and AEI-D01 carries
+# the same measure at the grain where it actually varies, by 29 points.
 AEI_MIX = {
     "AEI-04": dict(prefix="use_case_", strip="_pct",
                    title="Work, personal and study use of Claude",
@@ -4027,16 +4030,6 @@ AEI_MIX = {
                    note="Only the work share is a candidate for an enterprise measure; "
                         "personal and coursework use is real traffic but not commercial "
                         "workload. The three are mutually exclusive and total 100%."),
-    "AEI-05": dict(prefix="collaboration_bucket_", strip="_pct",
-                   title="Automation against augmentation",
-                   xlabel="Share of Claude conversations",
-                   what="Anthropic's headline finding about how Claude is used: whether "
-                        "the model completed the task (automation) or worked with the "
-                        "person on it (augmentation).",
-                   note="The split is close to even, and it is a classification of the "
-                        "conversation rather than a measurement of work displaced. "
-                        "Automation here means the model did the task in that exchange, "
-                        "not that a job was automated."),
     "AEI-06": dict(prefix="collaboration_", strip="_pct", exclude=("bucket",),
                    title="How people work with Claude",
                    xlabel="Share of Claude conversations",
@@ -4181,89 +4174,6 @@ def build_aei_d02(_r=None):
              subtitle, note)
 
 
-def build_aei_d03(_r=None):
-    """Autonomy against the education the task is judged to need."""
-    t = _acsv("aei_soc_major.csv").dropna(
-        subset=["ai_autonomy_mean", "human_education_years_mean", "pct"])
-    t = t[t["pct"] >= 0.5]
-
-    subtitle = ("What it shows: how autonomously Claude operates in each occupation group "
-                "against the years of human education Anthropic's classifier judges the "
-                "task to require. Marker area is the group's share of conversations.")
-    note = ("Both axes are model-generated judgements published as means, not measured "
-            "quantities, and the education estimate is a proxy for task difficulty rather "
-            "than a claim about who is doing the work. The relationship is weak across "
-            "groups, which is itself the finding: autonomy tracks the kind of task, not "
-            f"its apparent difficulty. {AEI_SCOPE}")
-
-    fig, ax = _afig(subtitle, note, left=0.085, width=0.640, xlabel_room=0.058,
-                    badge_above=False)
-    sizes = [max(28, v * 46) for v in t["pct"]]
-    ax.scatter(t["human_education_years_mean"], t["ai_autonomy_mean"], s=sizes,
-               color=SERIES["current"], alpha=0.72, edgecolor="white",
-               linewidth=0.9, zorder=3)
-    for r in t.itertuples():
-        if r.pct >= 2.5:
-            ax.annotate(_clip(r.node_name, 34),
-                        (r.human_education_years_mean, r.ai_autonomy_mean),
-                        textcoords="offset points", xytext=(0, 11), ha="center",
-                        fontsize=8.2, color=INK)
-    ax.set_xlabel("Estimated years of human education the task requires", fontsize=10)
-    ax.set_ylabel("Mean AI autonomy (1–5 scale)", fontsize=10)
-    ax.grid(color=RULE, linewidth=0.7)
-    ax.set_axisbelow(True)
-    ax.text(0.985, 0.03, "marker area ∝ share of conversations", transform=ax.transAxes,
-            ha="right", va="bottom", fontsize=8.6, color=MUTED, style="italic")
-    _afinish(fig, ax, "AEI-D03",
-             "Autonomy tracks the kind of task, not how hard it looks",
-             subtitle, note, badge_above=False)
-
-
-def build_aei_d04(_r=None):
-    """The only movement two months of data can carry."""
-    o = _acsv("aei_overall.csv")
-    meta = _ameta()
-    first, last = meta["period_first"], meta["period_last"]
-    keep = [m for m in o.metric_id
-            if not m.startswith("artifact_") and m not in
-            ("usage_pct", "usage_per_capita_index")]
-    t = o[o.metric_id.isin(keep)].copy()
-    # percentage-point metrics only: means in years, hours and index points do
-    # not share an axis with shares
-    t = t[t.metric_id.str.endswith("_pct")]
-    t = t.reindex(t["delta"].abs().sort_values(ascending=False).index).head(12)
-    t = t.sort_values("delta")
-
-    subtitle = (f"What it shows: how each share moved between {first[:7]} and "
-                f"{last[:7]} — the only comparison this release supports, since it "
-                f"publishes two months. The 12 largest movements are shown.")
-    note = ("Two consecutive months is not a trend and nothing here is extrapolated. "
-            "The largest movement is a 2.2-point fall in the work share against a rise "
-            "in personal use, which one month apart is as likely to be seasonal or a "
-            "classifier revision as a change in behaviour. Percentage-point metrics only: "
-            f"the means in years, hours and index points do not share this axis. {AEI_SCOPE}")
-
-    fig, ax = _afig(subtitle, note, left=0.335, width=0.520, badge_above=True)
-    ys = list(range(len(t)))
-    labels = [m[:-4].replace("collaboration_bucket_", "").replace("collaboration_", "")
-               .replace("use_case_", "").replace("_", " ").capitalize()
-              for m in t.metric_id]
-    colours = [SERIES["current"] if d >= 0 else SERIES["scope"] for d in t["delta"]]
-    ax.barh(ys, t["delta"], height=0.70, color=colours, edgecolor="white",
-            linewidth=0.6, zorder=3)
-    lim = float(t["delta"].abs().max()) * 1.45
-    for y, r in zip(ys, t.itertuples()):
-        ax.text(r.delta + (lim*0.02 if r.delta >= 0 else -lim*0.02), y,
-                f"{r.delta:+.2f} pt", va="center",
-                ha="left" if r.delta >= 0 else "right", fontsize=8.8, color=INK)
-    ax.set_yticks(ys); ax.set_yticklabels(labels, fontsize=9.4)
-    ax.axvline(0, color=INK, linewidth=1.1, zorder=4)
-    ax.set_xlim(-lim, lim)
-    ax.set_xlabel(f"Change from {first[:7]} to {last[:7]} (percentage points)", fontsize=10)
-    ax.grid(axis="x", color=RULE, linewidth=0.7)
-    ax.set_axisbelow(True)
-    _afinish(fig, ax, "AEI-D04",
-             "One month of movement, which is not yet a trend", subtitle, note)
 
 
 def build_aei_d05(_r=None):
@@ -4362,9 +4272,14 @@ def build_aei_d06(_r=None):
              "Everything globally, shares only almost everywhere else", subtitle, note)
 
 
+# AEI-D03 (autonomy against required education) and AEI-D04 (month-on-month
+# movement) were published and withdrawn. D03 plotted an autonomy range of 0.34
+# on a 1-5 scale, which is noise presented as a relationship; D04 plotted 46
+# metrics of which 44 moved by less than a point, median 0.07. Neither is
+# rebuildable on purpose.
 AEI_DERIVED = {
-    "AEI-D01": build_aei_d01, "AEI-D02": build_aei_d02, "AEI-D03": build_aei_d03,
-    "AEI-D04": build_aei_d04, "AEI-D05": build_aei_d05, "AEI-D06": build_aei_d06,
+    "AEI-D01": build_aei_d01, "AEI-D02": build_aei_d02,
+    "AEI-D05": build_aei_d05, "AEI-D06": build_aei_d06,
 }
 
 

@@ -25,4 +25,4 @@ ai_companies_staff_reports.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-0
 ai_companies_funding_rounds.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-08 + COMPANIES-09 + D03 + D04 + D07
 ai_companies_compute_spend.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-10 + D05 + D06 + D07
 ai_companies.csv,ai_companies,"Epoch AI, AI Companies",
-aei_claude_ai_2026-06-26.csv,<root>,Anthropic Economic Index (Claude.ai),AEI-01..10 + D01..D06
+aei_claude_ai_2026-06-26.csv,<root>,Anthropic Economic Index (Claude.ai),AEI-01..04 + 06..10 + D01 + D02 + D05 + D06

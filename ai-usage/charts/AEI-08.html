@@ -1,0 +1,218 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude usage mapped to occupation groups</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px; background:#fff; color:#1a1a1a;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .ctl { display:flex; gap:8px; margin:8px 0 4px; align-items:center; flex-wrap:wrap; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 11px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .cnt { color:#6b7280; font-size:11.5px; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .rowlab { fill:#1a1a1a; font-size:11px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px; box-shadow:0 4px 14px rgba(0,0,0,.10);
+          opacity:0; transition:opacity .08s; max-width:300px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">AEI-08</span><h1>Claude usage mapped to occupation groups</h1></div>
+<div class="sub">22 in the release, 2026-05 data. The static chart has room for a ranked selection; this one carries the whole list. <span class="badge">ONE PROVIDER'S OWN TRAFFIC</span></div>
+<div class="ctl" id="ctl"></div>
+<div style="position:relative">
+  <svg id="c" role="img" aria-label="Claude usage mapped to occupation groups"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Hover a bar for the exact value and its rank. Source: Anthropic Economic Index (CC-BY) — aei_claude_ai_2026-06-26.csv —
+huggingface.co/datasets/Anthropic/EconomicIndex. Claude.ai consumer traffic only, so every
+share is a share of Claude conversations and not of AI use at large. A cell Anthropic did
+not publish is absent, not zero.</div>
+</div>
+<script>
+const D = {"kind":"bar","rows":[["Computer and Mathematical",23.8,63.9,7.6868],["Arts, Design, Entertainment, Sports, and Media",13.55,35.85,6.8868],["Educational Instruction and Library",12.79,42.77,8.3879],["Sales and Related",9.14,43.79,4.9321],["Office and Administrative Support",7.89,56.02,10.2679],["Management",5.9,43.9,8.1693],["Business and Financial Operations",5.77,42.61,8.9359],["Life, Physical, and Social Science",4.51,40.46,6.8647],["Architecture and Engineering",3.56,44.89,6.7614],["Healthcare Practitioners and Technical",3.31,41.62,3.5593],["Community and Social Service",2.57,40.01,2.6324],["Personal Care and Service",1.23,55.87,6.3053],["Production",1.04,63.72,5.0536],["Legal",1.02,34.57,7.3259],["Healthcare Support",0.62,39.08,3.4264],["Installation, Maintenance, and Repair",0.62,69.44,5.5482],["Food Preparation and Serving Related",0.48,49.13,5.4303],["Transportation and Material Moving",0.34,51.74,6.0046],["Protective Service",0.33,73.58,7.5323],["Building and Grounds Cleaning and Maintenance",0.13,47.06,7.3822],["Construction and Extraction",0.1,66.21,7.1839],["Farming, Fishing, and Forestry",0.04,65.07,5.078]],"dp":1,"unit":"%","color":"#1f3864","rule":null,"xLabel":"Share of Claude conversations","valueLabel":"Share of Claude conversations","defaultTop":0,"extra":[["Automation share",1,"%"],["Estimated time saved",1,"x"]],"labelW":310};
+const svg=document.getElementById('c'), tip=document.getElementById('tip'), ctl=document.getElementById('ctl');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000;
+let showAll = !D.defaultTop;
+
+function fmt(v,dp,unit){ return v.toLocaleString('en-US',{minimumFractionDigits:dp,maximumFractionDigits:dp})+unit; }
+function niceTicks(hi,n){
+  const raw=hi/n, mag=Math.pow(10,Math.floor(Math.log10(raw)));
+  const step=[1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=raw)||10*mag;
+  const out=[]; for(let v=0; v<=hi*1.0001; v+=step) out.push(+v.toFixed(6));
+  return out;
+}
+
+function rows(){ return showAll ? D.rows : D.rows.slice(0, D.defaultTop); }
+
+function drawBar(){
+  const R=rows(), n=R.length;
+  const rowH = n>60 ? 15 : n>34 ? 19 : 24;
+  const M={l:D.labelW,r:64,t:14,b:46};
+  const H=M.t+M.b+n*rowH;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const hi=Math.max.apply(null,R.map(r=>r[1]))*1.04;
+  const sx=v=>M.l+v/hi*(W-M.l-M.r);
+
+  niceTicks(hi,6).forEach(v=>{
+    const x=sx(v);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:M.t,y2:H-M.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-M.b+17,class:'axis','text-anchor':'middle'});
+    t.textContent=fmt(v,v<10?(D.dp>1?1:0):0,D.unit); svg.appendChild(t);
+  });
+  R.forEach((r,i)=>{
+    const y=M.t+i*rowH, bh=Math.max(7,rowH-7);
+    svg.appendChild(el('rect',{x:M.l,y:y+(rowH-bh)/2,width:Math.max(1,sx(r[1])-M.l),
+      height:bh,fill:D.color,rx:1.5,'data-i':i}));
+    const lab=el('text',{x:M.l-7,y:y+rowH/2+3.6,class:'rowlab','text-anchor':'end'});
+    lab.textContent=r[0]; svg.appendChild(lab);
+    const val=el('text',{x:sx(r[1])+6,y:y+rowH/2+3.6,class:'axis','text-anchor':'start'});
+    val.textContent=fmt(r[1],D.dp,D.unit); svg.appendChild(val);
+  });
+  if(D.rule!==null && D.rule<=hi){
+    const x=sx(D.rule);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:M.t,y2:H-M.b,stroke:'#b4763a',
+      'stroke-width':1.5,'stroke-dasharray':'5 3'}));
+  }
+  const xl=el('text',{x:(M.l+W-M.r)/2,y:H-M.b+38,class:'axlab','text-anchor':'middle'});
+  xl.textContent=D.xLabel; svg.appendChild(xl);
+  svg.appendChild(el('rect',{id:'hl',x:-99,y:-99,width:0,height:0,fill:'none',
+    stroke:'#1a1a1a','stroke-width':1.4}));
+  svg._rowH=rowH; svg._M=M; svg._H=H; svg._sx=sx; svg._R=R;
+}
+
+function drawScatter(){
+  const H=560, M={l:78,r:22,t:16,b:52};
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const xs=D.rows.map(r=>r[1]), ys=D.rows.map(r=>r[2]);
+  const lx=v=>Math.log10(v);
+  const xLo=lx(Math.min.apply(null,xs))-0.08, xHi=lx(Math.max.apply(null,xs))+0.08;
+  const yLo=lx(Math.min.apply(null,ys))-0.08, yHi=lx(Math.max.apply(null,ys))+0.08;
+  const sx=v=>M.l+(lx(v)-xLo)/(xHi-xLo)*(W-M.l-M.r);
+  const sy=v=>H-M.b-(lx(v)-yLo)/(yHi-yLo)*(H-M.t-M.b);
+  const decades=(lo,hi)=>{const o=[];for(let e=Math.floor(lo);e<=Math.ceil(hi);e++)
+    for(const m of [1,2,5]){const v=m*Math.pow(10,e); if(lx(v)>=lo&&lx(v)<=hi) o.push(v);} return o;};
+  decades(yLo,yHi).forEach(v=>{const y=sy(v);
+    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y,y2:y,class:'grid'}));
+    const t=el('text',{x:M.l-8,y:y+4,class:'axis','text-anchor':'end'});
+    t.textContent=(+v.toPrecision(2)); svg.appendChild(t);});
+  decades(xLo,xHi).forEach(v=>{const x=sx(v);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:M.t,y2:H-M.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-M.b+18,class:'axis','text-anchor':'middle'});
+    t.textContent=(+v.toPrecision(2))+'%'; svg.appendChild(t);});
+  const y1=sy(1.0);
+  svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y1,y2:y1,stroke:'#b4763a',
+    'stroke-width':1.5,'stroke-dasharray':'5 3'}));
+  const pl=el('text',{x:M.l+6,y:y1-6,class:'axis',fill:'#b4763a'});
+  pl.textContent='proportional to population'; svg.appendChild(pl);
+  D.rows.forEach(r=>{
+    svg.appendChild(el('circle',{cx:sx(r[1]).toFixed(2),cy:sy(r[2]).toFixed(2),r:4.2,
+      fill:D.color,'fill-opacity':.62,stroke:'#fff','stroke-width':.7}));
+  });
+  const xl=el('text',{x:(M.l+W-M.r)/2,y:H-M.b+40,class:'axlab','text-anchor':'middle'});
+  xl.textContent=D.xLabel; svg.appendChild(xl);
+  const yl=el('text',{x:0,y:0,class:'axlab','text-anchor':'middle',
+    transform:'translate(15,'+((M.t+H-M.b)/2)+') rotate(-90)'});
+  yl.textContent=D.yLabel; svg.appendChild(yl);
+  svg.appendChild(el('circle',{id:'hl',r:7.5,fill:'none',stroke:'#1a1a1a','stroke-width':1.6,cx:-99,cy:-99}));
+  svg._sx=sx; svg._sy=sy; svg._H=H;
+}
+
+const draw = D.kind==='bar' ? drawBar : drawScatter;
+
+function buildCtl(){
+  ctl.innerHTML='';
+  if(D.kind==='bar' && D.defaultTop && D.rows.length>D.defaultTop){
+    [[false,'Top '+D.defaultTop],[true,'All '+D.rows.length]].forEach(([val,txt])=>{
+      const b=document.createElement('button');
+      b.className='btn'; b.type='button'; b.textContent=txt;
+      b.setAttribute('aria-pressed', showAll===val ? 'true':'false');
+      b.onclick=()=>{ showAll=val; buildCtl(); draw(); reportHeight(); };
+      ctl.appendChild(b);
+    });
+  }
+  const s=document.createElement('span');
+  s.className='cnt';
+  s.textContent = D.kind==='bar'
+    ? rows().length+' of '+D.rows.length+' shown'
+    : D.rows.length+' countries';
+  ctl.appendChild(s);
+}
+
+function tipFor(r){
+  let h='<b>'+r[0]+'</b>';
+  if(D.kind==='bar'){
+    h+='<div>'+D.valueLabel+': '+fmt(r[1],D.dp,D.unit)+'</div>';
+    h+='<div class="m">rank '+(D.rows.indexOf(r)+1)+' of '+D.rows.length+'</div>';
+    (D.extra||[]).forEach((e,k)=>{ const v=r[2+k];
+      if(v!==null&&v!==undefined) h+='<div class="m">'+e[0]+': '+fmt(v,e[1],e[2])+'</div>'; });
+  } else {
+    h+='<div>'+D.xLabel+': '+fmt(r[1],2,'%')+'</div>';
+    h+='<div>Usage per working-age person: '+fmt(r[2],2,'')+'</div>';
+  }
+  return h;
+}
+
+function place(px,py,rect){
+  tip.style.left=Math.min(Math.max(8,px+14), rect.width-tip.offsetWidth-8)+'px';
+  tip.style.top=Math.min(Math.max(8,py-10), rect.height-tip.offsetHeight-8)+'px';
+}
+
+svg.addEventListener('pointermove',ev=>{
+  const rect=svg.getBoundingClientRect();
+  const px=(ev.clientX-rect.left)/rect.width*W, py=(ev.clientY-rect.top)/rect.width*W;
+  const hl=document.getElementById('hl');
+  if(D.kind==='bar'){
+    const {_rowH:rowH,_M:M,_R:R,_sx:sx}=svg;
+    const i=Math.floor((py-M.t)/rowH);
+    if(i<0||i>=R.length||px<M.l-4){ tip.style.opacity=0; hl.setAttribute('x',-99); return; }
+    const r=R[i], bh=Math.max(7,rowH-7);
+    hl.setAttribute('x',M.l); hl.setAttribute('y',M.t+i*rowH+(rowH-bh)/2);
+    hl.setAttribute('width',Math.max(1,sx(r[1])-M.l)); hl.setAttribute('height',bh);
+    tip.innerHTML=tipFor(r); tip.style.opacity=1;
+    place(sx(r[1])/W*rect.width,(M.t+i*rowH+rowH/2)/W*rect.width,rect);
+  } else {
+    const {_sx:sx,_sy:sy}=svg; let best=null,bd=18*18;
+    D.rows.forEach(r=>{const dx=sx(r[1])-px,dy=sy(r[2])-py,d=dx*dx+dy*dy;
+      if(d<bd){bd=d;best=r;}});
+    if(!best){ tip.style.opacity=0; hl.setAttribute('cx',-99); return; }
+    hl.setAttribute('cx',sx(best[1])); hl.setAttribute('cy',sy(best[2]));
+    tip.innerHTML=tipFor(best); tip.style.opacity=1;
+    place(sx(best[1])/W*rect.width,sy(best[2])/W*rect.width,rect);
+  }
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
+  const hl=document.getElementById('hl'); if(hl){hl.setAttribute('x',-99);hl.setAttribute('cx',-99);}});
+
+buildCtl(); draw();
+
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'AEI-08',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>
