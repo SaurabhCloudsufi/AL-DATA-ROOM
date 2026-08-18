@@ -144,6 +144,30 @@ DOMAINS = [
         },
         "live": True,
     },
+    {
+        "slug": "ai-usage",
+        "title": "AI Usage",
+        "blurb": "What people actually do with a frontier model: what they ask for, what "
+                 "gets produced, which occupations the work belongs to, and where in the "
+                 "world it happens.",
+        "index": "build/plot_index_aei.csv",
+        "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "Anthropic — Published Visualizations":
+                "These reproduce the views Anthropic's own Economic Index presents, "
+                "rebuilt from the published file rather than screenshotted. The whole "
+                "domain carries one caveat that cannot be repeated often enough: this "
+                "is one provider's own consumer traffic, so every share is a share of "
+                "Claude conversations and never of AI use at large.",
+            "Derived Analysis":
+                "Our own analysis of the same file — the published views held at a "
+                "grain where they vary, and crossed against each other. A cell "
+                "Anthropic did not publish is absent rather than zero: a value is "
+                "released only where it clears an aggregation threshold and a "
+                "geography sample floor, so a missing country is a suppressed one.",
+        },
+        "live": True,
+    },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
     {"slug": "model-pricing", "title": "Model Pricing", "live": False},
     {"slug": "energy", "title": "Energy", "live": False},

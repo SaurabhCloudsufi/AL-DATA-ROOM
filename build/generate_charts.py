@@ -3836,6 +3836,538 @@ COMPANIES_DERIVED = {
 }
 
 
+# ============================================================== AI USAGE (AEI)
+# The Anthropic Economic Index publishes one enormous long-format file: a metric
+# value per geography per category node. AEI-01 to AEI-10 are the views
+# Anthropic's own index and report present; AEI-D01 onward are ours.
+AEI_DOMAIN = "ai-usage"
+AEI_DATA = REPO / AEI_DOMAIN / "data"
+AEI_FILE = "aei_claude_ai_2026-06-26.csv"
+AEI_METH = ("Methodology reference pending final methodology document; derivation "
+            "follows Anthropic's published Economic Index data documentation")
+
+
+def aei_src():
+    return (f"Anthropic Economic Index (CC-BY) — {AEI_FILE} — "
+            f"huggingface.co/datasets/Anthropic/EconomicIndex")
+
+
+def _acsv(name):
+    import pandas as pd
+    return pd.read_csv(AEI_DATA / name)
+
+
+def _ameta():
+    return _acsv("aei_summary.csv").iloc[0]
+
+
+def _aei_badge(ax, above=False):
+    """The scope limit that governs every reading of this dataset."""
+    y, va = (1.030, "bottom") if above else (0.955, "top")
+    ax.text(0.0 if above else 0.017, y,
+            "  ONE PROVIDER'S OWN TRAFFIC  ·  not a market measure  ",
+            transform=ax.transAxes, ha="left", va=va, fontsize=9.1,
+            fontweight="bold", color="white", zorder=9, clip_on=False,
+            bbox=dict(boxstyle="round,pad=0.42", facecolor=SERIES["current"],
+                      edgecolor="none"))
+
+
+def _afig(subtitle, note, left=0.300, width=0.560, xlabel_room=0.055,
+          figsize=(12.0, 8.4), badge_above=True):
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_axes(_rect(subtitle, note, left=left, width=width,
+                            xlabel_room=xlabel_room, badge_above=badge_above,
+                            source=aei_src()))
+    return fig, ax
+
+
+def _afinish(fig, ax, plot_id, title, subtitle, note, badge_above=True):
+    _aei_badge(ax, above=badge_above)
+    frame(fig, ax, plot_id, title, subtitle, aei_src(), AEI_METH, note)
+    save(fig, plot_id, AEI_DOMAIN)
+
+
+AEI_SCOPE = ("Claude.ai covers the Free, Pro and Max consumer plans plus Cowork; "
+             "Anthropic's API traffic is a separate file and is not included here.")
+AEI_ABSENT = ("A cell Anthropic did not publish is absent, not zero: a value is "
+              "released only where it clears an aggregation threshold and a "
+              "geography sample floor.")
+
+
+def _abar(ax, labels, values, colours=None, fmt="{v:.1f}%", pad=None,
+          headroom=1.16, height=0.72, min_slots=0):
+    """Ranked horizontal bars, highest at the top, labelled at the tip."""
+    ys = list(range(len(labels)))
+    colours = colours or [SERIES["current"]] * len(labels)
+    ax.barh(ys, values, height=height, color=colours, edgecolor="white",
+            linewidth=0.6, zorder=3)
+    span = max(values) if len(values) else 1
+    pad = pad if pad is not None else span * 0.014
+    for y, v in zip(ys, values):
+        ax.text(v + pad, y, fmt.format(v=v), va="center", fontsize=9,
+                color=INK, zorder=4)
+    ax.set_yticks(ys)
+    ax.set_yticklabels(labels, fontsize=9.4)
+    ax.invert_yaxis()
+    # two or three categories across a full-height axis give absurdly thick
+    # bars; padding the y range keeps the canvas and thins the bars instead
+    if min_slots and len(labels) < min_slots:
+        mid = (len(labels) - 1) / 2
+        ax.set_ylim(mid + min_slots / 2, mid - min_slots / 2)
+    ax.set_xlim(0, span * headroom)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+
+
+# ---- the ranked views, one config each ------------------------------------
+AEI_RANK = {
+    "AEI-01": dict(table="aei_countries.csv", label="country", col="usage_per_capita_index",
+                   top=20, fmt="{v:.2f}", left=0.235,
+                   title="Anthropic AI Usage Index, by country",
+                   xlabel="Usage share divided by working-age population share",
+                   what="Anthropic's own headline geographic measure: a country's share of "
+                        "Claude usage divided by its share of the world's working-age "
+                        "(15-64) population. 1.0 means usage exactly proportional to "
+                        "population; above 1.0 means Claude is used more than population "
+                        "alone would predict.",
+                   note="An index above 1.0 is not a statement about a country's AI "
+                        "adoption at large - it is Claude usage per working-age person "
+                        "relative to the world. Small, rich, English-speaking economies "
+                        "index highest, which is what one provider's consumer product "
+                        "reaching a wealthy early-adopter population looks like."),
+    "AEI-02": dict(table="aei_countries.csv", label="country", col="usage_pct",
+                   top=20, fmt="{v:.2f}%", left=0.235,
+                   title="Share of Claude usage, by country",
+                   xlabel="Share of global Claude conversations",
+                   what="Where Claude conversations actually come from, as a share of the "
+                        "global total. This is the raw volume view that the usage index "
+                        "normalises by population.",
+                   note="Volume follows population and market presence, so this ranking "
+                        "and the per-capita index answer different questions and should "
+                        "not be read as competing."),
+    "AEI-03": dict(table="aei_us_states.csv", label="geo_id", col="usage_per_capita_index",
+                   top=20, fmt="{v:.2f}", left=0.175,
+                   title="Anthropic AI Usage Index, by US state",
+                   xlabel="Usage share divided by working-age population share",
+                   what="The same index inside the United States, the only country for "
+                        "which Anthropic publishes it at subregion level.",
+                   note="The District of Columbia sits far above every state, which is "
+                        "what a single dense federal-and-professional labour market looks "
+                        "like when measured per head of population."),
+    "AEI-07": dict(table="aei_request_major.csv", label="node_name", col="pct",
+                   top=15, fmt="{v:.1f}%", left=0.315,
+                   title="What people ask Claude for, by topic",
+                   xlabel="Share of Claude conversations",
+                   what="Anthropic's request taxonomy at its major-topic grain: what the "
+                        "conversation was actually about.",
+                   note="Shares are of classified conversations and do not total 100% "
+                        "because the long tail of minor topics is not shown."),
+    "AEI-08": dict(table="aei_soc_major.csv", label="node_name", col="pct",
+                   top=15, fmt="{v:.1f}%", left=0.345,
+                   title="Claude usage mapped to occupation groups",
+                   xlabel="Share of Claude conversations",
+                   what="Conversations mapped onto the US Bureau of Labor Statistics "
+                        "Standard Occupational Classification, at major-group level.",
+                   note="This is the occupational character of the work in the "
+                        "conversation, not the occupation of the person typing. A "
+                        "teacher drafting a spreadsheet formula appears under Computer "
+                        "and Mathematical."),
+    "AEI-09": dict(table="aei_onet_gwa.csv", label="node_name", col="pct",
+                   top=15, fmt="{v:.1f}%", left=0.375,
+                   title="Claude usage mapped to work activities",
+                   xlabel="Share of Claude conversations",
+                   what="Conversations mapped onto O*NET Generalized Work Activities - "
+                        "the US Department of Labor's vocabulary for what work consists of.",
+                   note="Advice, information-gathering and creative thinking dominate, "
+                        "which is the signature of a conversational assistant rather than "
+                        "of an autonomous worker."),
+    "AEI-10": dict(table="aei_artifacts.csv", label="artifact", col="value",
+                   top=16, fmt="{v:.1f}%", left=0.315,
+                   title="What Claude actually produced",
+                   xlabel="Share of Claude conversations",
+                   what="The most prominent concrete output of each conversation, across "
+                        "Anthropic's 32 artifact labels.",
+                   note="'None' is a real category and a large one: a substantial share of "
+                        "conversations produce no artifact at all, which is a conversation "
+                        "rather than a piece of work."),
+}
+
+
+def build_aei_rank(plot_id):
+    cfg = AEI_RANK[plot_id]
+    t = _acsv(cfg["table"]).dropna(subset=[cfg["col"]])
+    t = t.sort_values(cfg["col"], ascending=False).head(cfg["top"])
+    meta = _ameta()
+    total = len(_acsv(cfg["table"]).dropna(subset=[cfg["col"]]))
+
+    subtitle = (f"What it shows: {cfg['what']} {cfg['top']} of {total} shown, "
+                f"{meta['period_last'][:7]} data.")
+    note = f"{cfg['note']} {AEI_SCOPE} {AEI_ABSENT}"
+
+    fig, ax = _afig(subtitle, note, left=cfg["left"], width=0.955 - cfg["left"] - 0.10)
+    labels = [_clip(str(x), 46) for x in t[cfg["label"]]]
+    _abar(ax, labels, list(t[cfg["col"]]), fmt=cfg["fmt"])
+    ax.set_xlabel(cfg["xlabel"], fontsize=10)
+    if cfg["col"] == "usage_per_capita_index":
+        ax.axvline(1.0, color=SERIES["scope"], linewidth=1.4,
+                   linestyle=(0, (5, 2.5)), zorder=4)
+        ax.text(1.0, len(labels) - 0.35, "  1.0 = proportional to population",
+                fontsize=8.8, color=SERIES["scope"], style="italic", va="top")
+    _afinish(fig, ax, plot_id, cfg["title"], subtitle, note)
+
+
+# ---- the headline splits, read off the overall row ------------------------
+AEI_MIX = {
+    "AEI-04": dict(prefix="use_case_", strip="_pct",
+                   title="Work, personal and study use of Claude",
+                   xlabel="Share of Claude conversations",
+                   what="Anthropic's own classification of what each conversation was "
+                        "for. This is the split that decides whether a usage figure "
+                        "belongs in an enterprise demand estimate at all.",
+                   note="Only the work share is a candidate for an enterprise measure; "
+                        "personal and coursework use is real traffic but not commercial "
+                        "workload. The three are mutually exclusive and total 100%."),
+    "AEI-05": dict(prefix="collaboration_bucket_", strip="_pct",
+                   title="Automation against augmentation",
+                   xlabel="Share of Claude conversations",
+                   what="Anthropic's headline finding about how Claude is used: whether "
+                        "the model completed the task (automation) or worked with the "
+                        "person on it (augmentation).",
+                   note="The split is close to even, and it is a classification of the "
+                        "conversation rather than a measurement of work displaced. "
+                        "Automation here means the model did the task in that exchange, "
+                        "not that a job was automated."),
+    "AEI-06": dict(prefix="collaboration_", strip="_pct", exclude=("bucket",),
+                   title="How people work with Claude",
+                   xlabel="Share of Claude conversations",
+                   what="The interaction pattern underneath the automation split: "
+                        "directive requests, back-and-forth iteration, learning, "
+                        "validation and feedback loops.",
+                   note="Directive and task-iteration together account for most "
+                        "conversations - one-shot instructions and refinement loops, "
+                        "rather than the model being supervised or checked."),
+}
+
+
+def build_aei_mix(plot_id):
+    cfg = AEI_MIX[plot_id]
+    o = _acsv("aei_overall.csv")
+    meta = _ameta()
+    last, first = meta["period_last"], meta["period_first"]
+    rows = o[o.metric_id.str.startswith(cfg["prefix"])]
+    for bad in cfg.get("exclude", ()):
+        rows = rows[~rows.metric_id.str.contains(bad)]
+    rows = rows.sort_values(last, ascending=False)
+    labels = [m[len(cfg["prefix"]):-len(cfg["strip"])].replace("_", " ").capitalize()
+              for m in rows.metric_id]
+
+    subtitle = (f"What it shows: {cfg['what']} {meta['period_last'][:7]} data, "
+                f"with the change since {first[:7]} marked.")
+    note = f"{cfg['note']} {AEI_SCOPE} {AEI_ABSENT}"
+
+    fig, ax = _afig(subtitle, note, left=0.235, width=0.620)
+    vals = list(rows[last])
+    _abar(ax, labels, vals, fmt="{v:.1f}%", headroom=1.34, min_slots=7)
+    # the only movement the release supports: two consecutive months, set clear
+    # of the value label rather than running into it
+    for y, (_, r) in enumerate(rows.iterrows()):
+        d = r["delta"]
+        if abs(d) >= 0.05:
+            ax.text(r[last] + max(vals) * 0.165, y,
+                    f"({d:+.1f} pt vs {first[:7]})", va="center", fontsize=8.4,
+                    color=SERIES["scope"] if d > 0 else MUTED, style="italic")
+    ax.set_xlabel(cfg["xlabel"], fontsize=10)
+    _afinish(fig, ax, plot_id, cfg["title"], subtitle, note)
+
+
+# ------------------------------------------------ Derived analysis (same file)
+def build_aei_d01(_r=None):
+    """Which kinds of work Claude does for you, rather than with you."""
+    t = _acsv("aei_soc_major.csv").dropna(
+        subset=["collaboration_bucket_automation_pct", "pct"])
+    t = t[t["pct"] >= 1.0].sort_values("collaboration_bucket_automation_pct",
+                                       ascending=False)
+    o = _acsv("aei_overall.csv")
+    last = _ameta()["period_last"]
+    base = float(o[o.metric_id == "collaboration_bucket_automation_pct"][last].iloc[0])
+
+    subtitle = (f"What it shows: the automation share within each occupation group, "
+                f"against the {base:.1f}% global average. The published split is a single "
+                f"number for all of Claude; this is the same measure held at the grain "
+                f"where it varies. {len(t)} groups shown, each with at least 1% of "
+                f"conversations.")
+    hi_n = t.iloc[0]["node_name"]
+    lo_n = t.iloc[-1]["node_name"]
+    note = (f"Deviation from the global average, in percentage points. {hi_n} work is the "
+            f"most automated and {lo_n} the least, which is the shape of a model that is "
+            f"strong at bounded technical tasks and used as a collaborator where judgement "
+            f"and voice carry the work. Automation is a property of the conversation, not "
+            f"evidence of a job displaced. {AEI_SCOPE}")
+
+    fig, ax = _afig(subtitle, note, left=0.345, width=0.560, badge_above=True)
+    ys = range(len(t))
+    devs = [v - base for v in t["collaboration_bucket_automation_pct"]]
+    colours = [SERIES["current"] if d >= 0 else SERIES["scope"] for d in devs]
+    ax.barh(list(ys), devs, height=0.72, color=colours, edgecolor="white",
+            linewidth=0.6, zorder=3)
+    lim = max(abs(min(devs)), abs(max(devs))) * 1.30
+    for y, (d, v) in enumerate(zip(devs, t["collaboration_bucket_automation_pct"])):
+        ax.text(d + (lim * 0.018 if d >= 0 else -lim * 0.018), y, f"{v:.0f}%",
+                va="center", ha="left" if d >= 0 else "right", fontsize=9, color=INK)
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([_clip(x, 44) for x in t["node_name"]], fontsize=9.4)
+    ax.invert_yaxis()
+    ax.axvline(0, color=INK, linewidth=1.1, zorder=4)
+    ax.set_xlim(-lim, lim)
+    ax.set_xlabel(f"Automation share relative to the {base:.1f}% global average "
+                  f"(percentage points)", fontsize=10)
+    ax.xaxis.set_major_formatter(
+        plt.FuncFormatter(lambda v, _p: "0" if abs(v) < 1e-9 else f"{v:+.0f}"))
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    spread = (float(t["collaboration_bucket_automation_pct"].max())
+              - float(t["collaboration_bucket_automation_pct"].min()))
+    _afinish(fig, ax, "AEI-D01",
+             f"The even global split hides a {spread:.0f}-point spread across occupations",
+             subtitle, note)
+
+
+def build_aei_d02(_r=None):
+    """The time claim, with both sides converted to the same unit."""
+    t = _acsv("aei_soc_major.csv").dropna(subset=["time_ratio", "pct"])
+    t = t[t["pct"] >= 1.0].sort_values("time_ratio", ascending=False)
+
+    subtitle = ("What it shows: Anthropic's two time estimates side by side - how long a "
+                "task would take a person alone, against how long it takes with Claude - "
+                "for each occupation group. The published file gives the first in hours "
+                "and the second in minutes; both are converted to minutes here.")
+    note = ("The unit difference is the trap in this dataset: read raw, the two columns "
+            "appear to show tasks taking longer with AI. Both are Anthropic's own "
+            "model-generated estimates of a hypothetical unaided task, not measurements "
+            "of anyone actually working, so the ratio is a property of the classifier as "
+            f"much as of the work. {AEI_SCOPE}")
+
+    fig, ax = _afig(subtitle, note, left=0.345, width=0.500, badge_above=True)
+    ys = list(range(len(t)))
+    h = 0.36
+    ax.barh([y - h/2 for y in ys], t["human_only_minutes"], height=h,
+            color=SERIES["prior"], edgecolor="white", linewidth=0.5,
+            label="Without AI (estimated)", zorder=3)
+    ax.barh([y + h/2 for y in ys], t["human_with_ai_minutes"], height=h,
+            color=SERIES["current"], edgecolor="white", linewidth=0.5,
+            label="With Claude (estimated)", zorder=3)
+    top = float(t["human_only_minutes"].max())
+    for y, r in zip(ys, t.itertuples()):
+        ax.text(r.human_only_minutes + top * 0.012, y - h/2,
+                f"{r.human_only_minutes/60:.1f}h", va="center", fontsize=8.4, color=MUTED)
+        ax.text(r.human_with_ai_minutes + top * 0.012, y + h/2,
+                f"{r.human_with_ai_minutes:.0f}m", va="center", fontsize=8.4, color=INK)
+        ax.text(top * 1.30, y, f"{r.time_ratio:.1f}x", va="center", fontsize=9,
+                fontweight="bold", color=SERIES["scope"])
+    ax.text(top * 1.30, -0.85, "ratio", fontsize=8.6, color=SERIES["scope"],
+            style="italic", va="center")
+    ax.set_yticks(ys)
+    ax.set_yticklabels([_clip(x, 44) for x in t["node_name"]], fontsize=9.4)
+    ax.invert_yaxis()
+    ax.set_xlim(0, top * 1.42)
+    ax.set_xlabel("Estimated task time (minutes)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    # kept left of the ratio column rather than on top of it
+    ax.legend(loc="lower right", bbox_to_anchor=(0.87, 0.01), frameon=False, fontsize=9)
+    lo, hi = float(t["time_ratio"].min()), float(t["time_ratio"].max())
+    _afinish(fig, ax, "AEI-D02",
+             f"Estimated time falls {lo:.0f}- to {hi:.0f}-fold, on Anthropic's own numbers",
+             subtitle, note)
+
+
+def build_aei_d03(_r=None):
+    """Autonomy against the education the task is judged to need."""
+    t = _acsv("aei_soc_major.csv").dropna(
+        subset=["ai_autonomy_mean", "human_education_years_mean", "pct"])
+    t = t[t["pct"] >= 0.5]
+
+    subtitle = ("What it shows: how autonomously Claude operates in each occupation group "
+                "against the years of human education Anthropic's classifier judges the "
+                "task to require. Marker area is the group's share of conversations.")
+    note = ("Both axes are model-generated judgements published as means, not measured "
+            "quantities, and the education estimate is a proxy for task difficulty rather "
+            "than a claim about who is doing the work. The relationship is weak across "
+            "groups, which is itself the finding: autonomy tracks the kind of task, not "
+            f"its apparent difficulty. {AEI_SCOPE}")
+
+    fig, ax = _afig(subtitle, note, left=0.085, width=0.640, xlabel_room=0.058,
+                    badge_above=False)
+    sizes = [max(28, v * 46) for v in t["pct"]]
+    ax.scatter(t["human_education_years_mean"], t["ai_autonomy_mean"], s=sizes,
+               color=SERIES["current"], alpha=0.72, edgecolor="white",
+               linewidth=0.9, zorder=3)
+    for r in t.itertuples():
+        if r.pct >= 2.5:
+            ax.annotate(_clip(r.node_name, 34),
+                        (r.human_education_years_mean, r.ai_autonomy_mean),
+                        textcoords="offset points", xytext=(0, 11), ha="center",
+                        fontsize=8.2, color=INK)
+    ax.set_xlabel("Estimated years of human education the task requires", fontsize=10)
+    ax.set_ylabel("Mean AI autonomy (1–5 scale)", fontsize=10)
+    ax.grid(color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.text(0.985, 0.03, "marker area ∝ share of conversations", transform=ax.transAxes,
+            ha="right", va="bottom", fontsize=8.6, color=MUTED, style="italic")
+    _afinish(fig, ax, "AEI-D03",
+             "Autonomy tracks the kind of task, not how hard it looks",
+             subtitle, note, badge_above=False)
+
+
+def build_aei_d04(_r=None):
+    """The only movement two months of data can carry."""
+    o = _acsv("aei_overall.csv")
+    meta = _ameta()
+    first, last = meta["period_first"], meta["period_last"]
+    keep = [m for m in o.metric_id
+            if not m.startswith("artifact_") and m not in
+            ("usage_pct", "usage_per_capita_index")]
+    t = o[o.metric_id.isin(keep)].copy()
+    # percentage-point metrics only: means in years, hours and index points do
+    # not share an axis with shares
+    t = t[t.metric_id.str.endswith("_pct")]
+    t = t.reindex(t["delta"].abs().sort_values(ascending=False).index).head(12)
+    t = t.sort_values("delta")
+
+    subtitle = (f"What it shows: how each share moved between {first[:7]} and "
+                f"{last[:7]} — the only comparison this release supports, since it "
+                f"publishes two months. The 12 largest movements are shown.")
+    note = ("Two consecutive months is not a trend and nothing here is extrapolated. "
+            "The largest movement is a 2.2-point fall in the work share against a rise "
+            "in personal use, which one month apart is as likely to be seasonal or a "
+            "classifier revision as a change in behaviour. Percentage-point metrics only: "
+            f"the means in years, hours and index points do not share this axis. {AEI_SCOPE}")
+
+    fig, ax = _afig(subtitle, note, left=0.335, width=0.520, badge_above=True)
+    ys = list(range(len(t)))
+    labels = [m[:-4].replace("collaboration_bucket_", "").replace("collaboration_", "")
+               .replace("use_case_", "").replace("_", " ").capitalize()
+              for m in t.metric_id]
+    colours = [SERIES["current"] if d >= 0 else SERIES["scope"] for d in t["delta"]]
+    ax.barh(ys, t["delta"], height=0.70, color=colours, edgecolor="white",
+            linewidth=0.6, zorder=3)
+    lim = float(t["delta"].abs().max()) * 1.45
+    for y, r in zip(ys, t.itertuples()):
+        ax.text(r.delta + (lim*0.02 if r.delta >= 0 else -lim*0.02), y,
+                f"{r.delta:+.2f} pt", va="center",
+                ha="left" if r.delta >= 0 else "right", fontsize=8.8, color=INK)
+    ax.set_yticks(ys); ax.set_yticklabels(labels, fontsize=9.4)
+    ax.axvline(0, color=INK, linewidth=1.1, zorder=4)
+    ax.set_xlim(-lim, lim)
+    ax.set_xlabel(f"Change from {first[:7]} to {last[:7]} (percentage points)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    _afinish(fig, ax, "AEI-D04",
+             "One month of movement, which is not yet a trend", subtitle, note)
+
+
+def build_aei_d05(_r=None):
+    """Volume against intensity, which the published views never cross."""
+    t = _acsv("aei_countries.csv").dropna(subset=["usage_pct", "usage_per_capita_index"])
+
+    subtitle = (f"What it shows: each country's share of Claude conversations against its "
+                f"usage per working-age person. The index published on its own hides that "
+                f"the highest-indexing countries are small; the volume ranking on its own "
+                f"hides that the largest are not the most intensive. {len(t)} countries.")
+    note = ("Both axes are log-scaled: shares span three orders of magnitude and the index "
+            "two. A country high and to the left is small but intensive; low and to the "
+            "right is large but thin. The United States is the only country that is both "
+            f"large and well above proportional. {AEI_SCOPE} {AEI_ABSENT}")
+
+    fig, ax = _afig(subtitle, note, left=0.085, width=0.640, xlabel_room=0.058,
+                    badge_above=True)
+    ax.scatter(t["usage_pct"], t["usage_per_capita_index"], s=34,
+               color=SERIES["current"], alpha=0.62, edgecolor="white",
+               linewidth=0.6, zorder=3)
+    show = (set(t.nlargest(6, "usage_pct").geo_id)
+            | set(t.nlargest(6, "usage_per_capita_index").geo_id))
+    # the labelled countries cluster tightly at the top right, so labels are
+    # alternated above and below the marker rather than stacked on each other
+    labelled = t[t.geo_id.isin(show)].sort_values("usage_pct")
+    offsets = [(0, 10), (0, -18), (0, 23)]
+    for i, r in enumerate(labelled.itertuples()):
+        dx, dy = offsets[i % len(offsets)]
+        ax.annotate(r.country, (r.usage_pct, r.usage_per_capita_index),
+                    textcoords="offset points", xytext=(dx, dy), ha="center",
+                    va="bottom" if dy > 0 else "top", fontsize=8.2, color=INK)
+    ax.set_xscale("log"); ax.set_yscale("log")
+    _decade_ticks(ax.xaxis, t["usage_pct"], lambda v: f"{v:g}%")
+    _decade_ticks(ax.yaxis, t["usage_per_capita_index"], lambda v: f"{v:g}")
+    ax.axhline(1.0, color=SERIES["scope"], linewidth=1.3, linestyle=(0, (5, 2.5)), zorder=2)
+    ax.text(float(t["usage_pct"].min()), 1.05, " proportional to population",
+            fontsize=8.6, color=SERIES["scope"], style="italic", va="bottom")
+    ax.set_xlabel("Share of global Claude conversations", fontsize=10)
+    ax.set_ylabel("Usage per working-age person (index, 1.0 = proportional)", fontsize=10)
+    ax.grid(color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    _afinish(fig, ax, "AEI-D05",
+             "Big markets and intensive ones are mostly different countries",
+             subtitle, note, badge_above=True)
+
+
+def build_aei_d06(_r=None):
+    """What the release actually contains, before anyone reads a number off it."""
+    import numpy as np
+    cov = _acsv("aei_coverage.csv")
+    meta = _ameta()
+    grid = cov.pivot_table(index="category_name", columns="geo_level",
+                           values="rows", aggfunc="sum").fillna(0)
+    grid = grid[[c for c in ("global", "country", "subregion") if c in grid.columns]]
+    grid = grid.loc[grid.sum(axis=1).sort_values(ascending=False).index]
+
+    subtitle = (f"What it shows: how the {int(meta['rows']):,} published rows are "
+                f"distributed across the four category hierarchies and three geographic "
+                f"levels. {int(meta['metrics'])} distinct metrics, "
+                f"{int(meta['countries'])} countries and {int(meta['subregions'])} "
+                f"subregions, over {int(meta['periods'])} months.")
+    note = ("Depth is very unevenly distributed, and that governs which charts are "
+            "possible: everything is available globally, only shares are published for "
+            "most country and subregion breakdowns, and the usage index reaches "
+            f"subregion level for US states alone ({int(meta['us_states_with_index'])} of "
+            f"them). {AEI_ABSENT} {AEI_SCOPE}")
+
+    fig, ax = _afig(subtitle, note, left=0.215, width=0.560, xlabel_room=0.070,
+                    badge_above=True)
+    vals = grid.to_numpy(dtype=float)
+    shown = np.where(vals > 0, vals, np.nan)
+    im = ax.imshow(shown, cmap="Blues", aspect="auto", vmin=0, vmax=float(np.nanmax(shown)))
+    for i in range(grid.shape[0]):
+        for j in range(grid.shape[1]):
+            v = vals[i, j]
+            if v > 0:
+                ax.text(j, i, f"{int(v):,}", ha="center", va="center", fontsize=9.4,
+                        fontweight="bold",
+                        color="white" if v > np.nanmax(shown) * 0.55 else INK)
+            else:
+                ax.text(j, i, "—", ha="center", va="center", fontsize=9.4, color="#c9ced8")
+    ax.set_xticks(range(grid.shape[1]))
+    ax.set_xticklabels([c.capitalize() for c in grid.columns], fontsize=9.6)
+    ax.set_yticks(range(grid.shape[0]))
+    ax.set_yticklabels(grid.index, fontsize=9.6)
+    ax.set_xticks([x - 0.5 for x in range(1, grid.shape[1])], minor=True)
+    ax.set_yticks([y - 0.5 for y in range(1, grid.shape[0])], minor=True)
+    ax.grid(which="minor", color="white", linewidth=1.6)
+    ax.tick_params(which="minor", length=0)
+    ax.grid(which="major", visible=False)
+    ax.set_xlabel("Geographic level", fontsize=10)
+    cb = fig.colorbar(im, ax=ax, fraction=0.030, pad=0.02)
+    cb.set_label("Published rows", fontsize=9)
+    cb.outline.set_visible(False)
+    _afinish(fig, ax, "AEI-D06",
+             "Everything globally, shares only almost everywhere else", subtitle, note)
+
+
+AEI_DERIVED = {
+    "AEI-D01": build_aei_d01, "AEI-D02": build_aei_d02, "AEI-D03": build_aei_d03,
+    "AEI-D04": build_aei_d04, "AEI-D05": build_aei_d05, "AEI-D06": build_aei_d06,
+}
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -3854,6 +4386,9 @@ BUILDERS.update({pid: (lambda _rows, _p=pid: build_companies(_p))
                  for pid in COMPANIES_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b())
                  for pid, fn in COMPANIES_DERIVED.items()})
+BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_rank(_p)) for pid in AEI_RANK})
+BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_mix(_p)) for pid in AEI_MIX})
+BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in AEI_DERIVED.items()})
 
 
 def main():

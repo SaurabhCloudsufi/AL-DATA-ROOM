@@ -29,6 +29,10 @@ AzureLMMInferenceTrace*.csv
 # Epoch AI company dataset as downloaded (CC-BY, re-downloadable from
 # epoch.ai/data/ai-companies). The derived tables in ai-companies/data/ are committed.
 /ai_companies/
+# Anthropic Economic Index as published (CC-BY, re-downloadable from
+# huggingface.co/datasets/Anthropic/EconomicIndex). 219 MB; the derived tables
+# in ai-usage/data/ are committed.
+/anthropic_aei/
 aei_*.csv
 rankings_*.csv
 app_rankings_*.csv

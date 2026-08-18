@@ -238,6 +238,60 @@ above.
 
 ---
 
+## AI Usage
+
+What people actually do with a frontier model. Source: the
+[Anthropic Economic Index](https://huggingface.co/datasets/Anthropic/EconomicIndex)
+(CC-BY), release `2026_06_26` ("Cadences"), downloaded into `anthropic_aei/`:
+
+| File | Rows | What it is |
+|---|---|---|
+| `aei_claude_ai_2026-06-26.csv` | 1,636,573 | Claude chat and Cowork (Free, Pro, Max), 2026-04 and 2026-05 |
+
+One row is one metric value for one geography and one category node — 219 MB of
+them. `summarise_anthropic_aei.py` reduces it to the nine small tables in
+`ai-usage/data/` that the charts read; nothing else touches the raw file.
+
+**16 charts**, in two sections:
+
+| IDs | Section | What they are |
+|---|---|---|
+| `AEI-01` – `AEI-10` | Anthropic — Published Visualizations | The views Anthropic's own index presents: the usage index by country and by US state, usage share by country, the work/personal/study split, automation against augmentation, collaboration patterns, request topics, occupation groups, work activities and artifact types |
+| `AEI-D01` – `AEI-D06` | Derived Analysis | The published views held at a grain where they vary, and crossed against each other — automation by occupation, the time estimates converted to one unit, autonomy against task difficulty, month-on-month movement, volume against intensity, and what the release actually holds |
+
+Three rules hold across all 16:
+
+- **One provider's own traffic.** Claude.ai is not the market. Every share is a
+  share of Claude conversations, and the charts carry that on their face rather
+  than implying a market measurement. The API file is a separate release and is
+  not pooled with this one.
+- **A missing cell is not a zero.** Anthropic publishes a value only where it
+  clears an aggregation threshold and a geography sample floor, so an absent
+  country or node was suppressed for sparsity. It is left absent.
+- **Two months is not a trend.** The release publishes 2026-04
+  and 2026-05. `AEI-D04` shows the movement between them and
+  says plainly that one month apart is as likely to be seasonal or a classifier
+  revision as a change in behaviour. Nothing is extrapolated.
+
+The trap in this dataset is a unit mismatch: `human_only_time_mean` is published
+in **hours** and `human_with_ai_time_mean` in **minutes**. Read raw, the two
+columns appear to show tasks taking longer with AI. They are converted to a
+common unit once, in the summariser, and `AEI-D02` states the conversion on its
+face. Both are Anthropic's own model-generated estimates of a hypothetical
+unaided task, not measurements of anyone working.
+
+```bash
+python build/summarise_anthropic_aei.py     # anthropic_aei/*.csv → ai-usage/data/
+python build/generate_charts.py AEI-01 …    # derived tables → SVG + PNG
+python build/build_site.py                  # → ai-usage/index.html
+```
+
+The raw release stays out of the repository, as with every other working
+dataset; `ai-usage/data/` carries the derived tables. To rebuild from source,
+put the file back in `anthropic_aei/` from the link above.
+
+---
+
 ## Structure
 
 ```
@@ -355,15 +409,16 @@ The names are the files as downloaded, in the project source store:
 | `AI data centers` | `data_centers.csv`, `data_center_timelines.csv`, `data_center_chip_quantities.csv`, `data_center_cooling_towers.csv`, `data_center_chillers.csv` | `EPOCH-03` – `EPOCH-05`, `DERIVED-01` – `DERIVED-06` |
 | `ai_models` | `notable_ai_models.csv`, `frontier_ai_models.csv`, `large_scale_ai_models.csv`, `all_ai_models.csv` | `MODELS-01` – `MODELS-13`, `MODELS-D01` – `MODELS-D11` |
 | `ai_chip_components` | `quarterly_by_designer.csv`, `cumulative_by_designer.csv`, `cumulative_by_chip.csv`, `supply_denominators.csv` | `CHIP-01` – `CHIP-14`, `CHIP-D01` – `CHIP-D06` |
+| `anthropic_aei` (Hugging Face) | `aei_claude_ai_2026-06-26.csv` | `AEI-01` – `AEI-10`, `AEI-D01` – `AEI-D06` |
 | `ai_companies` | `ai_companies_revenue_reports.csv`, `ai_companies_funding_rounds.csv`, `ai_companies_staff_reports.csv`, `ai_companies_usage_reports.csv`, `ai_companies_compute_spend.csv`, `ai_companies.csv` | `COMPANIES-01` – `COMPANIES-10`, `COMPANIES-D01` – `COMPANIES-D08` |
 
 `build/source_files_manifest.csv` records that store file by file, and
 
 ```bash
-python build/verify_source_files.py     # 74 published charts checked, 0 failing
+python build/verify_source_files.py     # 90 published charts checked, 0 failing
 ```
 
-checks all 74 published charts against it. A chart that names no file, that
+checks all 90 published charts against it. A chart that names no file, that
 names a different file on its face than in its index row, or that names a file
 the store does not hold, fails the check rather than reaching a client.
 
