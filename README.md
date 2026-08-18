@@ -74,12 +74,12 @@ Amazon (Trainium) and AMD — consumed each quarter, and what share of world sup
 that was. Source: [Epoch AI, AI Chip Components](https://epoch.ai/data/ai-chip-components)
 (CC-BY).
 
-**11 charts**, in two sections:
+**12 charts**, in two sections:
 
 | IDs | Section | What they are |
 |---|---|---|
 | `CHIP-01`, `-02`, `-09`, `-11`, `-13` | Epoch AI — Published Visualizations | Epoch's configurable figure, each chart carrying both of its "show data as" settings side by side: cost by component and by designer, then logic, packaging and memory as an amount against the world-supply line and as a share of that supply |
-| `CHIP-D01` – `CHIP-D06` | Derived Analysis | Questions the explorer's settings cannot answer — the three components on one axis, component mix by designer, chip-level concentration, the published uncertainty, packaging intensity, and demand growth against supply growth |
+| `CHIP-D01` – `CHIP-D07` | Derived Analysis | Questions the explorer's settings cannot answer — the three components on one axis, component mix by designer, chip-level concentration, the published uncertainty, packaging intensity, demand growth against supply growth, and the generation handover running inside every designer at once |
 
 `CHIP-01` also ships the full explorer as an interactive companion — all four tabs
 crossed with colour-by and amount/share, over the same eight quarters — with
@@ -481,10 +481,10 @@ The names are the files as downloaded, in the project source store:
 `build/source_files_manifest.csv` records that store file by file, and
 
 ```bash
-python build/verify_source_files.py     # 73 published charts checked, 0 failing
+python build/verify_source_files.py     # 74 published charts checked, 0 failing
 ```
 
-checks all 73 published charts against it. A chart that names no file, that
+checks all 74 published charts against it. A chart that names no file, that
 names a different file on its face than in its index row, or that names a file
 the store does not hold, fails the check rather than reaching a client.
 

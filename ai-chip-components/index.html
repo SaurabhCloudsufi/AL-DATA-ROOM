@@ -15,13 +15,13 @@
   <h1>AI Chip Components</h1>
   <p class="standfirst">The three components AI accelerators are built from — advanced-node logic wafers, CoWoS packaging and HBM memory — and how much of the world&#x27;s supply of each the leading AI chip designers consumed.</p>
   <dl class="meta">
-    <div><dt>Charts published</dt><dd>11</dd></div>
+    <div><dt>Charts published</dt><dd>12</dd></div>
   </dl>
 </header>
 
 <div class="toc"><h2>Contents</h2><ol>
 <li><a href="#epoch-ai-published-visualizations">Epoch AI — Published Visualizations</a> <span class="count">5 of 5 published</span></li>
-<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">6 of 6 published</span></li>
+<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">7 of 7 published</span></li>
 </ol></div>
 <div class="section" id="epoch-ai-published-visualizations">
 <h2>Epoch AI — Published Visualizations</h2>
@@ -260,6 +260,27 @@
 <div><dt>Note</dt><dd>Supply is deterministic in the source and carries no interval; demand is a sum of medians and carries the 0.71% non-additivity</dd></div>
 </dl>
 <p class="downloads"><a href="charts/CHIP-D06.svg" download>Download SVG</a><a href="charts/CHIP-D06.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="CHIP-D07">
+<div class="chart-head">
+<a class="pid" href="#CHIP-D07">CHIP-D07</a>
+<h3>Chip generations handing over, by designer</h3>
+</div>
+<p class="shows">Quarterly component cost by individual chip, one panel per designer — the only view in the domain at chip grain over time.</p>
+<div class="figure">
+<img src="charts/CHIP-D07.svg" alt="Chip generations handing over, by designer" width="864" height="619" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Components (cumulative_by_chip.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One chip type in one quarter</dd></div>
+<div><dt>Coverage</dt><dd>16 tracked chip types across 4 designers, 8 quarters; Epoch&#x27;s &quot;Other&quot; residual excluded</dd></div>
+<div><dt>Source files</dt><dd class="files">quarterly_by_chip.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Epoch&#x27;s &quot;Other&quot; residual excluded as it is untracked supply rather than a chip generation; a chip absent from a quarter was not published for it, which for a retiring part is not the same as zero</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-components" rel="noopener">Epoch AI — AI Chip Components</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI Chip Components methodology</dd></div>
+<div><dt>Note</dt><dd>H100/H200 falls from $2.21bn to $0.20bn while B300 goes from nothing to $10.14bn; every designer runs the same transition at once</dd></div>
+</dl>
+<p class="downloads"><a href="charts/CHIP-D07.svg" download>Download SVG</a><a href="charts/CHIP-D07.png" download>Download PNG</a></p>
 </section>
 </div>
 

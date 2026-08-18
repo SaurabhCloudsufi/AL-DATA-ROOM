@@ -17,7 +17,7 @@ quarterly_by_designer.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP
 cumulative_by_designer.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-D02
 cumulative_by_chip.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-D03
 supply_denominators.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-09 + 11 + 13 + D01 + D06
-quarterly_by_chip.csv,ai_chip_components,"Epoch AI, AI Chip Components",
+quarterly_by_chip.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-D07
 cumulative_supply_denominators.csv,ai_chip_components,"Epoch AI, AI Chip Components",
 ai_companies_revenue_reports.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-01..03 + D01..D03 + D06..D08
 ai_companies_usage_reports.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-04 + COMPANIES-05 + D01 + D07 + D08

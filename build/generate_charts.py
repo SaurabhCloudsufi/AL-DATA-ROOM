@@ -4560,6 +4560,111 @@ def build_models_panels(plot_id):
     save(fig, plot_id, MODELS_DOMAIN)
 
 
+def build_chip_d07(_r=None):
+    """The generation handover, which only the quarterly by-chip file carries."""
+    rows = _chip_csv("chip_quarterly_by_chip.csv")
+    quarters = sorted({r["quarter"] for r in rows},
+                      key=lambda q: (int(q.split()[1]), int(q.split()[0][1])))
+    qi = {q: i for i, q in enumerate(quarters)}
+
+    # "Other" is Epoch's untracked residual, not a chip generation, so it has no
+    # place in a chart about generations handing over
+    tracked = [d for d, _ in CHIP_DESIGNERS]
+    by_designer = {d: {} for d in tracked}
+    for r in rows:
+        d, c = r["designer"], r["chip_type"]
+        if d not in by_designer:
+            continue
+        v = r.get("total_cost_usd_p50")
+        if not isinstance(v, float):
+            continue
+        by_designer[d].setdefault(c, [0.0] * len(quarters))[qi[r["quarter"]]] += v / 1e9
+
+    # generations ordered by first appearance, then shaded oldest-pale to newest-dark
+    # so the handover reads as the dark band displacing the pale one
+    RAMPS = {"NVIDIA": ["#c3cddf", "#8fa3c4", "#4a6fa5", "#1f3864"],
+             "Google": ["#cfd9e8", "#93a9cd", "#4a6fa5", "#22406f"],
+             "Amazon": ["#c8dbcb", "#94b79a", "#6b8f71", "#3f6247"],
+             "AMD": ["#e8d3bd", "#d6b083", "#b4763a", "#7d4f22"]}
+
+    def first_seen(vals):
+        return next((i for i, v in enumerate(vals) if v > 0), len(quarters))
+
+    subtitle = ("What it shows: quarterly component cost by individual chip, one panel "
+                "per designer, over the eight complete quarters. Every designer is "
+                "running the same transition at the same time: the previous generation "
+                "falls away as the next one takes over. This is the only view in the "
+                "domain at chip grain over time — the published figure stops at "
+                "designer, and CHIP-D03 accumulates the generations into one total.")
+    note = ("Shading runs pale to dark by first appearance, so a handover reads as the "
+            "dark band displacing the pale one. Epoch's \"Other\" residual is excluded: "
+            "it is the untracked remainder of world supply, not a chip generation, and "
+            "at $18.7bn in the last quarter it would dwarf every panel. A chip absent "
+            "from a quarter was not published for it, which for a retiring part is not "
+            "the same as zero. Every value is a Monte Carlo median and medians do not "
+            "add, because Epoch simulates each aggregation separately.")
+
+    fig = plt.figure(figsize=(12.0, 8.6))
+    l, b, w, h = _rect(subtitle, note, left=0.070, width=0.900, xlabel_room=0.058,
+                       badge_above=True,
+                       source=chip_src(["quarterly_by_chip.csv"]))
+    fig.text(l, b + h + 0.050,
+             "  COMPLETE QUARTERS ONLY  ·  partial Q1 2026 excluded  ",
+             ha="left", va="bottom", fontsize=9.1, fontweight="bold", color="white",
+             zorder=9, bbox=dict(boxstyle="round,pad=0.42",
+                                 facecolor=SERIES["current"], edgecolor="none"))
+    gx, gy = 0.085, 0.115
+    pw, ph = (w - gx) / 2, (h - gy) / 2
+    idx = list(range(len(quarters)))
+
+    for k, designer in enumerate(tracked):
+        r, c = divmod(k, 2)
+        ax = fig.add_axes([l + c * (pw + gx), b + (1 - r) * (ph + gy), pw, ph])
+        chips = sorted(by_designer[designer].items(), key=lambda kv: first_seen(kv[1]))
+        ramp = RAMPS[designer]
+        bottom = [0.0] * len(quarters)
+        for j, (chip, vals) in enumerate(chips):
+            colour = ramp[min(j, len(ramp) - 1)] if len(chips) <= len(ramp) else \
+                ramp[min(int(j * len(ramp) / len(chips)), len(ramp) - 1)]
+            ax.bar(idx, vals, bottom=bottom, width=0.72, color=colour, label=chip,
+                   edgecolor="white", linewidth=0.6, zorder=3)
+            bottom = [a + v for a, v in zip(bottom, vals)]
+        top = max(bottom) if max(bottom) else 1
+        for i, t in enumerate(bottom):
+            if t > 0:
+                ax.text(i, t + top * 0.03, f"${t:,.1f}bn", ha="center", va="bottom",
+                        fontsize=7.8, color=INK, fontweight="bold")
+        ax.set_xticks(idx)
+        ax.set_xticklabels([q.replace(" ", "\n") for q in quarters], fontsize=8.2)
+        ax.set_xlim(-0.6, len(quarters) - 0.4)
+        # headroom scales with the legend, which sits inside the panel and would
+        # otherwise sit on top of the early bars
+        ax.set_ylim(0, top * (1.30 + 0.09 * min(4, max(0, len(chips) - 2))))
+        # a panel topping out near $2bn needs a decimal, or 1.5 and 2.0 both
+        # print as "$2bn" and the axis repeats itself
+        dp = 0 if top >= 5 else 1
+        ax.yaxis.set_major_formatter(
+            plt.FuncFormatter(lambda v, _p, _d=dp: f"${v:,.{_d}f}bn"))
+        ax.set_title(designer, fontsize=10.6, fontweight="bold", color=INK, pad=7)
+        ax.grid(axis="y", color=RULE, linewidth=0.7)
+        ax.set_axisbelow(True)
+        ax.tick_params(labelsize=8.4)
+        if r == 1:
+            ax.set_xlabel("Quarter", fontsize=9.6)
+        if c == 0:
+            ax.set_ylabel("Component cost (US$ bn)", fontsize=9.4)
+        hh, ll = ax.get_legend_handles_labels()
+        # AMD runs six generations; a single column of keys reaches the bars
+        ax.legend(hh[::-1], ll[::-1], loc="upper left", frameon=False, fontsize=8.2,
+                  handlelength=1.1, labelspacing=0.32, borderaxespad=0.3,
+                  ncol=2 if len(chips) > 4 else 1, columnspacing=1.1)
+
+    frame(fig, fig.axes[0], "CHIP-D07",
+          "Every designer is handing over to a new generation at once",
+          subtitle, chip_src(["quarterly_by_chip.csv"]), CHIP_METH, note)
+    save(fig, "CHIP-D07", CHIP_DOMAIN)
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -4575,7 +4680,8 @@ BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in MODEL_DERIVED.i
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_chip(_p)) for pid in CHIP_PLOTS})
 BUILDERS.update({"CHIP-D01": build_chip_d01, "CHIP-D02": build_chip_d02,
                  "CHIP-D03": build_chip_d03, "CHIP-D04": build_chip_d04,
-                 "CHIP-D05": build_chip_d05, "CHIP-D06": build_chip_d06})
+                 "CHIP-D05": build_chip_d05, "CHIP-D06": build_chip_d06,
+                 "CHIP-D07": build_chip_d07})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_companies(_p))
                  for pid in COMPANIES_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b())
