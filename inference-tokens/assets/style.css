@@ -212,3 +212,21 @@ a.pid:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 .figure-live { border: 1px solid #d7dbe2; border-radius: 6px; overflow: hidden; background: #fff; }
 iframe.live { display: block; width: 100%; border: 0; }
 .facts dd.files { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+
+/* ------------------------------------------------------------- glossary */
+/* Terms a reader looks up rather than reads through, so they scan as a list
+   with the definition beside the word, not underneath it. */
+.glossary { margin: 6px 0 0; }
+.glossary > div {
+  display: grid;
+  grid-template-columns: minmax(150px, 210px) 1fr;
+  gap: 4px 20px;
+  padding: 9px 0;
+  border-top: 1px solid var(--rule);
+  max-width: 96ch;
+}
+.glossary dt { color: var(--ink); font-weight: 620; font-size: 14.5px; }
+.glossary dd { margin: 0; color: var(--body); font-size: 14.5px; }
+@media (max-width: 640px) {
+  .glossary > div { grid-template-columns: 1fr; gap: 2px; }
+}

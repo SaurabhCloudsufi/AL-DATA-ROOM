@@ -1750,12 +1750,12 @@ CHIP_TABS = {
 # series as a running total to within 0.03%, and annual re-bucketed the same file
 # into two bars.
 CHIP_PLOTS = {
+    # colour-by is a control on this figure too, not a second figure: what used
+    # to be CHIP-02 is this chart with "Colour by: Designer" on its companion,
+    # and CHIP-D02 carries the designer x component cross as a static.
     "CHIP-01": dict(tab="cost", group="component", period="quarterly",
                     modes=["absolute", "share"],
                     title="Cost of AI chip components, by component"),
-    "CHIP-02": dict(tab="cost", group="designer", period="quarterly",
-                    modes=["absolute", "share"],
-                    title="Cost of AI chip components, by designer"),
     "CHIP-09": dict(tab="logic", group="designer", period="quarterly",
                     modes=["absolute", "supply"],
                     title="Advanced-node logic wafers, consumed and as a share of supply"),
@@ -4665,6 +4665,87 @@ def build_chip_d07(_r=None):
     save(fig, "CHIP-D07", CHIP_DOMAIN)
 
 
+def build_chip_d08(_r=None):
+    """The window total, which the quarterly series never states."""
+    tracked = [d for d, _ in CHIP_DESIGNERS]
+    cd = _chip_csv("chip_cumulative_by_designer.csv")
+    cs = {r["quarter"]: r for r in _chip_csv("chip_cumulative_supply.csv")}
+    q = _chip_csv("chip_quarterly_by_designer.csv")
+    sq = {r["quarter"]: r for r in _chip_csv("chip_supply.csv")}
+    quarters = sorted({r["quarter"] for r in q},
+                      key=lambda s: (int(s.split()[1]), int(s.split()[0][1])))
+    first, last = quarters[0], quarters[-1]
+
+    parts = [("Logic wafers", "logic_wafers_p50", "logic_supply_wafers_p50", "#1f3864"),
+             ("CoWoS packaging", "cowos_wafers_p50", "cowos_supply_wafers_p50", "#4e8a8b"),
+             ("HBM memory", "hbm_cost_usd_p50", "hbm_supply_usd_p50", "#b4763a")]
+
+    def share(rows, supply_row, ai_col, sup_col, quarter):
+        # the four tracked designers only: Epoch's "Other" row IS the residual of
+        # the denominator, so including it returns 100% by construction
+        ai = sum(r[ai_col] for r in rows
+                 if r["quarter"] == quarter and r["designer"] in tracked)
+        return ai / float(supply_row[quarter][sup_col]) * 100
+
+    data = [(lab, share(cd, cs, a, s, last), share(q, sq, a, s, last), col)
+            for lab, a, s, col in parts]
+
+    hi = max(d[1] for d in data)
+    subtitle = (f"What it shows: the share of world supply the four tracked designers "
+                f"took across the whole window, against the share they took in {last} "
+                f"alone. The published figure and CHIP-D01 both answer the second "
+                f"question quarter by quarter; only Epoch's cumulative file answers the "
+                f"first, and it is the one a capacity question actually asks.")
+    note = (f"Cumulative share is everything the tracked designers consumed from {first} "
+            f"to {last} over everything the world produced in the same window - not an "
+            f"average of the quarterly shares, which would weight a small quarter like a "
+            f"large one. The gap between the two bars is the direction of travel: HBM at "
+            f"{data[2][1]:.0f}% cumulative against {data[2][2]:.0f}% in the final quarter "
+            f"is concentration still building, while logic sits near a tenth of supply on "
+            f"both measures. Epoch's \"Other\" designer row is excluded from the "
+            f"numerator throughout: it is the residual of the denominator, so including "
+            f"it returns 100% by construction. Every value is a Monte Carlo median.")
+
+    fig, ax = plt.figure(figsize=(12.0, 7.4)), None
+    ax = fig.add_axes(_rect(subtitle, note, left=0.215, width=0.640,
+                            xlabel_room=0.062, badge_above=True,
+                            source=chip_src(["cumulative_supply_denominators.csv",
+                                             "supply_denominators.csv"])))
+    ys = list(range(len(data)))
+    h = 0.34
+    for y, (lab, cum, qtr, col) in zip(ys, data):
+        ax.barh(y - h / 2, cum, height=h, color=col, edgecolor="white", linewidth=0.6,
+                zorder=3)
+        ax.barh(y + h / 2, qtr, height=h, color=col, alpha=0.42, edgecolor="white",
+                linewidth=0.6, zorder=3)
+        ax.text(cum + hi * 0.014, y - h / 2, f"{cum:.1f}%", va="center", fontsize=9.4,
+                fontweight="bold", color=INK)
+        ax.text(qtr + hi * 0.014, y + h / 2, f"{qtr:.1f}%", va="center", fontsize=9.0,
+                color=MUTED)
+    ax.set_yticks(ys)
+    ax.set_yticklabels([d[0] for d in data], fontsize=10.4)
+    ax.invert_yaxis()
+    ax.set_xlim(0, min(100, hi * 1.22))
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.0f}%"))
+    ax.set_xlabel("Share of world supply taken by the four tracked AI chip designers",
+                  fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    # each row has its own colour, so the key is neutral: solid means cumulative,
+    # faded means the final quarter, whatever the component
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(facecolor=MUTED, label="Whole window, cumulative"),
+                       Patch(facecolor=MUTED, alpha=0.42, label=f"{last} alone")],
+              loc="upper right", bbox_to_anchor=(1.0, 0.62), frameon=False, fontsize=9)
+    _chip_badge(ax, above=True)
+    frame(fig, ax, "CHIP-D08",
+          "AI took most of the world's packaging and memory, and a tenth of its logic",
+          subtitle,
+          chip_src(["cumulative_supply_denominators.csv", "supply_denominators.csv"]),
+          CHIP_METH, note)
+    save(fig, "CHIP-D08", CHIP_DOMAIN)
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -4681,7 +4762,8 @@ BUILDERS.update({pid: (lambda _rows, _p=pid: build_chip(_p)) for pid in CHIP_PLO
 BUILDERS.update({"CHIP-D01": build_chip_d01, "CHIP-D02": build_chip_d02,
                  "CHIP-D03": build_chip_d03, "CHIP-D04": build_chip_d04,
                  "CHIP-D05": build_chip_d05, "CHIP-D06": build_chip_d06,
-                 "CHIP-D07": build_chip_d07})
+                 "CHIP-D07": build_chip_d07,
+                 "CHIP-D08": build_chip_d08})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_companies(_p))
                  for pid in COMPANIES_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b())

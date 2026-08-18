@@ -20,8 +20,8 @@
 </header>
 
 <div class="toc"><h2>Contents</h2><ol>
-<li><a href="#epoch-ai-published-visualizations">Epoch AI — Published Visualizations</a> <span class="count">5 of 5 published</span></li>
-<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">7 of 7 published</span></li>
+<li><a href="#epoch-ai-published-visualizations">Epoch AI — Published Visualizations</a> <span class="count">4 of 4 published</span></li>
+<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">8 of 8 published</span></li>
 </ol></div>
 <div class="section" id="epoch-ai-published-visualizations">
 <h2>Epoch AI — Published Visualizations</h2>
@@ -46,27 +46,6 @@
 <div><dt>Note</dt><dd>HBM rises from 52% to 63% of component cost across the window; the absolute panel alone hides that</dd></div>
 </dl>
 <p class="downloads"><a class="interactive" href="charts/CHIP-01.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/CHIP-01.svg" download>Download SVG</a><a href="charts/CHIP-01.png" download>Download PNG</a></p>
-</section>
-<section class="chart" id="CHIP-02">
-<div class="chart-head">
-<a class="pid" href="#CHIP-02">CHIP-02</a>
-<h3>Cost of AI chip components, by designer</h3>
-</div>
-<p class="shows">The same pair coloured by designer rather than component.</p>
-<div class="figure">
-<img src="charts/CHIP-02.svg" alt="Cost of AI chip components, by designer" width="864" height="605" loading="lazy">
-</div>
-<dl class="facts">
-<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Components (quarterly_by_designer.csv)</dd></div>
-<div><dt>Granularity</dt><dd>Designer x quarter, 5th/50th/95th percentile</dd></div>
-<div><dt>Coverage</dt><dd>Q1 2024 to Q4 2025 — 8 complete quarters; the partial Q1 2026 in the download is excluded</dd></div>
-<div><dt>Source files</dt><dd class="files">quarterly_by_designer.csv</dd></div>
-<div><dt>Data treatment</dt><dd class="treatment">Complete quarters only; published Monte Carlo medians read at the grain each chart is drawn at. Nothing imputed, projected or trend-fitted</dd></div>
-<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-components" rel="noopener">Epoch AI — AI Chip Components</a></dd></div>
-<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI Chip Components methodology</dd></div>
-<div><dt>Note</dt><dd>The right panel is the left one normalised to 100%</dd></div>
-</dl>
-<p class="downloads"><a href="charts/CHIP-02.svg" download>Download SVG</a><a href="charts/CHIP-02.png" download>Download PNG</a></p>
 </section>
 <section class="chart" id="CHIP-09">
 <div class="chart-head">
@@ -141,8 +120,8 @@
 <h3>Packaging and memory, not logic dies, are the binding constraint</h3>
 </div>
 <p class="shows">All three components on one axis: how much of each one&#x27;s world supply the tracked AI designers took, quarter by quarter.</p>
-<div class="figure">
-<img src="charts/CHIP-D01.svg" alt="Packaging and memory, not logic dies, are the binding constraint" width="864" height="576" loading="lazy">
+<div class="figure figure-live">
+<iframe class="live" src="charts/CHIP-D01.html" title="Packaging and memory, not logic dies, are the binding constraint (interactive)" height="620" loading="lazy"></iframe>
 </div>
 <dl class="facts">
 <div><dt>Dataset</dt><dd>Epoch AI — AI Chip Components (quarterly_by_designer.csv, supply_denominators.csv)</dd></div>
@@ -154,7 +133,7 @@
 <div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI Chip Components methodology</dd></div>
 <div><dt>Note</dt><dd>The residual is directional — it can absorb untracked designers, stockpiling, idle capacity or Epoch&#x27;s own estimation error</dd></div>
 </dl>
-<p class="downloads"><a href="charts/CHIP-D01.svg" download>Download SVG</a><a href="charts/CHIP-D01.png" download>Download PNG</a></p>
+<p class="downloads"><a class="interactive" href="charts/CHIP-D01.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/CHIP-D01.svg" download>Download SVG</a><a href="charts/CHIP-D01.png" download>Download PNG</a></p>
 </section>
 <section class="chart" id="CHIP-D02">
 <div class="chart-head">
@@ -267,8 +246,8 @@
 <h3>Chip generations handing over, by designer</h3>
 </div>
 <p class="shows">Quarterly component cost by individual chip, one panel per designer — the only view in the domain at chip grain over time.</p>
-<div class="figure">
-<img src="charts/CHIP-D07.svg" alt="Chip generations handing over, by designer" width="864" height="619" loading="lazy">
+<div class="figure figure-live">
+<iframe class="live" src="charts/CHIP-D07.html" title="Chip generations handing over, by designer (interactive)" height="620" loading="lazy"></iframe>
 </div>
 <dl class="facts">
 <div><dt>Dataset</dt><dd>Epoch AI — AI Chip Components (cumulative_by_chip.csv)</dd></div>
@@ -280,8 +259,43 @@
 <div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI Chip Components methodology</dd></div>
 <div><dt>Note</dt><dd>H100/H200 falls from $2.21bn to $0.20bn while B300 goes from nothing to $10.14bn; every designer runs the same transition at once</dd></div>
 </dl>
-<p class="downloads"><a href="charts/CHIP-D07.svg" download>Download SVG</a><a href="charts/CHIP-D07.png" download>Download PNG</a></p>
+<p class="downloads"><a class="interactive" href="charts/CHIP-D07.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/CHIP-D07.svg" download>Download SVG</a><a href="charts/CHIP-D07.png" download>Download PNG</a></p>
 </section>
+<section class="chart" id="CHIP-D08">
+<div class="chart-head">
+<a class="pid" href="#CHIP-D08">CHIP-D08</a>
+<h3>Share of world supply taken across the whole window</h3>
+</div>
+<p class="shows">The share of world supply the four tracked designers took across the full window, against the share they took in the final quarter alone.</p>
+<div class="figure">
+<img src="charts/CHIP-D08.svg" alt="Share of world supply taken across the whole window" width="864" height="533" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Components (cumulative_by_chip.csv)</dd></div>
+<div><dt>Granularity</dt><dd>One component, two measures</dd></div>
+<div><dt>Coverage</dt><dd>3 components; cumulative over 8 quarters against the final quarter</dd></div>
+<div><dt>Source files</dt><dd class="files">cumulative_supply_denominators.csv + supply_denominators.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Cumulative share is total consumption over total production in the window, not an average of quarterly shares; Epoch&#x27;s &quot;Other&quot; designer row is excluded from the numerator as it is the residual of the denominator</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-components" rel="noopener">Epoch AI — AI Chip Components</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI Chip Components methodology</dd></div>
+<div><dt>Note</dt><dd>AI took 88% of all CoWoS packaging and 82% of all HBM produced in 2024–25, against 9% of advanced-node logic</dd></div>
+</dl>
+<p class="downloads"><a href="charts/CHIP-D08.svg" download>Download SVG</a><a href="charts/CHIP-D08.png" download>Download PNG</a></p>
+</section>
+</div>
+<div class="section" id="what-these-components-are">
+<h2>What these components are</h2>
+<p class="blurb">An AI accelerator is not one chip. It is a logic die, a stack of memory beside it, and a package holding the two together — three separate supply chains, each with its own constraint. These are the terms used throughout this domain.</p>
+<dl class="glossary">
+<div><dt>Wafer</dt><dd>A disc of silicon, 12 inches across, that chips are made on. Fabs sell capacity in wafers rather than chips, so wafers are the unit supply is counted in. One wafer yields many dies, and how many depends on die size and how many come out working.</dd></div>
+<div><dt>Advanced-node logic</dt><dd>The processor itself — the part that does the arithmetic. &quot;Advanced-node&quot; means the 3–5 nanometre class TSMC fabricates (N3/N5), the leading edge. Only a handful of fabs in the world can make it, which is why the capacity is worth tracking.</dd></div>
+<div><dt>CoWoS packaging</dt><dd>Chip-on-Wafer-on-Substrate, TSMC&#x27;s advanced packaging. It mounts the logic die and the memory stacks onto one substrate so they sit millimetres apart. Without it the memory cannot feed the processor fast enough, and it has been the tightest constraint in the chain — AI took 88% of all of it produced across 2024–25.</dd></div>
+<div><dt>HBM</dt><dd>High Bandwidth Memory: DRAM stacked vertically and placed beside the logic die rather than out on the board. Bandwidth, not capacity, is what training and inference are short of, and HBM is the largest single line in every designer&#x27;s component bill. Epoch measures it in dollars rather than units, because stack generations are not comparable by count.</dd></div>
+<div><dt>Auxiliary</dt><dd>Epoch&#x27;s catch-all for everything else in the bill of materials — substrate, power delivery, passives, assembly and test. Small per chip, and not broken out further at source.</dd></div>
+<div><dt>Chip designer</dt><dd>The company that designs the accelerator and buys the capacity: NVIDIA, Google (TPUs), Amazon (Trainium) and AMD. None of them owns a leading-edge fab, so all four are drawing on the same TSMC and memory-vendor capacity.</dd></div>
+<div><dt>World supply</dt><dd>Epoch&#x27;s estimate of everything the world produced of that component in the period, AI or otherwise. It is the denominator behind every share view here, and &quot;Other&quot; is its residual — not a fifth designer, but the capacity going to phones, laptops, cars and everything else, plus stockpiling and estimation error.</dd></div>
+<div><dt>Monte Carlo median</dt><dd>Every figure Epoch publishes is the middle of 10,000 simulated draws, not a measured quantity. Two consequences run through this domain: medians do not add, because each aggregation is simulated separately, and the 5th–95th interval behind each one is wide — CHIP-D04 plots it.</dd></div>
+</dl>
 </div>
 
 <footer class="foot">

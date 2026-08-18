@@ -489,6 +489,200 @@ def extras():
               SRC)
 
 
+
+
+def more():
+    """CHIP-D07 and CHIP-D01, the two derived views hover actually helps.
+
+    D07 carries 16 chip types across four designers, which no static legend can
+    label without crowding. D01 is three lines over eight quarters where the
+    question is always "what was the share in that quarter", and reading it off
+    a gridline is exactly what a tooltip removes.
+    """
+    # ---- D07: generation handover, one series per chip, grouped by designer ----
+    rows = read("chip_quarterly_by_chip.csv")
+    quarters = sorted({r["quarter"] for r in rows}, key=qkey)
+    qi = {q: i for i, q in enumerate(quarters)}
+    tracked = [d for d, _ in DESIGNERS]
+    RAMPS = {"NVIDIA": ["#c3cddf", "#8fa3c4", "#4a6fa5", "#1f3864"],
+             "Google": ["#cfd9e8", "#93a9cd", "#4a6fa5", "#22406f"],
+             "Amazon": ["#c8dbcb", "#94b79a", "#6b8f71", "#3f6247"],
+             "AMD": ["#e8d3bd", "#d6b083", "#b4763a", "#7d4f22"]}
+    panels = []
+    for d in tracked:
+        chips = {}
+        for r in rows:
+            if r["designer"] != d:
+                continue
+            v = r.get("total_cost_usd_p50")
+            if not v:
+                continue
+            chips.setdefault(r["chip_type"], [0.0] * len(quarters))[qi[r["quarter"]]] \
+                += float(v) / 1e9
+        ordered = sorted(chips.items(),
+                         key=lambda kv: next((i for i, x in enumerate(kv[1]) if x > 0), 99))
+        ramp = RAMPS[d]
+        panels.append({"name": d, "series": [
+            {"name": c, "vals": [round(x, 4) for x in vals],
+             "color": ramp[min(int(j * len(ramp) / max(1, len(ordered))), len(ramp) - 1)]}
+            for j, (c, vals) in enumerate(ordered)]})
+    emit_panels("CHIP-D07", "Chip generations handing over, by designer",
+                f"All 16 tracked chip types across {len(quarters)} quarters. Pick a "
+                f"designer; hover a quarter to read every generation in it.",
+                "Epoch's \"Other\" residual is excluded: it is untracked supply, not a "
+                "chip generation.",
+                {"quarters": quarters, "panels": panels, "unit": "$", "suffix": "bn",
+                 "dp": 2, "ylabel": "Component cost (US$ bn)"},
+                "quarterly_by_chip.csv")
+
+    # ---- D01: the three components' share of world supply, quarter by quarter ----
+    q = read("chip_quarterly_by_designer.csv")
+    sup = {r["quarter"]: r for r in read("chip_supply.csv")}
+    lines = [("Logic wafers", "logic_wafers_p50", "logic_supply_wafers_p50", "#1f3864"),
+             ("CoWoS packaging", "cowos_wafers_p50", "cowos_supply_wafers_p50", "#4e8a8b"),
+             ("HBM memory", "hbm_cost_usd_p50", "hbm_supply_usd_p50", "#b4763a")]
+    series = []
+    for lab, ai, sc, col in lines:
+        vals = []
+        for qq in quarters:
+            num = sum(float(r[ai] or 0) for r in q
+                      if r["quarter"] == qq and r["designer"] in tracked)
+            vals.append(round(num / float(sup[qq][sc]) * 100, 2))
+        series.append({"name": lab, "vals": vals, "color": col})
+    emit_panels("CHIP-D01", "Share of world supply taken by AI, by component",
+                "The three components on one axis, quarter by quarter. Hover to read "
+                "all three at once.",
+                "Share is of total world supply of the component, not of AI demand. "
+                "Epoch's \"Other\" row is the residual of that denominator and is "
+                "excluded from the numerator.",
+                {"quarters": quarters, "panels": [{"name": "All components",
+                                                   "series": series}],
+                 "unit": "", "suffix": "%", "dp": 1, "lines": True,
+                 "ylabel": "Share of world supply (%)"},
+                "quarterly_by_designer.csv + supply_denominators.csv")
+
+
+PANEL_JS = """
+const D = __DATA__;
+const svg=document.getElementById('c'), tip=document.getElementById('tip');
+const ctl=document.getElementById('ctl'), lgw=document.getElementById('lg');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000,H=440,M={l:92,r:24,t:18,b:56};
+let PI=0;
+const panel=()=>D.panels[PI];
+function fmt(v){ return (D.unit||'')+v.toLocaleString('en-US',{minimumFractionDigits:D.dp,maximumFractionDigits:D.dp})+(D.suffix||''); }
+function buildCtl(){
+  ctl.innerHTML='';
+  if(D.panels.length<2) return;
+  const g=document.createElement('div'); g.className='grp';
+  const c=document.createElement('span'); c.className='cap'; c.textContent='Designer'; g.appendChild(c);
+  D.panels.forEach((p,i)=>{
+    const b=document.createElement('button'); b.className='btn'; b.type='button';
+    b.textContent=p.name; b.setAttribute('aria-pressed', i===PI?'true':'false');
+    b.onclick=()=>{PI=i; buildCtl(); draw(); reportHeight();}; g.appendChild(b);
+  });
+  ctl.appendChild(g);
+}
+let SX,SY,TOT;
+function draw(){
+  const S=panel().series, n=D.quarters.length;
+  TOT=D.quarters.map((_,i)=>D.lines?0:S.reduce((a,s)=>a+(s.vals[i]||0),0));
+  const hi=Math.max.apply(null, D.lines
+    ? S.flatMap(s=>s.vals) : TOT)*1.20;
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  SX=i=>M.l+(W-M.l-M.r)*(i+0.5)/n;
+  SY=v=>H-M.b-(v/hi)*(H-M.t-M.b);
+  const step=hi/5, mag=Math.pow(10,Math.floor(Math.log10(step)));
+  const st=[1,2,2.5,5,10].map(m=>m*mag).find(x=>x>=step)||10*mag;
+  for(let v=0;v<=hi*1.0001;v+=st){
+    const y=SY(v);
+    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y,y2:y,class:'grid'}));
+    const t=el('text',{x:M.l-8,y:y+4,class:'axis','text-anchor':'end'});
+    t.textContent=fmt(v); svg.appendChild(t);
+  }
+  if(D.lines){
+    S.forEach(s=>{
+      svg.appendChild(el('polyline',{points:s.vals.map((v,i)=>SX(i)+','+SY(v)).join(' '),
+        fill:'none',stroke:s.color,'stroke-width':2.4}));
+      s.vals.forEach((v,i)=>svg.appendChild(el('circle',{cx:SX(i),cy:SY(v),r:3.6,
+        fill:s.color,stroke:'#fff','stroke-width':.8})));
+    });
+  } else {
+    const bw=(W-M.l-M.r)/n*0.62;
+    D.quarters.forEach((_,i)=>{
+      let acc=0;
+      S.forEach(s=>{
+        const v=s.vals[i]||0; if(v<=0) return;
+        svg.appendChild(el('rect',{x:SX(i)-bw/2,y:SY(acc+v),width:bw,
+          height:Math.max(0,SY(acc)-SY(acc+v)),fill:s.color,stroke:'#fff','stroke-width':.8}));
+        acc+=v;
+      });
+      const t=el('text',{x:SX(i),y:SY(acc)-6,class:'axis','text-anchor':'middle',
+                         style:'font-weight:700;fill:#1a1a1a'});
+      t.textContent=fmt(acc); svg.appendChild(t);
+    });
+  }
+  D.quarters.forEach((q,i)=>{
+    const a=el('text',{x:SX(i),y:H-M.b+18,class:'axis','text-anchor':'middle'});
+    a.textContent=q.split(' ')[0]; svg.appendChild(a);
+    const b=el('text',{x:SX(i),y:H-M.b+31,class:'axis','text-anchor':'middle'});
+    b.textContent=q.split(' ')[1]; svg.appendChild(b);
+  });
+  const xl=el('text',{x:(M.l+W-M.r)/2,y:H-M.b+50,class:'axlab','text-anchor':'middle'});
+  xl.textContent='Quarter'; svg.appendChild(xl);
+  const yl=el('text',{x:0,y:0,class:'axlab','text-anchor':'middle',
+    transform:'translate(15,'+((M.t+H-M.b)/2)+') rotate(-90)'});
+  yl.textContent=D.ylabel; svg.appendChild(yl);
+  lgw.innerHTML='';
+  S.forEach(s=>{ const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:'+s.color+'"></span>'+s.name;
+    lgw.appendChild(d); });
+}
+svg.addEventListener('pointermove',ev=>{
+  const r=svg.getBoundingClientRect();
+  const px=(ev.clientX-r.left)/r.width*W, n=D.quarters.length;
+  const i=Math.round((px-M.l)/((W-M.l-M.r)/n)-0.5);
+  if(i<0||i>=n){ tip.style.opacity=0; return; }
+  let h='<b>'+D.quarters[i]+'</b>';
+  panel().series.forEach(s=>{
+    const v=s.vals[i]||0; if(v<=0 && !D.lines) return;
+    h+='<div class="row"><span class="sw" style="display:inline-block;width:9px;height:9px;'
+      +'border-radius:2px;background:'+s.color+'"></span>'+s.name+'<i>'+fmt(v)+'</i></div>';
+  });
+  if(!D.lines) h+='<div class="row" style="border-top:1px solid #d7dbe2;margin-top:4px;'
+                 +'padding-top:4px;font-weight:700">Total<i>'+fmt(TOT[i])+'</i></div>';
+  tip.innerHTML=h; tip.style.opacity=1;
+  tip.style.left=Math.min(Math.max(8,SX(i)/W*r.width+14), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top='12px';
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;});
+buildCtl(); draw();
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'__PID__',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+"""
+
+PANEL_PAGE = PAGE[:PAGE.index("<script>") + len("<script>")] + PANEL_JS + "\n</script>\n"
+
+
+def emit_panels(pid, title, sub, hint, payload, src):
+    html = (PANEL_PAGE.replace("__DATA__", json.dumps(payload, separators=(",", ":")))
+                      .replace("__TITLE__", title).replace("__PID__", pid)
+                      .replace("__SUB__", sub).replace("__HINT__", hint)
+                      .replace("__FILE__", src))
+    (OUT / f"{pid}.html").write_text(html, encoding="utf-8")
+    print(f"wrote {(OUT / f'{pid}.html').relative_to(REPO)} "
+          f"({len(payload['panels'])} panel(s))")
+
+
 if __name__ == "__main__":
     main()
     extras()
+    more()

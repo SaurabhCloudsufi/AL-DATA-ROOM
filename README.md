@@ -78,8 +78,8 @@ that was. Source: [Epoch AI, AI Chip Components](https://epoch.ai/data/ai-chip-c
 
 | IDs | Section | What they are |
 |---|---|---|
-| `CHIP-01`, `-02`, `-09`, `-11`, `-13` | Epoch AI — Published Visualizations | Epoch's configurable figure, each chart carrying both of its "show data as" settings side by side: cost by component and by designer, then logic, packaging and memory as an amount against the world-supply line and as a share of that supply |
-| `CHIP-D01` – `CHIP-D07` | Derived Analysis | Questions the explorer's settings cannot answer — the three components on one axis, component mix by designer, chip-level concentration, the published uncertainty, packaging intensity, demand growth against supply growth, and the generation handover running inside every designer at once |
+| `CHIP-01`, `-09`, `-11`, `-13` | Epoch AI — Published Visualizations | Epoch's configurable figure, each chart carrying both of its "show data as" settings side by side: component cost, then logic, packaging and memory as an amount against the world-supply line and as a share of that supply |
+| `CHIP-D01` – `CHIP-D08` | Derived Analysis | Questions the explorer's settings cannot answer — the three components on one axis, component mix by designer, chip-level concentration, the published uncertainty, packaging intensity, demand growth against supply growth, the generation handover running inside every designer at once, and the share of world supply taken across the whole window |
 
 `CHIP-01` also ships the full explorer as an interactive companion — all four tabs
 crossed with colour-by and amount/share, over the same eight quarters — with
@@ -96,6 +96,18 @@ by eye:
 | `CHIP-05`, `CHIP-06` | Cumulative cost reproduced the quarterly series as a running total to within **0.03%** — the same eight numbers added up |
 | `CHIP-07`, `CHIP-08` | Annual cost re-bucketed the same file into **two bars** |
 | `CHIP-03`, `CHIP-04`, `CHIP-10`, `CHIP-12`, `CHIP-14` | The share halves of five absolute/share pairs. Epoch offers that as a control on one figure, so they are now the second panel of the chart they belong to, not separate charts |
+| `CHIP-02` | Cost by designer plotted the **identical** total to `CHIP-01` — 0.0000% apart across all eight quarters — decomposed by designer rather than by component. "Colour by" is a control on the same figure, and `CHIP-01`'s companion already carries it; `CHIP-D02` carries the designer × component cross as a static |
+
+Every one of the six files Epoch publishes now reaches a chart. `CHIP-D08` was
+added for the last one: `cumulative_supply_denominators.csv` answers a question
+the quarterly series never states — across 2024–25 the four tracked designers
+took **88% of all CoWoS packaging** and 82% of all HBM the world produced,
+against 9% of advanced-node logic.
+
+`CHIP-01`, `CHIP-D01`, `CHIP-D03`, `CHIP-D04` and `CHIP-D07` ship interactive
+companions. The page also carries a glossary — wafer, advanced-node logic,
+CoWoS, HBM, world supply, Monte Carlo median — because the domain is unreadable
+without knowing what the components are.
 
 Two rules hold across all 20:
 

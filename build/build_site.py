@@ -119,6 +119,58 @@ DOMAINS = [
                 "settings cannot answer, including the uncertainty behind every median. "
                 "Same complete-quarters rule throughout.",
         },
+        "extra_sections": [{
+            "title": "What these components are",
+            "body": "An AI accelerator is not one chip. It is a logic die, a stack of "
+                    "memory beside it, and a package holding the two together — three "
+                    "separate supply chains, each with its own constraint. These are "
+                    "the terms used throughout this domain.",
+            "terms": [
+                ("Wafer",
+                 "A disc of silicon, 12 inches across, that chips are made on. Fabs "
+                 "sell capacity in wafers rather than chips, so wafers are the unit "
+                 "supply is counted in. One wafer yields many dies, and how many "
+                 "depends on die size and how many come out working."),
+                ("Advanced-node logic",
+                 "The processor itself — the part that does the arithmetic. "
+                 "\"Advanced-node\" means the 3–5 nanometre class TSMC fabricates "
+                 "(N3/N5), the leading edge. Only a handful of fabs in the world can "
+                 "make it, which is why the capacity is worth tracking."),
+                ("CoWoS packaging",
+                 "Chip-on-Wafer-on-Substrate, TSMC's advanced packaging. It mounts the "
+                 "logic die and the memory stacks onto one substrate so they sit "
+                 "millimetres apart. Without it the memory cannot feed the processor "
+                 "fast enough, and it has been the tightest constraint in the chain — "
+                 "AI took 88% of all of it produced across 2024–25."),
+                ("HBM",
+                 "High Bandwidth Memory: DRAM stacked vertically and placed beside the "
+                 "logic die rather than out on the board. Bandwidth, not capacity, is "
+                 "what training and inference are short of, and HBM is the largest "
+                 "single line in every designer's component bill. Epoch measures it in "
+                 "dollars rather than units, because stack generations are not "
+                 "comparable by count."),
+                ("Auxiliary",
+                 "Epoch's catch-all for everything else in the bill of materials — "
+                 "substrate, power delivery, passives, assembly and test. Small per "
+                 "chip, and not broken out further at source."),
+                ("Chip designer",
+                 "The company that designs the accelerator and buys the capacity: "
+                 "NVIDIA, Google (TPUs), Amazon (Trainium) and AMD. None of them owns "
+                 "a leading-edge fab, so all four are drawing on the same TSMC and "
+                 "memory-vendor capacity."),
+                ("World supply",
+                 "Epoch's estimate of everything the world produced of that component "
+                 "in the period, AI or otherwise. It is the denominator behind every "
+                 "share view here, and \"Other\" is its residual — not a fifth "
+                 "designer, but the capacity going to phones, laptops, cars and "
+                 "everything else, plus stockpiling and estimation error."),
+                ("Monte Carlo median",
+                 "Every figure Epoch publishes is the middle of 10,000 simulated draws, "
+                 "not a measured quantity. Two consequences run through this domain: "
+                 "medians do not add, because each aggregation is simulated separately, "
+                 "and the 5th–95th interval behind each one is wide — CHIP-D04 plots it."),
+            ],
+        }],
         "live": True,
     },
     {
@@ -413,6 +465,13 @@ def build_gallery(dom):
         body.append(f'<div class="section" id="{anchor}">')
         body.append(f"<h2>{e(extra['title'])}</h2>")
         body.append(f'<p class="blurb">{e(extra["body"])}</p>')
+        # a glossary is a definition list, not a paragraph: terms have to be
+        # scannable, because a reader looks one up rather than reading it through
+        if extra.get("terms"):
+            body.append('<dl class="glossary">')
+            for term, meaning in extra["terms"]:
+                body.append(f"<div><dt>{e(term)}</dt><dd>{e(meaning)}</dd></div>")
+            body.append("</dl>")
         body.append("</div>")
 
     page = f"""<!DOCTYPE html>
