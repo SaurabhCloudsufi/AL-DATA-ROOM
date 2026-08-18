@@ -1,0 +1,279 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training compute of large-scale AI models</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; }
+  #pg { padding:14px 16px 10px; background:#fff; color:#1a1a1a;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  body { background:#fff; color:#1a1a1a; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .ctl .grp { display:flex; gap:6px; align-items:center; }
+  .ctl .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+         font-size:12px; border:0; background:none; padding:2px 3px; color:#1a1a1a; }
+  .lg .sw { width:11px; height:11px; border-radius:999px; flex:none; }
+  .lg[aria-pressed="true"] { opacity:.32; text-decoration:line-through; }
+  .lg:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .era { fill:#1f3864; opacity:.045; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px; box-shadow:0 4px 14px rgba(0,0,0,.10);
+          opacity:0; transition:opacity .08s; max-width:290px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">MODELS-06</span><h1>Training compute of large-scale AI models</h1></div>
+<div class="sub">314 of 524 models in large_scale_ai_models.csv carry a plotted value; the rest are absent. <span class="badge">RECORDED VALUES ONLY</span></div>
+<div class="ctl" id="ctl"></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" viewBox="0 0 1000 520" role="img" aria-label="Training compute of large-scale AI models"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Hover a point to identify the model; click a legend entry to remove that
+group. Source: Epoch AI, Data on AI Models (CC-BY) — large_scale_ai_models.csv. Only models that record the
+plotted value appear; nothing is imputed.</div>
+</div>
+<script>
+const D = {"pts":[[2019.8268,"AlphaStar",1.0773400001e+23,"DeepMind","2019-10-30"],[2020.0739,"Meena",1.12e+23,"Google Brain","2020-01-28"],[2020.4052,"GPT-3 175B (davinci)",3.14e+23,"OpenAI","2020-05-28"],[2021.4107,"Wu Dao 2.0",1.54350000000001e+24,"Beijing Academy of Artificial Intelligence / BAAI","2021-05-31"],[2021.6078,"Jurassic-1-Jumbo",3.7e+23,"AI21 Labs","2021-08-11"],[2021.6899,"HyperCLOVA 204B",2.0000000001e+23,"NAVER","2021-09-10"],[2021.6899,"HyperCLOVA 82B",1.476e+23,"NAVER","2021-09-10"],[2021.7748,"Megatron-Turing NLG 530B",8.586e+23,"Microsoft","2021-10-11"],[2021.7775,"Yuan 1.0",3.5380000000001e+23,"Inspur","2021-10-12"],[2021.9336,"Gopher (280B)",6.31e+23,"DeepMind","2021-12-08"],[2021.9473,"GLaM",3.6363112434e+23,"Google","2021-12-13"],[2021.95,"EXAONE 1.0",1.6956e+24,"LG","2021-12-14"],[2021.9747,"ERNIE 3.0 Titan",1.0421e+24,"Baidu","2021-12-23"],[2022.0876,"AlphaCode",2.38010000000001e+23,"DeepMind","2022-02-02"],[2022.1095,"LaMDA",3.55e+23,"Google","2022-02-10"],[2022.1287,"ST-MoE",2.9e+23,"Google","2022-02-17"],[2022.1999,"GPT-3.5 (davinci-002)",2.578e+24,"OpenAI","2022-03-15"],[2022.2382,"Chinchilla",5.76e+23,"DeepMind","2022-03-29"],[2022.2546,"PaLM (540B)",2.5272e+24,"Google Research","2022-04-04"],[2022.2601,"DALL\u00b7E 2",3.3695784e+23,"OpenAI","2022-04-06"],[2022.3313,"OPT-13B",3.53e+23,"Meta AI","2022-05-02"],[2022.3313,"OPT-175B",4.3e+23,"Meta AI","2022-05-02"],[2022.3532,"UL2",1.2e+23,"Google Research","2022-05-10"],[2022.4353,"BIG-G 137B",5.6e+23,"Google","2022-06-09"],[2022.4682,"OPT-66B",1.100000000001e+23,"Meta AI","2022-06-21"],[2022.4709,"Parti",5.09607936e+23,"Google Research","2022-06-22"],[2022.4736,"YaLM",2.2e+23,"Yandex","2022-06-23"],[2022.4901,"Minerva (540B)",2.7415e+24,"Google","2022-06-29"],[2022.5229,"BLOOM-176B",3.65664e+23,"Hugging Face","2022-07-11"],[2022.5832,"AlexaTM 20B",2.04374016e+23,"Amazon","2022-08-02"],[2022.5886,"GLM-130B",3.5490054945e+23,"Tsinghua University","2022-08-04"],[2022.6188,"Luminous-extended",1.0019457e+23,"Aleph Alpha","2022-08-15"],[2022.6188,"Luminous-supreme",3.5461e+23,"Aleph Alpha","2022-08-15"],[2022.7009,"PaLI",1.69e+23,"Google","2022-09-14"],[2022.8734,"Galactica",3.24e+23,"Meta AI","2022-11-16"],[2022.9254,"Whisper v2",1.1e+23,"OpenAI","2022-12-05"],[2023.1095,"ViT-22B",1.93248e+23,"Google","2023-02-10"],[2023.1478,"LLaMA-65B",5.5e+23,"Meta AI","2023-02-24"],[2023.1561,"LLaMA-33B",2.7300000000001e+23,"Meta AI","2023-02-27"],[2023.1999,"Falcon-40B",2.4e+23,"Technology Innovation Institute","2023-03-15"],[2023.1999,"GPT-4 (Mar 2023)",2.1e+25,"OpenAI","2023-03-15"],[2023.2136,"PanGu-\u03a3",4.67e+23,"Huawei Noah's Ark Lab","2023-03-20"],[2023.2163,"LightOn Mini",2.4e+23,"LightOn","2023-03-21"],[2023.2409,"BloombergGPT",2.36e+23,"Bloomberg","2023-03-30"],[2023.271,"SenseChat",3.89e+24,"SenseTime","2023-04-10"],[2023.3094,"ruGPT-3.5 13B",1.0699776e+23,"Sber","2023-04-24"],[2023.3532,"PaLM 2",7.34e+24,"Google","2023-05-10"],[2023.4709,"MPT-30B",1.8900000000001e+23,"MosaicML","2023-06-22"],[2023.4736,"Inflection-1",1.0001e+24,"Inflection AI","2023-06-23"],[2023.5092,"InternLM",9.984e+23,"Shanghai AI Lab","2023-07-06"],[2023.5092,"xTrimoPGLM -100B",6.2e+23,"Tsinghua University","2023-07-06"],[2023.5229,"Claude 2",3.866e+24,"Anthropic","2023-07-11"],[2023.5421,"Llama 2-13B",1.6e+23,"Meta AI","2023-07-18"],[2023.5421,"Llama 2-34B",4.08e+23,"Meta AI","2023-07-18"],[2023.5421,"Llama 2-70B",8.1e+23,"Meta AI","2023-07-18"],[2023.6023,"Baichuan2-53B",8.268e+23,"Baichuan","2023-08-09"],[2023.616,"Code Llama-34B",5.3e+23,"Meta AI","2023-08-14"],[2023.6215,"VARCO LLM 2.0 base",1.248e+23,"NCSOFT","2023-08-16"],[2023.6571,"Luca 2.0",1.1999999999999999e+24,"Mianbi Intelligence","2023-08-29"],[2023.679,"Baichuan2-13B",2.03e+23,"Baichuan","2023-09-06"],[2023.679,"Falcon-180B",3.76e+24,"Technology Innovation Institute","2023-09-06"],[2023.679,"TigerBot-70B",1.02e+24,"Tigerobo","2023-09-06"],[2023.6817,"Hunyuan",1.1999999999999999e+24,"Tencent","2023-09-07"],[2023.7173,"Baichuan 2-7B",1.092e+23,"Baichuan","2023-09-20"],[2023.7392,"Amazon Titan",4.7999999999999996e+24,"Amazon","2023-09-28"],[2023.7392,"PLaMo-13B",1.17e+23,"Preferred Networks Inc","2023-09-28"],[2023.7392,"Qwen-14B",2.5e+23,"Alibaba","2023-09-28"],[2023.7392,"Qwen-7B",1.01e+23,"Alibaba","2023-09-28"],[2023.7721,"CodeFuse-13B",3.09e+23,"Ant Group","2023-10-10"],[2023.7775,"Jiutian",1.668e+23,"China Mobile","2023-10-12"],[2023.8268,"Skywork-13B",2.5e+23,"Kunlun Inc.","2023-10-30"],[2023.8296,"BlueLM 7B",1.0920000000001e+23,"vivo AI lab","2023-10-31"],[2023.8296,"Mi:dm 200B",1.1999999999999999e+24,"KT","2023-10-31"],[2023.8323,"Nanbeige-16B",2.4e+23,"Nanbeige LLM Lab","2023-11-01"],[2023.835,"BlueLM 130B",7.8e+23,"vivo AI lab","2023-11-02"],[2023.835,"BlueLM 175B",1.05e+24,"vivo AI lab","2023-11-02"],[2023.835,"BlueLM 70B",4.2e+23,"vivo AI lab","2023-11-02"],[2023.835,"Yi 6B",1.26e+23,"01.AI","2023-11-02"],[2023.835,"Yi-34B",6.1e+23,"01.AI","2023-11-02"],[2023.8405,"Grok-1",2.90000000001e+24,"xAI","2023-11-04"],[2023.846,"Whisper v3",2.7e+23,"OpenAI","2023-11-06"],[2023.8515,"Jais-30b (phase 1)",1.0372049e+23,"Cerebras Systems","2023-11-08"],[2023.8706,"Nemotron-3-8B",1.8e+23,"NVIDIA","2023-11-15"],[2023.8898,"Inflection-2",1.001e+25,"Inflection AI","2023-11-22"],[2023.9035,"Yuan 2.0",1.78e+23,"Inspur","2023-11-27"],[2023.9117,"Granite 13B",2.44e+23,"IBM","2023-11-30"],[2023.9117,"Qwen-72B",1.3e+24,"Alibaba","2023-11-30"],[2023.9281,"Gemini 1.0 Ultra",5.0000000001e+25,"Google DeepMind","2023-12-06"],[2023.9336,"XVERSE-65B-2",1.24800000000001e+24,"XVERSE Technology","2023-12-08"],[2023.9418,"Mixtral 8x7B",7.74e+23,"Mistral AI","2023-12-11"],[2023.95,"Poro 34B",2.052e+23,"High-Performance Language Technologies (HPLT)","2023-12-14"],[2023.9528,"Konan LLM 41B",1.722e+23,"Konan Technology","2023-12-15"],[2023.9719,"YaYi 2.0",4.77e+23,"Yayi (Wenge)","2023-12-22"],[2024.011,"DeepSeek LLM 67B",8.04e+23,"DeepSeek","2024-01-05"],[2024.0301,"InternLM2-20B",3.12e+23,"Shanghai AI Lab","2024-01-12"],[2024.0657,"DeepSeek Coder 33B",3.96e+23,"DeepSeek","2024-01-25"],[2024.0767,"Code Llama-70B",1.26e+24,"Meta AI","2024-01-29"],[2024.0849,"OLMo-7B",1.0332e+23,"Allen Institute for AI","2024-02-01"],[2024.0931,"Qwen1.5-14B",3.36e+23,"Alibaba","2024-02-04"],[2024.0931,"Qwen1.5-72B",1.3e+24,"Alibaba","2024-02-04"],[2024.0931,"Qwen1.5-7B",1.68e+23,"Alibaba","2024-02-04"],[2024.1396,"Gemma 7B",3.07e+23,"Google DeepMind","2024-02-21"],[2024.1451,"MegaScale (175B)",2.7385671436e+23,"ByteDance","2024-02-23"],[2024.1451,"MegaScale (530B)",9.6910000000001e+23,"ByteDance","2024-02-23"],[2024.1451,"MegaScale (Production)",3.9e+24,"ByteDance","2024-02-23"],[2024.1478,"Gemma 1.1 7B Instruct",3.0744e+23,"Google","2024-02-24"],[2024.1561,"Nemotron-4 15B",7.5005116e+23,"NVIDIA","2024-02-27"],[2024.1615,"StarCoder 2 15B",3.87e+23,"Hugging Face","2024-02-29"],[2024.1615,"StarCoder 2 7B",1.55e+23,"Hugging Face","2024-02-29"],[2024.1725,"Aramco Metabrain AI",1.05e+25,"Saudi Aramco","2024-03-04"],[2024.1807,"Inflection-2.5",8.000001e+24,"Inflection AI","2024-03-07"],[2024.1999,"MM1-30B",4.86e+23,"Apple","2024-03-14"],[2024.2355,"DBRX",2.6e+24,"Databricks","2024-03-27"],[2024.2382,"Grok-1.5",9.26e+24,"xAI","2024-03-28"],[2024.2574,"Viking",2.574e+23,"Silo AI","2024-04-04"],[2024.2683,"Stable LM 2 12B",2.91e+23,"Stability AI","2024-04-08"],[2024.2875,"Reka Core",8.400010000000001e+24,"Reka AI","2024-04-15"],[2024.2875,"Reka Flash",6.3e+23,"Reka AI","2024-04-15"],[2024.293,"Mixtral 8x22B",2.34e+24,"Mistral AI","2024-04-17"],[2024.2957,"Llama 3-70B",7.861e+24,"Meta AI","2024-04-18"],[2024.2957,"Llama 3-8B",7.2e+23,"Meta AI","2024-04-18"],[2024.2957,"Reka Edge",1.89e+23,"Reka AI","2024-04-18"],[2024.3094,"Phi-3.5-MoE",3.0202896e+23,"Microsoft","2024-04-23"],[2024.3094,"phi-3-medium 14B",4.032e+23,"Microsoft","2024-04-23"],[2024.3094,"phi-3-small 7.4B",2.1312e+23,"Microsoft","2024-04-23"],[2024.3121,"Arctic",3.8347175e+23,"Snowflake","2024-04-24"],[2024.3285,"Multi-Token Prediction 13B",1.5364368e+23,"Facebook AI Research","2024-04-30"],[2024.3285,"Multi-Token Prediction 7B",3.841092e+23,"Facebook AI Research","2024-04-30"],[2024.3477,"DeepSeek-V2 (MoE-236B)",1.02e+24,"DeepSeek","2024-05-07"],[2024.3532,"Falcon 2 11B",3.6e+23,"Technology Innovation Institute","2024-05-09"],[2024.3641,"Yi-1.5-34B",7.344e+23,"01.AI","2024-05-13"],[2024.3641,"Yi-1.5-9B",1.90728e+23,"01.AI","2024-05-13"],[2024.3641,"Yi-Large",1.8e+24,"01.AI","2024-05-13"],[2024.3723,"Chameleon-34B",1.6453571041e+24,"Facebook AI Research","2024-05-16"],[2024.3723,"FragLlama: Next-fragment prediction for molecular design",3.3399700602e+23,"Facebook AI Research","2024-05-16"],[2024.386,"ALLaM 34B",1.0608e+24,"Saudi Data and Artificial Intelligence Authority","2024-05-21"],[2024.3888,"360Zhinao-7B",1.428e+23,"360 Security Technology","2024-05-22"],[2024.4052,"Nanbeige2-16B-Chat",4.05e+23,"Nanbeige LLM Lab","2024-05-28"],[2024.4134,"Granite 20B",3.0000000000001e+23,"IBM Research","2024-05-31"],[2024.4326,"Qwen2-57B-A14B",3.7800000000001e+23,"Alibaba","2024-06-07"],[2024.4326,"Qwen2-72B",3.02e+24,"Alibaba","2024-06-07"],[2024.4326,"Qwen2-7B",2.9400000000001e+23,"Alibaba","2024-06-07"],[2024.4463,"Mamba2-Hybrid",1.8186e+23,"NVIDIA","2024-06-12"],[2024.4517,"Nemotron-4 340B",1.7999999999999999e+25,"NVIDIA","2024-06-14"],[2024.4517,"PLaMo-100B",1.1999999999999999e+24,"Preferred Networks Inc","2024-06-14"],[2024.4545,"JIUTIAN-139MoE",4.3596131e+23,"China Mobile","2024-06-15"],[2024.4682,"Claude 3.5 Sonnet",2.700000000000001e+25,"Anthropic","2024-06-20"],[2024.4791,"Gemma 2 27B",2.106e+24,"Google DeepMind","2024-06-24"],[2024.4791,"Gemma 2 9B",4.32e+23,"Google DeepMind","2024-06-24"],[2024.4819,"ESM3 (98B)",1.07e+24,"EvolutionaryScale","2024-06-25"],[2024.5229,"MAP-Neo",1.89e+23,"University of Waterloo","2024-07-10"],[2024.5503,"DCLM 7B",1.05e+23,"Apple","2024-07-20"],[2024.5585,"Llama 3.1-405B",3.8e+25,"Meta AI","2024-07-23"],[2024.5585,"Llama 3.1-70B",7.929e+24,"Meta AI","2024-07-23"],[2024.5585,"Llama 3.1-8B",1.224e+24,"Meta AI","2024-07-23"],[2024.5749,"AFM-on-device",4.5126e+23,"Apple","2024-07-29"],[2024.5749,"AFM-server",4.3e+24,"Apple","2024-07-29"],[2024.5941,"Jais-70B",9.654e+23,"G42","2024-08-05"],[2024.5996,"EXAONE 3.0",4e+23,"LG AI Research","2024-08-07"],[2024.6133,"Falcon Mamba",3.9391101e+23,"Technology Innovation Institute","2024-08-12"],[2024.616,"Grok-2",2.9599999999999996e+25,"xAI","2024-08-13"],[2024.6516,"Pharia-1-LLM-7B",4.43e+23,"Aleph Alpha","2024-08-26"],[2024.6817,"DeepSeek-V2.5",1.7892e+24,"DeepSeek","2024-09-06"],[2024.7118,"Qwen2.5-32B",3.51e+24,"Alibaba","2024-09-17"],[2024.7146,"Qwen2-VL-72B",6.048e+23,"Alibaba","2024-09-18"],[2024.7146,"Qwen2.5-Coder (7B)",2.5113e+23,"Alibaba","2024-09-18"],[2024.7173,"Qwen2.5-1.5B",1.6632e+23,"Alibaba","2024-09-19"],[2024.7173,"Qwen2.5-14B",1.58760000000001e+24,"Alibaba","2024-09-19"],[2024.7173,"Qwen2.5-3B",3.3372e+23,"Alibaba","2024-09-19"],[2024.7173,"Qwen2.5-72B",7.8e+24,"Alibaba","2024-09-19"],[2024.7173,"Qwen2.5-7B",8.2188e+23,"Alibaba","2024-09-19"],[2024.7201,"Telechat2-115B",6.899999999999999e+24,"China Telecom","2024-09-20"],[2024.731,"Llama 3.2 11B",5.79e+23,"Meta AI","2024-09-24"],[2024.731,"Llama 3.2 3B",1.7334e+23,"Meta AI","2024-09-24"],[2024.7584,"Movie Gen Audio",1.4e+23,"Meta AI","2024-10-04"],[2024.7584,"Movie Gen Video",1.65e+24,"Meta AI","2024-10-04"],[2024.7693,"Aria",1.428e+23,"Rhymes AI","2024-10-08"],[2024.7967,"Yi-Lightning",1.5e+24,"01.AI","2024-10-18"],[2024.8049,"Granite 3.0 2B",1.8e+23,"IBM","2024-10-21"],[2024.8049,"Granite 3.0 8B",5.832e+23,"IBM","2024-10-21"],[2024.8241,"Doubao-pro",2.505e+25,"ByteDance","2024-10-28"],[2024.8487,"Hunyuan-Large",3.49237e+24,"Tencent","2024-11-06"],[2024.8652,"Qwen2.5-Coder (32B)",1.0725e+24,"Alibaba","2024-11-12"],[2024.9227,"Amazon Nova Pro",6.000010000000001e+24,"Amazon","2024-12-03"],[2024.9227,"Hunyuan Video",1.4814815e+23,"Tencent","2024-12-03"],[2024.9309,"Llama 3.3 70B",6.8649768e+24,"Meta AI","2024-12-06"],[2024.9391,"EXAONE 3.5 32B",1.25e+24,"LG AI Research","2024-12-09"],[2024.9391,"EXAONE 3.5 7.8B",4.21e+23,"LG AI Research","2024-12-09"],[2024.9473,"Phi-4",9.3202015e+23,"Microsoft Research","2024-12-12"],[2024.961,"Falcon3-7B",5.88e+23,"Technology Innovation Institute","2024-12-17"],[2024.9637,"Granite 3.1 2B",1.8e+23,"IBM","2024-12-18"],[2024.9637,"Granite 3.1 8B",5.832e+23,"IBM","2024-12-18"],[2024.9802,"DeepSeek-V3",3.3e+24,"DeepSeek","2024-12-24"],[2024.9993,"OLMo 2 Furious 13B",4.6e+23,"Allen Institute for AI","2024-12-31"],[2024.9993,"OLMo 2 Furious 7B",1.8e+23,"Allen Institute for AI","2024-12-31"],[2025.0164,"Cosmos-1.0-\nDiffusion-14B Video2World",2.7999999999999996e+24,"NVIDIA","2025-01-07"],[2025.0164,"Cosmos-Predict1-14b-Video2World",2.7999999999999996e+24,"NVIDIA","2025-01-07"],[2025.0164,"Cosmos-Predict1-7b-Video2World",1.3999999999999998e+24,"NVIDIA","2025-01-07"],[2025.0356,"MiniMax-Text-01",3.1417632e+24,"MiniMax","2025-01-14"],[2025.0356,"MiniMax-VL-01",2.1238848e+24,"MiniMax","2025-01-14"],[2025.052,"DeepSeek-R1",3.4999999999999997e+24,"DeepSeek","2025-01-20"],[2025.0794,"Mistral Small 3",1.152e+24,"Mistral AI","2025-01-30"],[2025.1287,"Grok 3",3.5000000000000006e+26,"xAI","2025-02-17"],[2025.1314,"Step-1",6.24e+23,"StepFun","2025-02-18"],[2025.1342,"Evo 2 40B",2.25e+24,"Arc Institute","2025-02-19"],[2025.1342,"Evo 2 7B",1.008e+23,"Arc Institute","2025-02-19"],[2025.1342,"Qwen2.5-VL-72B",9.5712e+24,"Alibaba","2025-02-19"],[2025.1342,"Qwen2.5-VL-7B",9.9408e+23,"Alibaba","2025-02-19"],[2025.1478,"Claude 3.7 Sonnet",3.3499999999999998e+25,"Anthropic","2025-02-24"],[2025.1478,"Step-Video-T2V",4.1015808e+24,"StepFun","2025-02-24"],[2025.1506,"Wan 2.1 14B I2V",2.5e+23,"Alibaba","2025-02-25"],[2025.1506,"YandexGPT 5 Lite",7.3536e+23,"Yandex","2025-02-25"],[2025.1561,"GPT-4.5",3.8e+26,"OpenAI","2025-02-27"],[2025.1862,"Ling-Plus (\"Bailing\")",1.5552e+24,"Ant Group","2025-03-10"],[2025.1862,"Ling-lite-1.5 (\"Bailing\")",1.485e+23,"Ant Group","2025-03-10"],[2025.1889,"Hunyuan-TurboS",5.4e+24,"Tencent","2025-03-11"],[2025.1944,"OLMo 2 32B",1.3e+24,"Allen Institute for AI","2025-03-13"],[2025.2081,"Cosmos-Transfer1-7B",3.6059017e+24,"NVIDIA","2025-03-18"],[2025.2081,"Llama Nemotron Ultra 253B",3.911001e+25,"NVIDIA","2025-03-18"],[2025.2245,"DeepSeek-V3 (Mar 2025)",3.3e+24,"DeepSeek","2025-03-24"],[2025.2574,"Llama 4 Behemoth (preview)",5.18400000000001e+25,"Meta AI","2025-04-05"],[2025.2574,"Llama 4 Maverick",2.244000000001e+24,"Meta AI","2025-04-05"],[2025.2574,"Llama 4 Scout",4.08e+24,"Meta AI","2025-04-05"],[2025.271,"Pangu Ultra",1.0692e+25,"Huawei","2025-04-10"],[2025.2738,"Seaweed-7B",9.0007697e+23,"ByteDance","2025-04-11"],[2025.282,"GLM-4-32B-0414",2.88e+24,"Z.ai (Zhipu AI)","2025-04-14"],[2025.282,"GLM-4-9B-0414",8.1e+23,"Tsinghua University","2025-04-14"],[2025.282,"GLM-Z1-Rumination-32B-0414",2.88e+24,"Tsinghua University","2025-04-14"],[2025.282,"Nemotron-H 56B",6.72e+24,"NVIDIA","2025-04-14"],[2025.282,"Nemotron-H 8B",7.2e+23,"NVIDIA","2025-04-14"],[2025.3066,"MamayLM",4.36e+23,"INSAIT","2025-04-23"],[2025.3203,"Foundation-sec-8b",1.2242448e+24,"Cisco","2025-04-28"],[2025.3231,"Qwen3-0.6B",1.296e+23,"Alibaba","2025-04-29"],[2025.3231,"Qwen3-1.7B",3.672e+23,"Alibaba","2025-04-29"],[2025.3231,"Qwen3-14B",3.1968e+24,"Alibaba","2025-04-29"],[2025.3231,"Qwen3-235B-A22B",4.752e+24,"Alibaba","2025-04-29"],[2025.3231,"Qwen3-30B-A3B",6.48e+23,"Alibaba","2025-04-29"],[2025.3231,"Qwen3-32B",7.0848e+24,"Alibaba","2025-04-29"],[2025.3231,"Qwen3-4B",8.64e+23,"Alibaba","2025-04-29"],[2025.3231,"Qwen3-8B",1.7712e+24,"Alibaba","2025-04-29"],[2025.345,"Pangu Ultra MoE",3.0888e+24,"Huawei","2025-05-07"],[2025.3559,"Seed1.5-VL",1.388556e+24,"ByteDance","2025-05-11"],[2025.3778,"Marin 8B",6.12e+23,"Marin","2025-05-19"],[2025.3806,"Gemma 3n",5.181e+23,"Google","2025-05-20"],[2025.3833,"Falcon-H1",3.672e+24,"Technology Innovation Institute","2025-05-21"],[2025.4025,"DeepSeek-R1 (May 2025)",4.020010000000001e+24,"DeepSeek","2025-05-28"],[2025.4025,"Pangu Pro MoE",1.287e+24,"Huawei","2025-05-28"],[2025.4216,"MiMo-VL-7B-SFT",1.1508e+24,"Xiaomi Corp","2025-06-04"],[2025.4244,"MiMo-7B-Base",1.05e+24,"Xiaomi Corp","2025-06-05"],[2025.4463,"MiniMax-M1-40k",4.1861931e+24,"MiniMax","2025-06-13"],[2025.4463,"MiniMax-M1-80k",4.3240062e+24,"MiniMax","2025-06-13"],[2025.4901,"ERNIE-4.5-21B-A3B",1.8e+23,"Baidu","2025-06-29"],[2025.4901,"ERNIE-4.5-300B-A47B",2.82e+24,"Baidu","2025-06-29"],[2025.5092,"dots.llm1",1.2164856e+24,"Rednote","2025-07-06"],[2025.5175,"Grok 4",5.0000000000001e+26,"xAI","2025-07-09"],[2025.5229,"Kimi K2",2.976e+24,"Moonshot","2025-07-11"],[2025.5339,"EXAONE 4.0 (32B)",2.69000000000001e+24,"LG AI Research","2025-07-15"],[2025.553,"Qwen3-Coder-480B-A35B",1.575e+24,"Alibaba","2025-07-22"],[2025.5613,"Qwen3-235B-A22B (Jul 2025)",4.752e+24,"Alibaba","2025-07-25"],[2025.5613,"Qwen3-235B-A22B-Thinking (Jul 2025)",4.752e+24,"Alibaba","2025-07-25"],[2025.5695,"Wan 2.2 14B T2V",4.2e+23,"Alibaba","2025-07-28"],[2025.5804,"Tri-21B",2.95e+23,"Trillion Labs","2025-08-01"],[2025.5914,"GLM-4.5",4.42e+24,"Z.ai (Zhipu AI)","2025-08-05"],[2025.5914,"GLM-4.5-Air",1.656e+24,"Z.ai (Zhipu AI)","2025-08-05"],[2025.5914,"gpt-oss-120b",4.94e+24,"OpenAI","2025-08-05"],[2025.5914,"gpt-oss-20b",5.49e+23,"OpenAI","2025-08-05"],[2025.5969,"GPT-5",6.6e+25,"OpenAI","2025-08-07"],[2025.6188,"GLM-4.1V-Thinking",9.18e+23,"Z.ai (Zhipu AI)","2025-08-15"],[2025.6188,"GLM-4.5V",1.8e+24,"Z.ai (Zhipu AI)","2025-08-15"],[2025.627,"NVIDIA-Nemotron-Nano-12B-v2",1.5192e+24,"NVIDIA","2025-08-18"],[2025.627,"NVIDIA-Nemotron-Nano-9B-v2",1.53e+24,"NVIDIA","2025-08-18"],[2025.6352,"DeepSeek-V3.1",3.594058e+24,"DeepSeek","2025-08-21"],[2025.6352,"Seed-OSS-36B-Base",2.592e+24,"ByteDance","2025-08-21"],[2025.6352,"Teuken 7B",2.1444092e+23,"OpenGPT-X","2025-08-21"],[2025.6653,"LongCat-Flash",3.726e+24,"Meituan Inc","2025-09-01"],[2025.668,"Apertus 70B",6.74e+24,"ETH Zurich","2025-09-02"],[2025.6762,"Qwen3-Max",1.512e+25,"Alibaba","2025-09-05"],[2025.6899,"Ling-flash-base-2.0-20T",7.32e+23,"Ant Group","2025-09-10"],[2025.6899,"Ling-mini-base-2.0-20T",1.68e+23,"Ant Group","2025-09-10"],[2025.6899,"Qwen3-Next-80B-A3B",2.7e+23,"Alibaba","2025-09-10"],[2025.7228,"DeepSeek-V3.1-Terminus",3.594058e+24,"DeepSeek","2025-09-22"],[2025.742,"DeepSeek-V3.2-Exp",4.18e+24,"DeepSeek","2025-09-29"],[2025.7447,"GLM-4.6",4.42e+24,"Z.ai (Zhipu AI)","2025-09-30"],[2025.7502,"Granite-4.0-H-Micro",3.15e+23,"IBM","2025-10-02"],[2025.7502,"Granite-4.0-H-Small",1.215e+24,"IBM","2025-10-02"],[2025.7502,"Granite-4.0-H-Tiny",1.35e+23,"IBM","2025-10-02"],[2025.7721,"Ling-1T",6.000001e+24,"Ant Group","2025-10-10"],[2025.794,"Odyssey 102B",1.1e+23,"Anthrogen","2025-10-18"],[2025.8131,"Lapa LLM",8.64e+23,"Ukrainian Catholic University","2025-10-25"],[2025.8268,"Emu3.5",9.86736e+24,"Beijing Academy of Artificial Intelligence / BAAI","2025-10-30"],[2025.8268,"Kimi Linear",1.026e+23,"Moonshot","2025-10-30"],[2025.8843,"Olmo 3",1.0999999999999999e+24,"Allen Institute for AI","2025-11-20"],[2025.8843,"SAM 3",1.9981584e+23,"Meta AI","2025-11-20"],[2025.9144,"DeepSeek-V3.2",4.1999999999999997e+24,"DeepSeek","2025-12-01"],[2025.9528,"Nemotron 3-Nano-30B-A3B",4.8e+23,"NVIDIA","2025-12-15"],[2025.9555,"MiMo-V2-Flash",2.43e+24,"Xiaomi Corp","2025-12-16"],[2025.9966,"K-EXAONE",1.52e+24,"LG AI Research","2025-12-31"],[2025.9966,"Solar Open 100B",1.3999999999999998e+24,"Upstage","2025-12-31"],[2026.0876,"Kimi K2.5",5.8e+24,"Moonshot","2026-02-02"],[2026.1287,"GLM-5",6.84e+24,"Z.ai (Zhipu AI)","2026-02-17"],[2026.1342,"Arcee Trinity Large",1.326e+24,"Prime Intellect","2026-02-19"],[2026.2683,"EXAONE 4.5",3.85e+24,"LG AI Research","2026-04-09"],[2026.3066,"MiMo-V2.5",4.32e+24,"Xiaomi Corp","2026-04-23"],[2026.3066,"MiMo-V2.5-Pro",6.804e+24,"Xiaomi Corp","2026-04-23"],[2026.3094,"DeepSeek-V4-Flash",2.496e+24,"DeepSeek","2026-04-24"],[2026.3094,"DeepSeek-V4-Pro",9.702e+24,"DeepSeek","2026-04-24"],[2026.3751,"Composer 2.5",3.87e+25,"Cursor","2026-05-18"],[2026.4162,"MAI-Thinking-1",6.98511e+24,"Microsoft","2026-06-02"],[2026.4216,"Nemotron 3 Ultra",6.6e+24,"NVIDIA","2026-06-04"],[2026.4873,"Solar Open2 250B",1.05e+24,"Upstage","2026-06-28"],[2026.5339,"Inkling",1.845e+24,"Thinking Machines","2026-07-15"],[2026.5366,"Kimi K3",2.0001e+25,"Moonshot","2026-07-16"],[2026.5722,"A.X K2",1.8e+24,"SK Telecom","2026-07-29"],[2026.5777,"DeepSeek V4 Flash 0731",2.496e+24,"DeepSeek","2026-07-31"]],"metrics":[["training_compute_flop","Training compute (FLOP)","pow10"]],"dims":[{"label":"No colouring","perPoint":false,"groups":[{"name":"Recorded models","color":"#1f3864"}]}],"gStart":3,"metaAt":3,"fits":[[2019.8268309377138,2026.577686516085,0.22172180899053748,-424.86033597103363]],"logX":false,"xLabel":"Publication date"};
+
+function decadeTicks(lo, hi, target) {
+  const a = Math.floor(Math.log10(lo)), b = Math.ceil(Math.log10(hi));
+  if (b - a < 3) {
+    const out = [];
+    for (let e = a; e <= b; e++) for (const m of [1, 2, 5]) {
+      const v = m * Math.pow(10, e);
+      if (v >= lo / 1.6 && v <= hi * 1.6) out.push(v);
+    }
+    return out;
+  }
+  const stride = Math.max(1, Math.ceil((b - a + 1) / target));
+  const out = [];
+  for (let e = a; e <= b; e++) if ((b - e) % stride === 0) out.push(Math.pow(10, e));
+  return out;
+}
+
+function geometry(D, hidden, W, H, M, PTS) {
+  const shown = [];
+  for (let i = 0; i < PTS.length; i++) if (!hidden.has(PTS[i].g)) shown.push(i);
+  const xs = shown.map(i => PTS[i].x), ys = shown.map(i => PTS[i].y);
+  const yLo = Math.min.apply(null, ys), yHi = Math.max.apply(null, ys);
+  let xLo = Math.min.apply(null, xs), xHi = Math.max.apply(null, xs);
+  const sy = v => H - M.b - (Math.log10(v) - Math.log10(yLo))
+                  / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b);
+  let sx;
+  if (D.logX) {
+    sx = v => M.l + (Math.log10(v) - Math.log10(xLo))
+              / (Math.log10(xHi) - Math.log10(xLo) || 1) * (W - M.l - M.r);
+  } else {
+    const pad = (xHi - xLo) * 0.03;
+    xLo -= pad; xHi += pad;
+    sx = v => M.l + (v - xLo) / (xHi - xLo || 1) * (W - M.l - M.r);
+  }
+  return {
+    shown, sx, sy, xLo, xHi, yLo, yHi,
+    yTicks: decadeTicks(yLo, yHi, 8),
+    xTicks: D.logX ? decadeTicks(xLo, xHi, 8) : yearTicks(xLo, xHi),
+  };
+}
+
+function yearTicks(lo, hi) {
+  const span = hi - lo;
+  const step = span > 45 ? 10 : span > 18 ? 5 : span > 8 ? 2 : 1;
+  const out = [];
+  for (let y = Math.ceil(lo / step) * step; y <= hi; y += step) out.push(y);
+  return out;
+}
+
+function nearest(PTS, G, px, py, limit) {
+  let best = -1, bestD = limit * limit;
+  for (const i of G.shown) {
+    const dx = G.sx(PTS[i].x) - px, dy = G.sy(PTS[i].y) - py;
+    const d = dx * dx + dy * dy;
+    if (d < bestD) { bestD = d; best = i; }
+  }
+  return best;
+}
+
+// the settings Epoch offers as controls: which metric is on y, and what colours
+// the points. Changing either re-derives the groups and redraws.
+let MI = 0, CI = 0;
+function metric(){ return D.metrics[MI]; }
+function dim(){ return D.dims[CI]; }
+function activePts(){
+  const m = metric();
+  const out = [];
+  for (const p of D.pts) {
+    const y = p[2 + MI];
+    if (y === null || y === undefined) continue;
+    out.push({x:p[0], y:y, g:(dim().perPoint ? p[D.gStart + CI] : 0),
+              name:p[1], meta:p[D.metaAt], date:p[D.metaAt+1]});
+  }
+  return out;
+}
+const W=1000, H=520, M={l:82,r:18,t:16,b:52};
+const svg=document.getElementById('c'), tip=document.getElementById('tip'), lgw=document.getElementById('lg');
+const hidden=new Set();
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const SUP={'-':'\u207B','0':'\u2070','1':'\u00B9','2':'\u00B2','3':'\u00B3','4':'\u2074',
+           '5':'\u2075','6':'\u2076','7':'\u2077','8':'\u2078','9':'\u2079'};
+const sup=n=>String(n).split('').map(c=>SUP[c]||c).join('');
+function fmtLog(v){
+  const e=Math.round(Math.log10(v));
+  if(Math.abs(Math.log10(v)-e)<1e-9) return '10'+sup(e);
+  const f=Math.floor(Math.log10(v)), m=v/Math.pow(10,f);
+  return (Math.round(m*10)/10)+'\u00D7'+'10'+sup(f);
+}
+function fmtY(v){ const u=metric()[2];
+  return u==='count' ? human(v) : u==='usd' ? '$'+human(v)
+       : u==='days' ? (v>=1?human(v):String(+v.toPrecision(2))) : fmtLog(v); }
+function human(v){
+  for(const [c,u] of [[1e12,'T'],[1e9,'B'],[1e6,'M'],[1e3,'k']])
+    if(v>=c) return (v/c).toLocaleString('en-US',{maximumFractionDigits:0})+u;
+  return v.toLocaleString('en-US',{maximumFractionDigits:0});
+}
+function fmtX(v){ return D.logX ? fmtLog(v) : String(Math.round(v)); }
+
+function buildCtl(){
+  const ctl=document.getElementById('ctl'); ctl.innerHTML='';
+  const add=(cap, opts, cur, onPick)=>{
+    if(opts.length<2) return;
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap;
+    g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button');
+      b.className='btn'; b.type='button'; b.textContent=o;
+      b.setAttribute('aria-pressed', i===cur?'true':'false');
+      b.onclick=()=>{ onPick(i); hidden.clear(); buildCtl(); drawLegend(); draw(); reportHeight(); };
+      g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  add('Metric', D.metrics.map(m=>m[1]), MI, i=>{MI=i;});
+  add('Colour by', D.dims.map(d=>d.label), CI, i=>{CI=i;});
+}
+
+function drawLegend(){
+  lgw.innerHTML='';
+  const gs=dim().groups;
+  if(!dim().perPoint || gs.length<2) return;
+  gs.forEach((g,i)=>{
+    const b=document.createElement('button');
+    b.className='lg'; b.type='button';
+    b.setAttribute('aria-pressed', hidden.has(i)?'true':'false');
+    b.innerHTML='<span class="sw" style="background:'+g.color+'"></span>'+g.name;
+    b.onclick=()=>{
+      if(hidden.has(i)) hidden.delete(i);
+      else if(hidden.size < gs.length-1) hidden.add(i);
+      else return;
+      b.setAttribute('aria-pressed', hidden.has(i)?'true':'false');
+      draw();
+    };
+    lgw.appendChild(b);
+  });
+}
+
+let G=null, PTS=[];
+function draw(){
+  PTS=activePts();
+  G=geometry(D,hidden,W,H,M,PTS);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+  if(!D.logX && G.xLo < 2010){
+    const x=Math.max(M.l,G.sx(2010));
+    svg.appendChild(el('rect',{x:x,y:M.t,width:(W-M.r)-x,height:H-M.b-M.t,class:'era'}));
+    const t=el('text',{x:x+6,y:M.t+12,class:'axis'}); t.textContent='Deep learning era';
+    svg.appendChild(t);
+  }
+  G.yTicks.forEach(v=>{
+    const y=G.sy(v);
+    if(y<M.t-1||y>H-M.b+1) return;
+    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y,y2:y,class:'grid'}));
+    const t=el('text',{x:M.l-8,y:y+4,class:'axis','text-anchor':'end'});
+    t.textContent=fmtY(v); svg.appendChild(t);
+  });
+  G.xTicks.forEach(v=>{
+    const x=G.sx(v);
+    if(x<M.l-1||x>W-M.r+1) return;
+    svg.appendChild(el('line',{x1:x,x2:x,y1:M.t,y2:H-M.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-M.b+18,class:'axis','text-anchor':'middle'});
+    t.textContent=fmtX(v); svg.appendChild(t);
+  });
+  const xl=el('text',{x:(M.l+W-M.r)/2,y:H-M.b+40,class:'axlab','text-anchor':'middle'});
+  xl.textContent=D.xLabel; svg.appendChild(xl);
+  const yl=el('text',{x:0,y:0,class:'axlab','text-anchor':'middle',
+                      transform:'translate(16,'+((M.t+H-M.b)/2)+') rotate(-90)'});
+  yl.textContent=metric()[1]; svg.appendChild(yl);
+
+  const gs=dim().groups;
+  G.shown.forEach(i=>{
+    const p=PTS[i];
+    svg.appendChild(el('circle',{cx:G.sx(p.x).toFixed(2),cy:G.sy(p.y).toFixed(2),r:3.6,
+      fill:(gs[p.g]||gs[0]).color,stroke:'#fff','stroke-width':.6,'fill-opacity':.85}));
+  });
+  const f=D.fits && D.fits[MI];
+  if(f && !D.logX && CI===0){
+    svg.appendChild(el('line',{x1:G.sx(f[0]),y1:G.sy(Math.pow(10,f[2]*f[0]+f[3])),
+      x2:G.sx(f[1]),y2:G.sy(Math.pow(10,f[2]*f[1]+f[3])),
+      stroke:'#b4763a','stroke-width':2.2}));
+  }
+  const hl=el('circle',{id:'hl',r:6.5,fill:'none',stroke:'#1a1a1a','stroke-width':1.6,
+                        cx:-99,cy:-99}); svg.appendChild(hl);
+  const cnt=document.getElementById('cnt');
+  if(cnt) cnt.textContent=G.shown.length.toLocaleString('en-US')+' models plotted';
+}
+
+function move(ev){
+  if(!G) return;
+  const r=svg.getBoundingClientRect();
+  const px=(ev.clientX-r.left)/r.width*W, py=(ev.clientY-r.top)/r.height*H;
+  const i=nearest(PTS,G,px,py,14);
+  const hl=document.getElementById('hl');
+  if(i<0){ tip.style.opacity=0; hl.setAttribute('cx',-99); return; }
+  const p=PTS[i];
+  hl.setAttribute('cx',G.sx(p.x)); hl.setAttribute('cy',G.sy(p.y));
+  tip.innerHTML='<b>'+p.name+'</b><div class="m">'+p.meta+' &middot; '+p.date+'</div>'
+    +'<div>'+metric()[1]+': '+fmtY(p.y)+'</div>'
+    +(D.logX?'<div>'+D.xLabel+': '+fmtLog(p.x)+'</div>':'');
+  tip.style.opacity=1;
+  const left=G.sx(p.x)/W*r.width, top=G.sy(p.y)/H*r.height;
+  tip.style.left=Math.min(Math.max(8,left+14), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top=Math.min(Math.max(8,top-10), r.height-tip.offsetHeight-8)+'px';
+}
+// pointer events rather than mouse events, so touch reads the same as hover
+svg.addEventListener('pointermove',move);
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
+  const hl=document.getElementById('hl'); if(hl) hl.setAttribute('cx',-99);});
+buildCtl(); drawLegend(); draw();
+
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'MODELS-06',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>

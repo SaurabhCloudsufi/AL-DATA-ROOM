@@ -1,0 +1,141 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cumulative component cost, by chip type</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#1a1a1a; }
+  .lg .sw { width:11px; height:11px; border-radius:2px; flex:none; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px;
+          box-shadow:0 4px 14px rgba(0,0,0,.10); opacity:0; transition:opacity .08s;
+          max-width:290px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .tip .row { display:flex; gap:8px; align-items:center; }
+  .tip .row i { font-style:normal; margin-left:auto; font-variant-numeric:tabular-nums; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">CHIP-D03</span><h1>Cumulative component cost, by chip type</h1></div>
+<div class="sub">All 11 chip types Epoch tracks, cumulative to Q4 2025. The static chart has room for the leaders; this one carries every type. <span class="badge">COMPLETE QUARTERS ONLY</span></div>
+<div class="ctl" id="ctl"></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" viewBox="0 0 1000 470" role="img" aria-label="Cumulative component cost, by chip type"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Hover a bar for the exact figure and its rank. Source: Epoch AI, AI Chip Components (CC-BY) — cumulative_by_chip.csv —
+epoch.ai/data/ai-chip-components. Every value is a Monte Carlo median over 10,000 draws;
+medians do not add, because Epoch simulates each aggregation separately. Q1 2026 is
+incomplete at source and excluded.</div>
+</div>
+<script>
+const D = {"rows":[["Other",119.085],["B300",21.993],["B200",14.644],["H100/H200",11.709],["Trainium2",4.728],["TPU v6e",3.712],["MI300X",2.48],["TPU v7",2.173],["MI355X",1.016],["MI350X",0.907],["MI325X",0.887]],"top":10,"unit":"$","suffix":"bn","dp":2,"color":"#1f3864","interval":false,"xLabel":"Cumulative component cost (US$ billions)","valueLabel":"Cumulative cost","labelW":120};
+const svg=document.getElementById('c'), tip=document.getElementById('tip');
+const ctl=document.getElementById('ctl'), lgw=document.getElementById('lg');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000;
+let showAll=false;
+function rows(){ return showAll?D.rows:D.rows.slice(0,D.top); }
+function fmt(v){ return (D.unit||'')+v.toLocaleString('en-US',{minimumFractionDigits:D.dp,maximumFractionDigits:D.dp})+(D.suffix||''); }
+function buildCtl(){
+  ctl.innerHTML='';
+  if(D.rows.length>D.top){
+    [[false,'Top '+D.top],[true,'All '+D.rows.length]].forEach(([v,t])=>{
+      const b=document.createElement('button'); b.className='btn'; b.type='button';
+      b.textContent=t; b.setAttribute('aria-pressed',showAll===v?'true':'false');
+      b.onclick=()=>{showAll=v;buildCtl();draw();reportHeight();}; ctl.appendChild(b);
+    });
+  }
+  const s=document.createElement('span'); s.className='cap';
+  s.textContent=rows().length+' of '+D.rows.length+' shown'; ctl.appendChild(s);
+}
+let RH,MM,SXX,RR;
+function draw(){
+  const R=rows(), n=R.length;
+  RH=n>20?20:26; MM={l:D.labelW,r:D.interval?150:70,t:14,b:44};
+  const H=MM.t+MM.b+n*RH; svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const hi=Math.max.apply(null,R.map(r=>D.interval?r[3]:r[1]))*1.04;
+  SXX=v=>MM.l+v/hi*(W-MM.l-MM.r); RR=R;
+  const step=hi/5, mag=Math.pow(10,Math.floor(Math.log10(step)));
+  const st=[1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=step)||10*mag;
+  for(let v=0;v<=hi*1.0001;v+=st){
+    const x=SXX(v);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:MM.t,y2:H-MM.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-MM.b+17,class:'axis','text-anchor':'middle'});
+    t.textContent=fmt(v); svg.appendChild(t);
+  }
+  R.forEach((r,i)=>{
+    const y=MM.t+i*RH, bh=Math.max(8,RH-9);
+    if(D.interval){
+      svg.appendChild(el('line',{x1:SXX(r[2]),x2:SXX(r[3]),y1:y+RH/2,y2:y+RH/2,
+        stroke:'#9aa9c4','stroke-width':3.4,'stroke-linecap':'round'}));
+      svg.appendChild(el('circle',{cx:SXX(r[1]),cy:y+RH/2,r:4.4,fill:'#1f3864',
+        stroke:'#fff','stroke-width':.8}));
+      const t=el('text',{x:SXX(r[3])+8,y:y+RH/2+3.6,class:'axis','text-anchor':'start'});
+      t.textContent=fmt(r[1])+'  ('+fmt(r[2])+'–'+fmt(r[3])+')'; svg.appendChild(t);
+    } else {
+      svg.appendChild(el('rect',{x:MM.l,y:y+(RH-bh)/2,width:Math.max(1,SXX(r[1])-MM.l),
+        height:bh,fill:D.color,rx:1.5}));
+      const t=el('text',{x:SXX(r[1])+6,y:y+RH/2+3.6,class:'axis','text-anchor':'start'});
+      t.textContent=fmt(r[1]); svg.appendChild(t);
+    }
+    const lab=el('text',{x:MM.l-7,y:y+RH/2+3.6,class:'axis','text-anchor':'end',
+                         style:'fill:#1a1a1a'});
+    lab.textContent=r[0]; svg.appendChild(lab);
+  });
+  const xl=el('text',{x:(MM.l+W-MM.r)/2,y:H-MM.b+36,class:'axlab','text-anchor':'middle'});
+  xl.textContent=D.xLabel; svg.appendChild(xl);
+}
+svg.addEventListener('pointermove',ev=>{
+  const r=svg.getBoundingClientRect();
+  const py=(ev.clientY-r.top)/r.width*W;
+  const i=Math.floor((py-MM.t)/RH);
+  if(i<0||i>=RR.length){ tip.style.opacity=0; return; }
+  const x=RR[i];
+  let h='<b>'+x[0]+'</b><div>'+D.valueLabel+': '+fmt(x[1])+'</div>';
+  if(D.interval) h+='<div class="m">5th–95th percentile: '+fmt(x[2])+' – '+fmt(x[3])+'</div>'
+                   +'<div class="m">interval is '+((x[3]-x[2])/x[1]).toFixed(1)+'x the median</div>';
+  h+='<div class="m">rank '+(D.rows.indexOf(x)+1)+' of '+D.rows.length+'</div>';
+  tip.innerHTML=h; tip.style.opacity=1;
+  tip.style.left=Math.min(Math.max(8,(MM.l/W*r.width)+20), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top=Math.min(Math.max(8,(MM.t+i*RH)/W*r.width), r.height-tip.offsetHeight-8)+'px';
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;});
+buildCtl(); draw();
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'CHIP-D03',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+
+</script>

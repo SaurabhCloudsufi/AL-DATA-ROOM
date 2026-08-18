@@ -1530,29 +1530,6 @@ MODEL_PLOTS = {
         "ylabel": "Training compute (FLOP, log scale)", "fmt": "pow10",
         "unit": "FLOP", "fit": True, "label": 6,
     },
-    "MODELS-02": {
-        "dataset": "notable", "metric": "training_compute_flop", "colour": "domain",
-        "colour_label": "Domain", "top_n": 8, "residual": "Other domains",
-        "title": "Training compute of notable AI models, by domain",
-        "ylabel": "Training compute (FLOP, log scale)", "fmt": "pow10",
-        "unit": "FLOP", "fit": True, "label": 4,
-    },
-    "MODELS-03": {
-        "dataset": "notable", "metric": "training_compute_flop",
-        "colour": "organization_primary", "colour_label": "Organization",
-        "top_n": 9, "residual": "All other organizations",
-        "title": "Training compute of notable AI models, by organization",
-        "ylabel": "Training compute (FLOP, log scale)", "fmt": "pow10",
-        "unit": "FLOP", "fit": True, "label": 4,
-    },
-    "MODELS-04": {
-        "dataset": "notable", "metric": "training_compute_flop", "colour": "country",
-        "colour_label": "Country of organization", "top_n": 7,
-        "residual": "Other countries",
-        "title": "Training compute of notable AI models, by country",
-        "ylabel": "Training compute (FLOP, log scale)", "fmt": "pow10",
-        "unit": "FLOP", "fit": True, "label": 4,
-    },
     "MODELS-05": {
         "dataset": "frontier", "metric": "training_compute_flop", "colour": None,
         "title": "Training compute of frontier AI models",
@@ -1564,51 +1541,6 @@ MODEL_PLOTS = {
         "title": "Training compute of large-scale AI models",
         "ylabel": "Training compute (FLOP, log scale)", "fmt": "pow10",
         "unit": "FLOP", "fit": True, "label": 5,
-    },
-    "MODELS-07": {
-        "dataset": "all", "metric": "training_compute_flop", "colour": None,
-        "title": "Training compute of all AI models in the database",
-        "ylabel": "Training compute (FLOP, log scale)", "fmt": "pow10",
-        "unit": "FLOP", "fit": True, "label": 5,
-    },
-    "MODELS-08": {
-        "dataset": "notable", "metric": "parameters", "colour": None,
-        "title": "Parameters of notable AI models",
-        "ylabel": "Parameters (log scale)", "fmt": "count",
-        "unit": "parameters", "fit": True, "label": 5,
-    },
-    "MODELS-09": {
-        "dataset": "notable", "metric": "training_dataset_size", "colour": None,
-        "title": "Training dataset size of notable AI models",
-        "ylabel": "Training dataset size (datapoints, log scale)", "fmt": "count",
-        "unit": "datapoints", "fit": True, "label": 5,
-    },
-    "MODELS-10": {
-        "dataset": "notable", "metric": "training_cost_2023usd", "colour": None,
-        "title": "Training cost of notable AI models",
-        "ylabel": "Training compute cost (2023 US$, log scale)", "fmt": "usd",
-        "unit": "2023 US dollars", "fit": True, "label": 5,
-    },
-    "MODELS-11": {
-        "dataset": "notable", "metric": "training_power_draw_w", "colour": None,
-        "title": "Training power draw of notable AI models",
-        "ylabel": "Training power draw (log scale)", "fmt": "watt",
-        "unit": "watts", "fit": True, "label": 5,
-    },
-    "MODELS-12": {
-        "dataset": "notable", "metric": "training_time_days", "colour": None,
-        "title": "Training time of notable AI models",
-        "ylabel": "Training time (days, log scale)", "fmt": "days",
-        "unit": "days", "fit": False, "label": 5,
-    },
-    "MODELS-13": {
-        "dataset": "notable", "metric": "parameters",
-        "x_metric": "training_compute_flop", "colour": "domain",
-        "colour_label": "Domain", "top_n": 8, "residual": "Other domains",
-        "title": "Parameters against training compute, notable AI models",
-        "ylabel": "Parameters (log scale)", "fmt": "count",
-        "xlabel": "Training compute (FLOP, log scale)", "x_fmt": "pow10",
-        "unit": "parameters", "fit": False, "label": 4,
     },
 }
 
@@ -1811,37 +1743,28 @@ CHIP_TABS = {
     ),
 }
 
+# Epoch offers "Show data as" as a control on one figure. Each entry below is one
+# figure carrying both of its settings side by side, rather than two charts that
+# share an x axis and a colour key and differ only in normalisation. The
+# cumulative and annual settings are gone: cumulative reproduced the quarterly
+# series as a running total to within 0.03%, and annual re-bucketed the same file
+# into two bars.
 CHIP_PLOTS = {
-    # ---- Total cost tab: every control Epoch offers, one setting at a time
-    "CHIP-01": dict(tab="cost", group="component", period="quarterly", mode="absolute",
+    "CHIP-01": dict(tab="cost", group="component", period="quarterly",
+                    modes=["absolute", "share"],
                     title="Cost of AI chip components, by component"),
-    "CHIP-02": dict(tab="cost", group="designer", period="quarterly", mode="absolute",
+    "CHIP-02": dict(tab="cost", group="designer", period="quarterly",
+                    modes=["absolute", "share"],
                     title="Cost of AI chip components, by designer"),
-    "CHIP-03": dict(tab="cost", group="component", period="quarterly", mode="share",
-                    title="Share of AI chip component cost, by component"),
-    "CHIP-04": dict(tab="cost", group="designer", period="quarterly", mode="share",
-                    title="Share of AI chip component cost, by designer"),
-    "CHIP-05": dict(tab="cost", group="component", period="cumulative", mode="absolute",
-                    title="Cumulative cost of AI chip components, by component"),
-    "CHIP-06": dict(tab="cost", group="designer", period="cumulative", mode="absolute",
-                    title="Cumulative cost of AI chip components, by designer"),
-    "CHIP-07": dict(tab="cost", group="component", period="annual", mode="absolute",
-                    title="Annual cost of AI chip components, by component"),
-    "CHIP-08": dict(tab="cost", group="designer", period="annual", mode="absolute",
-                    title="Annual cost of AI chip components, by designer"),
-    # ---- the three component tabs, absolute and as share of world supply
-    "CHIP-09": dict(tab="logic", group="designer", period="quarterly", mode="absolute",
-                    title="Advanced-node logic wafers consumed, by designer"),
-    "CHIP-10": dict(tab="logic", group="designer", period="quarterly", mode="supply",
-                    title="Share of world advanced-node logic supply, by designer"),
-    "CHIP-11": dict(tab="cowos", group="designer", period="quarterly", mode="absolute",
-                    title="CoWoS packaging wafers consumed, by designer"),
-    "CHIP-12": dict(tab="cowos", group="designer", period="quarterly", mode="supply",
-                    title="Share of world CoWoS packaging supply, by designer"),
-    "CHIP-13": dict(tab="hbm", group="designer", period="quarterly", mode="absolute",
-                    title="HBM memory consumed, by designer"),
-    "CHIP-14": dict(tab="hbm", group="designer", period="quarterly", mode="supply",
-                    title="Share of world HBM supply, by designer"),
+    "CHIP-09": dict(tab="logic", group="designer", period="quarterly",
+                    modes=["absolute", "supply"],
+                    title="Advanced-node logic wafers, consumed and as a share of supply"),
+    "CHIP-11": dict(tab="cowos", group="designer", period="quarterly",
+                    modes=["absolute", "supply"],
+                    title="CoWoS packaging wafers, consumed and as a share of supply"),
+    "CHIP-13": dict(tab="hbm", group="designer", period="quarterly",
+                    modes=["absolute", "supply"],
+                    title="HBM memory, consumed and as a share of supply"),
 }
 
 # the exact published files each chart is built from, printed on its face
@@ -1957,41 +1880,132 @@ def _chip_series(cfg):
     return xs, series, totals
 
 
-def build_chip(plot_id):
-    """One setting of Epoch's published AI Chip Components figure."""
+def _chip_panel(ax, cfg, tab, mode, xs, series, totals, legend=False):
+    """Draw one setting of the figure into one axes. Returns whether the world
+    supply denominator was read, so the source line credits what it used."""
     import matplotlib.ticker as mticker
+    pct = mode in ("share", "supply")
+    idx = list(range(len(xs)))
+    bottom = [0.0] * len(xs)
+    ai_top = None
+    bar_w = 0.68 if len(xs) > 3 else 0.42
+    for name, colour, vals in series:
+        ax.bar(idx, vals, bottom=bottom, width=bar_w, color=colour, label=name,
+               edgecolor="white", linewidth=0.7, zorder=3)
+        # the residual carries the combined-share rule right below it, so labelling
+        # it as well would print two numbers on top of each other
+        label_seg = pct and not (mode == "supply" and name == CHIP_OTHER[0])
+        for i, v in enumerate(vals):
+            if label_seg and v >= 10:
+                ax.text(i, bottom[i] + v / 2, f"{v:.0f}%", ha="center", va="center",
+                        fontsize=8.0, color="white", fontweight="bold", zorder=5)
+        bottom = [b + v for b, v in zip(bottom, vals)]
+        if name == CHIP_DESIGNERS[-1][0]:
+            ai_top = list(bottom)
 
+    head = max(totals)
+    used_supply = mode == "supply"
+    if mode == "absolute" and tab["supply_col"]:
+        # what the tracked designers are drawing down: Epoch's own supply
+        # denominator, so the headroom above each bar is legible
+        sup = {r["quarter"]: r[tab["supply_col"] + "_p50"] / tab["scale"]
+               for r in _chip_csv("chip_supply.csv")}
+        ys = [sup[x] for x in xs]
+        ax.plot(idx, ys, linestyle=(0, (5, 2.5)), color=MUTED, linewidth=1.5,
+                marker="_", markersize=14, markeredgewidth=1.6,
+                label="World supply (all users)", zorder=5)
+        head = max(head, max(ys))
+        used_supply = True
+        for i, t in enumerate(totals):
+            inside = ys[i] - t < head * 0.075
+            ax.text(i, t - head * 0.012 if inside else t + head * 0.018,
+                    tab["total_fmt"].format(v=t), ha="center",
+                    va="top" if inside else "bottom", fontsize=8.4,
+                    fontweight="bold", color="white" if inside else INK, zorder=6)
+    elif not pct:
+        for i, t in enumerate(totals):
+            ax.text(i, t + head * 0.018, tab["total_fmt"].format(v=t), ha="center",
+                    va="bottom", fontsize=8.4, fontweight="bold", color=INK, zorder=6)
+    elif mode == "supply" and ai_top:
+        # the figure this view exists to show: how much of world supply the four
+        # tracked designers took, ruled across the top of their part of the stack
+        for i, v in enumerate(ai_top):
+            ax.plot([i - bar_w * 0.59, i + bar_w * 0.59], [v, v], color=INK,
+                    linewidth=1.3, zorder=6)
+            ax.text(i, v + 1.8, f"{v:.0f}%", ha="center", va="bottom", fontsize=8.4,
+                    fontweight="bold", color=INK, zorder=7)
+
+    ax.set_xticks(idx)
+    ax.set_xticklabels([x.replace(" ", "\n") for x in xs], fontsize=8.8)
+    ax.set_ylabel("Share of component cost (%)" if mode == "share"
+                  else "Share of world supply (%)" if mode == "supply"
+                  else tab["ylabel"], fontsize=9.6)
+    ax.set_xlabel("Calendar year" if cfg["period"] == "annual"
+                  else "Quarter (cumulative through)" if cfg["period"] == "cumulative"
+                  else "Quarter", fontsize=9.6)
+    ax.set_xlim(-0.6, len(xs) - 0.4)
+    ax.set_ylim(0, 112 if mode == "supply" else 100 if pct else head * 1.14)
+    if pct:
+        ax.set_yticks([0, 20, 40, 60, 80, 100])
+    else:
+        ax.yaxis.set_major_locator(mticker.MaxNLocator(nbins=6, steps=[1, 2, 5, 10]))
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(
+        lambda v, _p: f"{v:.0f}%" if pct else tab["fmt"].format(v=v)))
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.set_title({"absolute": "Amount consumed", "share": "Share of cost",
+                  "supply": "Share of world supply"}[mode],
+                 fontsize=10.4, fontweight="bold", color=INK, pad=8)
+    if legend:
+        h, l = ax.get_legend_handles_labels()
+        ax.legend(h[::-1], l[::-1], loc="upper left", bbox_to_anchor=(1.030, 1.0),
+                  frameon=False, fontsize=9,
+                  title="Component" if cfg["group"] == "component" else "Designer",
+                  title_fontsize=9.2, handlelength=1.5, borderaxespad=0)
+    return used_supply
+
+
+def build_chip(plot_id):
+    """Epoch's published figure, with its absolute and share settings side by side.
+
+    Epoch offers "Show data as" as a control on one figure, not as two figures.
+    Publishing each setting separately meant two charts that share an x axis, a
+    colour key and a caption, and differ only in whether the stack is normalised.
+    They are one chart with two panels here, which is also how the source reads.
+    """
     cfg = CHIP_PLOTS[plot_id]
     tab = CHIP_TABS[cfg["tab"]]
     meta = _chip_meta()
-    xs, series, totals = _chip_series(cfg)
-    pct = cfg["mode"] in ("share", "supply")
+    modes = cfg["modes"]
+    panels = [(m, _chip_series({**cfg, "mode": m})) for m in modes]
+    xs = panels[0][1][0]
 
-    # Epoch's own settings panel, transcribed onto the chart so a downloaded file
-    # still says which of the explorer's settings it is
+    mode_words = " + ".join({"absolute": "Absolute", "share": "Share of cost",
+                             "supply": "Share of supply"}[m] for m in modes)
     setting = "\n".join([
         "Epoch explorer settings",
         f"Tab:  {tab['label']}",
         f"Colour by:  {'Component' if cfg['group'] == 'component' else 'Designer'}",
-        f"Show data as:  {'Share of cost' if cfg['mode'] == 'share' else 'Share of supply' if cfg['mode'] == 'supply' else 'Absolute'}",
+        "Show data as:",
+        f"    {mode_words}",
+        "    (side by side)",
         f"Show time as:  {'Annual' if cfg['period'] == 'annual' else 'Quarterly'}",
         f"Show cumulative:  {'yes' if cfg['period'] == 'cumulative' else 'no'}",
         "Project trend:  off (disabled at source)",
     ])
+    if "supply" in modes:
+        setting += "\n\nBlack rule:  the four tracked\ndesigners' combined share"
 
-    period_words = {
-        "quarterly": "in each quarter",
-        "cumulative": "cumulatively since Q1 2024, as Epoch publishes it",
-        "annual": "in each calendar year",
-    }[cfg["period"]]
-    subtitle = (f"What it shows: Epoch AI's published figure at this setting — "
-                f"{tab['what']} by the {int(meta['designers_tracked'])} tracked AI chip "
-                f"designers ({meta['designer_names']}) {period_words}, rebuilt from the "
-                f"downloaded CSV. {meta['window_first_quarter']} to "
-                f"{meta['window_last_quarter']}, the full window the source covers.")
+    subtitle = (f"What it shows: Epoch AI's published figure at both of its "
+                f"\"show data as\" settings — {tab['what']} by the "
+                f"{int(meta['designers_tracked'])} tracked AI chip designers "
+                f"({meta['designer_names']}) in each quarter, as an amount and as a "
+                f"{'share of world supply' if 'supply' in modes else 'share of the total'}. "
+                f"{meta['window_first_quarter']} to {meta['window_last_quarter']}, the "
+                f"full window the source covers.")
 
     note = tab["defn"] + " "
-    if cfg["mode"] == "supply":
+    if "supply" in modes:
         note += (f"Share is of total world supply of the component, not of AI demand: "
                  f"the five bars sum to exactly 100% of the quarterly denominator "
                  f"Epoch publishes, and the identity was checked to "
@@ -1999,134 +2013,50 @@ def build_chip(plot_id):
                  f"points. \"Other\" is therefore not a fifth AI chip designer but the "
                  f"residual of that denominator - capacity taken by designers Epoch "
                  f"does not track, stockpiling, idle capacity, or error in the tracked "
-                 f"estimates. Epoch itself calls it directional. ")
-    elif cfg["tab"] == "cost":
-        note += (f"\"Other\" - the rest of world supply - carries no AI chips and is "
-                 f"excluded from every cost view here. ")
+                 f"estimates. Epoch itself calls it directional. The dashed line on the "
+                 f"left panel is that same denominator, so the two panels are the same "
+                 f"quantity read two ways. ")
     else:
-        note += (f"Bars are the four tracked designers only. The dashed line is Epoch's "
-                 f"published total world supply of the component in that quarter, so "
-                 f"the gap between the two is the residual Epoch labels \"Other\" - "
-                 f"charted in full in the share view. ")
-
+        note += (f"\"Other\" - the rest of world supply - carries no AI chips and is "
+                 f"excluded from every cost view here. The right panel is the left one "
+                 f"normalised to 100%, which is what makes a composition change legible "
+                 f"while the total is growing. ")
     if cfg["group"] == "component":
         note += (f"Component totals are sums of the four designers' published medians. "
                  f"Epoch simulates each aggregation separately, so a median never adds "
                  f"exactly: the measured gap at the analogous grain is "
                  f"{float(meta['median_additivity_grain_pct']):.2f}%. Reported, not "
                  f"reconciled. ")
-    if cfg["period"] == "annual":
-        note += (f"Annual figures here sum the four published quarterly medians rather "
-                 f"than re-simulating the year, which introduces the same "
-                 f"non-additivity - measured at "
-                 f"{float(meta['median_additivity_cumulative_pct']):.2f}% across "
-                 f"quarters. ")
-    if cfg["period"] == "cumulative":
-        note += ("Read from Epoch's own cumulative file, not by running-summing the "
-                 "quarterly one. ")
     note += (f"Every value is a Monte Carlo median; the published 5th-95th percentile "
              f"range is wide and is charted separately in CHIP-D04. "
              f"{int(meta['partial_designer_rows_excluded'])} designer rows for "
-             f"{meta['partial_quarter']} are excluded as partial - that quarter holds "
-             f"only {meta['partial_designers_present']} and would show a collapse in "
-             f"demand that is missing coverage, not a fall. Chip designers outside the "
-             f"tracked four (Meta, Microsoft, Tesla, Huawei and others) are not in the "
-             f"source at all.")
+             f"the partial quarter after the window are excluded.")
 
+    pct_any = all(m in ("share", "supply") for m in modes)
     fig = plt.figure(figsize=(12.0, 8.4))
-    # a 100% stack fills its own top-left corner, so there the badge sits above
-    # the axes rather than over the bars
-    ax = fig.add_axes(_rect(subtitle, note, left=0.082, width=0.688,
-                            xlabel_room=0.072, badge_above=pct))
+    rect = _rect(subtitle, note, left=0.068, width=0.700, xlabel_room=0.062,
+                 badge_above=True,
+                 source=chip_src([CHIP_FILES[cfg["period"]], "supply_denominators.csv"]))
+    l, b, w, h = rect
+    gap = 0.075
+    pw = (w - gap) / 2
+    axes = [fig.add_axes([l, b, pw, h]), fig.add_axes([l + pw + gap, b, pw, h])]
+    # each panel carries its own title, so the badge sits above both of them
+    fig.text(l, b + h + 0.052,
+             "  COMPLETE QUARTERS ONLY  \u00b7  partial Q1 2026 excluded  ",
+             ha="left", va="bottom", fontsize=9.1, fontweight="bold", color="white",
+             zorder=9, bbox=dict(boxstyle="round,pad=0.42",
+                                 facecolor=SERIES["current"], edgecolor="none"))
 
-    idx = list(range(len(xs)))
-    bottom = [0.0] * len(xs)
-    ai_top = None
-    bar_w = 0.68 if len(xs) > 3 else 0.42   # two annual bars should not be slabs
-    for name, colour, vals in series:
-        ax.bar(idx, vals, bottom=bottom, width=bar_w, color=colour, label=name,
-               edgecolor="white", linewidth=0.7, zorder=3)
-        # the residual carries the combined-share rule right below it, so labelling
-        # it as well would print two numbers on top of each other
-        label_seg = pct and not (cfg["mode"] == "supply" and name == CHIP_OTHER[0])
-        for i, v in enumerate(vals):
-            if label_seg and v >= 10:
-                ax.text(i, bottom[i] + v / 2, f"{v:.0f}%", ha="center", va="center",
-                        fontsize=8.4, color="white", fontweight="bold", zorder=5)
-        bottom = [b + v for b, v in zip(bottom, vals)]
-        if name == CHIP_DESIGNERS[-1][0]:
-            ai_top = list(bottom)   # top of the four tracked designers
+    used_supply = False
+    for k, ((mode, (px, series, totals)), ax) in enumerate(zip(panels, axes)):
+        used_supply |= _chip_panel(ax, cfg, tab, mode, px, series, totals,
+                                   legend=(k == len(axes) - 1))
+    axes[-1].text(1.030, 0.98 - 0.062 * (len(panels[-1][1][1]) + 1), setting,
+                  transform=axes[-1].transAxes, ha="left", va="top", fontsize=8.3,
+                  color=MUTED, linespacing=1.55)
 
-    head = max(totals)
-    supply_ys = None
-    if cfg["mode"] == "absolute" and tab["supply_col"]:
-        # what the tracked designers are drawing down: Epoch's own supply
-        # denominator, so the headroom above each bar is legible
-        sup = {r["quarter"]: r[tab["supply_col"] + "_p50"] / tab["scale"]
-               for r in _chip_csv("chip_supply.csv")}
-        ys = [sup[x] for x in xs]
-        ax.plot(idx, ys, linestyle=(0, (5, 2.5)), color=MUTED, linewidth=1.5,
-                marker="_", markersize=20, markeredgewidth=1.8,
-                label="World supply (all users)", zorder=5)
-        head = max(head, max(ys))
-        supply_ys = ys
-
-    if not pct:
-        for i, t in enumerate(totals):
-            # the label goes above the bar unless the supply line is sitting
-            # there, in which case it drops just inside the top of the stack
-            inside = supply_ys is not None and supply_ys[i] - t < head * 0.075
-            ax.text(i, t - head * 0.012 if inside else t + head * 0.018,
-                    tab["total_fmt"].format(v=t), ha="center",
-                    va="top" if inside else "bottom", fontsize=9,
-                    fontweight="bold", color="white" if inside else INK, zorder=6)
-    elif cfg["mode"] == "supply" and ai_top:
-        # the figure this view exists to show: how much of world supply the four
-        # tracked designers took, ruled across the top of their part of the stack
-        for i, v in enumerate(ai_top):
-            ax.plot([i - bar_w * 0.59, i + bar_w * 0.59], [v, v], color=INK,
-                    linewidth=1.3,
-                    zorder=6)
-            ax.text(i, v + 1.8, f"{v:.0f}%", ha="center", va="bottom", fontsize=9,
-                    fontweight="bold", color=INK, zorder=7)
-        setting += "\n\nBlack rule:  the four tracked\ndesigners' combined share"
-
-    ax.set_xticks(idx)
-    ax.set_xticklabels([x.replace(" ", "\n") for x in xs], fontsize=9.4)
-    ax.set_ylabel("Share of component cost (%)" if cfg["mode"] == "share"
-                  else "Share of world supply (%)" if cfg["mode"] == "supply"
-                  else tab["ylabel"], fontsize=10)
-    ax.set_xlabel("Calendar year" if cfg["period"] == "annual"
-                  else "Quarter (cumulative through)" if cfg["period"] == "cumulative"
-                  else "Quarter", fontsize=10)
-    ax.set_xlim(-0.6, len(xs) - 0.4)
-    # headroom above a full stack for the combined-share labels
-    ax.set_ylim(0, 112 if cfg["mode"] == "supply" else 100 if pct else head * 1.14)
-    if pct:
-        ax.set_yticks([0, 20, 40, 60, 80, 100])
-    else:
-        # integer tick steps, so a $2.5bn gridline is never printed as "$2bn"
-        ax.yaxis.set_major_locator(mticker.MaxNLocator(nbins=6, steps=[1, 2, 5, 10]))
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(
-        lambda v, _p: f"{v:.0f}%" if pct else tab["fmt"].format(v=v)))
-    ax.grid(axis="y", color=RULE, linewidth=0.7)
-    ax.set_axisbelow(True)
-    _chip_badge(ax, above=pct)
-
-    h, l = ax.get_legend_handles_labels()
-    ax.legend(h[::-1], l[::-1], loc="upper left", bbox_to_anchor=(1.015, 1.0),
-              frameon=False, fontsize=9,
-              title="Component" if cfg["group"] == "component" else "Designer",
-              title_fontsize=9.2, handlelength=1.5, borderaxespad=0)
-    # clears the legend, which is one row per series plus its title
-    ax.text(1.015, 0.98 - 0.062 * (len(series) + 1), setting, transform=ax.transAxes,
-            ha="left", va="top", fontsize=8.3, color=MUTED, linespacing=1.55)
-
-    # supply_ys is set only where the world-supply line was actually drawn, so the
-    # credited files are the ones read rather than the ones the mode implies: the
-    # absolute component tabs draw that line too, not just the supply views
-    used_supply = cfg["mode"] == "supply" or supply_ys is not None
-    frame(fig, ax, plot_id, cfg["title"], subtitle,
+    frame(fig, axes[0], plot_id, cfg["title"], subtitle,
           chip_src([CHIP_FILES[cfg["period"]]]
                    + (["supply_denominators.csv"] if used_supply else [])),
           CHIP_METH, note)
@@ -4529,6 +4459,107 @@ AEI_API_DERIVED = {
 }
 
 
+# ------------------------------- merged small-multiples, replacing four figures
+# Epoch's figure takes the metric as a control. Publishing one chart per metric
+# gave four scatters that share an x axis, a colour and a caption and differ only
+# in the y column. They are one figure with one panel per metric here, and the
+# interactive companion carries the selector Epoch actually offers.
+MODELS_PANELS = {
+    "MODELS-08": dict(
+        x="publication_date", xlabel="Publication date",
+        title="What else went into training, over time",
+        headline="Every input grows, none as fast as compute",
+        metrics=[("parameters", "Parameters", "count"),
+                 ("training_dataset_size", "Training dataset (datapoints)", "count"),
+                 ("training_cost_2023usd", "Training cost (2023 USD)", "usd"),
+                 ("training_time_days", "Training time (days)", "days")],
+        what="the other three quantities Epoch records against publication date, "
+             "beside the parameter count. One panel per metric, on the axes the "
+             "published figure uses for each.",
+        note="Coverage differs sharply by metric and each panel states its own n: "
+             "Epoch records parameters for 714 of the 1,043 notable models and cost "
+             "for 180. A model missing the value is absent from that panel, never "
+             "imputed. Growth rates differ too, which is the point of seeing them "
+             "together - MODELS-D01 fits and compares them directly."),
+    "MODELS-13": dict(
+        x="training_compute_flop", xlabel="Training compute (FLOP)",
+        title="What training compute buys",
+        headline="Compute explains part of every other input, and all of none",
+        metrics=[("parameters", "Parameters", "count"),
+                 ("hardware_quantity", "Accelerators used", "count"),
+                 ("training_cost_2023usd", "Training cost (2023 USD)", "usd")],
+        what="the three quantities Epoch records against training compute rather "
+             "than against time. Both axes are log-scaled on every panel.",
+        note="Each panel is the subset recording both values, so the counts fall well "
+             "below the 1,043 in the release and differ panel to panel. A relationship "
+             "here is association within one published record, not a cost model: "
+             "spend at any given compute level spans three orders of magnitude."),
+}
+
+
+def build_models_panels(plot_id):
+    import pandas as pd
+    cfg = MODELS_PANELS[plot_id]
+    df = _mpoints("notable")
+    logx = cfg["x"] != "publication_date"
+    n_panels = len(cfg["metrics"])
+    cols = 2 if n_panels == 4 else n_panels
+    rows = (n_panels + cols - 1) // cols
+    total = int(_msummary("notable")["models"])
+
+    subtitle = (f"What it shows: {cfg['what']} Notable AI models, {total:,} in the "
+                f"release; each panel plots only the models recording both of its "
+                f"values.")
+    note = cfg["note"]
+
+    fig = plt.figure(figsize=(12.0, 8.6 if rows > 1 else 6.8))
+    l, b, w, h = _rect(subtitle, note, left=0.072, width=0.905, xlabel_room=0.060,
+                       badge_above=True, source=models_src("notable"))
+    # every panel carries its own title, so the badge goes above all of them
+    fig.text(l, b + h + 0.050,
+             "  OBSERVED DATA ONLY  \u00b7  projections excluded  ",
+             ha="left", va="bottom", fontsize=9.1, fontweight="bold", color="white",
+             zorder=9, bbox=dict(boxstyle="round,pad=0.42",
+                                 facecolor=SERIES["current"], edgecolor="none"))
+    gx, gy = 0.085, 0.115
+    pw = (w - gx * (cols - 1)) / cols
+    ph = (h - gy * (rows - 1)) / rows
+
+    for k, (metric, label, fmt) in enumerate(cfg["metrics"]):
+        r, c = divmod(k, cols)
+        ax = fig.add_axes([l + c * (pw + gx), b + (rows - 1 - r) * (ph + gy), pw, ph])
+        sub = df.dropna(subset=[metric, cfg["x"]])
+        sub = sub[sub[metric] > 0]
+        if logx:
+            sub = sub[sub[cfg["x"]] > 0]
+        xs = (sub["decyear"] if cfg["x"] == "publication_date" else sub[cfg["x"]])
+        ax.scatter(xs, sub[metric], s=13, color=SERIES["current"], alpha=0.55,
+                   edgecolor="none", zorder=3)
+        ax.set_yscale("log")
+        _decade_ticks(ax.yaxis, sub[metric], AXIS_FMT[fmt], target=5)
+        if logx:
+            ax.set_xscale("log")
+            _decade_ticks(ax.xaxis, sub[cfg["x"]], AXIS_FMT["pow10"], target=5)
+        else:
+            span = xs.max() - xs.min()
+            step = 10 if span > 45 else 5 if span > 18 else 2
+            import matplotlib.ticker as mticker
+            ax.xaxis.set_major_locator(mticker.MultipleLocator(step))
+            ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{int(v)}"))
+            ax.set_xlim(xs.min() - span * 0.03, xs.max() + span * 0.04)
+        ax.set_title(f"{label}    n={len(sub):,}", fontsize=10.2, fontweight="bold",
+                     color=INK, pad=7)
+        ax.grid(color=RULE, linewidth=0.7)
+        ax.set_axisbelow(True)
+        ax.tick_params(labelsize=8.8)
+        if r == rows - 1:
+            ax.set_xlabel(cfg["xlabel"], fontsize=9.6)
+
+    frame(fig, fig.axes[0], plot_id, cfg["headline"], subtitle,
+          models_src("notable"), MODELS_METH, note)
+    save(fig, plot_id, MODELS_DOMAIN)
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -4538,6 +4569,8 @@ BUILDERS.update({"DERIVED-01": build_d01, "DERIVED-02": build_d02,
                  "DERIVED-05": build_d05, "DERIVED-06": build_d06})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_model_scatter(_p))
                  for pid in MODEL_PLOTS})
+BUILDERS.update({pid: (lambda _rows, _p=pid: build_models_panels(_p))
+                 for pid in MODELS_PANELS})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in MODEL_DERIVED.items()})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_chip(_p)) for pid in CHIP_PLOTS})
 BUILDERS.update({"CHIP-D01": build_chip_d01, "CHIP-D02": build_chip_d02,

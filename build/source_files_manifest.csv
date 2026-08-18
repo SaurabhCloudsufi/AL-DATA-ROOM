@@ -9,14 +9,14 @@ data_center_timelines.csv,AI data centers,"Epoch AI, AI Data Centers",EPOCH-03..
 data_center_chip_quantities.csv,AI data centers,"Epoch AI, AI Data Centers",DERIVED-04
 data_center_cooling_towers.csv,AI data centers,"Epoch AI, AI Data Centers",DERIVED-05
 data_center_chillers.csv,AI data centers,"Epoch AI, AI Data Centers",DERIVED-05
-notable_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-01..04 + 08..13 + D01..D08 + D10..D11
+notable_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-01 + 08 + 13 + D01..D06 + D10 + D11
 frontier_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-05 + D09 + D11
 large_scale_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-06 + D11
-all_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",MODELS-07 + D11
-quarterly_by_designer.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-01..04 + 07..14 + D01 + D04..D06
-cumulative_by_designer.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-05 + CHIP-06 + CHIP-D02
+all_ai_models.csv,ai_models,"Epoch AI, Data on AI Models",D11
+quarterly_by_designer.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-01 + 02 + 09 + 11 + 13 + D01 + D04..D06
+cumulative_by_designer.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-D02
 cumulative_by_chip.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-D03
-supply_denominators.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-09..14 + D01 + D06
+supply_denominators.csv,ai_chip_components,"Epoch AI, AI Chip Components",CHIP-09 + 11 + 13 + D01 + D06
 quarterly_by_chip.csv,ai_chip_components,"Epoch AI, AI Chip Components",
 cumulative_supply_denominators.csv,ai_chip_components,"Epoch AI, AI Chip Components",
 ai_companies_revenue_reports.csv,ai_companies,"Epoch AI, AI Companies",COMPANIES-01..03 + D01..D03 + D06..D08

@@ -1,0 +1,220 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI chip components — Epoch's figure, all settings</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#1a1a1a; }
+  .lg .sw { width:11px; height:11px; border-radius:2px; flex:none; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px;
+          box-shadow:0 4px 14px rgba(0,0,0,.10); opacity:0; transition:opacity .08s;
+          max-width:290px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .tip .row { display:flex; gap:8px; align-items:center; }
+  .tip .row i { font-style:normal; margin-left:auto; font-variant-numeric:tabular-nums; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">CHIP-01</span><h1>AI chip components — Epoch's figure, all settings</h1></div>
+<div class="sub">All four tabs of Epoch's figure over 8 complete quarters, Q1 2024 to Q4 2025. The static chart carries two settings side by side; this one carries the whole control surface. <span class="badge">COMPLETE QUARTERS ONLY</span></div>
+<div class="ctl" id="ctl"></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" viewBox="0 0 1000 470" role="img" aria-label="AI chip components — Epoch's figure, all settings"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Switch tab, colouring and absolute/share above; hover a quarter to read every series in it. Source: Epoch AI, AI Chip Components (CC-BY) — quarterly_by_designer.csv —
+epoch.ai/data/ai-chip-components. Every value is a Monte Carlo median over 10,000 draws;
+medians do not add, because Epoch simulates each aggregation separately. Q1 2026 is
+incomplete at source and excluded.</div>
+</div>
+<script>
+const D = {"quarters":["Q1 2024","Q2 2024","Q3 2024","Q4 2024","Q1 2025","Q2 2025","Q3 2025","Q4 2025"],"tabs":[{"key":"cost","label":"Total cost","scale":1000000000.0,"unit":"$","suffix":"bn","dp":1,"supply":null,"ylabel":"Component cost (US$ billions)"},{"key":"logic","label":"Logic","scale":1000.0,"unit":"","suffix":"k","dp":1,"supply":"logic_supply_wafers","ylabel":"Logic wafers consumed (thousands)"},{"key":"cowos","label":"Packaging","scale":1000.0,"unit":"","suffix":"k","dp":1,"supply":"cowos_supply_wafers","ylabel":"CoWoS wafers consumed (thousands)"},{"key":"hbm","label":"Memory","scale":1000000000.0,"unit":"$","suffix":"bn","dp":1,"supply":"hbm_supply_usd","ylabel":"HBM consumed (US$ billions)"}],"designers":[["NVIDIA","#1f3864"],["Google","#4a6fa5"],["Amazon","#6b8f71"],["AMD","#b4763a"]],"components":[["logic_cost_usd","Logic wafers","#1f3864"],["cowos_cost_usd","CoWoS packaging","#4e8a8b"],["hbm_cost_usd","HBM memory","#b4763a"],["aux_cost_usd","Auxiliary","#9aa9c4"]],"other":["Other","#c3c8d1"],"des":{"cost":{"NVIDIA":[2.1037,2.743,3.8396,6.0375,7.3655,7.8822,10.8054,13.4321],"Google":[0.5893,0.6817,0.7728,0.8713,0.9869,1.2245,1.5265,1.687],"Amazon":[0.2036,0.3033,0.5534,0.6633,0.6804,0.7933,0.9203,1.07],"AMD":[0.3391,0.5498,0.8224,0.9368,0.8304,0.8494,0.9809,1.1679]},"logic":{"NVIDIA":[18.908,23.3014,32.0045,51.9118,58.9946,61.0885,82.7026,103.7469],"Google":[5.1147,6.0581,7.6378,9.804,12.7339,15.0477,13.2295,10.3399],"Amazon":[0.7002,1.6716,4.0843,5.1201,5.9251,6.8924,7.9956,9.2886],"AMD":[1.4705,2.268,3.4267,3.4804,2.9442,2.8839,3.0825,3.4497]},"cowos":{"NVIDIA":[29.8946,36.9679,47.3947,73.2833,81.7281,78.8196,100.3177,116.3917],"Google":[10.5406,11.823,13.4914,15.0347,17.6217,21.1541,21.777,20.2665],"Amazon":[4.0962,5.5545,9.3227,9.4044,9.6608,11.2441,13.0407,15.1516],"AMD":[6.4383,10.3802,15.5956,16.5026,14.0287,13.0564,13.5359,15.0016]},"hbm":{"NVIDIA":[1.1231,1.5238,2.2135,3.5357,4.2759,4.797,6.7734,8.5802],"Google":[0.2383,0.2871,0.3155,0.338,0.363,0.4821,0.7638,1.0158],"Amazon":[0.0994,0.1571,0.3023,0.3458,0.3758,0.4378,0.5077,0.591],"AMD":[0.219,0.3453,0.5183,0.5891,0.5256,0.5699,0.6757,0.8215]}},"comp":{"cost":{"logic_cost_usd":[8.7036,10.5714,11.6863,15.596,14.1835,17.2863,19.6589,20.2084],"cowos_cost_usd":[0.7009,0.9168,1.2321,1.5477,1.7154,2.0979,2.5394,2.9454],"hbm_cost_usd":[2.5,3.5,4.92,7.46,6.48,7.86,9.47,11.4],"aux_cost_usd":[0.4876,0.6073,0.7415,0.957,1.2184,1.1532,1.3835,1.5329]}},"supply":{"logic":[465.9762,566.0794,626.5159,836.5714,761.9048,927.373,1054.8651,1085.0238],"cowos":[58.5,76.5,99.0,117.0,124.6875,149.0625,173.4375,197.8125],"hbm":[2.5,3.5,4.92,7.46,6.48,7.86,9.47,11.4]},"residual":{"logic":[439.7828,532.7803,579.3626,766.2551,681.307,841.4605,947.8549,958.1987],"cowos":[7.5303,11.7744,13.1956,2.775,1.6482,24.7883,24.7662,31.0011],"hbm":[0.8202,1.1867,1.5704,2.6514,0.9397,1.5732,0.7494,0.3915]}};
+const svg=document.getElementById('c'), tip=document.getElementById('tip');
+const ctl=document.getElementById('ctl'), lgw=document.getElementById('lg');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000,H=470,M={l:86,r:20,t:16,b:56};
+let TI=0, GI=0, SI=0;               // tab, colour-by, absolute/share
+
+function tab(){ return D.tabs[TI]; }
+function byDesigner(){ return GI===1; }
+function shareMode(){ return SI===1; }
+
+function fmt(v,dp,unit,suffix){
+  return (unit||'')+v.toLocaleString('en-US',{minimumFractionDigits:dp,maximumFractionDigits:dp})+(suffix||'');
+}
+function series(){
+  const t=tab();
+  // the cost tab is the only one Epoch colours by component
+  const useComp = (t.key==='cost') && !byDesigner();
+  const out=[];
+  if(useComp){
+    for(const c of D.components) out.push({name:c[1], color:c[2], vals:D.comp[t.key][c[0]]});
+  } else {
+    for(const d of D.designers) out.push({name:d[0], color:d[1], vals:D.des[t.key][d[0]]});
+    if(shareMode() && t.supply) out.push({name:D.other[0], color:D.other[1], vals:D.residual[t.key]});
+  }
+  return out;
+}
+function totals(s){
+  return D.quarters.map((_,i)=>s.reduce((a,x)=>a+(x.vals[i]||0),0));
+}
+
+function buildCtl(){
+  ctl.innerHTML='';
+  const add=(cap,opts,cur,pick)=>{
+    if(opts.length<2) return;
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap; g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.type='button';
+      b.textContent=o; b.setAttribute('aria-pressed', i===cur?'true':'false');
+      b.onclick=()=>{ pick(i); buildCtl(); draw(); reportHeight(); };
+      g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  add('Tab', D.tabs.map(t=>t.label), TI, i=>{TI=i; if(!D.tabs[i].supply && SI===1) SI=1;});
+  if(tab().key==='cost') add('Colour by', ['Component','Designer'], GI, i=>{GI=i;});
+  add('Show as', [tab().supply?'Amount':'Amount', tab().supply?'Share of supply':'Share of cost'],
+      SI, i=>{SI=i;});
+}
+
+let S=[], TOT=[], SX=null, SY=null;
+function draw(){
+  const t=tab(); S=series();
+  const pct=shareMode();
+  let vals;
+  if(pct){
+    const raw=totals(S);
+    vals=S.map(s=>s.vals.map((v,i)=>raw[i]?v/raw[i]*100:0));
+  } else {
+    vals=S.map(s=>s.vals.slice());
+  }
+  TOT=D.quarters.map((_,i)=>vals.reduce((a,v)=>a+(v[i]||0),0));
+  let hi = pct?100:Math.max.apply(null,TOT);
+  const supply = (!pct && t.supply) ? D.supply[t.key] : null;
+  if(supply) hi=Math.max(hi, Math.max.apply(null,supply));
+  hi*= pct?1.02:1.16;
+
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const n=D.quarters.length, bw=(W-M.l-M.r)/n*0.62;
+  SX=i=>M.l+(W-M.l-M.r)*(i+0.5)/n;
+  SY=v=>H-M.b-(v/hi)*(H-M.t-M.b);
+
+  const ticks=pct?[0,20,40,60,80,100]:niceTicks(hi,5);
+  ticks.forEach(v=>{
+    const y=SY(v);
+    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y,y2:y,class:'grid'}));
+    const tx=el('text',{x:M.l-8,y:y+4,class:'axis','text-anchor':'end'});
+    tx.textContent=pct?v+'%':fmt(v,v<10?t.dp:0,t.unit,t.suffix); svg.appendChild(tx);
+  });
+  D.quarters.forEach((q,i)=>{
+    let acc=0;
+    vals.forEach((vv,k)=>{
+      const v=vv[i]||0; if(v<=0) return;
+      svg.appendChild(el('rect',{x:SX(i)-bw/2,y:SY(acc+v),width:bw,
+        height:Math.max(0,SY(acc)-SY(acc+v)),fill:S[k].color,stroke:'#fff','stroke-width':.8}));
+      acc+=v;
+    });
+    const lab=el('text',{x:SX(i),y:H-M.b+18,class:'axis','text-anchor':'middle'});
+    lab.textContent=q.split(' ')[0]; svg.appendChild(lab);
+    const yr=el('text',{x:SX(i),y:H-M.b+31,class:'axis','text-anchor':'middle'});
+    yr.textContent=q.split(' ')[1]; svg.appendChild(yr);
+    if(!pct){
+      const tt=el('text',{x:SX(i),y:SY(TOT[i])-6,class:'axis','text-anchor':'middle',
+                          style:'font-weight:700;fill:#1a1a1a'});
+      tt.textContent=fmt(TOT[i],t.dp,t.unit,t.suffix); svg.appendChild(tt);
+    }
+  });
+  if(supply){
+    const pts=supply.map((v,i)=>SX(i)+','+SY(v)).join(' ');
+    svg.appendChild(el('polyline',{points:pts,fill:'none',stroke:'#6b7280',
+      'stroke-width':1.6,'stroke-dasharray':'6 3'}));
+  }
+  const xl=el('text',{x:(M.l+W-M.r)/2,y:H-M.b+50,class:'axlab','text-anchor':'middle'});
+  xl.textContent='Quarter'; svg.appendChild(xl);
+  const yl=el('text',{x:0,y:0,class:'axlab','text-anchor':'middle',
+    transform:'translate(15,'+((M.t+H-M.b)/2)+') rotate(-90)'});
+  yl.textContent=pct?(t.supply?'Share of world supply (%)':'Share of cost (%)'):t.ylabel;
+  svg.appendChild(yl);
+
+  lgw.innerHTML='';
+  S.forEach(s=>{
+    const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:'+s.color+'"></span>'+s.name;
+    lgw.appendChild(d);
+  });
+  if(supply){
+    const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:#6b7280"></span>World supply (all users)';
+    lgw.appendChild(d);
+  }
+  window._vals=vals; window._pct=pct;
+}
+function niceTicks(hi,n){
+  const raw=hi/n, mag=Math.pow(10,Math.floor(Math.log10(raw)));
+  const step=[1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=raw)||10*mag;
+  const out=[]; for(let v=0;v<=hi*1.0001;v+=step) out.push(+v.toFixed(6));
+  return out;
+}
+
+svg.addEventListener('pointermove',ev=>{
+  const r=svg.getBoundingClientRect();
+  const px=(ev.clientX-r.left)/r.width*W;
+  const n=D.quarters.length;
+  const i=Math.round((px-M.l)/((W-M.l-M.r)/n)-0.5);
+  if(i<0||i>=n){ tip.style.opacity=0; return; }
+  const t=tab(), pct=window._pct, vals=window._vals;
+  let h='<b>'+D.quarters[i]+'</b>';
+  S.forEach((s,k)=>{
+    const v=vals[k][i]||0;
+    h+='<div class="row"><span class="sw" style="display:inline-block;width:9px;height:9px;'
+      +'border-radius:2px;background:'+s.color+'"></span>'+s.name
+      +'<i>'+(pct?v.toFixed(1)+'%':fmt(v,t.dp,t.unit,t.suffix))+'</i></div>';
+  });
+  if(!pct) h+='<div class="row" style="border-top:1px solid #d7dbe2;margin-top:4px;'
+             +'padding-top:4px;font-weight:700">Total<i>'+fmt(TOT[i],t.dp,t.unit,t.suffix)+'</i></div>';
+  tip.innerHTML=h; tip.style.opacity=1;
+  const left=SX(i)/W*r.width;
+  tip.style.left=Math.min(Math.max(8,left+14), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top='12px';
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;});
+
+buildCtl(); draw();
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'CHIP-01',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>

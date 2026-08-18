@@ -28,26 +28,52 @@ RESIDUAL = "#c9ced8"
 
 # pid -> (dataset, y metric, colour column, top-N groups, residual label,
 #         title, y axis label, x metric or None for publication date)
+# Epoch's figure takes "colour by" and the metric as controls. The static gallery
+# used to publish one chart per setting; the settings live here instead, as the
+# selectors above the plot, and the payload carries every setting at once.
+COLOUR_DIMS = [
+    ("__none__", "No colouring", 0, ""),
+    ("domain", "Domain", 8, "Other domains"),
+    ("organization_primary", "Organization", 9, "All other organizations"),
+    ("country", "Country", 7, "Other countries"),
+]
+
 CHARTS = {
-    "MODELS-01": ("notable", "training_compute_flop", None, 0, "",
-                  "Training compute of notable AI models",
-                  "Training compute (FLOP)", None),
-    "MODELS-02": ("notable", "training_compute_flop", "domain", 8, "Other domains",
-                  "Training compute of notable AI models, by domain",
-                  "Training compute (FLOP)", None),
-    "MODELS-03": ("notable", "training_compute_flop", "organization_primary", 9,
-                  "All other organizations",
-                  "Training compute of notable AI models, by organization",
-                  "Training compute (FLOP)", None),
-    "MODELS-04": ("notable", "training_compute_flop", "country", 7, "Other countries",
-                  "Training compute of notable AI models, by country",
-                  "Training compute (FLOP)", None),
-    "MODELS-05": ("frontier", "training_compute_flop", None, 0, "",
-                  "Training compute of frontier AI models",
-                  "Training compute (FLOP)", None),
-    "MODELS-13": ("notable", "parameters", "domain", 8, "Other domains",
-                  "Parameters against training compute, notable AI models",
-                  "Parameters", "training_compute_flop"),
+    "MODELS-01": dict(dataset="notable", x="publication_date",
+                      metrics=[("training_compute_flop", "Training compute (FLOP)", "pow10")],
+                      colours=COLOUR_DIMS, fit=True,
+                      title="Training compute of notable AI models",
+                      xlabel="Publication date"),
+    "MODELS-05": dict(dataset="frontier", x="publication_date",
+                      metrics=[("training_compute_flop", "Training compute (FLOP)", "pow10")],
+                      colours=COLOUR_DIMS[:1], fit=True,
+                      title="Training compute of frontier AI models",
+                      xlabel="Publication date"),
+    "MODELS-06": dict(dataset="large_scale", x="publication_date",
+                      metrics=[("training_compute_flop", "Training compute (FLOP)", "pow10")],
+                      colours=COLOUR_DIMS[:1], fit=True,
+                      title="Training compute of large-scale AI models",
+                      xlabel="Publication date"),
+    "MODELS-08": dict(dataset="notable", x="publication_date",
+                      metrics=[("parameters", "Parameters", "count"),
+                               ("training_dataset_size", "Training dataset (datapoints)", "count"),
+                               ("training_cost_2023usd", "Training cost (2023 USD)", "usd"),
+                               ("training_time_days", "Training time (days)", "days")],
+                      colours=COLOUR_DIMS[:1], fit=False,
+                      title="What else went into training, over time",
+                      xlabel="Publication date"),
+    "MODELS-13": dict(dataset="notable", x="training_compute_flop",
+                      metrics=[("parameters", "Parameters", "count"),
+                               ("hardware_quantity", "Accelerators used", "count"),
+                               ("training_cost_2023usd", "Training cost (2023 USD)", "usd")],
+                      colours=COLOUR_DIMS[:2], fit=False,
+                      title="What training compute buys",
+                      xlabel="Training compute (FLOP)"),
+    "MODELS-D09": dict(dataset="frontier", x="publication_date",
+                       metrics=[("flop_per_dollar", "Compute per dollar of hardware (FLOP/$)", "pow10")],
+                       colours=COLOUR_DIMS[:1], fit=False, table="hardware",
+                       title="Hardware price-performance behind frontier models",
+                       xlabel="Hardware release date"),
 }
 
 SHORT_COUNTRY = {
@@ -76,10 +102,10 @@ function decadeTicks(lo, hi, target) {
   return out;
 }
 
-function geometry(D, hidden, W, H, M) {
+function geometry(D, hidden, W, H, M, PTS) {
   const shown = [];
-  for (let i = 0; i < D.pts.length; i++) if (!hidden.has(D.pts[i][2])) shown.push(i);
-  const xs = shown.map(i => D.pts[i][0]), ys = shown.map(i => D.pts[i][1]);
+  for (let i = 0; i < PTS.length; i++) if (!hidden.has(PTS[i].g)) shown.push(i);
+  const xs = shown.map(i => PTS[i].x), ys = shown.map(i => PTS[i].y);
   const yLo = Math.min.apply(null, ys), yHi = Math.max.apply(null, ys);
   let xLo = Math.min.apply(null, xs), xHi = Math.max.apply(null, xs);
   const sy = v => H - M.b - (Math.log10(v) - Math.log10(yLo))
@@ -108,10 +134,10 @@ function yearTicks(lo, hi) {
   return out;
 }
 
-function nearest(D, G, px, py, limit) {
+function nearest(PTS, G, px, py, limit) {
   let best = -1, bestD = limit * limit;
   for (const i of G.shown) {
-    const dx = G.sx(D.pts[i][0]) - px, dy = G.sy(D.pts[i][1]) - py;
+    const dx = G.sx(PTS[i].x) - px, dy = G.sy(PTS[i].y) - py;
     const d = dx * dx + dy * dy;
     if (d < bestD) { bestD = d; best = i; }
   }
@@ -137,6 +163,13 @@ PAGE = """<!doctype html>
   .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
   .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
             font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .ctl .grp { display:flex; gap:6px; align-items:center; }
+  .ctl .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
   .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
   .lg { display:inline-flex; align-items:center; gap:6px; cursor:pointer;
          font-size:12px; border:0; background:none; padding:2px 3px; color:#1a1a1a; }
@@ -158,6 +191,7 @@ PAGE = """<!doctype html>
 <div id="pg">
 <div class="hd"><span class="pid">__PID__</span><h1>__TITLE__</h1></div>
 <div class="sub">__SUB__ <span class="badge">RECORDED VALUES ONLY</span></div>
+<div class="ctl" id="ctl"></div>
 <div class="legend" id="lg"></div>
 <div style="position:relative">
   <svg id="c" viewBox="0 0 1000 520" role="img" aria-label="__TITLE__"></svg>
@@ -170,6 +204,22 @@ plotted value appear; nothing is imputed.</div>
 <script>
 const D = __DATA__;
 __GEOMETRY__
+// the settings Epoch offers as controls: which metric is on y, and what colours
+// the points. Changing either re-derives the groups and redraws.
+let MI = 0, CI = 0;
+function metric(){ return D.metrics[MI]; }
+function dim(){ return D.dims[CI]; }
+function activePts(){
+  const m = metric();
+  const out = [];
+  for (const p of D.pts) {
+    const y = p[2 + MI];
+    if (y === null || y === undefined) continue;
+    out.push({x:p[0], y:y, g:(dim().perPoint ? p[D.gStart + CI] : 0),
+              name:p[1], meta:p[D.metaAt], date:p[D.metaAt+1]});
+  }
+  return out;
+}
 const W=1000, H=520, M={l:82,r:18,t:16,b:52};
 const svg=document.getElementById('c'), tip=document.getElementById('tip'), lgw=document.getElementById('lg');
 const hidden=new Set();
@@ -184,7 +234,9 @@ function fmtLog(v){
   const f=Math.floor(Math.log10(v)), m=v/Math.pow(10,f);
   return (Math.round(m*10)/10)+'\\u00D7'+'10'+sup(f);
 }
-function fmtY(v){ return D.yUnit==='count' ? human(v) : fmtLog(v); }
+function fmtY(v){ const u=metric()[2];
+  return u==='count' ? human(v) : u==='usd' ? '$'+human(v)
+       : u==='days' ? (v>=1?human(v):String(+v.toPrecision(2))) : fmtLog(v); }
 function human(v){
   for(const [c,u] of [[1e12,'T'],[1e9,'B'],[1e6,'M'],[1e3,'k']])
     if(v>=c) return (v/c).toLocaleString('en-US',{maximumFractionDigits:0})+u;
@@ -192,20 +244,39 @@ function human(v){
 }
 function fmtX(v){ return D.logX ? fmtLog(v) : String(Math.round(v)); }
 
+function buildCtl(){
+  const ctl=document.getElementById('ctl'); ctl.innerHTML='';
+  const add=(cap, opts, cur, onPick)=>{
+    if(opts.length<2) return;
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap;
+    g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button');
+      b.className='btn'; b.type='button'; b.textContent=o;
+      b.setAttribute('aria-pressed', i===cur?'true':'false');
+      b.onclick=()=>{ onPick(i); hidden.clear(); buildCtl(); drawLegend(); draw(); reportHeight(); };
+      g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  add('Metric', D.metrics.map(m=>m[1]), MI, i=>{MI=i;});
+  add('Colour by', D.dims.map(d=>d.label), CI, i=>{CI=i;});
+}
+
 function drawLegend(){
   lgw.innerHTML='';
-  if(D.groups.length<2) return;
-  D.groups.forEach((g,i)=>{
+  const gs=dim().groups;
+  if(!dim().perPoint || gs.length<2) return;
+  gs.forEach((g,i)=>{
     const b=document.createElement('button');
     b.className='lg'; b.type='button';
     b.setAttribute('aria-pressed', hidden.has(i)?'true':'false');
-    b.innerHTML='<span class="sw" style="background:'+g.color+'"></span>'+g.name+' ('+g.n+')';
-    // toggle in place rather than rebuilding the legend, so focus and the
-    // pressed state survive the click
+    b.innerHTML='<span class="sw" style="background:'+g.color+'"></span>'+g.name;
     b.onclick=()=>{
       if(hidden.has(i)) hidden.delete(i);
-      else if(hidden.size < D.groups.length-1) hidden.add(i);
-      else return;                       // never leave the chart with nothing on it
+      else if(hidden.size < gs.length-1) hidden.add(i);
+      else return;
       b.setAttribute('aria-pressed', hidden.has(i)?'true':'false');
       draw();
     };
@@ -213,9 +284,10 @@ function drawLegend(){
   });
 }
 
-let G=null;
+let G=null, PTS=[];
 function draw(){
-  G=geometry(D,hidden,W,H,M);
+  PTS=activePts();
+  G=geometry(D,hidden,W,H,M,PTS);
   while(svg.firstChild) svg.removeChild(svg.firstChild);
 
   if(!D.logX && G.xLo < 2010){
@@ -242,36 +314,40 @@ function draw(){
   xl.textContent=D.xLabel; svg.appendChild(xl);
   const yl=el('text',{x:0,y:0,class:'axlab','text-anchor':'middle',
                       transform:'translate(16,'+((M.t+H-M.b)/2)+') rotate(-90)'});
-  yl.textContent=D.yLabel; svg.appendChild(yl);
+  yl.textContent=metric()[1]; svg.appendChild(yl);
 
+  const gs=dim().groups;
   G.shown.forEach(i=>{
-    const p=D.pts[i];
-    svg.appendChild(el('circle',{cx:G.sx(p[0]).toFixed(2),cy:G.sy(p[1]).toFixed(2),r:3.6,
-      fill:D.groups[p[2]].color,stroke:'#fff','stroke-width':.6,'fill-opacity':.85}));
+    const p=PTS[i];
+    svg.appendChild(el('circle',{cx:G.sx(p.x).toFixed(2),cy:G.sy(p.y).toFixed(2),r:3.6,
+      fill:(gs[p.g]||gs[0]).color,stroke:'#fff','stroke-width':.6,'fill-opacity':.85}));
   });
-  if(D.fit && !D.logX){
-    const [x0,x1,slope,icept]=D.fit;
-    svg.appendChild(el('line',{x1:G.sx(x0),y1:G.sy(Math.pow(10,slope*x0+icept)),
-      x2:G.sx(x1),y2:G.sy(Math.pow(10,slope*x1+icept)),stroke:'#b4763a','stroke-width':2.2}));
+  const f=D.fits && D.fits[MI];
+  if(f && !D.logX && CI===0){
+    svg.appendChild(el('line',{x1:G.sx(f[0]),y1:G.sy(Math.pow(10,f[2]*f[0]+f[3])),
+      x2:G.sx(f[1]),y2:G.sy(Math.pow(10,f[2]*f[1]+f[3])),
+      stroke:'#b4763a','stroke-width':2.2}));
   }
   const hl=el('circle',{id:'hl',r:6.5,fill:'none',stroke:'#1a1a1a','stroke-width':1.6,
                         cx:-99,cy:-99}); svg.appendChild(hl);
+  const cnt=document.getElementById('cnt');
+  if(cnt) cnt.textContent=G.shown.length.toLocaleString('en-US')+' models plotted';
 }
 
 function move(ev){
   if(!G) return;
   const r=svg.getBoundingClientRect();
   const px=(ev.clientX-r.left)/r.width*W, py=(ev.clientY-r.top)/r.height*H;
-  const i=nearest(D,G,px,py,14);
+  const i=nearest(PTS,G,px,py,14);
   const hl=document.getElementById('hl');
   if(i<0){ tip.style.opacity=0; hl.setAttribute('cx',-99); return; }
-  const p=D.pts[i];
-  hl.setAttribute('cx',G.sx(p[0])); hl.setAttribute('cy',G.sy(p[1]));
-  tip.innerHTML='<b>'+p[3]+'</b><div class="m">'+p[4]+' &middot; '+p[5]+'</div>'
-    +'<div>'+D.yLabel+': '+fmtY(p[1])+'</div>'
-    +(D.logX?'<div>'+D.xLabel+': '+fmtLog(p[0])+'</div>':'');
+  const p=PTS[i];
+  hl.setAttribute('cx',G.sx(p.x)); hl.setAttribute('cy',G.sy(p.y));
+  tip.innerHTML='<b>'+p.name+'</b><div class="m">'+p.meta+' &middot; '+p.date+'</div>'
+    +'<div>'+metric()[1]+': '+fmtY(p.y)+'</div>'
+    +(D.logX?'<div>'+D.xLabel+': '+fmtLog(p.x)+'</div>':'');
   tip.style.opacity=1;
-  const left=G.sx(p[0])/W*r.width, top=G.sy(p[1])/H*r.height;
+  const left=G.sx(p.x)/W*r.width, top=G.sy(p.y)/H*r.height;
   tip.style.left=Math.min(Math.max(8,left+14), r.width-tip.offsetWidth-8)+'px';
   tip.style.top=Math.min(Math.max(8,top-10), r.height-tip.offsetHeight-8)+'px';
 }
@@ -279,7 +355,7 @@ function move(ev){
 svg.addEventListener('pointermove',move);
 svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
   const hl=document.getElementById('hl'); if(hl) hl.setAttribute('cx',-99);});
-drawLegend(); draw();
+buildCtl(); drawLegend(); draw();
 
 function reportHeight(){
   const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
@@ -310,72 +386,105 @@ def main():
     summary = {r["dataset"]: r for r in read("models_summary.csv")}
     trends = read("models_trends.csv")
 
-    for pid, (ds, metric, colour, top_n, residual, title, ylabel, xmetric) in CHARTS.items():
-        rows = [r for r in read(f"points_{ds}.csv")
-                if r["publication_date"] and r[metric]
-                and (not xmetric or r[xmetric])]
-
-        # group assignment, matching the static chart exactly
-        if colour:
-            counts = {}
-            for r in rows:
-                key = r[colour] or ""
-                counts[key] = counts.get(key, 0) + 1
-            ranked = [k for k in sorted(counts, key=lambda k: -counts[k]) if k]
-            if colour == "country" and "Multinational" in ranked:
-                ranked.remove("Multinational")
-                ranked.insert(0, "Multinational")
-            keep = ranked[:top_n]
-            names = [SHORT_COUNTRY.get(k, k) for k in keep]
-            index = {k: i for i, k in enumerate(keep)}
+    for pid, cfg in CHARTS.items():
+        if cfg.get("table") == "hardware":
+            rows = read("frontier_hardware_price_performance.csv")
+            datecol = "hardware_release_date"
         else:
-            keep, names, index = [], [], {}
+            rows = read(f"points_{cfg['dataset']}.csv")
+            datecol = "publication_date"
+        xcol = cfg["x"] if cfg["x"] != "publication_date" else datecol
 
-        pts, group_n = [], {}
+        # a point survives if it has an x and at least one of the metrics
+        keep = []
         for r in rows:
-            if colour:
-                key = r[colour] or ""
-                gi = index.get(key, len(keep))
-            else:
-                gi = 0
-            group_n[gi] = group_n.get(gi, 0) + 1
-            x = float(r[xmetric]) if xmetric else dec_year(r["publication_date"])
-            pts.append([round(x, 4), float(r[metric]), gi, r["model"],
-                        r["organization_primary"] or "Organization not recorded",
-                        r["publication_date"]])
+            if not r.get(xcol):
+                continue
+            if not any(r.get(m) for m, _, _ in cfg["metrics"]):
+                continue
+            keep.append(r)
 
-        if colour:
-            labels = names + ([residual] if len(keep) in group_n else [])
-        else:
-            labels = ["Recorded models"]
-        groups = [{"name": lab,
-                   "color": RESIDUAL if (colour and i == len(names)) else PALETTE[i % len(PALETTE)],
-                   "n": group_n.get(i, 0)}
-                  for i, lab in enumerate(labels)]
+        # one group index per colour dimension, assigned exactly as the static
+        # charts assign them: top-N by count, the rest pooled into one pale group
+        dims = []
+        for col, label, top_n, residual in cfg["colours"]:
+            if col == "__none__":
+                dims.append({"label": label, "perPoint": False,
+                             "groups": [{"name": "Recorded models", "color": PALETTE[0]}],
+                             "index": {}})
+                continue
+            counts = {}
+            for r in keep:
+                k = r.get(col) or ""
+                if k:
+                    counts[k] = counts.get(k, 0) + 1
+            ranked = sorted(counts, key=lambda k: -counts[k])
+            if col == "country" and "Multinational" in ranked:
+                ranked.remove("Multinational"); ranked.insert(0, "Multinational")
+            head = ranked[:top_n]
+            names = [SHORT_COUNTRY.get(k, k) for k in head]
+            groups = [{"name": n, "color": PALETTE[i % len(PALETTE)]}
+                      for i, n in enumerate(names)] + [{"name": residual, "color": RESIDUAL}]
+            dims.append({"label": label, "perPoint": True, "groups": groups,
+                         "index": {k: i for i, k in enumerate(head)}})
 
-        fit = None
-        if not xmetric:
+        pts = []
+        for r in keep:
+            x = float(r[xcol]) if cfg["x"] != "publication_date" else dec_year(r[datecol])
+            row = [round(x, 4), r.get("model") or "Model not named"]
+            for m, _, _ in cfg["metrics"]:
+                v = r.get(m)
+                row.append(round(float(v), 6) if v else None)
+            for (col, _, _, _), d in zip(cfg["colours"], dims):
+                if d["perPoint"]:
+                    row.append(d["index"].get(r.get(col) or "", len(d["index"])))
+            row.append(r.get("organization_primary") or r.get("training_hardware")
+                       or "Organization not recorded")
+            row.append(r.get(datecol, ""))
+            pts.append(row)
+
+        n_metrics = len(cfg["metrics"])
+        n_perpoint = sum(1 for d in dims if d["perPoint"])
+        fits = [None] * n_metrics
+        if cfg["fit"]:
             for t in trends:
-                if (t["dataset"] == ds and t["metric"] == metric
-                        and t["era"] == "deep learning era"):
-                    fit = [float(t["x_min"]), float(t["x_max"]),
-                           float(t["oom_per_year"]), float(t["intercept_log10"])]
+                if (t["dataset"] == cfg["dataset"] and t["era"] == "deep learning era"):
+                    for k, (m, _, _) in enumerate(cfg["metrics"]):
+                        if t["metric"] == m:
+                            fits[k] = [float(t["x_min"]), float(t["x_max"]),
+                                       float(t["oom_per_year"]), float(t["intercept_log10"])]
+
         payload = {
-            "pts": pts, "groups": groups, "logX": bool(xmetric), "fit": fit,
-            "yLabel": ylabel, "yUnit": "count" if metric == "parameters" else "pow10",
-            "xLabel": ("Training compute (FLOP)" if xmetric else "Publication date"),
+            "pts": pts,
+            "metrics": [[m, lab, unit] for m, lab, unit in cfg["metrics"]],
+            "dims": [{"label": d["label"], "perPoint": d["perPoint"],
+                      "groups": d["groups"]} for d in dims],
+            "gStart": 2 + n_metrics,
+            "metaAt": 2 + n_metrics + n_perpoint,
+            "fits": fits,
+            "logX": cfg["x"] != "publication_date",
+            "xLabel": cfg["xlabel"],
         }
-        summ = summary[ds]
-        sub = (f"{len(pts):,} of {int(summ['models']):,} models in "
-               f"{summ['source_file']} record "
-               f"{'both values' if xmetric else 'this value'}; the rest are absent.")
+        summ = summary.get(cfg["dataset"], {})
+        total = int(summ.get("models", len(keep)))
+        controls = []
+        if len(cfg["metrics"]) > 1:
+            controls.append(f"{len(cfg['metrics'])} metrics")
+        if len(cfg["colours"]) > 1:
+            controls.append(f"{len(cfg['colours'])} colourings")
+        sub = (f"{len(pts):,} of {total:,} models in "
+               f"{summ.get('source_file', 'the release')} carry a plotted value"
+               + (f"; switch between {' and '.join(controls)} above." if controls
+                  else "; the rest are absent."))
+
         html = (PAGE.replace("__DATA__", json.dumps(payload, separators=(",", ":")))
                     .replace("__GEOMETRY__", GEOMETRY_JS)
-                    .replace("__TITLE__", title).replace("__PID__", pid)
-                    .replace("__SUB__", sub).replace("__FILE__", summ["source_file"]))
+                    .replace("__TITLE__", cfg["title"]).replace("__PID__", pid)
+                    .replace("__SUB__", sub)
+                    .replace("__FILE__", summ.get("source_file", "notable_ai_models.csv")))
         (OUT / f"{pid}.html").write_text(html, encoding="utf-8")
         print(f"wrote {(OUT / f'{pid}.html').relative_to(REPO)} "
-              f"({len(pts):,} points, {len(groups)} groups)")
+              f"({len(pts):,} points, {n_metrics} metric(s), {len(dims)} colouring(s))")
 
 
 if __name__ == "__main__":

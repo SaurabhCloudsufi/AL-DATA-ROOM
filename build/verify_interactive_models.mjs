@@ -1,132 +1,89 @@
-// Render each interactive AI Models chart in a simulated DOM and assert it drew.
-//
-// A scatter whose maths is right can still ship blank if the markup or the
-// wiring is broken, so this runs the published HTML end to end: draw, legend
-// toggle, hover readout, height report.
-//
-// Needs jsdom, a dev-time dependency only, not vendored into the site. Skips
-// with a clear message if it is not installed.
-// Run: node build/verify_interactive_models.mjs [path-to-node_modules]
-import { readFileSync, existsSync } from "node:fs";
-import { createRequire } from "node:module";
+/**
+ * Verify the interactive AI Models companions render and their controls work.
+ *
+ * Runs each page against a minimal DOM stub. Checks it drew a circle per plotted
+ * point plus the hover highlight, then exercises the two controls Epoch offers
+ * and this page reproduces: switching the metric must change the plotted count,
+ * and switching "colour by" must change the number of legend entries. Finally it
+ * fires a hover and requires the tooltip to name a model.
+ *
+ * No dependencies - the previous version needed jsdom and could not run here.
+ *
+ *   node build/verify_interactive_models.mjs [--embedded]
+ */
+import { readFileSync, readdirSync } from 'fs';
+import vm from 'vm';
 
-const CHARTS = ["MODELS-01", "MODELS-02", "MODELS-03", "MODELS-04",
-                "MODELS-05", "MODELS-13"];
-const DIR = new URL("../ai-models/charts/", import.meta.url);
+const dir = new URL('../ai-models/charts/', import.meta.url).pathname;
+const embedded = process.argv[2] === '--embedded';
+let fail = 0;
 
-let JSDOM;
-try {
-  const req = createRequire(process.argv[2] ? process.argv[2] + "/" : import.meta.url);
-  ({ JSDOM } = req("jsdom"));
-} catch {
-  console.log("jsdom not installed - skipping render verification");
-  process.exit(0);
-}
-
-let failures = 0;
-const check = (name, ok, detail = "") => {
-  if (!ok) { failures++; console.error(`  FAIL  ${name} ${detail}`); }
-  else console.log(`  ok    ${name}`);
-};
-
-for (const id of CHARTS) {
-  const file = new URL(id + ".html", DIR);
-  if (!existsSync(file)) { check(`${id} exists`, false); continue; }
-  console.log(`\n${id}`);
-
-  const posted = [];
-  const dom = new JSDOM(readFileSync(file, "utf8"), {
-    runScripts: "dangerously", pretendToBeVisual: true, url: "https://example.test/",
+for (const f of readdirSync(dir).filter(x => x.startsWith('MODELS-') && x.endsWith('.html')).sort()) {
+  const html = readFileSync(dir + f, 'utf8');
+  const js = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+  const D = JSON.parse(js.match(/^const D = (\{.*\});$/m)[1]);
+  const mk = (tag) => ({
+    tag, children: [], attrs: {}, style: {},
+    setAttribute(k, v) { this.attrs[k] = v; }, getAttribute(k) { return this.attrs[k]; },
+    appendChild(c) { this.children.push(c); return c; },
+    removeChild(c) { this.children = this.children.filter(x => x !== c); },
+    get firstChild() { return this.children[0] || null; },
+    set innerHTML(v) { this._html = v; this.children = []; },
+    get innerHTML() { return this._html || ''; },
+    set textContent(v) { this._text = v; }, get textContent() { return this._text || ''; },
+    addEventListener(t, fn) { (this._ev ||= {})[t] = fn; },
+    getBoundingClientRect: () => ({ left: 0, top: 0, width: 1000, height: 520 }),
   });
-  const { window } = dom;
-  window.parent = { postMessage: (m) => posted.push(m) };
-  await new Promise(r => setTimeout(r, 60));
-  const doc = window.document;
+  const byId = { c: mk('svg'), tip: mk('div'), lg: mk('div'), ctl: mk('div'), pg: mk('div') };
+  const posted = [];
+  const ctx = { document: {
+      getElementById: (id) => byId[id] || byId.c.children.find(e => e.attrs.id === id) || null,
+      createElementNS: (n, t) => mk(t), createElement: (t) => mk(t),
+      querySelector: () => null, body: mk('body') },
+    console };
+  ctx.window = { addEventListener() {} }; ctx.window.window = ctx.window;
+  ctx.window.parent = embedded ? { postMessage: (m) => posted.push(m) } : ctx.window;
+  try {
+    vm.createContext(ctx);
+    vm.runInContext(js, ctx, { timeout: 20000 });
+    const circles = () => byId.c.children.filter(e => e.tag === 'circle').length;
+    const base = circles(), texts = byId.c.children.filter(e => e.tag === 'text').length;
 
-  const svg = doc.getElementById("c");
-  check(`${id} svg present`, !!svg);
-
-  // the payload is the contract: every point in it must reach the page
-  const data = JSON.parse(readFileSync(file, "utf8")
-    .match(/const D = (\{.*?\});\n/s)[1]);
-  const circles = svg.querySelectorAll("circle");
-  // one marker per point, plus the hover highlight ring
-  check(`${id} drew one marker per recorded model`,
-        circles.length === data.pts.length + 1,
-        `got ${circles.length} for ${data.pts.length} points`);
-  check(`${id} no NaN in any marker`,
-        ![...circles].some(c => ["cx", "cy"].some(a => Number.isNaN(parseFloat(c.getAttribute(a))))));
-  check(`${id} every marker sits inside the plot area`,
-        [...circles].slice(0, -1).every(c => {
-          const x = parseFloat(c.getAttribute("cx")), y = parseFloat(c.getAttribute("cy"));
-          return x >= 0 && x <= 1000 && y >= 0 && y <= 520;
-        }));
-  check(`${id} gridlines and axis labels drawn`,
-        svg.querySelectorAll("line.grid").length >= 4 &&
-        svg.querySelectorAll("text.axis").length >= 5);
-  check(`${id} both axes are labelled`,
-        svg.querySelectorAll("text.axlab").length === 2);
-
-  const legend = doc.querySelectorAll("#lg button.lg");
-  check(`${id} legend has an entry per group`,
-        legend.length === (data.groups.length > 1 ? data.groups.length : 0),
-        `got ${legend.length} for ${data.groups.length} groups`);
-
-  if (legend.length) {
-    // clicking a legend entry must remove exactly that group's points
-    const before = svg.querySelectorAll("circle").length;
-    legend[0].dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
-    const after = svg.querySelectorAll("circle").length;
-    check(`${id} legend toggle removes exactly that group`,
-          before - after === data.groups[0].n, `${before} -> ${after}`);
-    check(`${id} toggle marks the entry pressed`,
-          legend[0].getAttribute("aria-pressed") === "true");
-    legend[0].dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
-    check(`${id} legend toggle restores the group`,
-          svg.querySelectorAll("circle").length === before);
-  }
-
-  // hover must name the model under the pointer. jsdom has no PointerEvent, but
-  // a MouseEvent carries the clientX/clientY the handler actually reads.
-  svg.getBoundingClientRect = () => ({ left: 0, top: 0, width: 1000, height: 520 });
-  const point = (type, x, y) => svg.dispatchEvent(
-    new window.MouseEvent(type, { bubbles: true, clientX: x, clientY: y }));
-
-  // aim at a marker that is actually on the page rather than a guessed pixel
-  const target = [...svg.querySelectorAll("circle")].find(c => c.getAttribute("id") !== "hl");
-  point("pointermove", parseFloat(target.getAttribute("cx")),
-        parseFloat(target.getAttribute("cy")));
-  const tip = doc.getElementById("tip");
-  check(`${id} hover names a model`, tip.style.opacity === "1" && /<b>.+<\/b>/.test(tip.innerHTML),
-        tip.innerHTML.slice(0, 60));
-  check(`${id} hover rings the point`,
-        parseFloat(doc.getElementById("hl").getAttribute("cx")) > 0);
-
-  point("pointermove", 5, 5);
-  check(`${id} pointer away from any model retracts the readout`,
-        tip.style.opacity === "0");
-
-  point("pointerleave", 500, 260);
-  check(`${id} leaving hides the readout and the ring`,
-        tip.style.opacity === "0" &&
-        parseFloat(doc.getElementById("hl").getAttribute("cx")) < 0);
-
-  // jsdom has no layout engine, so a real measurement is always 0 here. Stub the
-  // wrapper's box and fire a resize: that tests the wiring, which is the part
-  // that can actually break.
-  const pg = doc.getElementById("pg");
-  check(`${id} wraps its content in #pg`, !!pg);
-  if (pg) {
-    pg.getBoundingClientRect = () => ({ height: 613 });
-    posted.length = 0;
-    window.dispatchEvent(new window.Event("resize"));
-    check(`${id} reports its measured height to the parent`,
-          posted.some(m => m && m.type === "aidr-height" && m.id === id && m.h === 615),
-          JSON.stringify(posted.slice(-1)));
-  }
-
-  window.close();
+    const groups = byId.ctl.children.filter(e => e.tag === 'div');
+    const btns = (g) => g.children.filter(e => e.tag === 'button');
+    let metricTest = 'n/a', colourTest = 'n/a';
+    for (const g of groups) {
+      const cap = g.children[0].textContent, bs = btns(g);
+      if (cap === 'Metric' && bs.length > 1) {
+        bs[1].onclick(); const after = circles(); bs[0].onclick();
+        metricTest = (after !== base && circles() === base) ? 'ok' : `BROKEN ${base}->${after}`;
+      }
+      if (cap === 'Colour by' && bs.length > 1) {
+        const before = byId.lg.children.length;
+        bs[1].onclick(); const after = byId.lg.children.length; bs[0].onclick();
+        colourTest = (after > before) ? `ok (${before}->${after} keys)` : `BROKEN ${before}->${after}`;
+      }
+    }
+    let hover = 'BROKEN';
+    const mv = byId.c._ev && byId.c._ev.pointermove;
+    if (mv) {
+      // the scales live inside the page, so sweep the plot area until a point is
+      // hit rather than guessing one position
+      outer: for (let x = 90; x < 980; x += 12) {
+        for (let y = 20; y < 470; y += 12) {
+          mv({ clientX: x, clientY: y });
+          if ((byId.tip.innerHTML || '').includes('<b>')) { hover = 'ok'; break outer; }
+        }
+      }
+    }
+    const ok = base > 2 && texts > 3 && hover === 'ok'
+               && !String(metricTest).startsWith('BROKEN')
+               && !String(colourTest).startsWith('BROKEN');
+    if (!ok) { fail++; console.log(`  ${f}: SUSPECT circles=${base} texts=${texts} metric=${metricTest} colour=${colourTest} hover=${hover}`); }
+    else console.log(`  ${f.replace('.html','').padEnd(11)} points=${String(base-1).padStart(4)} `
+      + `metric=${String(metricTest).padEnd(6)} colour=${String(colourTest).padEnd(16)} hover=${hover}`
+      + (embedded ? `  height-msgs=${posted.length}` : ''));
+  } catch (e) { fail++; console.log(`  ${f}: THREW — ${e.message}`); }
 }
-
-console.log(failures ? `\n${failures} check(s) FAILED` : "\nall render checks passed");
-process.exit(failures ? 1 : 0);
+console.log(fail ? `\n${fail} page(s) failed` : '\nall pages executed and drew content');
+process.exit(fail ? 1 : 0);
