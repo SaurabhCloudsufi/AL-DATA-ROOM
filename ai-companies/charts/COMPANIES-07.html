@@ -1,0 +1,225 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff at AI companies, with fitted growth</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px; background:#fff; color:#1a1a1a;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+         font-size:12px; border:0; background:none; padding:2px 3px; color:#1a1a1a; }
+  .lg .sw { width:11px; height:11px; border-radius:999px; flex:none; }
+  .lg[aria-pressed="true"] { opacity:.32; text-decoration:line-through; }
+  .lg:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px; box-shadow:0 4px 14px rgba(0,0,0,.10);
+          opacity:0; transition:opacity .08s; max-width:290px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">COMPANIES-07</span><h1>Staff at AI companies, with fitted growth</h1></div>
+<div class="sub">48 observations across 9 companies, of 11 Epoch tracks. Observed to 2026-08-13. Growth fitted for 1 company; the rest have too few observations. <span class="badge">OBSERVED DATA ONLY</span></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" viewBox="0 0 1000 520" role="img" aria-label="Staff at AI companies, with fitted growth"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Hover a point for the company and the report behind it; click a legend
+entry to remove that company. Source: Epoch AI, AI Companies (CC-BY) — ai_companies_staff_reports.csv —
+epoch.ai/data/ai-companies. A company appears only where Epoch records the plotted value;
+nothing is imputed and no line is drawn past the last observation.</div>
+</div>
+<script>
+const D = {"pts":[[2022.6188,50.0,3,"2022-08-15","Full company",0],[2023.0,85.0,3,"2023-01-01","Full company",0],[2023.7858,192.0,3,"2023-10-15","Full company",0],[2023.9473,300.0,3,"2023-12-13","Full company",0],[2024.4107,500.0,3,"2024-05-30","Full company",0],[2024.9993,915.0,3,"2024-12-31","Full company",0],[2024.9993,521.0,3,"2024-12-31","Division/role \u00b7 Research and development",1],[2025.3888,1300.0,3,"2025-05-23","Full company",0],[2025.9172,2300.0,3,"2025-12-02","Full company",0],[2026.5941,3000.0,3,"2026-08-06","Full company",0],[2025.1971,160.0,8,"2025-03-14","Full company",0],[2026.4819,300.0,8,"2026-06-26","Full company",0],[2013.9966,75.0,0,"2013-12-31","Division/role \u00b7 DeepMind",1],[2014.0684,100.0,0,"2014-01-26","Division/role \u00b7 DeepMind",1],[2016.1971,200.0,0,"2016-03-13","Division/role \u00b7 DeepMind",1],[2016.9938,350.0,0,"2016-12-29","Division/role \u00b7 DeepMind",1],[2017.9856,700.0,0,"2017-12-27","Division/role \u00b7 DeepMind",1],[2021.3833,1000.0,0,"2021-05-21","Division/role \u00b7 DeepMind",1],[2021.7639,1000.0,0,"2021-10-07","Division/role \u00b7 DeepMind",1],[2024.3723,2600.0,0,"2024-05-16","Full AI division \u00b7 Google DeepMind",1],[2024.4134,4000.0,0,"2024-05-31","Full AI division \u00b7 Google DeepMind",1],[2025.2108,5600.0,0,"2025-03-19","Full AI division \u00b7 Google DeepMind",1],[2025.5941,6000.0,0,"2025-08-06","Full AI division \u00b7 Google DeepMind",1],[2016.8323,75.0,2,"2016-10-31","Division/role \u00b7 FAIR",1],[2018.8515,200.0,2,"2018-11-08","Division/role \u00b7 FAIR",1],[2025.2464,1000.0,2,"2025-04-01","Division/role \u00b7 FAIR",1],[2025.5394,3400.0,2,"2025-07-17","",1],[2025.7447,385.0,6,"2025-09-30","Full company",0],[2024.3477,35.0,7,"2024-05-07","Full company",0],[2025.6872,350.0,7,"2025-09-09","Full company",0],[2016.9993,52.0,1,"2016-12-31","Full company",0],[2017.9966,99.0,1,"2017-12-31","Full company",0],[2018.9966,113.0,1,"2018-12-31","Full company",0],[2019.9966,125.0,1,"2019-12-31","Full company",0],[2020.1287,120.0,1,"2020-02-17","Full company",0],[2023.0602,375.0,1,"2023-01-23","Full company",0],[2023.8706,800.0,1,"2023-11-15","Full company",0],[2024.5613,1500.0,1,"2024-07-24","Full company",0],[2024.731,1700.0,1,"2024-09-24","Full company",0],[2025.5339,3000.0,1,"2025-07-15","Full company",0],[2025.9938,4000.0,1,"2025-12-30","Full company",0],[2026.2163,4500.0,1,"2026-03-21","Full company",0],[2025.4928,883.0,5,"2025-06-30","Full company",0],[2023.5257,12.0,4,"2023-07-12","Full company",0],[2024.4654,15.0,4,"2024-06-19","Full company",0],[2024.4983,97.0,4,"2024-07-01","Full company",0],[2025.1916,300.0,4,"2025-03-12","Full company",0],[2025.1916,900.0,4,"2025-03-12","Contractors \u00b7 AI tutors (data contractors)",1]],"groups":[{"name":"Google","color":"#4a6fa5","n":11},{"name":"OpenAI","color":"#1f3864","n":12},{"name":"Meta","color":"#6b8f71","n":4},{"name":"Anthropic","color":"#b4763a","n":10},{"name":"xAI","color":"#7d5a7d","n":5},{"name":"Z.ai (Zhipu)","color":"#9aa9c4","n":1},{"name":"MiniMax","color":"#55606e","n":1},{"name":"Mistral AI","color":"#a46b6b","n":2},{"name":"DeepSeek","color":"#4e8a8b","n":2}],"connect":true,"fits":[[1,2016.9993155373031,2026.2162902121834,0.20888073256892384,-419.7148735799597]],"unit":"count","value":"Staff count","yLabel":"Staff count","xLabel":"Date of report"};
+
+function decadeTicks(lo, hi, target) {
+  const a = Math.floor(Math.log10(lo)), b = Math.ceil(Math.log10(hi));
+  if (b - a < 3) {
+    const out = [];
+    for (let e = a; e <= b; e++) for (const m of [1, 2, 5]) {
+      const v = m * Math.pow(10, e);
+      if (v >= lo / 1.6 && v <= hi * 1.6) out.push(v);
+    }
+    return out;
+  }
+  const stride = Math.max(1, Math.ceil((b - a + 1) / target));
+  const out = [];
+  for (let e = a; e <= b; e++) if ((b - e) % stride === 0) out.push(Math.pow(10, e));
+  return out;
+}
+
+function yearTicks(lo, hi) {
+  const span = hi - lo;
+  const step = span > 45 ? 10 : span > 18 ? 5 : span > 8 ? 2 : 1;
+  const out = [];
+  for (let y = Math.ceil(lo / step) * step; y <= hi; y += step) out.push(y);
+  return out;
+}
+
+function geometry(D, hidden, W, H, M) {
+  const shown = [];
+  for (let i = 0; i < D.pts.length; i++) if (!hidden.has(D.pts[i][2])) shown.push(i);
+  const xs = shown.map(i => D.pts[i][0]), ys = shown.map(i => D.pts[i][1]);
+  const yLo = Math.min.apply(null, ys), yHi = Math.max.apply(null, ys);
+  let xLo = Math.min.apply(null, xs), xHi = Math.max.apply(null, xs);
+  const pad = Math.max((xHi - xLo) * 0.04, 0.15);
+  xLo -= pad; xHi += pad;
+  const sy = v => H - M.b - (Math.log10(v) - Math.log10(yLo))
+                  / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b);
+  const sx = v => M.l + (v - xLo) / (xHi - xLo || 1) * (W - M.l - M.r);
+  return {
+    shown, sx, sy, xLo, xHi, yLo, yHi,
+    yTicks: decadeTicks(yLo, yHi, 8),
+    xTicks: yearTicks(xLo, xHi),
+  };
+}
+
+function nearest(D, G, px, py, limit) {
+  let best = -1, bestD = limit * limit;
+  for (const i of G.shown) {
+    const dx = G.sx(D.pts[i][0]) - px, dy = G.sy(D.pts[i][1]) - py;
+    const d = dx * dx + dy * dy;
+    if (d < bestD) { bestD = d; best = i; }
+  }
+  return best;
+}
+
+const W=1000, H=520, M={l:86,r:18,t:16,b:52};
+const svg=document.getElementById('c'), tip=document.getElementById('tip'), lgw=document.getElementById('lg');
+const hidden=new Set();
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+function human(v){
+  for(const [c,u] of [[1e12,'T'],[1e9,'B'],[1e6,'M'],[1e3,'k']])
+    if(v>=c) return (v/c).toLocaleString('en-US',{maximumFractionDigits:v/c<10?1:0})+u;
+  return v.toLocaleString('en-US',{maximumFractionDigits:0});
+}
+const fmtY = v => (D.unit==='usd' ? '$' : '') + human(v);
+const fmtX = v => String(Math.round(v));
+
+function drawLegend(){
+  lgw.innerHTML='';
+  D.groups.forEach((g,i)=>{
+    const b=document.createElement('button');
+    b.className='lg'; b.type='button';
+    b.setAttribute('aria-pressed', hidden.has(i)?'true':'false');
+    b.innerHTML='<span class="sw" style="background:'+g.color+'"></span>'+g.name+' ('+g.n+')';
+    // toggled in place, so focus and the pressed state survive the click
+    b.onclick=()=>{
+      if(hidden.has(i)) hidden.delete(i);
+      else if(hidden.size < D.groups.length-1) hidden.add(i);
+      else return;                       // never leave the chart with nothing on it
+      b.setAttribute('aria-pressed', hidden.has(i)?'true':'false');
+      draw();
+    };
+    lgw.appendChild(b);
+  });
+}
+
+let G=null;
+function draw(){
+  G=geometry(D,hidden,W,H,M);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+  G.yTicks.forEach(v=>{
+    const y=G.sy(v);
+    if(y<M.t-1||y>H-M.b+1) return;
+    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:y,y2:y,class:'grid'}));
+    const t=el('text',{x:M.l-8,y:y+4,class:'axis','text-anchor':'end'});
+    t.textContent=fmtY(v); svg.appendChild(t);
+  });
+  G.xTicks.forEach(v=>{
+    const x=G.sx(v);
+    if(x<M.l-1||x>W-M.r+1) return;
+    svg.appendChild(el('line',{x1:x,x2:x,y1:M.t,y2:H-M.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-M.b+18,class:'axis','text-anchor':'middle'});
+    t.textContent=fmtX(v); svg.appendChild(t);
+  });
+  const xl=el('text',{x:(M.l+W-M.r)/2,y:H-M.b+40,class:'axlab','text-anchor':'middle'});
+  xl.textContent=D.xLabel; svg.appendChild(xl);
+  const yl=el('text',{x:0,y:0,class:'axlab','text-anchor':'middle',
+                      transform:'translate(16,'+((M.t+H-M.b)/2)+') rotate(-90)'});
+  yl.textContent=D.yLabel; svg.appendChild(yl);
+
+  // one polyline per visible company, in the order the observations were reported
+  if(D.connect){
+    D.groups.forEach((g,gi)=>{
+      if(hidden.has(gi)) return;
+      const seq=D.pts.map((p,i)=>[p,i]).filter(([p])=>p[2]===gi)
+                     .sort((a,b)=>a[0][0]-b[0][0]);
+      if(seq.length<2) return;
+      svg.appendChild(el('polyline',{
+        points:seq.map(([p])=>G.sx(p[0]).toFixed(2)+','+G.sy(p[1]).toFixed(2)).join(' '),
+        fill:'none',stroke:g.color,'stroke-width':1.6,'stroke-opacity':.85}));
+    });
+  }
+
+  // fitted growth, dashed, stopping at the last observation - never projected
+  (D.fits||[]).forEach(f=>{
+    if(hidden.has(f[0])) return;
+    const [gi,x0,x1,slope,icept]=f;
+    svg.appendChild(el('line',{x1:G.sx(x0),y1:G.sy(Math.pow(10,slope*x0+icept)),
+      x2:G.sx(x1),y2:G.sy(Math.pow(10,slope*x1+icept)),
+      stroke:D.groups[gi].color,'stroke-width':2.1,'stroke-dasharray':'6 3'}));
+  });
+
+  G.shown.forEach(i=>{
+    const p=D.pts[i], g=D.groups[p[2]];
+    // hollow markers carry the same caveat as the static chart
+    svg.appendChild(el('circle',{cx:G.sx(p[0]).toFixed(2),cy:G.sy(p[1]).toFixed(2),r:4,
+      fill:p[5]?'#fff':g.color,stroke:p[5]?g.color:'#fff','stroke-width':p[5]?1.6:.7,
+      'fill-opacity':p[5]?1:.9}));
+  });
+  const hl=el('circle',{id:'hl',r:7,fill:'none',stroke:'#1a1a1a','stroke-width':1.6,
+                        cx:-99,cy:-99}); svg.appendChild(hl);
+}
+
+function move(ev){
+  if(!G) return;
+  const r=svg.getBoundingClientRect();
+  const px=(ev.clientX-r.left)/r.width*W, py=(ev.clientY-r.top)/r.height*H;
+  const i=nearest(D,G,px,py,16);
+  const hl=document.getElementById('hl');
+  if(i<0){ tip.style.opacity=0; hl.setAttribute('cx',-99); return; }
+  const p=D.pts[i];
+  hl.setAttribute('cx',G.sx(p[0])); hl.setAttribute('cy',G.sy(p[1]));
+  tip.innerHTML='<b>'+D.groups[p[2]].name+'</b>'
+    +'<div>'+D.value+': '+fmtY(p[1])+'</div>'
+    +'<div class="m">'+p[3]+(p[4]?' &middot; '+p[4]:'')+'</div>';
+  tip.style.opacity=1;
+  const left=G.sx(p[0])/W*r.width, top=G.sy(p[1])/H*r.height;
+  tip.style.left=Math.min(Math.max(8,left+14), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top=Math.min(Math.max(8,top-10), r.height-tip.offsetHeight-8)+'px';
+}
+// pointer events rather than mouse events, so touch reads the same as hover
+svg.addEventListener('pointermove',move);
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
+  const hl=document.getElementById('hl'); if(hl) hl.setAttribute('cx',-99);});
+drawLegend(); draw();
+
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'COMPANIES-07',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>

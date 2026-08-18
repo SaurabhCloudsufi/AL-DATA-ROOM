@@ -85,17 +85,20 @@ def main():
     if not faces:
         sys.exit("no charts found - run build/generate_charts.py first")
 
-    failures = 0
+    failures, orphans = 0, []
     for pid in sorted(faces):
         face, idx = faces[pid], index.get(pid)
         web, inter = gallery.get(pid), interactive.get(pid)
         problems = []
 
+        if idx is None:
+            # not in any plot index, so not published: a builder that outlived
+            # its chart, per the convention in README. Nothing to enforce.
+            orphans.append(pid)
+            continue
         if not face:
             problems.append("chart face names no source file")
-        if idx is None:
-            problems.append("no plot index row")
-        elif not idx:
+        if not idx:
             problems.append("plot index row names no source file")
         elif face and set(idx) != set(face):
             problems.append(f"plot index {idx} != chart face {face}")
@@ -123,7 +126,9 @@ def main():
             where = ", ".join(f"{f} [{store[f]}]" for f in face)
             print(f"ok    {pid:<12} {where}")
 
-    print(f"\n{len(faces)} charts checked, {failures} failing")
+    if orphans:
+        print(f"\nnot published, skipped: {', '.join(orphans)}")
+    print(f"\n{len(faces) - len(orphans)} published charts checked, {failures} failing")
     if failures:
         sys.exit(1)
 
