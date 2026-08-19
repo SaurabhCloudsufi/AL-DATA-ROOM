@@ -1,0 +1,235 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Throughput per accelerator, by chip</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn[disabled] { opacity:.35; cursor:not-allowed; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; font-size:12px; }
+  .lg .sw { width:11px; height:11px; border-radius:2px; flex:none; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .rowlab { fill:#1a1a1a; font-size:11px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px;
+          box-shadow:0 4px 14px rgba(0,0,0,.10); opacity:0; transition:opacity .08s;
+          max-width:300px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .tip .row { display:flex; gap:8px; }
+  .tip .row i { font-style:normal; margin-left:auto; font-variant-numeric:tabular-nums; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+  .empty { fill:#6b7280; font-size:12px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">MLPERF-01</span><h1>Throughput per accelerator, by chip</h1></div>
+<div class="sub">All 7 workloads across 3 scenarios — 20 rankings, of which the static chart can show one. <span class="badge">BENCHMARK CONDITIONS</span></div>
+<div class="ctl" id="ctl"></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" role="img" aria-label="Throughput per accelerator, by chip"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Pick a workload and a scenario; hover a bar for the system behind it. Source: MLCommons, MLPerf Inference v6.0 closed division —
+MLPerf_Inference_Hardware_Performance_Benchmarks.csv — mlcommons.org/benchmarks/inference-datacenter. Throughput is per accelerator:
+the published result is the whole system, and systems here run from 1 accelerator to 288.
+Every figure is a vendor-tuned submission, so these are ceilings rather than expected
+production throughput.</div>
+</div>
+<script>
+const D = {"mode":"rank","workloads":["llama2-70b-99","llama2-70b-99.9","gpt-oss-120b","llama3.1-8b","deepseek-r1","llama3.1-405b","mixtral-8x7b"],"scenarios":["Offline","Server","Interactive"],"data":{"llama2-70b-99":{"Offline":[["NVIDIA GB300",15650.7,1,"NVIDIA",1126850.0,72],["NVIDIA B300-SXM-270GB",14466.2,5,"NVIDIA",115730.0,8],["NVIDIA B200-SXM-180GB",12994.2,2,"NVIDIA",103954.0,8],["AMD Instinct MI355X 288GB HBM3e",12935.0,9,"AMD",1042110.0,88],["NVIDIA GB200",12334.1,1,"NVIDIA",888054.0,72],["AMD Instinct MI350X 288GB HBM3e",10059.8,4,"AMD",159932.0,16],["AMD Instinct MI325X 256GB HBM3e",4235.1,1,"AMD",33880.4,8],["NVIDIA H200-NVL-141GB",4000.5,1,"NVIDIA",32004.0,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",3738.6,11,"",36710.8,10],["AMD Instinct MI300X 192GB HBM3",3449.8,2,"AMD",27598.7,8],["MS-Intel Arc Pro B60 Dual 48G Turbo",817.7,1,"",3270.7,4],["Intel Arc Pro B70",614.8,1,"",2459.2,4],["Intel Arc Pro B60",424.4,1,"",1697.7,4]],"Server":[["NVIDIA B300-SXM-270GB",14313.0,5,"NVIDIA",114504.0,8],["NVIDIA B200-SXM-180GB",12954.4,2,"NVIDIA",103635.0,8],["AMD Instinct MI355X 288GB HBM3e",12535.3,9,"AMD",1016380.0,88],["NVIDIA GB300",12059.4,1,"NVIDIA",868278.0,72],["NVIDIA GB200",11251.4,1,"NVIDIA",810104.0,72],["AMD Instinct MI350X 288GB HBM3e",9672.2,4,"AMD",153022.0,16],["AMD Instinct MI325X 256GB HBM3e",3986.1,1,"AMD",31888.9,8],["NVIDIA H200-NVL-141GB",3635.6,1,"NVIDIA",29084.9,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",3591.0,11,"",35590.8,10],["AMD Instinct MI300X 192GB HBM3",3182.9,2,"AMD",25463.2,8],["MS-Intel Arc Pro B60 Dual 48G Turbo",549.9,1,"",2199.5,4],["Intel Arc Pro B70",424.6,1,"",1698.6,4],["Intel Arc Pro B60",276.6,1,"",1106.3,4]],"Interactive":[["NVIDIA GB300",11307.3,1,"NVIDIA",814128.0,72],["NVIDIA GB200",10484.1,1,"NVIDIA",754855.0,72],["AMD Instinct MI355X 288GB HBM3e",9201.0,7,"AMD",785522.0,88],["NVIDIA B300-SXM-270GB",8840.5,2,"NVIDIA",70724.3,8],["NVIDIA B200-SXM-180GB",7705.6,1,"NVIDIA",61644.7,8],["AMD Instinct MI350X 288GB HBM3e",6841.3,3,"AMD",103633.0,16],["NVIDIA H200-NVL-141GB",2043.0,1,"NVIDIA",16343.8,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",782.8,2,"",6262.6,8]]},"llama2-70b-99.9":{"Offline":[["NVIDIA GB300",15650.7,1,"NVIDIA",1126850.0,72],["NVIDIA B300-SXM-270GB",14119.2,3,"NVIDIA",112954.0,8],["NVIDIA B200-SXM-180GB",13071.5,2,"NVIDIA",104572.0,8],["AMD Instinct MI355X 288GB HBM3e",12935.0,9,"AMD",1042110.0,88],["NVIDIA GB200",12334.1,1,"NVIDIA",888054.0,72],["AMD Instinct MI350X 288GB HBM3e",9873.6,1,"AMD",78988.6,8],["AMD Instinct MI325X 256GB HBM3e",4235.1,1,"AMD",33880.4,8],["NVIDIA H200-NVL-141GB",4000.5,1,"NVIDIA",32004.0,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",3737.5,7,"",36704.2,10],["AMD Instinct MI300X 192GB HBM3",3449.8,2,"AMD",27598.7,8],["MS-Intel Arc Pro B60 Dual 48G Turbo",817.7,1,"",3270.7,4],["Intel Arc Pro B70",614.8,1,"",2459.2,4],["Intel Arc Pro B60",424.4,1,"",1697.7,4]],"Server":[["NVIDIA B300-SXM-270GB",13549.0,3,"NVIDIA",108392.0,8],["NVIDIA B200-SXM-180GB",12953.4,2,"NVIDIA",103627.0,8],["AMD Instinct MI355X 288GB HBM3e",12535.3,9,"AMD",1016380.0,88],["NVIDIA GB300",12059.4,1,"NVIDIA",868278.0,72],["NVIDIA GB200",11251.4,1,"NVIDIA",810104.0,72],["AMD Instinct MI350X 288GB HBM3e",9672.2,1,"AMD",77377.9,8],["AMD Instinct MI325X 256GB HBM3e",3986.1,1,"AMD",31888.9,8],["NVIDIA H200-NVL-141GB",3635.6,1,"NVIDIA",29084.9,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",3589.6,7,"",35522.3,10],["AMD Instinct MI300X 192GB HBM3",3182.9,2,"AMD",25463.2,8],["MS-Intel Arc Pro B60 Dual 48G Turbo",549.9,1,"",2199.5,4],["Intel Arc Pro B70",424.6,1,"",1698.6,4],["Intel Arc Pro B60",276.6,1,"",1106.3,4]],"Interactive":[["NVIDIA GB300",11307.3,1,"NVIDIA",814128.0,72],["NVIDIA GB200",10484.1,1,"NVIDIA",754855.0,72],["AMD Instinct MI355X 288GB HBM3e",9201.0,7,"AMD",785522.0,88],["NVIDIA B300-SXM-270GB",8840.5,2,"NVIDIA",70724.3,8],["NVIDIA B200-SXM-180GB",7662.6,1,"NVIDIA",61300.4,8],["AMD Instinct MI350X 288GB HBM3e",6841.3,1,"AMD",54730.5,8],["NVIDIA H200-NVL-141GB",2043.0,1,"NVIDIA",16343.8,8]]},"gpt-oss-120b":{"Offline":[["NVIDIA GB300",15371.7,5,"NVIDIA",1046150.0,72],["NVIDIA B300-SXM-270GB",13937.0,6,"NVIDIA",111496.0,8],["NVIDIA GB200",12215.9,2,"NVIDIA",879542.0,72],["AMD Instinct MI355X 288GB HBM3e",11875.5,6,"AMD",1031070.0,96],["NVIDIA B200-SXM-180GB",11633.8,2,"NVIDIA",93070.7,8],["NVIDIA H200-SXM-141GB",3585.0,1,"NVIDIA",28680.0,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",1904.1,3,"",19040.8,10],["MS-Intel Arc Pro B60 Dual 48G Turbo",400.5,1,"",1601.9,4],["Intel Arc Pro B70",384.2,1,"",1536.9,4],["Intel Arc Pro B60",210.3,1,"",841.0,4]],"Server":[["NVIDIA GB300",15232.9,5,"NVIDIA",1096770.0,72],["NVIDIA B300-SXM-270GB",13831.9,6,"NVIDIA",110655.0,8],["NVIDIA GB200",12489.1,2,"NVIDIA",899218.0,72],["NVIDIA B200-SXM-180GB",10930.5,2,"NVIDIA",87444.2,8],["AMD Instinct MI355X 288GB HBM3e",10267.0,6,"AMD",900054.0,96],["NVIDIA H200-SXM-141GB",3012.9,1,"NVIDIA",24103.2,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",1782.4,3,"",17737.6,10],["Intel Arc Pro B70",237.9,1,"",951.7,4],["MS-Intel Arc Pro B60 Dual 48G Turbo",221.1,1,"",884.2,4],["Intel Arc Pro B60",113.0,1,"",452.2,4]],"Interactive":[["NVIDIA GB300",9405.5,1,"NVIDIA",677199.0,72],["NVIDIA GB200",8679.6,1,"NVIDIA",624929.0,72],["NVIDIA B300-SXM-270GB",3250.7,1,"NVIDIA",26005.8,8],["NVIDIA B200-SXM-180GB",1644.4,1,"NVIDIA",13155.3,8]]},"llama3.1-8b":{"Offline":[["NVIDIA B300-SXM-270GB",20843.1,3,"NVIDIA",166745.0,8],["NVIDIA B200-SXM-180GB",20050.4,2,"NVIDIA",160403.0,8],["NVIDIA H200-NVL-141GB",6649.2,2,"NVIDIA",53193.6,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",6247.6,10,"",60679.9,10],["NVIDIA RTX PRO 4500 Blackwell",2340.8,2,"",11665.0,5],["MS-Intel Arc Pro B60 Dual 48G Turbo",1690.6,1,"",6762.3,4],["Intel Arc Pro B70",1154.3,1,"",4617.4,4],["Intel Arc Pro B60",836.9,1,"",3347.4,4],["Intel Arc Pro B50",430.5,1,"",1721.8,4]],"Server":[["NVIDIA B300-SXM-270GB",18508.4,3,"NVIDIA",148067.0,8],["NVIDIA B200-SXM-180GB",16408.8,2,"NVIDIA",131270.0,8],["NVIDIA H200-NVL-141GB",6432.9,2,"NVIDIA",45075.8,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",6099.3,10,"",59632.7,10],["NVIDIA RTX PRO 4500 Blackwell",2270.4,2,"",11352.1,5],["MS-Intel Arc Pro B60 Dual 48G Turbo",1573.5,1,"",6293.9,4],["Intel Arc Pro B70",1042.5,1,"",4170.1,4],["Intel Arc Pro B60",786.3,1,"",3145.2,4],["Intel Arc Pro B50",296.8,1,"",1187.1,4]],"Interactive":[["NVIDIA B200-SXM-180GB",16093.8,2,"NVIDIA",128750.0,8],["NVIDIA B300-SXM-270GB",16079.1,1,"NVIDIA",128633.0,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",5510.9,7,"",53054.7,10]]},"deepseek-r1":{"Offline":[["NVIDIA GB300",9820.5,5,"NVIDIA",2494310.0,288],["NVIDIA B300-SXM-270GB",8790.7,7,"NVIDIA",70325.7,8],["NVIDIA GB200",7322.9,3,"NVIDIA",486141.0,72],["NVIDIA B200-SXM-180GB",7322.7,3,"NVIDIA",58581.6,8]],"Server":[["NVIDIA GB300",8063.8,5,"NVIDIA",1555110.0,288],["NVIDIA B300-SXM-270GB",7551.7,7,"NVIDIA",60413.4,8],["NVIDIA B200-SXM-180GB",6461.6,3,"NVIDIA",51692.9,8],["NVIDIA GB200",4867.7,3,"NVIDIA",336106.0,72]],"Interactive":[["NVIDIA GB300",3481.0,1,"NVIDIA",250634.0,72],["NVIDIA GB200",3337.8,1,"NVIDIA",240318.0,72],["NVIDIA B300-SXM-270GB",616.8,1,"NVIDIA",4934.6,8]]},"llama3.1-405b":{"Offline":[["NVIDIA GB300",271.0,1,"NVIDIA",19511.7,72],["NVIDIA B300-SXM-270GB",246.4,4,"NVIDIA",1971.1,8],["NVIDIA GB200",214.7,1,"NVIDIA",15461.5,72],["NVIDIA B200-SXM-180GB",168.8,1,"NVIDIA",1350.2,8]],"Server":[["NVIDIA GB300",258.7,1,"NVIDIA",18627.6,72],["NVIDIA GB200",196.3,1,"NVIDIA",14133.9,72],["NVIDIA B300-SXM-270GB",185.6,4,"NVIDIA",1484.4,8],["NVIDIA B200-SXM-180GB",123.0,1,"NVIDIA",983.6,8]],"Interactive":[["NVIDIA GB300",255.1,1,"NVIDIA",18365.4,72],["NVIDIA GB200",194.6,1,"NVIDIA",14010.1,72],["NVIDIA B300-SXM-270GB",95.6,1,"NVIDIA",764.7,8]]},"mixtral-8x7b":{"Offline":[["NVIDIA B200-SXM-180GB",15808.5,1,"NVIDIA",126468.0,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",4204.7,4,"",41242.4,10]],"Server":[["NVIDIA B200-SXM-180GB",15901.1,1,"NVIDIA",127209.0,8],["NVIDIA RTX PRO 6000 Blackwell Server Edition",4018.9,4,"",39234.1,10]],"Interactive":[]}},"vendorColour":{"NVIDIA":"#1f3864","AMD":"#b4763a","":"#6b8f71"},"scenarioColour":{"Offline":"#1f3864","Server":"#4e8a8b","Interactive":"#b4763a"},"labelW":293};
+const svg=document.getElementById('c'), tip=document.getElementById('tip');
+const ctl=document.getElementById('ctl'), lgw=document.getElementById('lg');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000;
+let WI=0, SI=0;
+const wk=()=>D.workloads[WI], sc=()=>D.scenarios[SI];
+function cell(w,s){ return (D.data[w]||{})[s]||[]; }
+function rows(){ return D.mode==='rank' ? cell(wk(),sc()) : cell(wk(),'__all__'); }
+function tok(v){ return v>=1000 ? (v/1000).toFixed(1)+'k' : v.toFixed(0); }
+
+function buildCtl(){
+  ctl.innerHTML='';
+  const add=(cap,opts,cur,pick,enabled)=>{
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap;
+    g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.type='button';
+      b.textContent=o; b.setAttribute('aria-pressed', i===cur?'true':'false');
+      if(enabled && !enabled(i)) b.disabled=true;
+      b.onclick=()=>{ if(b.disabled) return; pick(i); buildCtl(); draw(); reportHeight(); };
+      g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  // a workload with no submission in the chosen scenario is disabled rather than
+  // silently drawn empty
+  add('Workload', D.workloads, WI, i=>{WI=i;},
+      i=>D.mode!=='rank' ? (cell(D.workloads[i],'__all__').length>0)
+                         : (cell(D.workloads[i],sc()).length>0));
+  if(D.mode==='rank') add('Scenario', D.scenarios, SI, i=>{SI=i;},
+      i=>cell(wk(),D.scenarios[i]).length>0);
+  const s=document.createElement('span'); s.className='cap';
+  s.textContent=rows().length+' chips submitted';
+  ctl.appendChild(s);
+}
+
+function drawEmpty(msg){
+  svg.setAttribute('viewBox','0 0 1000 140');
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const t=el('text',{x:500,y:70,class:'empty','text-anchor':'middle'});
+  t.textContent=msg; svg.appendChild(t); lgw.innerHTML='';
+}
+
+let RR=[], MM, SXX, RH;
+function draw(){
+  const R=rows();
+  if(!R.length){ drawEmpty('No submissions for this combination.'); return; }
+  RR=R;
+  if(D.mode==='rank') drawRank(R); else drawScenarios(R);
+}
+
+function drawRank(R){
+  RH=26; MM={l:D.labelW,r:96,t:14,b:46};
+  const H=MM.t+MM.b+R.length*RH;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const hi=Math.max.apply(null,R.map(r=>r[1]))*1.04;
+  SXX=v=>MM.l+v/hi*(W-MM.l-MM.r);
+  const step=hi/5, mag=Math.pow(10,Math.floor(Math.log10(step)));
+  const st=[1,2,2.5,5,10].map(m=>m*mag).find(x=>x>=step)||10*mag;
+  for(let v=0;v<=hi*1.0001;v+=st){
+    const x=SXX(v);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:MM.t,y2:H-MM.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-MM.b+17,class:'axis','text-anchor':'middle'});
+    t.textContent=tok(v); svg.appendChild(t);
+  }
+  R.forEach((r,i)=>{
+    const y=MM.t+i*RH, bh=RH-9;
+    svg.appendChild(el('rect',{x:MM.l,y:y+(RH-bh)/2,width:Math.max(1,SXX(r[1])-MM.l),
+      height:bh,fill:D.vendorColour[r[3]]||D.vendorColour[''],rx:1.5}));
+    const lab=el('text',{x:MM.l-7,y:y+RH/2+3.6,class:'rowlab','text-anchor':'end'});
+    lab.textContent=r[0]; svg.appendChild(lab);
+    const val=el('text',{x:SXX(r[1])+6,y:y+RH/2+3.6,class:'axis','text-anchor':'start'});
+    val.textContent=tok(r[1]); svg.appendChild(val);
+  });
+  const xl=el('text',{x:(MM.l+W-MM.r)/2,y:H-MM.b+38,class:'axlab','text-anchor':'middle'});
+  xl.textContent='Tokens per second, per accelerator'; svg.appendChild(xl);
+  lgw.innerHTML='';
+  ['NVIDIA','AMD',''].forEach(v=>{
+    const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:'+D.vendorColour[v]+'"></span>'
+      +(v||'Other vendor'); lgw.appendChild(d);
+  });
+}
+
+function drawScenarios(R){
+  RH=54; MM={l:D.labelW,r:92,t:14,b:46};
+  const H=MM.t+MM.b+R.length*RH;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  const hi=Math.max.apply(null,R.map(r=>Math.max.apply(null,r[1])))*1.04;
+  SXX=v=>MM.l+v/hi*(W-MM.l-MM.r);
+  const step=hi/5, mag=Math.pow(10,Math.floor(Math.log10(step)));
+  const st=[1,2,2.5,5,10].map(m=>m*mag).find(x=>x>=step)||10*mag;
+  for(let v=0;v<=hi*1.0001;v+=st){
+    const x=SXX(v);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:MM.t,y2:H-MM.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-MM.b+17,class:'axis','text-anchor':'middle'});
+    t.textContent=tok(v); svg.appendChild(t);
+  }
+  R.forEach((r,i)=>{
+    const y0=MM.t+i*RH, bh=13;
+    r[1].forEach((v,k)=>{
+      if(v===null) return;
+      const y=y0+6+k*(bh+2);
+      svg.appendChild(el('rect',{x:MM.l,y:y,width:Math.max(1,SXX(v)-MM.l),height:bh,
+        fill:D.scenarioColour[D.scenarios[k]],rx:1.5}));
+      const t=el('text',{x:SXX(v)+5,y:y+bh-2.5,class:'axis','text-anchor':'start'});
+      t.textContent=tok(v); svg.appendChild(t);
+    });
+    const lab=el('text',{x:MM.l-7,y:y0+RH/2+3.6,class:'rowlab','text-anchor':'end'});
+    lab.textContent=r[0]; svg.appendChild(lab);
+    if(r[1][0]!==null && r[1][2]!==null){
+      const pen=(1-r[1][2]/r[1][0])*100;
+      const t=el('text',{x:W-MM.r+34,y:y0+RH/2+4,class:'axis','text-anchor':'middle',
+                         style:'font-weight:700;fill:#b4763a'});
+      t.textContent='\u2212'+pen.toFixed(0)+'%'; svg.appendChild(t);
+    }
+  });
+  const xl=el('text',{x:(MM.l+W-MM.r)/2,y:H-MM.b+38,class:'axlab','text-anchor':'middle'});
+  xl.textContent='Tokens per second, per accelerator'; svg.appendChild(xl);
+  lgw.innerHTML='';
+  D.scenarios.forEach(s=>{
+    const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:'+D.scenarioColour[s]+'"></span>'+s;
+    lgw.appendChild(d);
+  });
+  const d=document.createElement('span'); d.className='lg';
+  d.innerHTML='<span style="color:#b4763a;font-weight:700">\u2212n%</span>&nbsp;interactive vs offline';
+  lgw.appendChild(d);
+}
+
+svg.addEventListener('pointermove',ev=>{
+  if(!RR.length){ tip.style.opacity=0; return; }
+  const r=svg.getBoundingClientRect();
+  const py=(ev.clientY-r.top)/r.width*W;
+  const i=Math.floor((py-MM.t)/RH);
+  if(i<0||i>=RR.length){ tip.style.opacity=0; return; }
+  const x=RR[i];
+  let h='<b>'+x[0]+'</b>';
+  if(D.mode==='rank'){
+    h+='<div class="row">Per accelerator<i>'+tok(x[1])+' tok/s</i></div>';
+    h+='<div class="row m">Best system<i>'+tok(x[4])+' tok/s</i></div>';
+    h+='<div class="row m">Accelerators in it<i>'+x[5]+'</i></div>';
+    h+='<div class="row m">Submissions<i>'+x[2]+'</i></div>';
+    h+='<div class="m">rank '+(i+1)+' of '+RR.length+' &middot; '+wk()+' &middot; '+sc()+'</div>';
+  } else {
+    D.scenarios.forEach((s,k)=>{
+      if(x[1][k]===null) return;
+      h+='<div class="row"><span class="sw" style="display:inline-block;width:9px;height:9px;'
+        +'border-radius:2px;background:'+D.scenarioColour[s]+'"></span>'+s
+        +'<i>'+tok(x[1][k])+' tok/s</i></div>';
+    });
+    if(x[1][0]!==null && x[1][2]!==null)
+      h+='<div class="m">interactive costs '+((1-x[1][2]/x[1][0])*100).toFixed(0)+'% of offline</div>';
+  }
+  tip.innerHTML=h; tip.style.opacity=1;
+  tip.style.left=Math.min(Math.max(8,(MM.l/W*r.width)+20), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top=Math.min(Math.max(8,(MM.t+i*RH)/W*r.width), r.height-tip.offsetHeight-8)+'px';
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;});
+
+buildCtl(); draw();
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'MLPERF-01',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>
