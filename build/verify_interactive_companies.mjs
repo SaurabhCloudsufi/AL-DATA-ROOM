@@ -42,7 +42,7 @@ for (const f of readdirSync(dir).filter(x => x.startsWith('COMPANIES-') && x.end
     addEventListener() {}, focus() {},
     getBoundingClientRect: () => ({ left: 0, top: 0, width: 1000, height: 520 }),
   });
-  const byId = { c: mk('svg'), tip: mk('div'), lg: mk('div'), pg: mk('div') };
+  const byId = { c: mk('svg'), tip: mk('div'), lg: mk('div'), ctl: mk('div'), pg: mk('div') };
   const ctx = {
     document: {
       getElementById: (id) => byId[id] || null,
@@ -69,6 +69,30 @@ for (const f of readdirSync(dir).filter(x => x.startsWith('COMPANIES-') && x.end
     const n = (t) => svgKids.filter(e => e.tag === t).length;
     const legend = byId.lg.children.length;
     const circles = n('circle'), lines = n('line'), polys = n('polyline'), texts = n('text');
+    // the scale and growth-trend controls, which replaced three withdrawn charts
+    let ctlTest = 'n/a';
+    const ctl = byId.ctl;
+    if (ctl && ctl.children.length) {
+      const groups = ctl.children.filter(e => e.tag === 'div');
+      const results = [];
+      for (const g of groups) {
+        const cap = g.children[0].textContent;
+        const bs = g.children.filter(e => e.tag === 'button');
+        if (bs.length < 2) continue;
+        // compare what was actually drawn, not how many nodes: a log and a
+        // linear axis can happen to emit the same number of elements
+        const snap = () => byId.c.children.map(e => e.tag + ':' + (e.textContent || '')
+                                              + (e.attrs.d || e.attrs.points || '')).join('|');
+        const before = snap();
+        bs[1].onclick();
+        const after = snap();
+        bs[0].onclick();
+        const back = snap();
+        results.push(`${cap.split(' ')[0]}=${after !== before && back === before ? 'ok' : 'BROKEN'}`);
+      }
+      ctlTest = results.join(' ') || 'n/a';
+    }
+
     // the interaction itself: hide the first company, redraw, restore
     let toggled = 'n/a';
     const btn = byId.lg.children[0];
@@ -80,12 +104,13 @@ for (const f of readdirSync(dir).filter(x => x.startsWith('COMPANIES-') && x.end
       const back = byId.c.children.filter(e => e.tag === 'circle').length;
       toggled = (after < before && back === before) ? 'ok' : `BROKEN ${before}->${after}->${back}`;
     }
-    const ok = circles > 1 && texts > 2 && toggled !== 'n/a' && !String(toggled).startsWith('BROKEN');
+    const ok = circles > 1 && texts > 2 && toggled !== 'n/a'
+               && !String(toggled).startsWith('BROKEN') && !ctlTest.includes('BROKEN');
     if (!ok) { fail++; console.log(`  ${f}: SUSPECT — circles=${circles} texts=${texts} toggle=${toggled}`); }
     else console.log(`  ${f.replace('.html','').padEnd(14)} circles=${String(circles).padStart(3)} `
       + `polylines=${String(polys).padStart(2)} gridlines/fits=${String(lines).padStart(3)} `
       + `labels=${String(texts).padStart(3)} legend=${legend}`
-      + `  legend-toggle=${toggled}`
+      + `  legend=${toggled}  ${ctlTest}`
       + (embedded ? `  height-msgs=${ctx.posted.length}` : ''));
   } catch (e) {
     fail++;

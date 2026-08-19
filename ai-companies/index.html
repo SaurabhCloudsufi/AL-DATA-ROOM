@@ -15,12 +15,12 @@
   <h1>AI Companies</h1>
   <p class="standfirst">The companies building the models: what they earn, what they raise, what they are worth, who they employ, how much they are used and what they spend on compute.</p>
   <dl class="meta">
-    <div><dt>Charts published</dt><dd>18</dd></div>
+    <div><dt>Charts published</dt><dd>15</dd></div>
   </dl>
 </header>
 
 <div class="toc"><h2>Contents</h2><ol>
-<li><a href="#epoch-ai-published-visualizations">Epoch AI — Published Visualizations</a> <span class="count">10 of 10 published</span></li>
+<li><a href="#epoch-ai-published-visualizations">Epoch AI — Published Visualizations</a> <span class="count">7 of 7 published</span></li>
 <li><a href="#derived-analysis">Derived Analysis</a> <span class="count">8 of 8 published</span></li>
 </ol></div>
 <div class="section" id="epoch-ai-published-visualizations">
@@ -31,7 +31,7 @@
 <a class="pid" href="#COMPANIES-01">COMPANIES-01</a>
 <h3>Annualised revenue of AI companies</h3>
 </div>
-<p class="shows">Epoch&#x27;s default published view at the revenue tab: annualised revenue against the date of the report, log scale, every company where a figure exists.</p>
+<p class="shows">Epoch&#x27;s published revenue view: annualised revenue against the date of the report, log scale, every company where a figure exists.</p>
 <div class="figure figure-live">
 <iframe class="live" src="charts/COMPANIES-01.html" title="Annualised revenue of AI companies (interactive)" height="620" loading="lazy"></iframe>
 </div>
@@ -44,53 +44,9 @@
 <div><dt>Data treatment</dt><dd class="treatment">Epoch&#x27;s &#x27;exclude from graph view&#x27; rows dropped; no value projected, imputed or back-filled</dd></div>
 <div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-companies" rel="noopener">Epoch AI — AI Companies</a></dd></div>
 <div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI companies documentation</dd></div>
-<div><dt>Note</dt><dd>9 of the 52 observations are Epoch annualising a disclosed period figure, drawn as open markers</dd></div>
+<div><dt>Note</dt><dd>Scale and the fitted growth regression are controls on Epoch&#x27;s figure and live on the interactive companion, not as separate charts</dd></div>
 </dl>
 <p class="downloads"><a class="interactive" href="charts/COMPANIES-01.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/COMPANIES-01.svg" download>Download SVG</a><a href="charts/COMPANIES-01.png" download>Download PNG</a></p>
-</section>
-<section class="chart" id="COMPANIES-02">
-<div class="chart-head">
-<a class="pid" href="#COMPANIES-02">COMPANIES-02</a>
-<h3>Annualised revenue of AI companies, linear scale</h3>
-</div>
-<p class="shows">The same series on a linear axis — the scale control at its other setting, and the reason Epoch defaults to log.</p>
-<div class="figure">
-<img src="charts/COMPANIES-02.svg" alt="Annualised revenue of AI companies, linear scale" width="864" height="605" loading="lazy">
-</div>
-<dl class="facts">
-<div><dt>Dataset</dt><dd>Epoch AI — AI Companies: Revenue Reports</dd></div>
-<div><dt>Granularity</dt><dd>One row per dated observation, as reported</dd></div>
-<div><dt>Year</dt><dd>2022–2026 (observed to 2026-08-13)</dd></div>
-<div><dt>Coverage</dt><dd>52 observations, 8 of 11 tracked companies</dd></div>
-<div><dt>Source files</dt><dd class="files">ai_companies_revenue_reports.csv</dd></div>
-<div><dt>Data treatment</dt><dd class="treatment">Epoch&#x27;s &#x27;exclude from graph view&#x27; rows dropped; no value projected, imputed or back-filled</dd></div>
-<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-companies" rel="noopener">Epoch AI — AI Companies</a></dd></div>
-<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI companies documentation</dd></div>
-<div><dt>Note</dt><dd>Every company but the largest two collapses onto the floor</dd></div>
-</dl>
-<p class="downloads"><a href="charts/COMPANIES-02.svg" download>Download SVG</a><a href="charts/COMPANIES-02.png" download>Download PNG</a></p>
-</section>
-<section class="chart" id="COMPANIES-03">
-<div class="chart-head">
-<a class="pid" href="#COMPANIES-03">COMPANIES-03</a>
-<h3>Annualised revenue of AI companies, with fitted growth</h3>
-</div>
-<p class="shows">The revenue view with Epoch&#x27;s regression control on: log-linear growth fitted per company, stated as an annual multiple and a doubling time.</p>
-<div class="figure figure-live">
-<iframe class="live" src="charts/COMPANIES-03.html" title="Annualised revenue of AI companies, with fitted growth (interactive)" height="620" loading="lazy"></iframe>
-</div>
-<dl class="facts">
-<div><dt>Dataset</dt><dd>Epoch AI — AI Companies: Revenue Reports</dd></div>
-<div><dt>Granularity</dt><dd>One row per dated observation, as reported</dd></div>
-<div><dt>Year</dt><dd>2022–2026 (observed to 2026-08-13)</dd></div>
-<div><dt>Coverage</dt><dd>52 observations; 2 companies fitted</dd></div>
-<div><dt>Source files</dt><dd class="files">ai_companies_revenue_reports.csv</dd></div>
-<div><dt>Data treatment</dt><dd class="treatment">Ordinary least squares on log10(revenue) against date, observed span only, never projected</dd></div>
-<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-companies" rel="noopener">Epoch AI — AI Companies</a></dd></div>
-<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI companies documentation</dd></div>
-<div><dt>Note</dt><dd>Fitted only for OpenAI and Anthropic; no other company reaches 12 observations</dd></div>
-</dl>
-<p class="downloads"><a class="interactive" href="charts/COMPANIES-03.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/COMPANIES-03.svg" download>Download SVG</a><a href="charts/COMPANIES-03.png" download>Download PNG</a></p>
 </section>
 <section class="chart" id="COMPANIES-04">
 <div class="chart-head">
@@ -141,7 +97,7 @@
 <a class="pid" href="#COMPANIES-06">COMPANIES-06</a>
 <h3>Staff at AI companies</h3>
 </div>
-<p class="shows">The staff tab: headcount against the date of the report.</p>
+<p class="shows">Headcount against the date of the report.</p>
 <div class="figure figure-live">
 <iframe class="live" src="charts/COMPANIES-06.html" title="Staff at AI companies (interactive)" height="620" loading="lazy"></iframe>
 </div>
@@ -154,31 +110,9 @@
 <div><dt>Data treatment</dt><dd class="treatment">Epoch&#x27;s &#x27;exclude from graph view&#x27; rows dropped; no value projected, imputed or back-filled</dd></div>
 <div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-companies" rel="noopener">Epoch AI — AI Companies</a></dd></div>
 <div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI companies documentation</dd></div>
-<div><dt>Note</dt><dd>For Google and Meta only an AI division is published, never the corporation; those are drawn as open markers</dd></div>
+<div><dt>Note</dt><dd>For Google and Meta only an AI division is published, drawn as open markers; the growth regression is a control on the companion</dd></div>
 </dl>
 <p class="downloads"><a class="interactive" href="charts/COMPANIES-06.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/COMPANIES-06.svg" download>Download SVG</a><a href="charts/COMPANIES-06.png" download>Download PNG</a></p>
-</section>
-<section class="chart" id="COMPANIES-07">
-<div class="chart-head">
-<a class="pid" href="#COMPANIES-07">COMPANIES-07</a>
-<h3>Staff at AI companies, with fitted growth</h3>
-</div>
-<p class="shows">The staff view with the regression control on.</p>
-<div class="figure figure-live">
-<iframe class="live" src="charts/COMPANIES-07.html" title="Staff at AI companies, with fitted growth (interactive)" height="620" loading="lazy"></iframe>
-</div>
-<dl class="facts">
-<div><dt>Dataset</dt><dd>Epoch AI — AI Companies: Staff Reports</dd></div>
-<div><dt>Granularity</dt><dd>One row per dated observation, as reported</dd></div>
-<div><dt>Year</dt><dd>2013–2026 (observed to 2026-08-13)</dd></div>
-<div><dt>Coverage</dt><dd>48 observations; 1 company fitted</dd></div>
-<div><dt>Source files</dt><dd class="files">ai_companies_staff_reports.csv</dd></div>
-<div><dt>Data treatment</dt><dd class="treatment">Ordinary least squares on log10(staff) against date, full-company scope only, never projected</dd></div>
-<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-companies" rel="noopener">Epoch AI — AI Companies</a></dd></div>
-<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI companies documentation</dd></div>
-<div><dt>Note</dt><dd>Only OpenAI reaches the 12 full-company observations a fit requires</dd></div>
-</dl>
-<p class="downloads"><a class="interactive" href="charts/COMPANIES-07.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/COMPANIES-07.svg" download>Download SVG</a><a href="charts/COMPANIES-07.png" download>Download PNG</a></p>
 </section>
 <section class="chart" id="COMPANIES-08">
 <div class="chart-head">

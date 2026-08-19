@@ -3190,21 +3190,19 @@ CT = {   # one entry per tab/metric the explorer offers
     ),
 }
 
+# Scale and the fitted regression are controls on Epoch's figure, not separate
+# figures. COMPANIES-02 (linear), -03 (revenue with trend) and -07 (staff with
+# trend) were published and withdrawn: they plot the identical series as -01 and
+# -06 with one control moved. Both controls live on the interactive companions.
 COMPANIES_PLOTS = {
     "COMPANIES-01": dict(metric="revenue", log=True, trend=False,
                          title="Annualised revenue of AI companies"),
-    "COMPANIES-02": dict(metric="revenue", log=False, trend=False,
-                         title="Annualised revenue of AI companies, linear scale"),
-    "COMPANIES-03": dict(metric="revenue", log=True, trend=True,
-                         title="Annualised revenue of AI companies, with fitted growth"),
     "COMPANIES-04": dict(metric="active_users", log=True, trend=False,
                          title="Active users of AI products"),
     "COMPANIES-05": dict(metric="daily_tokens", log=True, trend=False,
                          title="Tokens processed per day, by company"),
     "COMPANIES-06": dict(metric="staff_count", log=True, trend=False,
                          title="Staff at AI companies"),
-    "COMPANIES-07": dict(metric="staff_count", log=True, trend=True,
-                         title="Staff at AI companies, with fitted growth"),
     "COMPANIES-08": dict(metric="equity_usd", log=True, trend=False,
                          title="Equity raised per funding round"),
     "COMPANIES-09": dict(metric="valuation_usd", log=True, trend=False,
@@ -5265,8 +5263,7 @@ def build_owners_02(_r=None):
 def build_owners_d01(_r=None):
     """How few hands hold it, which decides how much rests on few estimates."""
     d = _ocsv("owners_by_owner.csv")
-    quarters = _qsort(d.quarter.unique())
-    last = quarters[-1]
+    last = _qsort(d.quarter.unique())[-1]
     t = d[d.quarter == last].sort_values("h100e", ascending=False).reset_index(drop=True)
     total = t["h100e"].sum()
     t["share"] = t["h100e"] / total * 100
@@ -5274,45 +5271,55 @@ def build_owners_d01(_r=None):
     top5 = t["cum"].iloc[4]
 
     subtitle = (f"What it shows: how concentrated ownership of installed AI compute is "
-                f"at {last}. The five largest holders account for {top5:.0f}% of "
-                f"{_h(total)} H100e; the ten tracked holders account for all of it, "
-                f"because Epoch's residual is itself one of them.")
+                f"at {last}. Each bar is one holder's share of {_h(total)} H100e, with "
+                f"the running total beside it. The five largest account for "
+                f"{top5:.0f}%.")
     note = (f"Concentration is the reason any estimate built on this dataset rests on a "
             f"handful of figures: get Google or Microsoft wrong and the total moves. "
             f"{OWNERS_AGG} \"Other\" ranking third is a statement about coverage, not "
             f"about a third-largest company. {OWNERS_SCOPE}")
 
-    fig, ax = _ofig(subtitle, note, 0.235, 0.600, ["cumulative_by_designer.csv"])
+    fig, ax = _ofig(subtitle, note, 0.215, 0.545, ["cumulative_by_designer.csv"])
     ys = list(range(len(t)))
-    colours = [OWNER_COLOUR.get(o, RESIDUAL) for o in t["owner"]]
-    ax.barh(ys, t["share"], height=0.68, color=colours, edgecolor="white",
-            linewidth=0.6, zorder=3)
+    hi = float(t["share"].max())
     for y, r in zip(ys, t.itertuples()):
-        ax.text(r.share + 0.5, y, f"{r.share:.1f}%   ({_h(r.h100e)})", va="center",
-                fontsize=9, color=INK)
-    ax2 = ax.twiny()
-    ax2.plot(t["cum"], ys, color=SERIES["scope"], linewidth=1.8, marker="o",
-             markersize=4.5, zorder=5, label="Cumulative share")
-    ax2.set_xlim(0, 105)
-    ax2.set_ylim(ax.get_ylim())
-    ax2.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.0f}%"))
-    ax2.tick_params(labelsize=8.8, colors=SERIES["scope"])
-    ax2.set_xlabel("Cumulative share (orange line)", fontsize=9.4,
-                   color=SERIES["scope"])
-    ax2.grid(False)
+        # the top five are the chart's point, so they carry full weight and the
+        # rest are muted rather than competing for attention
+        top = y < 5
+        ax.barh(y, r.share, height=0.68, color=OWNER_COLOUR.get(r.owner, RESIDUAL),
+                alpha=1.0 if top else 0.45, edgecolor="white", linewidth=0.6, zorder=3)
+        ax.text(r.share + hi * 0.03, y, f"{r.share:.1f}%", va="center",
+                fontsize=9.4, fontweight="bold" if top else "normal", color=INK)
+        ax.text(hi * 1.30, y, _h(r.h100e), va="center", ha="right", fontsize=9,
+                color=MUTED)
+        # the running total, as a column rather than a second x axis: the bars and
+        # a cumulative curve do not share a scale and should not share an axis
+        ax.text(hi * 1.52, y, f"{r.cum:.0f}%", va="center", ha="right", fontsize=9.2,
+                fontweight="bold" if top else "normal",
+                color=SERIES["scope"] if top else MUTED)
+    ax.text(hi * 1.30, -0.9, "H100e", ha="right", va="center", fontsize=8.4,
+            color=MUTED, style="italic")
+    ax.text(hi * 1.52, -0.9, "running\ntotal", ha="right", va="center", fontsize=8.4,
+            color=SERIES["scope"], style="italic", linespacing=1.4)
+    # where the top five end
+    ax.axhline(4.5, color=SERIES["scope"], linewidth=1.4, linestyle=(0, (5, 2.5)),
+               zorder=5)
+    ax.text(hi * 0.02, 4.5, f"  top five  ·  {top5:.0f}% of all installed compute",
+            va="center", ha="left", fontsize=9, color=SERIES["scope"],
+            fontweight="bold", zorder=6,
+            bbox=dict(boxstyle="round,pad=0.30", facecolor="white", edgecolor="none"))
     ax.set_yticks(ys)
-    ax.set_yticklabels(t["owner"], fontsize=9.6)
+    ax.set_yticklabels(t["owner"], fontsize=9.8)
     ax.invert_yaxis()
-    ax.set_xlim(0, float(t["share"].max()) * 1.55)
+    ax.set_xlim(0, hi * 1.58)
+    ax.set_xticks([0, 5, 10, 15, 20, 25])
     ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.0f}%"))
-    ax.set_xlabel("Share of installed H100e (bars)", fontsize=10)
+    ax.set_xlabel("Share of installed H100e", fontsize=10)
     ax.grid(axis="x", color=RULE, linewidth=0.7)
     ax.set_axisbelow(True)
-    _o_badge(ax, above=True)
-    frame(fig, ax, "OWNERS-D01",
-          f"Five owners hold {top5:.0f}% of the world's installed AI compute",
-          subtitle, owners_src(["cumulative_by_designer.csv"]), OWNERS_METH, note)
-    save(fig, "OWNERS-D01", OWNERS_DOMAIN)
+    _ofinish(fig, ax, "OWNERS-D01",
+             f"Five owners hold {top5:.0f}% of the world's installed AI compute",
+             subtitle, note, ["cumulative_by_designer.csv"])
 
 
 def build_owners_d02(_r=None):

@@ -15,6 +15,13 @@
   .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
   .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
             font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
   .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
   .lg { display:inline-flex; align-items:center; gap:6px; cursor:pointer;
          font-size:12px; border:0; background:none; padding:2px 3px; color:#1a1a1a; }
@@ -34,7 +41,8 @@
 </style>
 <div id="pg">
 <div class="hd"><span class="pid">COMPANIES-06</span><h1>Staff at AI companies</h1></div>
-<div class="sub">48 observations across 9 companies, of 11 Epoch tracks. Observed to 2026-08-13. <span class="badge">OBSERVED DATA ONLY</span></div>
+<div class="sub">48 observations across 9 companies, of 11 Epoch tracks. Observed to 2026-08-13. Above, switch the scale or turn on the growth fit for 1 company. <span class="badge">OBSERVED DATA ONLY</span></div>
+<div class="ctl" id="ctl"></div>
 <div class="legend" id="lg"></div>
 <div style="position:relative">
   <svg id="c" viewBox="0 0 1000 520" role="img" aria-label="Staff at AI companies"></svg>
@@ -46,7 +54,7 @@ epoch.ai/data/ai-companies. A company appears only where Epoch records the plott
 nothing is imputed and no line is drawn past the last observation.</div>
 </div>
 <script>
-const D = {"pts":[[2022.6188,50.0,3,"2022-08-15","Full company",0],[2023.0,85.0,3,"2023-01-01","Full company",0],[2023.7858,192.0,3,"2023-10-15","Full company",0],[2023.9473,300.0,3,"2023-12-13","Full company",0],[2024.4107,500.0,3,"2024-05-30","Full company",0],[2024.9993,915.0,3,"2024-12-31","Full company",0],[2024.9993,521.0,3,"2024-12-31","Division/role \u00b7 Research and development",1],[2025.3888,1300.0,3,"2025-05-23","Full company",0],[2025.9172,2300.0,3,"2025-12-02","Full company",0],[2026.5941,3000.0,3,"2026-08-06","Full company",0],[2025.1971,160.0,8,"2025-03-14","Full company",0],[2026.4819,300.0,8,"2026-06-26","Full company",0],[2013.9966,75.0,0,"2013-12-31","Division/role \u00b7 DeepMind",1],[2014.0684,100.0,0,"2014-01-26","Division/role \u00b7 DeepMind",1],[2016.1971,200.0,0,"2016-03-13","Division/role \u00b7 DeepMind",1],[2016.9938,350.0,0,"2016-12-29","Division/role \u00b7 DeepMind",1],[2017.9856,700.0,0,"2017-12-27","Division/role \u00b7 DeepMind",1],[2021.3833,1000.0,0,"2021-05-21","Division/role \u00b7 DeepMind",1],[2021.7639,1000.0,0,"2021-10-07","Division/role \u00b7 DeepMind",1],[2024.3723,2600.0,0,"2024-05-16","Full AI division \u00b7 Google DeepMind",1],[2024.4134,4000.0,0,"2024-05-31","Full AI division \u00b7 Google DeepMind",1],[2025.2108,5600.0,0,"2025-03-19","Full AI division \u00b7 Google DeepMind",1],[2025.5941,6000.0,0,"2025-08-06","Full AI division \u00b7 Google DeepMind",1],[2016.8323,75.0,2,"2016-10-31","Division/role \u00b7 FAIR",1],[2018.8515,200.0,2,"2018-11-08","Division/role \u00b7 FAIR",1],[2025.2464,1000.0,2,"2025-04-01","Division/role \u00b7 FAIR",1],[2025.5394,3400.0,2,"2025-07-17","",1],[2025.7447,385.0,6,"2025-09-30","Full company",0],[2024.3477,35.0,7,"2024-05-07","Full company",0],[2025.6872,350.0,7,"2025-09-09","Full company",0],[2016.9993,52.0,1,"2016-12-31","Full company",0],[2017.9966,99.0,1,"2017-12-31","Full company",0],[2018.9966,113.0,1,"2018-12-31","Full company",0],[2019.9966,125.0,1,"2019-12-31","Full company",0],[2020.1287,120.0,1,"2020-02-17","Full company",0],[2023.0602,375.0,1,"2023-01-23","Full company",0],[2023.8706,800.0,1,"2023-11-15","Full company",0],[2024.5613,1500.0,1,"2024-07-24","Full company",0],[2024.731,1700.0,1,"2024-09-24","Full company",0],[2025.5339,3000.0,1,"2025-07-15","Full company",0],[2025.9938,4000.0,1,"2025-12-30","Full company",0],[2026.2163,4500.0,1,"2026-03-21","Full company",0],[2025.4928,883.0,5,"2025-06-30","Full company",0],[2023.5257,12.0,4,"2023-07-12","Full company",0],[2024.4654,15.0,4,"2024-06-19","Full company",0],[2024.4983,97.0,4,"2024-07-01","Full company",0],[2025.1916,300.0,4,"2025-03-12","Full company",0],[2025.1916,900.0,4,"2025-03-12","Contractors \u00b7 AI tutors (data contractors)",1]],"groups":[{"name":"Google","color":"#4a6fa5","n":11},{"name":"OpenAI","color":"#1f3864","n":12},{"name":"Meta","color":"#6b8f71","n":4},{"name":"Anthropic","color":"#b4763a","n":10},{"name":"xAI","color":"#7d5a7d","n":5},{"name":"Z.ai (Zhipu)","color":"#9aa9c4","n":1},{"name":"MiniMax","color":"#55606e","n":1},{"name":"Mistral AI","color":"#a46b6b","n":2},{"name":"DeepSeek","color":"#4e8a8b","n":2}],"connect":true,"fits":[],"unit":"count","value":"Staff count","yLabel":"Staff count","xLabel":"Date of report"};
+const D = {"pts":[[2022.6188,50.0,3,"2022-08-15","Full company",0],[2023.0,85.0,3,"2023-01-01","Full company",0],[2023.7858,192.0,3,"2023-10-15","Full company",0],[2023.9473,300.0,3,"2023-12-13","Full company",0],[2024.4107,500.0,3,"2024-05-30","Full company",0],[2024.9993,915.0,3,"2024-12-31","Full company",0],[2024.9993,521.0,3,"2024-12-31","Division/role \u00b7 Research and development",1],[2025.3888,1300.0,3,"2025-05-23","Full company",0],[2025.9172,2300.0,3,"2025-12-02","Full company",0],[2026.5941,3000.0,3,"2026-08-06","Full company",0],[2025.1971,160.0,8,"2025-03-14","Full company",0],[2026.4819,300.0,8,"2026-06-26","Full company",0],[2013.9966,75.0,0,"2013-12-31","Division/role \u00b7 DeepMind",1],[2014.0684,100.0,0,"2014-01-26","Division/role \u00b7 DeepMind",1],[2016.1971,200.0,0,"2016-03-13","Division/role \u00b7 DeepMind",1],[2016.9938,350.0,0,"2016-12-29","Division/role \u00b7 DeepMind",1],[2017.9856,700.0,0,"2017-12-27","Division/role \u00b7 DeepMind",1],[2021.3833,1000.0,0,"2021-05-21","Division/role \u00b7 DeepMind",1],[2021.7639,1000.0,0,"2021-10-07","Division/role \u00b7 DeepMind",1],[2024.3723,2600.0,0,"2024-05-16","Full AI division \u00b7 Google DeepMind",1],[2024.4134,4000.0,0,"2024-05-31","Full AI division \u00b7 Google DeepMind",1],[2025.2108,5600.0,0,"2025-03-19","Full AI division \u00b7 Google DeepMind",1],[2025.5941,6000.0,0,"2025-08-06","Full AI division \u00b7 Google DeepMind",1],[2016.8323,75.0,2,"2016-10-31","Division/role \u00b7 FAIR",1],[2018.8515,200.0,2,"2018-11-08","Division/role \u00b7 FAIR",1],[2025.2464,1000.0,2,"2025-04-01","Division/role \u00b7 FAIR",1],[2025.5394,3400.0,2,"2025-07-17","",1],[2025.7447,385.0,6,"2025-09-30","Full company",0],[2024.3477,35.0,7,"2024-05-07","Full company",0],[2025.6872,350.0,7,"2025-09-09","Full company",0],[2016.9993,52.0,1,"2016-12-31","Full company",0],[2017.9966,99.0,1,"2017-12-31","Full company",0],[2018.9966,113.0,1,"2018-12-31","Full company",0],[2019.9966,125.0,1,"2019-12-31","Full company",0],[2020.1287,120.0,1,"2020-02-17","Full company",0],[2023.0602,375.0,1,"2023-01-23","Full company",0],[2023.8706,800.0,1,"2023-11-15","Full company",0],[2024.5613,1500.0,1,"2024-07-24","Full company",0],[2024.731,1700.0,1,"2024-09-24","Full company",0],[2025.5339,3000.0,1,"2025-07-15","Full company",0],[2025.9938,4000.0,1,"2025-12-30","Full company",0],[2026.2163,4500.0,1,"2026-03-21","Full company",0],[2025.4928,883.0,5,"2025-06-30","Full company",0],[2023.5257,12.0,4,"2023-07-12","Full company",0],[2024.4654,15.0,4,"2024-06-19","Full company",0],[2024.4983,97.0,4,"2024-07-01","Full company",0],[2025.1916,300.0,4,"2025-03-12","Full company",0],[2025.1916,900.0,4,"2025-03-12","Contractors \u00b7 AI tutors (data contractors)",1]],"groups":[{"name":"Google","color":"#4a6fa5","n":11},{"name":"OpenAI","color":"#1f3864","n":12},{"name":"Meta","color":"#6b8f71","n":4},{"name":"Anthropic","color":"#b4763a","n":10},{"name":"xAI","color":"#7d5a7d","n":5},{"name":"Z.ai (Zhipu)","color":"#9aa9c4","n":1},{"name":"MiniMax","color":"#55606e","n":1},{"name":"Mistral AI","color":"#a46b6b","n":2},{"name":"DeepSeek","color":"#4e8a8b","n":2}],"connect":true,"fits":[[1,2016.9993155373031,2026.2162902121834,0.20888073256892384,-419.7148735799597]],"unit":"count","value":"Staff count","scaleToggle":true,"yLabel":"Staff count","xLabel":"Date of report"};
 
 function decadeTicks(lo, hi, target) {
   const a = Math.floor(Math.log10(lo)), b = Math.ceil(Math.log10(hi));
@@ -80,14 +88,23 @@ function geometry(D, hidden, W, H, M) {
   let xLo = Math.min.apply(null, xs), xHi = Math.max.apply(null, xs);
   const pad = Math.max((xHi - xLo) * 0.04, 0.15);
   xLo -= pad; xHi += pad;
-  const sy = v => H - M.b - (Math.log10(v) - Math.log10(yLo))
-                  / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b);
+  const sy = LOGY
+    ? v => H - M.b - (Math.log10(v) - Math.log10(yLo))
+             / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b)
+    : v => H - M.b - (v - 0) / (yHi - 0 || 1) * (H - M.t - M.b);
   const sx = v => M.l + (v - xLo) / (xHi - xLo || 1) * (W - M.l - M.r);
   return {
     shown, sx, sy, xLo, xHi, yLo, yHi,
-    yTicks: decadeTicks(yLo, yHi, 8),
+    yTicks: LOGY ? decadeTicks(yLo, yHi, 8) : linearTicks(yHi, 6),
     xTicks: yearTicks(xLo, xHi),
   };
+}
+
+function linearTicks(hi, n) {
+  const raw = hi / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw) || 10 * mag;
+  const out = []; for (let v = 0; v <= hi * 1.0001; v += step) out.push(+v.toFixed(6));
+  return out;
 }
 
 function nearest(D, G, px, py, limit) {
@@ -103,6 +120,9 @@ function nearest(D, G, px, py, limit) {
 const W=1000, H=520, M={l:86,r:18,t:16,b:52};
 const svg=document.getElementById('c'), tip=document.getElementById('tip'), lgw=document.getElementById('lg');
 const hidden=new Set();
+// Epoch offers scale and the growth regression as controls; they live here
+// rather than as separate charts
+let LOGY=true, TREND=false;
 const NS='http://www.w3.org/2000/svg';
 const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
 
@@ -113,6 +133,25 @@ function human(v){
 }
 const fmtY = v => (D.unit==='usd' ? '$' : '') + human(v);
 const fmtX = v => String(Math.round(v));
+
+function buildCtl(){
+  const ctl=document.getElementById('ctl'); if(!ctl) return;
+  ctl.innerHTML='';
+  const add=(cap,opts,cur,pick)=>{
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap;
+    g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.type='button';
+      b.textContent=o; b.setAttribute('aria-pressed', i===cur?'true':'false');
+      b.onclick=()=>{ pick(i); buildCtl(); draw(); reportHeight(); };
+      g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  if(D.scaleToggle) add('Scale',['Logarithmic','Linear'],LOGY?0:1,i=>{LOGY=i===0;});
+  if(D.fits && D.fits.length) add('Growth trend',['Off','Fitted'],TREND?1:0,i=>{TREND=i===1;});
+}
 
 function drawLegend(){
   lgw.innerHTML='';
@@ -172,7 +211,7 @@ function draw(){
   }
 
   // fitted growth, dashed, stopping at the last observation - never projected
-  (D.fits||[]).forEach(f=>{
+  (TREND ? (D.fits||[]) : []).forEach(f=>{
     if(hidden.has(f[0])) return;
     const [gi,x0,x1,slope,icept]=f;
     svg.appendChild(el('line',{x1:G.sx(x0),y1:G.sy(Math.pow(10,slope*x0+icept)),
@@ -212,7 +251,7 @@ function move(ev){
 svg.addEventListener('pointermove',move);
 svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
   const hl=document.getElementById('hl'); if(hl) hl.setAttribute('cx',-99);});
-drawLegend(); draw();
+buildCtl(); drawLegend(); draw();
 
 function reportHeight(){
   const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;

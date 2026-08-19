@@ -49,14 +49,8 @@ SRC_FILE = {
 CHARTS = {
     "COMPANIES-01": dict(
         table="companies_revenue.csv", col="revenue_usd", src="revenue",
-        connect=True, trend=None, unit="usd",
+        connect=True, trend="revenue_usd", unit="usd", scale_toggle=True,
         title="Annualised revenue of AI companies",
-        ylabel="Annualised revenue (USD)", value="Annualised revenue",
-        ctx=("revenue_type", "source_type"), open_col="annualised_from_period"),
-    "COMPANIES-03": dict(
-        table="companies_revenue.csv", col="revenue_usd", src="revenue",
-        connect=True, trend="revenue_usd", unit="usd",
-        title="Annualised revenue of AI companies, with fitted growth",
         ylabel="Annualised revenue (USD)", value="Annualised revenue",
         ctx=("revenue_type", "source_type"), open_col="annualised_from_period"),
     "COMPANIES-04": dict(
@@ -73,14 +67,8 @@ CHARTS = {
         ctx=("product", "source_type"), open_col=None),
     "COMPANIES-06": dict(
         table="companies_staff.csv", col="staff_count", src="staff",
-        connect=True, trend=None, unit="count",
+        connect=True, trend="staff_count", unit="count", scale_toggle=True,
         title="Staff at AI companies",
-        ylabel="Staff count", value="Staff count",
-        ctx=("scope", "division"), open_col="_division"),
-    "COMPANIES-07": dict(
-        table="companies_staff.csv", col="staff_count", src="staff",
-        connect=True, trend="staff_count", unit="count",
-        title="Staff at AI companies, with fitted growth",
         ylabel="Staff count", value="Staff count",
         ctx=("scope", "division"), open_col="_division"),
     "COMPANIES-08": dict(
@@ -130,14 +118,23 @@ function geometry(D, hidden, W, H, M) {
   let xLo = Math.min.apply(null, xs), xHi = Math.max.apply(null, xs);
   const pad = Math.max((xHi - xLo) * 0.04, 0.15);
   xLo -= pad; xHi += pad;
-  const sy = v => H - M.b - (Math.log10(v) - Math.log10(yLo))
-                  / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b);
+  const sy = LOGY
+    ? v => H - M.b - (Math.log10(v) - Math.log10(yLo))
+             / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b)
+    : v => H - M.b - (v - 0) / (yHi - 0 || 1) * (H - M.t - M.b);
   const sx = v => M.l + (v - xLo) / (xHi - xLo || 1) * (W - M.l - M.r);
   return {
     shown, sx, sy, xLo, xHi, yLo, yHi,
-    yTicks: decadeTicks(yLo, yHi, 8),
+    yTicks: LOGY ? decadeTicks(yLo, yHi, 8) : linearTicks(yHi, 6),
     xTicks: yearTicks(xLo, xHi),
   };
+}
+
+function linearTicks(hi, n) {
+  const raw = hi / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw) || 10 * mag;
+  const out = []; for (let v = 0; v <= hi * 1.0001; v += step) out.push(+v.toFixed(6));
+  return out;
 }
 
 function nearest(D, G, px, py, limit) {
@@ -168,6 +165,13 @@ PAGE = """<!doctype html>
   .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
   .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
             font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
   .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
   .lg { display:inline-flex; align-items:center; gap:6px; cursor:pointer;
          font-size:12px; border:0; background:none; padding:2px 3px; color:#1a1a1a; }
@@ -188,6 +192,7 @@ PAGE = """<!doctype html>
 <div id="pg">
 <div class="hd"><span class="pid">__PID__</span><h1>__TITLE__</h1></div>
 <div class="sub">__SUB__ <span class="badge">OBSERVED DATA ONLY</span></div>
+<div class="ctl" id="ctl"></div>
 <div class="legend" id="lg"></div>
 <div style="position:relative">
   <svg id="c" viewBox="0 0 1000 520" role="img" aria-label="__TITLE__"></svg>
@@ -204,6 +209,9 @@ __GEOMETRY__
 const W=1000, H=520, M={l:86,r:18,t:16,b:52};
 const svg=document.getElementById('c'), tip=document.getElementById('tip'), lgw=document.getElementById('lg');
 const hidden=new Set();
+// Epoch offers scale and the growth regression as controls; they live here
+// rather than as separate charts
+let LOGY=true, TREND=false;
 const NS='http://www.w3.org/2000/svg';
 const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
 
@@ -214,6 +222,25 @@ function human(v){
 }
 const fmtY = v => (D.unit==='usd' ? '$' : '') + human(v);
 const fmtX = v => String(Math.round(v));
+
+function buildCtl(){
+  const ctl=document.getElementById('ctl'); if(!ctl) return;
+  ctl.innerHTML='';
+  const add=(cap,opts,cur,pick)=>{
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap;
+    g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.type='button';
+      b.textContent=o; b.setAttribute('aria-pressed', i===cur?'true':'false');
+      b.onclick=()=>{ pick(i); buildCtl(); draw(); reportHeight(); };
+      g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  if(D.scaleToggle) add('Scale',['Logarithmic','Linear'],LOGY?0:1,i=>{LOGY=i===0;});
+  if(D.fits && D.fits.length) add('Growth trend',['Off','Fitted'],TREND?1:0,i=>{TREND=i===1;});
+}
 
 function drawLegend(){
   lgw.innerHTML='';
@@ -273,7 +300,7 @@ function draw(){
   }
 
   // fitted growth, dashed, stopping at the last observation - never projected
-  (D.fits||[]).forEach(f=>{
+  (TREND ? (D.fits||[]) : []).forEach(f=>{
     if(hidden.has(f[0])) return;
     const [gi,x0,x1,slope,icept]=f;
     svg.appendChild(el('line',{x1:G.sx(x0),y1:G.sy(Math.pow(10,slope*x0+icept)),
@@ -313,7 +340,7 @@ function move(ev){
 svg.addEventListener('pointermove',move);
 svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
   const hl=document.getElementById('hl'); if(hl) hl.setAttribute('cx',-99);});
-drawLegend(); draw();
+buildCtl(); drawLegend(); draw();
 
 function reportHeight(){
   const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
@@ -383,15 +410,20 @@ def main():
 
         payload = {"pts": pts, "groups": groups, "connect": cfg["connect"],
                    "fits": fits, "unit": cfg["unit"], "value": cfg["value"],
+                   "scaleToggle": bool(cfg.get("scale_toggle")),
                    "yLabel": cfg["ylabel"], "xLabel": "Date of report"}
 
         sub = (f"{len(pts):,} observations across {len(groups)} companies, "
                f"of {int(meta['tracked_companies'])} Epoch tracks. "
                f"Observed to {meta['observed_to']}.")
+        bits = []
+        if cfg.get("scale_toggle"):
+            bits.append("switch the scale")
         if fits:
-            sub += (f" Growth fitted for {len(fits)} "
-                    f"{'company' if len(fits) == 1 else 'companies'}; the rest "
-                    f"have too few observations.")
+            bits.append(f"turn on the growth fit for {len(fits)} "
+                        f"{'company' if len(fits) == 1 else 'companies'}")
+        if bits:
+            sub += " Above, " + " or ".join(bits) + "."
 
         html = (PAGE.replace("__DATA__", json.dumps(payload, separators=(",", ":")))
                     .replace("__GEOMETRY__", GEOMETRY_JS)

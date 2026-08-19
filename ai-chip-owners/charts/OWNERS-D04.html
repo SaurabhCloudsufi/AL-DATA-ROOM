@@ -1,0 +1,167 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compute added each quarter, by owner</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#1a1a1a; }
+  .lg .sw { width:11px; height:11px; border-radius:2px; flex:none; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px;
+          box-shadow:0 4px 14px rgba(0,0,0,.10); opacity:0; transition:opacity .08s;
+          max-width:290px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .tip .row { display:flex; gap:8px; align-items:center; }
+  .tip .row i { font-style:normal; margin-left:auto; font-variant-numeric:tabular-nums; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">OWNERS-D04</span><h1>Compute added each quarter, by owner</h1></div>
+<div class="sub">What was added in each of the 16 complete quarters, rather than what stood installed. Hover a quarter to see which owners added it. <span class="badge">COMPLETE QUARTERS ONLY</span></div>
+<div class="ctl" id="ctl"></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" viewBox="0 0 1000 470" role="img" aria-label="Compute added each quarter, by owner"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Switch between amount and share; hover any quarter. Source: Epoch AI, AI Chip Owners (CC-BY) — quarters_by_chip_type.csv —
+epoch.ai/data/ai-chip-owners. H100e is a normalising unit, so a TPU and a Blackwell can
+be added — it measures compute, not chips. Almost none of this is disclosed by the owners;
+Epoch publishes a 5th–95th percentile beside every median. The final quarter of the
+download is flagged incomplete at source and is excluded.</div>
+</div>
+<script>
+const D = {"quarters":["2022Q1","2022Q2","2022Q3","2022Q4","2023Q1","2023Q2","2023Q3","2023Q4","2024Q1","2024Q2","2024Q3","2024Q4","2025Q1","2025Q2","2025Q3","2025Q4"],"ylabel":"Added in the quarter (H100-equivalents)","views":[{"label":"Owner","series":[{"name":"xAI","color":"#a46b6b","vals":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,100000.0,0.0,100000.0,0.0,353713.0,0.0]},{"name":"China","color":"#8a8f5c","vals":[9414.0,10060.0,3447.0,8870.0,16582.0,40236.0,65320.0,22704.0,65918.0,78606.0,86412.0,98992.0,190929.0,162551.0,142087.0,150764.0]},{"name":"Oracle","color":"#7d5a7d","vals":[1606.0,1732.0,1793.0,2569.0,3366.0,7710.0,12467.0,22639.0,38175.0,52030.0,62828.0,100802.0,168131.0,184558.0,225032.0,246555.0]},{"name":"CoreWeave","color":"#4e8a8b","vals":[0.0,0.0,0.0,0.0,4611.0,7501.0,12200.0,19845.0,27311.0,38865.0,54232.0,74319.0,49587.0,50817.0,127212.0,362124.0]},{"name":"Meta","color":"#b4763a","vals":[7759.0,8288.0,8603.0,9101.0,10702.0,24319.0,39409.0,52003.0,88487.0,127420.0,153833.0,238928.0,322967.0,313756.0,409558.0,468351.0]},{"name":"Amazon","color":"#6b8f71","vals":[5639.0,5990.0,6271.0,6616.0,7786.0,17794.0,28753.0,37596.0,83382.0,106837.0,151283.0,296837.0,357283.0,390023.0,443394.0,482478.0]},{"name":"Microsoft","color":"#4a6fa5","vals":[14769.0,15913.0,16448.0,17340.0,20390.0,46389.0,75069.0,99189.0,144980.0,189658.0,230785.0,359504.0,460429.0,472845.0,577309.0,649679.0]},{"name":"Other","color":"#c3c8d1","vals":[17653.0,18505.0,27496.0,23871.0,18734.0,45256.0,73081.0,151288.0,191991.0,221764.0,190995.0,301267.0,303673.0,486133.0,505447.0,900666.0]},{"name":"Google","color":"#1f3864","vals":[5700.0,6007.0,6236.0,6620.0,32720.0,50735.0,80150.0,122172.0,173669.0,205422.0,260588.0,411238.0,621239.0,819201.0,1012263.0,1193301.0]}]}]};
+const svg=document.getElementById('c'), tip=document.getElementById('tip');
+const ctl=document.getElementById('ctl'), lgw=document.getElementById('lg');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000,H=470,M={l:92,r:22,t:16,b:56};
+let VI=0, PCT=false;
+const view=()=>D.views[VI];
+function fmt(v){ return v>=1e6?(v/1e6).toFixed(2)+'M':v>=1e3?(v/1e3).toFixed(0)+'k':v.toFixed(0); }
+
+function buildCtl(){
+  ctl.innerHTML='';
+  const add=(cap,opts,cur,pick)=>{
+    if(opts.length<2) return;
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap; g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.type='button';
+      b.textContent=o; b.setAttribute('aria-pressed', i===cur?'true':'false');
+      b.onclick=()=>{ pick(i); buildCtl(); draw(); reportHeight(); }; g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  add('Break down by', D.views.map(v=>v.label), VI, i=>{VI=i;});
+  add('Show as', ['Amount','Share'], PCT?1:0, i=>{PCT=i===1;});
+}
+
+let SER=[], TOT=[], SX, SY;
+function draw(){
+  const v=view(), n=D.quarters.length;
+  let vals=v.series.map(s=>s.vals.slice());
+  const raw=D.quarters.map((_,i)=>vals.reduce((a,x)=>a+(x[i]||0),0));
+  if(PCT) vals=vals.map(s=>s.map((x,i)=>raw[i]?x/raw[i]*100:0));
+  TOT=D.quarters.map((_,i)=>vals.reduce((a,x)=>a+(x[i]||0),0));
+  SER=v.series; window._vals=vals;
+  const hi=PCT?100:Math.max.apply(null,TOT)*1.05;
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  SX=i=>M.l+(W-M.l-M.r)*i/(n-1);
+  SY=y=>H-M.b-(y/hi)*(H-M.t-M.b);
+  const step=hi/5, mag=Math.pow(10,Math.floor(Math.log10(step)));
+  const st=[1,2,2.5,5,10].map(m=>m*mag).find(x=>x>=step)||10*mag;
+  for(let y=0;y<=hi*1.0001;y+=st){
+    const py=SY(y);
+    svg.appendChild(el('line',{x1:M.l,x2:W-M.r,y1:py,y2:py,class:'grid'}));
+    const t=el('text',{x:M.l-8,y:py+4,class:'axis','text-anchor':'end'});
+    t.textContent=PCT?y.toFixed(0)+'%':fmt(y); svg.appendChild(t);
+  }
+  let bottom=new Array(n).fill(0);
+  vals.forEach((s,k)=>{
+    const top=bottom.map((b,i)=>b+(s[i]||0));
+    const pts=D.quarters.map((_,i)=>SX(i)+','+SY(top[i])).concat(
+      D.quarters.map((_,i)=>SX(n-1-i)+','+SY(bottom[n-1-i]))).join(' ');
+    svg.appendChild(el('polygon',{points:pts,fill:SER[k].color,stroke:'#fff','stroke-width':.6}));
+    bottom=top;
+  });
+  D.quarters.forEach((q,i)=>{
+    if(i%2 && n>10) return;
+    const a=el('text',{x:SX(i),y:H-M.b+18,class:'axis','text-anchor':'middle'});
+    a.textContent=q.slice(0,4); svg.appendChild(a);
+    const b=el('text',{x:SX(i),y:H-M.b+31,class:'axis','text-anchor':'middle'});
+    b.textContent=q.slice(4); svg.appendChild(b);
+  });
+  const xl=el('text',{x:(M.l+W-M.r)/2,y:H-M.b+50,class:'axlab','text-anchor':'middle'});
+  xl.textContent='Quarter'; svg.appendChild(xl);
+  const yl=el('text',{x:0,y:0,class:'axlab','text-anchor':'middle',
+    transform:'translate(15,'+((M.t+H-M.b)/2)+') rotate(-90)'});
+  yl.textContent=PCT?'Share of installed compute (%)':D.ylabel; svg.appendChild(yl);
+  svg.appendChild(el('line',{id:'rule',x1:-9,x2:-9,y1:M.t,y2:H-M.b,stroke:'#1a1a1a',
+    'stroke-width':1,'stroke-dasharray':'3 3'}));
+  lgw.innerHTML='';
+  SER.forEach(s=>{ const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:'+s.color+'"></span>'+s.name;
+    lgw.appendChild(d); });
+}
+
+svg.addEventListener('pointermove',ev=>{
+  const r=svg.getBoundingClientRect();
+  const px=(ev.clientX-r.left)/r.width*W, n=D.quarters.length;
+  const i=Math.max(0,Math.min(n-1,Math.round((px-M.l)/((W-M.l-M.r)/(n-1)))));
+  const rule=document.getElementById('rule');
+  if(rule){ rule.setAttribute('x1',SX(i)); rule.setAttribute('x2',SX(i)); }
+  const vals=window._vals;
+  let h='<b>'+D.quarters[i]+'</b>';
+  SER.map((s,k)=>[s,vals[k][i]||0]).filter(([,v])=>v>0)
+     .sort((a,b)=>b[1]-a[1]).forEach(([s,v])=>{
+    h+='<div class="row"><span class="sw" style="display:inline-block;width:9px;height:9px;'
+      +'border-radius:2px;background:'+s.color+'"></span>'+s.name
+      +'<i>'+(PCT?v.toFixed(1)+'%':fmt(v))+'</i></div>';
+  });
+  if(!PCT) h+='<div class="row" style="border-top:1px solid #d7dbe2;margin-top:4px;'
+             +'padding-top:4px;font-weight:700">Total<i>'+fmt(TOT[i])+'</i></div>';
+  tip.innerHTML=h; tip.style.opacity=1;
+  tip.style.left=Math.min(Math.max(8,SX(i)/W*r.width+14), r.width-tip.offsetWidth-8)+'px';
+  tip.style.top='12px';
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
+  const rule=document.getElementById('rule'); if(rule){rule.setAttribute('x1',-9);rule.setAttribute('x2',-9);}});
+
+buildCtl(); draw();
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'OWNERS-D04',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+
+</script>

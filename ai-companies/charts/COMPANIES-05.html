@@ -15,6 +15,13 @@
   .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
   .badge { display:inline-block; background:#1f3864; color:#fff; font-weight:700;
             font-size:10.5px; padding:3px 9px; border-radius:999px; letter-spacing:.02em; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
   .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
   .lg { display:inline-flex; align-items:center; gap:6px; cursor:pointer;
          font-size:12px; border:0; background:none; padding:2px 3px; color:#1a1a1a; }
@@ -35,6 +42,7 @@
 <div id="pg">
 <div class="hd"><span class="pid">COMPANIES-05</span><h1>Tokens processed per day, by company</h1></div>
 <div class="sub">10 observations across 4 companies, of 11 Epoch tracks. Observed to 2026-08-13. <span class="badge">OBSERVED DATA ONLY</span></div>
+<div class="ctl" id="ctl"></div>
 <div class="legend" id="lg"></div>
 <div style="position:relative">
   <svg id="c" viewBox="0 0 1000 520" role="img" aria-label="Tokens processed per day, by company"></svg>
@@ -46,7 +54,7 @@ epoch.ai/data/ai-companies. A company appears only where Epoch records the plott
 nothing is imputed and no line is drawn past the last observation.</div>
 </div>
 <script>
-const D = {"pts":[[2025.1588,788000000000.0,3,"2025-02-28","Chat and API for V3 and R1 \u00b7 Company disclosure",0],[2024.2875,323000000000.0,0,"2024-04-15","Google (all AI products) \u00b7 Company disclosure",0],[2025.3258,16000000000000.0,0,"2025-04-30","Google (all AI products) \u00b7 Company disclosure",0],[2025.5558,33000000000000.0,0,"2025-07-23","Google (all AI products) \u00b7 Company disclosure",0],[2025.7447,43000000000000.0,0,"2025-09-30","Google (all AI products) \u00b7 Company disclosure",0],[2024.1068,133000000000.0,1,"2024-02-09","All products \u00b7 Company disclosure",0],[2025.7611,8600000000000.0,1,"2025-10-06","API \u00b7 Company disclosure",0],[2023.9966,2100000000.0,2,"2023-12-31","Full company \u00b7 Company disclosure",0],[2024.9993,200000000000.0,2,"2024-12-31","Full company \u00b7 Company disclosure",0],[2025.4928,4600000000000.0,2,"2025-06-30","Full company \u00b7 Company disclosure",0]],"groups":[{"name":"Google","color":"#4a6fa5","n":4},{"name":"OpenAI","color":"#1f3864","n":2},{"name":"Z.ai (Zhipu)","color":"#9aa9c4","n":3},{"name":"DeepSeek","color":"#4e8a8b","n":1}],"connect":true,"fits":[],"unit":"count","value":"Tokens per day","yLabel":"Tokens processed per day","xLabel":"Date of report"};
+const D = {"pts":[[2025.1588,788000000000.0,3,"2025-02-28","Chat and API for V3 and R1 \u00b7 Company disclosure",0],[2024.2875,323000000000.0,0,"2024-04-15","Google (all AI products) \u00b7 Company disclosure",0],[2025.3258,16000000000000.0,0,"2025-04-30","Google (all AI products) \u00b7 Company disclosure",0],[2025.5558,33000000000000.0,0,"2025-07-23","Google (all AI products) \u00b7 Company disclosure",0],[2025.7447,43000000000000.0,0,"2025-09-30","Google (all AI products) \u00b7 Company disclosure",0],[2024.1068,133000000000.0,1,"2024-02-09","All products \u00b7 Company disclosure",0],[2025.7611,8600000000000.0,1,"2025-10-06","API \u00b7 Company disclosure",0],[2023.9966,2100000000.0,2,"2023-12-31","Full company \u00b7 Company disclosure",0],[2024.9993,200000000000.0,2,"2024-12-31","Full company \u00b7 Company disclosure",0],[2025.4928,4600000000000.0,2,"2025-06-30","Full company \u00b7 Company disclosure",0]],"groups":[{"name":"Google","color":"#4a6fa5","n":4},{"name":"OpenAI","color":"#1f3864","n":2},{"name":"Z.ai (Zhipu)","color":"#9aa9c4","n":3},{"name":"DeepSeek","color":"#4e8a8b","n":1}],"connect":true,"fits":[],"unit":"count","value":"Tokens per day","scaleToggle":false,"yLabel":"Tokens processed per day","xLabel":"Date of report"};
 
 function decadeTicks(lo, hi, target) {
   const a = Math.floor(Math.log10(lo)), b = Math.ceil(Math.log10(hi));
@@ -80,14 +88,23 @@ function geometry(D, hidden, W, H, M) {
   let xLo = Math.min.apply(null, xs), xHi = Math.max.apply(null, xs);
   const pad = Math.max((xHi - xLo) * 0.04, 0.15);
   xLo -= pad; xHi += pad;
-  const sy = v => H - M.b - (Math.log10(v) - Math.log10(yLo))
-                  / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b);
+  const sy = LOGY
+    ? v => H - M.b - (Math.log10(v) - Math.log10(yLo))
+             / (Math.log10(yHi) - Math.log10(yLo) || 1) * (H - M.t - M.b)
+    : v => H - M.b - (v - 0) / (yHi - 0 || 1) * (H - M.t - M.b);
   const sx = v => M.l + (v - xLo) / (xHi - xLo || 1) * (W - M.l - M.r);
   return {
     shown, sx, sy, xLo, xHi, yLo, yHi,
-    yTicks: decadeTicks(yLo, yHi, 8),
+    yTicks: LOGY ? decadeTicks(yLo, yHi, 8) : linearTicks(yHi, 6),
     xTicks: yearTicks(xLo, xHi),
   };
+}
+
+function linearTicks(hi, n) {
+  const raw = hi / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw) || 10 * mag;
+  const out = []; for (let v = 0; v <= hi * 1.0001; v += step) out.push(+v.toFixed(6));
+  return out;
 }
 
 function nearest(D, G, px, py, limit) {
@@ -103,6 +120,9 @@ function nearest(D, G, px, py, limit) {
 const W=1000, H=520, M={l:86,r:18,t:16,b:52};
 const svg=document.getElementById('c'), tip=document.getElementById('tip'), lgw=document.getElementById('lg');
 const hidden=new Set();
+// Epoch offers scale and the growth regression as controls; they live here
+// rather than as separate charts
+let LOGY=true, TREND=false;
 const NS='http://www.w3.org/2000/svg';
 const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
 
@@ -113,6 +133,25 @@ function human(v){
 }
 const fmtY = v => (D.unit==='usd' ? '$' : '') + human(v);
 const fmtX = v => String(Math.round(v));
+
+function buildCtl(){
+  const ctl=document.getElementById('ctl'); if(!ctl) return;
+  ctl.innerHTML='';
+  const add=(cap,opts,cur,pick)=>{
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap;
+    g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.type='button';
+      b.textContent=o; b.setAttribute('aria-pressed', i===cur?'true':'false');
+      b.onclick=()=>{ pick(i); buildCtl(); draw(); reportHeight(); };
+      g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  if(D.scaleToggle) add('Scale',['Logarithmic','Linear'],LOGY?0:1,i=>{LOGY=i===0;});
+  if(D.fits && D.fits.length) add('Growth trend',['Off','Fitted'],TREND?1:0,i=>{TREND=i===1;});
+}
 
 function drawLegend(){
   lgw.innerHTML='';
@@ -172,7 +211,7 @@ function draw(){
   }
 
   // fitted growth, dashed, stopping at the last observation - never projected
-  (D.fits||[]).forEach(f=>{
+  (TREND ? (D.fits||[]) : []).forEach(f=>{
     if(hidden.has(f[0])) return;
     const [gi,x0,x1,slope,icept]=f;
     svg.appendChild(el('line',{x1:G.sx(x0),y1:G.sy(Math.pow(10,slope*x0+icept)),
@@ -212,7 +251,7 @@ function move(ev){
 svg.addEventListener('pointermove',move);
 svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
   const hl=document.getElementById('hl'); if(hl) hl.setAttribute('cx',-99);});
-drawLegend(); draw();
+buildCtl(); drawLegend(); draw();
 
 function reportHeight(){
   const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
