@@ -28,3 +28,6 @@ ai_companies.csv,ai_companies,"Epoch AI, AI Companies",
 aei_claude_ai_2026-06-26.csv,<root>,Anthropic Economic Index (Claude.ai),AEI-01..04 + 06..10 + D01 + D02 + D05..D09
 aei_1p_api_2026-06-26.csv,<root>,Anthropic Economic Index (1P API),AEI-11 + AEI-12 + D07..D09
 MLPerf_Inference_Hardware_Performance_Benchmarks.csv,<root>,MLCommons — MLPerf Inference,MLPERF-01..03 + D01 + D02
+cumulative_by_designer.csv,ai_chip_owners,"Epoch AI, AI Chip Owners",OWNERS-01 + D01..D04
+cumulative_by_chip_type.csv,ai_chip_owners,"Epoch AI, AI Chip Owners",OWNERS-02
+quarters_by_chip_type.csv,ai_chip_owners,"Epoch AI, AI Chip Owners",OWNERS-D04

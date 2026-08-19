@@ -420,6 +420,56 @@ python build/build_site.py                    # → mlperf-inference/index.html
 
 ---
 
+## AI Chip Owners
+
+Who actually holds the accelerators. Source:
+[Epoch AI, AI Chip Owners](https://epoch.ai/data/ai-chip-owners) (CC-BY), three
+files downloaded into `ai_chip_owners/`:
+
+| File | Rows | What it is |
+|---|---|---|
+| `cumulative_by_designer.csv` | 215 | Installed base by owner and chip manufacturer, quarterly |
+| `cumulative_by_chip_type.csv` | 515 | The same, broken out to 25 chip types |
+| `quarters_by_chip_type.csv` | 384 | What was **added** each quarter, not the running total |
+
+**6 charts**, in two sections:
+
+| IDs | Section | What they are |
+|---|---|---|
+| `OWNERS-01`, `OWNERS-02` | Epoch AI — Published Visualizations | Installed compute by owner over time, and the same base by chip type |
+| `OWNERS-D01` – `OWNERS-D04` | Derived Analysis | Ownership concentration, the published interval behind each estimate, own silicon against bought-in, and the rate of addition rather than the total |
+
+Two rules decide what reaches a chart:
+
+- **Incomplete quarters are excluded.** Every row of the final quarter in the
+  download (`2026Q1`) carries Epoch's `Incomplete` flag: 8 rows against 19 the
+  quarter before, 7 owners against 10, and the cumulative total **falls** from
+  20.9M H100e to 17.1M. A cumulative series cannot fall — that is missing
+  coverage, not chips being switched off. The window is `2022Q1`–`2025Q4`.
+- **Ownership is estimated, not disclosed.** Epoch publishes a 5th–95th
+  percentile beside every median because almost none of this is reported by the
+  owners. The interval is wide and very uneven — 0.12× the median for CoreWeave,
+  **1.96×** for smuggled Chinese capacity — so it is carried through and charted
+  directly in `OWNERS-D02` rather than dropped.
+
+H100e is Epoch's normalising unit, so a TPU and a Blackwell can be added into one
+total. It measures compute, not chips, and flattens real differences in how those
+chips serve inference. The page carries a glossary covering that, the aggregate
+"owners", and the `Incomplete` flag.
+
+Three findings the charts carry: installed compute grew **334-fold** from 2022Q1
+to 2025Q4; **five owners hold 79%** of it; and only two of the ten holders run
+silicon they designed themselves — Google at **76%** of its fleet on TPUs,
+Amazon at **42%** on Trainium, everyone else buying all of it.
+
+```bash
+python build/summarise_epoch_chip_owners.py   # ai_chip_owners/*.csv → ai-chip-owners/data/
+python build/generate_charts.py OWNERS-01 …   # derived tables → SVG + PNG
+python build/build_site.py                    # → ai-chip-owners/index.html
+```
+
+---
+
 ## Structure
 
 ```
@@ -539,15 +589,16 @@ The names are the files as downloaded, in the project source store:
 | `ai_chip_components` | `quarterly_by_designer.csv`, `cumulative_by_designer.csv`, `cumulative_by_chip.csv`, `supply_denominators.csv` | `CHIP-01` – `CHIP-14`, `CHIP-D01` – `CHIP-D06` |
 | `anthropic_aei` (Hugging Face) | `aei_claude_ai_2026-06-26.csv` | `AEI-01` – `AEI-10`, `AEI-D01` – `AEI-D06` |
 | *(root)* | `MLPerf_Inference_Hardware_Performance_Benchmarks.csv` | `MLPERF-01` – `MLPERF-03`, `MLPERF-D01`, `MLPERF-D02` |
+| `ai_chip_owners` | `cumulative_by_designer.csv`, `cumulative_by_chip_type.csv`, `quarters_by_chip_type.csv` | `OWNERS-01`, `OWNERS-02`, `OWNERS-D01` – `OWNERS-D04` |
 | `ai_companies` | `ai_companies_revenue_reports.csv`, `ai_companies_funding_rounds.csv`, `ai_companies_staff_reports.csv`, `ai_companies_usage_reports.csv`, `ai_companies_compute_spend.csv`, `ai_companies.csv` | `COMPANIES-01` – `COMPANIES-10`, `COMPANIES-D01` – `COMPANIES-D08` |
 
 `build/source_files_manifest.csv` records that store file by file, and
 
 ```bash
-python build/verify_source_files.py     # 79 published charts checked, 0 failing
+python build/verify_source_files.py     # 85 published charts checked, 0 failing
 ```
 
-checks all 79 published charts against it. A chart that names no file, that
+checks all 85 published charts against it. A chart that names no file, that
 names a different file on its face than in its index row, or that names a file
 the store does not hold, fails the check rather than reaching a client.
 

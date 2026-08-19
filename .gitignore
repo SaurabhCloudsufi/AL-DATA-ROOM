@@ -36,6 +36,8 @@ AzureLMMInferenceTrace*.csv
 # MLCommons MLPerf Inference export as downloaded. The derived tables in
 # mlperf-inference/data/ are committed.
 /mlperf/
+# Epoch AI chip-owner files as downloaded; derived tables in ai-chip-owners/data/
+/ai_chip_owners/
 aei_*.csv
 rankings_*.csv
 app_rankings_*.csv

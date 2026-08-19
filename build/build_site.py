@@ -201,6 +201,64 @@ DOMAINS = [
         "live": True,
     },
     {
+        "slug": "ai-chip-owners",
+        "title": "AI Chip Owners",
+        "blurb": "Who actually holds the accelerators: installed AI compute by owner, "
+                 "by chip type and by who designed the silicon, in H100-equivalents.",
+        "index": "build/plot_index_chip_owners.csv",
+        "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "Epoch AI — Published Visualizations":
+                "Epoch's own views of the installed base, rebuilt from the downloaded "
+                "CSVs. Complete quarters only: every row of the final quarter in the "
+                "download is flagged incomplete at source, and charting it would show "
+                "installed compute falling when what fell is coverage.",
+            "Derived Analysis":
+                "Our own analysis of the same three files — how concentrated ownership "
+                "is, how much is actually known about each holder, who designs their "
+                "own silicon, and the rate of addition rather than the total.",
+        },
+        "extra_sections": [{
+            "title": "What is being counted",
+            "body": "This dataset estimates who holds AI accelerators. Almost none of "
+                    "it is disclosed by the owners, and the unit is a normalisation "
+                    "rather than a chip count. Both facts matter for every figure.",
+            "terms": [
+                ("H100e",
+                 "H100-equivalent: Epoch's normalising unit, so a TPU, a Trainium and "
+                 "a Blackwell can be added into one total. It is a measure of compute, "
+                 "not a count of chips, and it flattens real differences in how those "
+                 "chips serve inference — two fleets with the same H100e will not "
+                 "deliver the same tokens per second."),
+                ("Owner",
+                 "The organisation that holds the hardware, which is not always the "
+                 "one using it: a cloud provider's fleet is largely rented out. "
+                 "CoreWeave appears here as an owner and its customers do not."),
+                ("Other, China, China (smuggled)",
+                 "Aggregates rather than organisations. \"Other\" is Epoch's residual "
+                 "for holders it does not track individually, and it ranks third — "
+                 "which is a statement about coverage, not about a third-largest "
+                 "company. The two China lines are separated because one is "
+                 "legitimately imported and the other is not."),
+                ("5th–95th percentile",
+                 "Epoch publishes an interval beside every median because the estimate "
+                 "is built from filings, supply-chain reporting and satellite imagery "
+                 "rather than from disclosure. The interval is wide and very uneven — "
+                 "OWNERS-D02 charts it directly."),
+                ("Incomplete",
+                 "A row Epoch flags as not yet fully populated. Every row of the final "
+                 "quarter in this download carries it, and that quarter's cumulative "
+                 "total is lower than the one before, which cannot happen for a "
+                 "cumulative series. It is excluded throughout."),
+                ("Installed against added",
+                 "The cumulative files give what stood installed at the end of a "
+                 "quarter; the quarterly file gives what was added during it. They are "
+                 "separately estimated and agree to within a fraction of a percent."),
+            ],
+        }],
+        "live": True,
+    },
+    {
         "slug": "mlperf-inference",
         "title": "MLPerf Inference",
         "blurb": "What the hardware actually delivers: MLCommons' measured inference "

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Chip Owners — Visual Evidence Gallery — AI Data Room</title>
+<meta name="description" content="Who actually holds the accelerators: installed AI compute by owner, by chip type and by who designed the silicon, in H100-equivalents.">
+<link rel="stylesheet" href="../inference-tokens/assets/style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow"><a href="../">AI Data Room</a> &nbsp;/&nbsp; Visual Evidence</p>
+  <h1>AI Chip Owners</h1>
+  <p class="standfirst">Who actually holds the accelerators: installed AI compute by owner, by chip type and by who designed the silicon, in H100-equivalents.</p>
+  <dl class="meta">
+    <div><dt>Charts published</dt><dd>6</dd></div>
+  </dl>
+</header>
+
+<div class="toc"><h2>Contents</h2><ol>
+<li><a href="#epoch-ai-published-visualizations">Epoch AI — Published Visualizations</a> <span class="count">2 of 2 published</span></li>
+<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">4 of 4 published</span></li>
+</ol></div>
+<div class="section" id="epoch-ai-published-visualizations">
+<h2>Epoch AI — Published Visualizations</h2>
+<p class="blurb">Epoch&#x27;s own views of the installed base, rebuilt from the downloaded CSVs. Complete quarters only: every row of the final quarter in the download is flagged incomplete at source, and charting it would show installed compute falling when what fell is coverage.</p>
+<section class="chart" id="OWNERS-01">
+<div class="chart-head">
+<a class="pid" href="#OWNERS-01">OWNERS-01</a>
+<h3>Installed AI compute by owner</h3>
+</div>
+<p class="shows">Installed compute in H100-equivalents by owner, quarter by quarter.</p>
+<div class="figure">
+<img src="charts/OWNERS-01.svg" alt="Installed AI compute by owner" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Owners</dd></div>
+<div><dt>Granularity</dt><dd>One owner in one quarter</dd></div>
+<div><dt>Year</dt><dd>2022Q1 to 2025Q4 — 16 complete quarters</dd></div>
+<div><dt>Coverage</dt><dd>10 owners, 16 quarters, 20.9M H100e at 2025Q4</dd></div>
+<div><dt>Source files</dt><dd class="files">cumulative_by_designer.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Incomplete quarters excluded (2026Q1: every row flagged at source and the cumulative total falls); medians carried with Epoch&#x27;s 5th–95th percentile</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-owners" rel="noopener">Epoch AI — AI Chip Owners</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI chip owners documentation</dd></div>
+<div><dt>Note</dt><dd>334-fold growth from 2022Q1 to 2025Q4; &quot;Other&quot;, &quot;China&quot; and &quot;China (smuggled)&quot; are aggregates, not companies</dd></div>
+</dl>
+<p class="downloads"><a href="charts/OWNERS-01.svg" download>Download SVG</a><a href="charts/OWNERS-01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="OWNERS-02">
+<div class="chart-head">
+<a class="pid" href="#OWNERS-02">OWNERS-02</a>
+<h3>Installed base by chip type</h3>
+</div>
+<p class="shows">The same installed base broken out by chip type, top 9 named and the rest pooled.</p>
+<div class="figure">
+<img src="charts/OWNERS-02.svg" alt="Installed base by chip type" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Owners</dd></div>
+<div><dt>Granularity</dt><dd>One chip type in one quarter</dd></div>
+<div><dt>Year</dt><dd>2022Q1 to 2025Q4 — 16 complete quarters</dd></div>
+<div><dt>Coverage</dt><dd>25 chip types across 16 quarters</dd></div>
+<div><dt>Source files</dt><dd class="files">cumulative_by_chip_type.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Incomplete quarters excluded (2026Q1: every row flagged at source and the cumulative total falls); medians carried with Epoch&#x27;s 5th–95th percentile</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-owners" rel="noopener">Epoch AI — AI Chip Owners</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI chip owners documentation</dd></div>
+<div><dt>Note</dt><dd>Blackwell parts became the largest slice within two years while Hopper is still second</dd></div>
+</dl>
+<p class="downloads"><a href="charts/OWNERS-02.svg" download>Download SVG</a><a href="charts/OWNERS-02.png" download>Download PNG</a></p>
+</section>
+</div>
+<div class="section" id="derived-analysis">
+<h2>Derived Analysis</h2>
+<p class="blurb">Our own analysis of the same three files — how concentrated ownership is, how much is actually known about each holder, who designs their own silicon, and the rate of addition rather than the total.</p>
+<section class="chart" id="OWNERS-D01">
+<div class="chart-head">
+<a class="pid" href="#OWNERS-D01">OWNERS-D01</a>
+<h3>Owner concentration of installed compute</h3>
+</div>
+<p class="shows">How concentrated ownership is, as ranked shares against a cumulative curve.</p>
+<div class="figure">
+<img src="charts/OWNERS-D01.svg" alt="Owner concentration of installed compute" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Owners</dd></div>
+<div><dt>Granularity</dt><dd>One owner</dd></div>
+<div><dt>Year</dt><dd>2022Q1 to 2025Q4 — 16 complete quarters</dd></div>
+<div><dt>Coverage</dt><dd>10 owners at 2025Q4</dd></div>
+<div><dt>Source files</dt><dd class="files">cumulative_by_designer.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Shares of the tracked total; &quot;Other&quot; ranking third is a statement about coverage, not a company</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-owners" rel="noopener">Epoch AI — AI Chip Owners</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI chip owners documentation</dd></div>
+<div><dt>Note</dt><dd>Five owners hold 79% of the world&#x27;s installed AI compute</dd></div>
+</dl>
+<p class="downloads"><a href="charts/OWNERS-D01.svg" download>Download SVG</a><a href="charts/OWNERS-D01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="OWNERS-D02">
+<div class="chart-head">
+<a class="pid" href="#OWNERS-D02">OWNERS-D02</a>
+<h3>The interval behind every estimate</h3>
+</div>
+<p class="shows">Epoch&#x27;s published 5th–95th percentile beside each owner&#x27;s median.</p>
+<div class="figure">
+<img src="charts/OWNERS-D02.svg" alt="The interval behind every estimate" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Owners</dd></div>
+<div><dt>Granularity</dt><dd>One owner</dd></div>
+<div><dt>Year</dt><dd>2022Q1 to 2025Q4 — 16 complete quarters</dd></div>
+<div><dt>Coverage</dt><dd>10 owners at 2025Q4</dd></div>
+<div><dt>Source files</dt><dd class="files">cumulative_by_designer.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Published percentiles as-is; interval width expressed as a multiple of the median</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-owners" rel="noopener">Epoch AI — AI Chip Owners</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI chip owners documentation</dd></div>
+<div><dt>Note</dt><dd>The interval runs from 0.12x the median for CoreWeave to 1.96x for smuggled Chinese capacity</dd></div>
+</dl>
+<p class="downloads"><a href="charts/OWNERS-D02.svg" download>Download SVG</a><a href="charts/OWNERS-D02.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="OWNERS-D03">
+<div class="chart-head">
+<a class="pid" href="#OWNERS-D03">OWNERS-D03</a>
+<h3>Own silicon against bought-in</h3>
+</div>
+<p class="shows">How much of each owner&#x27;s fleet is silicon they designed themselves.</p>
+<div class="figure">
+<img src="charts/OWNERS-D03.svg" alt="Own silicon against bought-in" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Owners</dd></div>
+<div><dt>Granularity</dt><dd>One owner, split by manufacturer</dd></div>
+<div><dt>Year</dt><dd>2022Q1 to 2025Q4 — 16 complete quarters</dd></div>
+<div><dt>Coverage</dt><dd>10 owners x 6 manufacturers</dd></div>
+<div><dt>Source files</dt><dd class="files">cumulative_by_designer.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Own silicon is where the owner and the chip manufacturer are the same organisation</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-owners" rel="noopener">Epoch AI — AI Chip Owners</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI chip owners documentation</dd></div>
+<div><dt>Note</dt><dd>Google runs 76% of its compute on its own TPUs and Amazon 42% on Trainium; every other holder buys all of it</dd></div>
+</dl>
+<p class="downloads"><a href="charts/OWNERS-D03.svg" download>Download SVG</a><a href="charts/OWNERS-D03.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="OWNERS-D04">
+<div class="chart-head">
+<a class="pid" href="#OWNERS-D04">OWNERS-D04</a>
+<h3>Compute added each quarter</h3>
+</div>
+<p class="shows">What was added in each quarter rather than what stood installed, against the running total.</p>
+<div class="figure">
+<img src="charts/OWNERS-D04.svg" alt="Compute added each quarter" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Epoch AI — AI Chip Owners</dd></div>
+<div><dt>Granularity</dt><dd>One quarter</dd></div>
+<div><dt>Year</dt><dd>2022Q1 to 2025Q4 — 16 complete quarters</dd></div>
+<div><dt>Coverage</dt><dd>16 quarters of additions</dd></div>
+<div><dt>Source files</dt><dd class="files">quarters_by_chip_type.csv + cumulative_by_designer.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Read from Epoch&#x27;s own quarterly file rather than by differencing the cumulative one</dd></div>
+<div><dt>Source</dt><dd><a href="https://epoch.ai/data/ai-chip-owners" rel="noopener">Epoch AI — AI Chip Owners</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows Epoch AI&#x27;s published AI chip owners documentation</dd></div>
+<div><dt>Note</dt><dd>A single quarter now adds more than the entire installed base of two years earlier</dd></div>
+</dl>
+<p class="downloads"><a href="charts/OWNERS-D04.svg" download>Download SVG</a><a href="charts/OWNERS-D04.png" download>Download PNG</a></p>
+</section>
+</div>
+<div class="section" id="what-is-being-counted">
+<h2>What is being counted</h2>
+<p class="blurb">This dataset estimates who holds AI accelerators. Almost none of it is disclosed by the owners, and the unit is a normalisation rather than a chip count. Both facts matter for every figure.</p>
+<dl class="glossary">
+<div><dt>H100e</dt><dd>H100-equivalent: Epoch&#x27;s normalising unit, so a TPU, a Trainium and a Blackwell can be added into one total. It is a measure of compute, not a count of chips, and it flattens real differences in how those chips serve inference — two fleets with the same H100e will not deliver the same tokens per second.</dd></div>
+<div><dt>Owner</dt><dd>The organisation that holds the hardware, which is not always the one using it: a cloud provider&#x27;s fleet is largely rented out. CoreWeave appears here as an owner and its customers do not.</dd></div>
+<div><dt>Other, China, China (smuggled)</dt><dd>Aggregates rather than organisations. &quot;Other&quot; is Epoch&#x27;s residual for holders it does not track individually, and it ranks third — which is a statement about coverage, not about a third-largest company. The two China lines are separated because one is legitimately imported and the other is not.</dd></div>
+<div><dt>5th–95th percentile</dt><dd>Epoch publishes an interval beside every median because the estimate is built from filings, supply-chain reporting and satellite imagery rather than from disclosure. The interval is wide and very uneven — OWNERS-D02 charts it directly.</dd></div>
+<div><dt>Incomplete</dt><dd>A row Epoch flags as not yet fully populated. Every row of the final quarter in this download carries it, and that quarter&#x27;s cumulative total is lower than the one before, which cannot happen for a cumulative series. It is excluded throughout.</dd></div>
+<div><dt>Installed against added</dt><dd>The cumulative files give what stood installed at the end of a quarter; the quarterly file gives what was added during it. They are separately estimated and agree to within a fraction of a percent.</dd></div>
+</dl>
+</div>
+
+<footer class="foot">
+  <p><strong>How to read this gallery.</strong> Every chart carries a stable Plot ID
+  matching the Dataset Register. Link straight to any chart by appending its ID, for
+  example <code>#P-59</code>. That address does not change as the gallery grows.</p>
+  <p><strong>Methodology references.</strong> Section references shown against each chart
+  are taken from the working methodology. They become links once that document is final.</p>
+</footer>
+
+</div>
+<script>
+// embedded charts post their rendered height; without this the iframe would
+// either clip the legend or leave a gap at some widths
+addEventListener('message', function (ev) {
+  var d = ev.data;
+  if (!d || d.type !== 'aidr-height' || !d.id) return;
+  var f = document.querySelector('iframe.live[src="charts/' + d.id + '.html"]');
+  // ignore implausible measurements rather than collapsing the frame to a sliver
+  if (f && d.h > 200 && d.h < 4000) f.style.height = d.h + 'px';
+});
+</script>
+</body>
+</html>

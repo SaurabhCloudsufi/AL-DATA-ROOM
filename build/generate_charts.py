@@ -5083,6 +5083,392 @@ MLPERF_BUILDERS = {
 }
 
 
+# ======================================================== AI CHIP OWNERS
+# Epoch's AI Chip Owners: who actually has the accelerators, in H100-equivalents.
+# Almost none of it is disclosed by the owners, so every figure carries a wide
+# published interval and OWNERS-D02 charts it directly.
+OWNERS_DOMAIN = "ai-chip-owners"
+OWNERS_DATA = REPO / OWNERS_DOMAIN / "data"
+OWNERS_METH = ("Methodology reference pending final methodology document; derivation "
+               "follows Epoch AI's published AI chip owners documentation")
+
+OWNER_COLOUR = {
+    "Google": "#1f3864", "Microsoft": "#4a6fa5", "Amazon": "#6b8f71",
+    "Meta": "#b4763a", "Oracle": "#7d5a7d", "CoreWeave": "#4e8a8b",
+    "xAI": "#a46b6b", "China": "#8a8f5c", "China (smuggled)": "#c08a5a",
+    "Other": "#c3c8d1",
+}
+MANU_COLOUR = {"Nvidia": "#1f3864", "Google": "#4a6fa5", "AMD": "#b4763a",
+               "Amazon": "#6b8f71", "Huawei": "#a46b6b", "Cambricon": "#8a8f5c"}
+
+
+def owners_src(files):
+    return ("Epoch AI, AI Chip Owners (CC-BY) — " + " + ".join(files)
+            + " — epoch.ai/data/ai-chip-owners")
+
+
+def _ocsv(name):
+    import pandas as pd
+    return pd.read_csv(OWNERS_DATA / name)
+
+
+def _ometa():
+    return _ocsv("owners_summary.csv").iloc[0]
+
+
+def _o_badge(ax, above=True):
+    y, va = (1.030, "bottom") if above else (0.955, "top")
+    ax.text(0.0 if above else 0.017, y,
+            "  OWNERSHIP IS ESTIMATED  ·  not disclosed  ",
+            transform=ax.transAxes, ha="left", va=va, fontsize=9.1,
+            fontweight="bold", color="white", zorder=9, clip_on=False,
+            bbox=dict(boxstyle="round,pad=0.42", facecolor=SERIES["current"],
+                      edgecolor="none"))
+
+
+OWNERS_SCOPE = ("Almost none of this is disclosed by the owners: Epoch estimates it "
+                "from filings, supply-chain reporting and satellite work, and publishes "
+                "a 5th-95th percentile beside every median. OWNERS-D02 charts that "
+                "interval, which is wide and very uneven.")
+OWNERS_H100E = ("H100e is Epoch's normalising unit — an H100-equivalent of compute — so "
+                "a TPU and a Blackwell can be added together. It flattens real "
+                "differences in how those chips serve inference.")
+OWNERS_AGG = ("\"Other\", \"China\" and \"China (smuggled)\" are aggregates rather than "
+              "organisations, and are labelled so no reading treats them as one company.")
+
+
+def _ofig(subtitle, note, left, width, files, xlabel_room=0.058, figsize=(12.0, 8.4)):
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_axes(_rect(subtitle, note, left=left, width=width,
+                            xlabel_room=xlabel_room, badge_above=True,
+                            source=owners_src(files)))
+    return fig, ax
+
+
+def _ofinish(fig, ax, pid, title, subtitle, note, files):
+    _o_badge(ax, above=True)
+    frame(fig, ax, pid, title, subtitle, owners_src(files), OWNERS_METH, note)
+    save(fig, pid, OWNERS_DOMAIN)
+
+
+def _h(v):
+    return f"{v/1e6:,.1f}M" if v >= 1e6 else f"{v/1e3:,.0f}k" if v >= 1e3 else f"{v:,.0f}"
+
+
+def _qsort(qs):
+    return sorted(qs, key=lambda s: (int(s[:4]), int(s[-1])))
+
+
+def build_owners_01(_r=None):
+    """The installed base, quarter by quarter, by who holds it."""
+    d = _ocsv("owners_by_owner.csv")
+    meta = _ometa()
+    quarters = _qsort(d.quarter.unique())
+    last = quarters[-1]
+    order = (d[d.quarter == last].sort_values("h100e", ascending=False)["owner"].tolist())
+
+    subtitle = (f"What it shows: installed AI compute by owner, in H100-equivalents, "
+                f"across the {len(quarters)} complete quarters Epoch publishes. "
+                f"{_h(float(meta['total_h100e_last_quarter']))} H100e across "
+                f"{int(meta['owners'])} owners by {last}, up from "
+                f"{_h(d[d.quarter == quarters[0]]['h100e'].sum())} at {quarters[0]}. "
+                f"{OWNERS_H100E}")
+    note = (f"{OWNERS_AGG} {OWNERS_SCOPE} The final quarter in the download "
+            f"({meta['excluded_quarters']}) is excluded: every row in it is flagged "
+            f"incomplete at source and the cumulative total falls, which is missing "
+            f"coverage rather than chips being switched off.")
+
+    fig, ax = _ofig(subtitle, note, 0.078, 0.660,
+                    ["cumulative_by_designer.csv"], xlabel_room=0.080)
+    idx = list(range(len(quarters)))
+    bottom = [0.0] * len(quarters)
+    for owner in order:
+        sub = d[d.owner == owner].set_index("quarter")["h100e"]
+        vals = [float(sub.get(q, 0.0)) / 1e6 for q in quarters]
+        ax.fill_between(idx, bottom, [b + v for b, v in zip(bottom, vals)],
+                        color=OWNER_COLOUR.get(owner, RESIDUAL), label=owner,
+                        linewidth=0.6, edgecolor="white", zorder=3)
+        bottom = [b + v for b, v in zip(bottom, vals)]
+    ax.set_xticks(idx)
+    ax.set_xticklabels([q.replace("Q", "\nQ") for q in quarters], fontsize=8.6)
+    ax.set_xlim(0, len(quarters) - 1)
+    ax.set_ylim(0, max(bottom) * 1.06)
+    import matplotlib.ticker as mticker
+    ax.yaxis.set_major_locator(mticker.MultipleLocator(5))
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}M"))
+    ax.set_ylabel("Installed compute (millions of H100-equivalents)", fontsize=10)
+    ax.set_xlabel("Quarter", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    h, l = ax.get_legend_handles_labels()
+    ax.legend(h[::-1], l[::-1], loc="upper left", bbox_to_anchor=(1.015, 1.0),
+              frameon=False, fontsize=9, title="Owner", title_fontsize=9.2,
+              handlelength=1.4, borderaxespad=0)
+    grew = (d[d.quarter == last]["h100e"].sum()
+            / d[d.quarter == quarters[0]]["h100e"].sum())
+    years = len(quarters) / 4
+    _ofinish(fig, ax, "OWNERS-01",
+             f"Installed AI compute has grown {grew:,.0f}-fold in {years:.0f} years",
+             subtitle, note, ["cumulative_by_designer.csv"])
+
+
+def build_owners_02(_r=None):
+    """What silicon the installed base is actually made of."""
+    d = _ocsv("owners_by_chip_type.csv")
+    quarters = _qsort(d.quarter.unique())
+    last = quarters[-1]
+    rank = d[d.quarter == last].sort_values("h100e", ascending=False)
+    keep = rank.head(9)["chip_type"].tolist()
+
+    subtitle = (f"What it shows: the same installed base broken out by chip type. The "
+                f"{len(keep)} largest at {last} are named and the remaining "
+                f"{d.chip_type.nunique() - len(keep)} types are pooled. {OWNERS_H100E}")
+    note = (f"The generation turnover is the point: Blackwell parts hold the largest "
+            f"share of installed compute within two years of first appearing, while "
+            f"Hopper is still the second largest — installed base turns over far more "
+            f"slowly than shipments do. {OWNERS_SCOPE}")
+
+    fig, ax = _ofig(subtitle, note, 0.078, 0.640, ["cumulative_by_chip_type.csv"])
+    idx = list(range(len(quarters)))
+    bottom = [0.0] * len(quarters)
+    pal = MODELS_PALETTE
+    for i, chip in enumerate(keep + ["All other chip types"]):
+        if chip == "All other chip types":
+            sub = (d[~d.chip_type.isin(keep)].groupby("quarter")["h100e"].sum())
+            colour = RESIDUAL
+        else:
+            sub = d[d.chip_type == chip].set_index("quarter")["h100e"]
+            colour = pal[i % len(pal)]
+        vals = [float(sub.get(q, 0.0)) / 1e6 for q in quarters]
+        ax.fill_between(idx, bottom, [b + v for b, v in zip(bottom, vals)],
+                        color=colour, label=chip, linewidth=0.6, edgecolor="white",
+                        zorder=3)
+        bottom = [b + v for b, v in zip(bottom, vals)]
+    ax.set_xticks(idx)
+    ax.set_xticklabels([q.replace("Q", "\nQ") for q in quarters], fontsize=8.6)
+    ax.set_xlim(0, len(quarters) - 1)
+    ax.set_ylim(0, max(bottom) * 1.06)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}M"))
+    ax.set_ylabel("Installed compute (millions of H100-equivalents)", fontsize=10)
+    ax.set_xlabel("Quarter", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    h, l = ax.get_legend_handles_labels()
+    ax.legend(h[::-1], l[::-1], loc="upper left", bbox_to_anchor=(1.015, 1.0),
+              frameon=False, fontsize=8.8, title="Chip type", title_fontsize=9.2,
+              handlelength=1.4, borderaxespad=0)
+    _ofinish(fig, ax, "OWNERS-02",
+             "Blackwell became the largest slice of the installed base within two years",
+             subtitle, note, ["cumulative_by_chip_type.csv"])
+
+
+def build_owners_d01(_r=None):
+    """How few hands hold it, which decides how much rests on few estimates."""
+    d = _ocsv("owners_by_owner.csv")
+    quarters = _qsort(d.quarter.unique())
+    last = quarters[-1]
+    t = d[d.quarter == last].sort_values("h100e", ascending=False).reset_index(drop=True)
+    total = t["h100e"].sum()
+    t["share"] = t["h100e"] / total * 100
+    t["cum"] = t["share"].cumsum()
+    top5 = t["cum"].iloc[4]
+
+    subtitle = (f"What it shows: how concentrated ownership of installed AI compute is "
+                f"at {last}. The five largest holders account for {top5:.0f}% of "
+                f"{_h(total)} H100e; the ten tracked holders account for all of it, "
+                f"because Epoch's residual is itself one of them.")
+    note = (f"Concentration is the reason any estimate built on this dataset rests on a "
+            f"handful of figures: get Google or Microsoft wrong and the total moves. "
+            f"{OWNERS_AGG} \"Other\" ranking third is a statement about coverage, not "
+            f"about a third-largest company. {OWNERS_SCOPE}")
+
+    fig, ax = _ofig(subtitle, note, 0.235, 0.600, ["cumulative_by_designer.csv"])
+    ys = list(range(len(t)))
+    colours = [OWNER_COLOUR.get(o, RESIDUAL) for o in t["owner"]]
+    ax.barh(ys, t["share"], height=0.68, color=colours, edgecolor="white",
+            linewidth=0.6, zorder=3)
+    for y, r in zip(ys, t.itertuples()):
+        ax.text(r.share + 0.5, y, f"{r.share:.1f}%   ({_h(r.h100e)})", va="center",
+                fontsize=9, color=INK)
+    ax2 = ax.twiny()
+    ax2.plot(t["cum"], ys, color=SERIES["scope"], linewidth=1.8, marker="o",
+             markersize=4.5, zorder=5, label="Cumulative share")
+    ax2.set_xlim(0, 105)
+    ax2.set_ylim(ax.get_ylim())
+    ax2.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.0f}%"))
+    ax2.tick_params(labelsize=8.8, colors=SERIES["scope"])
+    ax2.set_xlabel("Cumulative share (orange line)", fontsize=9.4,
+                   color=SERIES["scope"])
+    ax2.grid(False)
+    ax.set_yticks(ys)
+    ax.set_yticklabels(t["owner"], fontsize=9.6)
+    ax.invert_yaxis()
+    ax.set_xlim(0, float(t["share"].max()) * 1.55)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:.0f}%"))
+    ax.set_xlabel("Share of installed H100e (bars)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    _o_badge(ax, above=True)
+    frame(fig, ax, "OWNERS-D01",
+          f"Five owners hold {top5:.0f}% of the world's installed AI compute",
+          subtitle, owners_src(["cumulative_by_designer.csv"]), OWNERS_METH, note)
+    save(fig, "OWNERS-D01", OWNERS_DOMAIN)
+
+
+def build_owners_d02(_r=None):
+    """The interval behind every number in this domain."""
+    d = _ocsv("owners_by_owner.csv")
+    last = _qsort(d.quarter.unique())[-1]
+    t = d[d.quarter == last].copy()
+    t = t[t["h100e"] > 0].sort_values("h100e", ascending=False)
+    t["width"] = (t["h100e_p95"] - t["h100e_p5"]) / t["h100e"]
+
+    subtitle = (f"What it shows: Epoch's published 5th-95th percentile beside each "
+                f"owner's median at {last}. Every other chart in this domain plots the "
+                f"dot; this is the bar it sits on, and the bar is not the same width "
+                f"for everyone.")
+    note = (f"The interval runs from {t['width'].min():.2f} times the median for "
+            f"{t.iloc[t['width'].values.argmin()]['owner']} to "
+            f"{t['width'].max():.2f} times for "
+            f"{t.iloc[t['width'].values.argmax()]['owner']} — the least and most "
+            f"observable holdings in the set. Smuggled capacity is by nature the "
+            f"hardest to see, and Epoch says so by widening the interval rather than "
+            f"by leaving it out. {OWNERS_AGG}")
+
+    fig, ax = _ofig(subtitle, note, 0.235, 0.620, ["cumulative_by_designer.csv"])
+    ys = list(range(len(t)))
+    for y, r in zip(ys, t.itertuples()):
+        colour = OWNER_COLOUR.get(r.owner, RESIDUAL)
+        ax.plot([r.h100e_p5 / 1e6, r.h100e_p95 / 1e6], [y, y], color=colour,
+                linewidth=4.0, alpha=0.42, solid_capstyle="round", zorder=3)
+        ax.plot([r.h100e / 1e6], [y], marker="o", markersize=9, color=colour,
+                markeredgecolor="white", markeredgewidth=1.0, zorder=4)
+        ax.text(r.h100e_p95 / 1e6 + 0.18, y, f"×{r.width:.2f}", va="center",
+                fontsize=8.8, color=MUTED)
+    ax.set_yticks(ys)
+    ax.set_yticklabels(t["owner"], fontsize=9.6)
+    ax.invert_yaxis()
+    ax.set_xlim(0, float(t["h100e_p95"].max()) / 1e6 * 1.22)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}M"))
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}M"))
+    ax.set_xlabel("Installed compute, 5th–95th percentile (millions of H100e)",
+                  fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.text(0.995, 0.02, "×n  =  interval width as a multiple of the median",
+            transform=ax.transAxes, ha="right", va="bottom", fontsize=8.6,
+            color=MUTED, style="italic")
+    _ofinish(fig, ax, "OWNERS-D02",
+             "How much is known differs enormously between owners",
+             subtitle, note, ["cumulative_by_designer.csv"])
+
+
+def build_owners_d03(_r=None):
+    """Who makes their own accelerators, which the owner totals hide entirely."""
+    d = _ocsv("owners_by_manufacturer.csv")
+    last = _qsort(d.quarter.unique())[-1]
+    t = d[d.quarter == last]
+    tot = t.groupby("owner")["h100e"].sum().sort_values(ascending=False)
+    own = t[t.own_silicon].groupby("owner")["h100e"].sum()
+    rows = [(o, float(own.get(o, 0.0)), float(tot[o] - own.get(o, 0.0))) for o in tot.index]
+
+    subtitle = (f"What it shows: how much of each owner's installed compute is silicon "
+                f"they designed themselves, at {last}. Only two of the ten have any at "
+                f"all, and for one of them it is most of the fleet. {OWNERS_H100E}")
+    note = (f"Google runs {own.get('Google', 0)/tot['Google']*100:.0f}% of its installed "
+            f"compute on its own TPUs and Amazon {own.get('Amazon', 0)/tot['Amazon']*100:.0f}% "
+            f"on Trainium; every other holder is buying all of it. That is the practical "
+            f"meaning of NVIDIA's position in this dataset, and it is invisible in a "
+            f"chart of owner totals. {OWNERS_AGG} {OWNERS_SCOPE}")
+
+    fig, ax = _ofig(subtitle, note, 0.215, 0.620, ["cumulative_by_designer.csv"])
+    ys = list(range(len(rows)))
+    for y, (owner, o_own, o_buy) in zip(ys, rows):
+        ax.barh(y, o_own / 1e6, height=0.66, color="#6b8f71", edgecolor="white",
+                linewidth=0.6, zorder=3, label="Own silicon" if y == 0 else None)
+        ax.barh(y, o_buy / 1e6, left=o_own / 1e6, height=0.66, color="#9aa9c4",
+                edgecolor="white", linewidth=0.6, zorder=3,
+                label="Bought in" if y == 0 else None)
+        share = o_own / (o_own + o_buy) * 100 if (o_own + o_buy) else 0
+        ax.text((o_own + o_buy) / 1e6 + 0.1, y,
+                f"{_h(o_own + o_buy)}" + (f"   {share:.0f}% own" if share else ""),
+                va="center", fontsize=9, color=INK)
+    ax.set_yticks(ys)
+    ax.set_yticklabels([r[0] for r in rows], fontsize=9.6)
+    ax.invert_yaxis()
+    ax.set_xlim(0, max(r[1] + r[2] for r in rows) / 1e6 * 1.30)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}M"))
+    ax.set_xlabel("Installed compute (millions of H100-equivalents)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.legend(loc="lower right", frameon=False, fontsize=9)
+    _ofinish(fig, ax, "OWNERS-D03",
+             "Only Google and Amazon run compute they designed themselves",
+             subtitle, note, ["cumulative_by_designer.csv"])
+
+
+def build_owners_d04(_r=None):
+    """The rate, not the total, which a cumulative chart can only imply."""
+    d = _ocsv("owners_added.csv")
+    quarters = _qsort(d.quarter.unique())
+    tot = d.groupby("quarter")["h100e"].sum().reindex(quarters)
+    cum = _ocsv("owners_by_owner.csv").groupby("quarter")["h100e"].sum().reindex(quarters)
+
+    subtitle = (f"What it shows: how much compute was added in each quarter, rather "
+                f"than how much stood installed. The cumulative view can only imply "
+                f"this through its slope; here it is the quantity itself, over the "
+                f"{len(quarters)} complete quarters.")
+    note = (f"Additions have risen every year and reached {_h(float(tot.iloc[-1]))} "
+            f"H100e in {quarters[-1]} — more than the entire installed base as recently "
+            f"as {quarters[max(0, len(quarters)-9)]}. Read from Epoch's own quarterly "
+            f"file rather than by differencing the cumulative one; the two agree to "
+            f"within a fraction of a percent but are separately estimated. "
+            f"{OWNERS_SCOPE}")
+
+    fig, ax = _ofig(subtitle, note, 0.088, 0.660, ["quarters_by_chip_type.csv",
+                                                   "cumulative_by_designer.csv"])
+    idx = list(range(len(quarters)))
+    ax.bar(idx, tot.values / 1e6, width=0.68, color=SERIES["current"],
+           edgecolor="white", linewidth=0.6, zorder=3, label="Added in the quarter")
+    for i, v in enumerate(tot.values):
+        ax.text(i, v / 1e6 + max(tot.values) / 1e6 * 0.02, f"{v/1e6:,.1f}M",
+                ha="center", va="bottom", fontsize=8.2, color=INK, fontweight="bold")
+    ax2 = ax.twinx()
+    ax2.plot(idx, cum.values / 1e6, color=SERIES["scope"], linewidth=2.2,
+             marker="o", markersize=4.5, zorder=5, label="Installed base (right)")
+    ax2.set_ylim(0, float(cum.max()) / 1e6 * 1.14)
+    ax2.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}M"))
+    ax2.tick_params(labelsize=9, colors=SERIES["scope"])
+    ax2.set_ylabel("Installed base (millions of H100e)", fontsize=9.6,
+                   color=SERIES["scope"])
+    ax2.grid(False)
+    ax.set_xticks(idx)
+    ax.set_xticklabels([q.replace("Q", "\nQ") for q in quarters], fontsize=8.6)
+    ax.set_xlim(-0.6, len(quarters) - 0.4)
+    ax.set_ylim(0, float(tot.max()) / 1e6 * 1.22)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.1f}M"))
+    ax.set_ylabel("Added in the quarter (millions of H100e)", fontsize=10)
+    ax.set_xlabel("Quarter", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    h1, l1 = ax.get_legend_handles_labels()
+    h2, l2 = ax2.get_legend_handles_labels()
+    ax.legend(h1 + h2, l1 + l2, loc="upper left", frameon=False, fontsize=9)
+    _o_badge(ax, above=True)
+    frame(fig, ax, "OWNERS-D04",
+          "A single quarter now adds more than the whole installed base of two years ago",
+          subtitle, owners_src(["quarters_by_chip_type.csv", "cumulative_by_designer.csv"]),
+          OWNERS_METH, note)
+    save(fig, "OWNERS-D04", OWNERS_DOMAIN)
+
+
+OWNERS_BUILDERS = {
+    "OWNERS-01": build_owners_01, "OWNERS-02": build_owners_02,
+    "OWNERS-D01": build_owners_d01, "OWNERS-D02": build_owners_d02,
+    "OWNERS-D03": build_owners_d03, "OWNERS-D04": build_owners_d04,
+}
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -5111,6 +5497,7 @@ BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in AEI_DERIVED.ite
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_api_rank(_p)) for pid in AEI_API_RANK})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in AEI_API_DERIVED.items()})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in MLPERF_BUILDERS.items()})
+BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in OWNERS_BUILDERS.items()})
 
 
 def main():
