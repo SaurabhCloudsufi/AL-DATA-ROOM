@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MLPerf Inference — Visual Evidence Gallery — AI Data Room</title>
+<meta name="description" content="What the hardware actually delivers: MLCommons&#x27; measured inference throughput per accelerator, across chips, workloads and the three serving scenarios.">
+<link rel="stylesheet" href="../inference-tokens/assets/style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow"><a href="../">AI Data Room</a> &nbsp;/&nbsp; Visual Evidence</p>
+  <h1>MLPerf Inference</h1>
+  <p class="standfirst">What the hardware actually delivers: MLCommons&#x27; measured inference throughput per accelerator, across chips, workloads and the three serving scenarios.</p>
+  <dl class="meta">
+    <div><dt>Charts published</dt><dd>5</dd></div>
+  </dl>
+</header>
+
+<div class="toc"><h2>Contents</h2><ol>
+<li><a href="#mlcommons-published-results">MLCommons — Published Results</a> <span class="count">3 of 3 published</span></li>
+<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">2 of 2 published</span></li>
+</ol></div>
+<div class="section" id="mlcommons-published-results">
+<h2>MLCommons — Published Results</h2>
+<p class="blurb">MLCommons publishes a results table rather than a figure, so these are readings of that table. Every number is divided by the accelerator count before it is plotted: the published result is the whole system, and systems in this release run from one accelerator to 288.</p>
+<section class="chart" id="MLPERF-01">
+<div class="chart-head">
+<a class="pid" href="#MLPERF-01">MLPERF-01</a>
+<h3>Throughput per accelerator, by chip</h3>
+</div>
+<p class="shows">The best submitted throughput per accelerator on llama2-70b-99, the most-submitted workload, in the offline scenario.</p>
+<div class="figure">
+<img src="charts/MLPERF-01.svg" alt="Throughput per accelerator, by chip" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>MLCommons — MLPerf Inference (datacenter, closed)</dd></div>
+<div><dt>Granularity</dt><dd>One chip, best submitted result</dd></div>
+<div><dt>Year</dt><dd>MLPerf v6.0</dd></div>
+<div><dt>Coverage</dt><dd>16 chips, 21 organisations</dd></div>
+<div><dt>Source files</dt><dd class="files">MLPerf_Inference_Hardware_Performance_Benchmarks.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Throughput normalised per accelerator; mixed-accelerator systems and results without an attributable accelerator count excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://mlcommons.org/benchmarks/inference-datacenter/" rel="noopener">MLCommons — MLPerf Inference</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows MLCommons&#x27; published MLPerf Inference rules</dd></div>
+<div><dt>Note</dt><dd>Offline is the most favourable condition the benchmark offers; it assumes every request is already waiting</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MLPERF-01.svg" download>Download SVG</a><a href="charts/MLPERF-01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MLPERF-02">
+<div class="chart-head">
+<a class="pid" href="#MLPERF-02">MLPERF-02</a>
+<h3>Throughput across the three serving scenarios</h3>
+</div>
+<p class="shows">The same chips across offline, server and interactive serving, with the interactive penalty stated.</p>
+<div class="figure">
+<img src="charts/MLPERF-02.svg" alt="Throughput across the three serving scenarios" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>MLCommons — MLPerf Inference (datacenter, closed)</dd></div>
+<div><dt>Granularity</dt><dd>One chip, three scenarios</dd></div>
+<div><dt>Year</dt><dd>MLPerf v6.0</dd></div>
+<div><dt>Coverage</dt><dd>8 chips submitting all three scenarios</dd></div>
+<div><dt>Source files</dt><dd class="files">MLPerf_Inference_Hardware_Performance_Benchmarks.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Throughput normalised per accelerator; mixed-accelerator systems and results without an attributable accelerator count excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://mlcommons.org/benchmarks/inference-datacenter/" rel="noopener">MLCommons — MLPerf Inference</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows MLCommons&#x27; published MLPerf Inference rules</dd></div>
+<div><dt>Note</dt><dd>Interactive costs 15% to 79% of offline throughput; the two must never be pooled</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MLPERF-02.svg" download>Download SVG</a><a href="charts/MLPERF-02.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MLPERF-03">
+<div class="chart-head">
+<a class="pid" href="#MLPERF-03">MLPERF-03</a>
+<h3>Throughput by workload</h3>
+</div>
+<p class="shows">The best per-accelerator throughput reached on each token-generating workload.</p>
+<div class="figure">
+<img src="charts/MLPERF-03.svg" alt="Throughput by workload" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>MLCommons — MLPerf Inference (datacenter, closed)</dd></div>
+<div><dt>Granularity</dt><dd>One workload, best result</dd></div>
+<div><dt>Year</dt><dd>MLPerf v6.0</dd></div>
+<div><dt>Coverage</dt><dd>7 token-generating workloads</dd></div>
+<div><dt>Source files</dt><dd class="files">MLPerf_Inference_Hardware_Performance_Benchmarks.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Throughput normalised per accelerator; mixed-accelerator systems and results without an attributable accelerator count excluded</dd></div>
+<div><dt>Source</dt><dd><a href="https://mlcommons.org/benchmarks/inference-datacenter/" rel="noopener">MLCommons — MLPerf Inference</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows MLCommons&#x27; published MLPerf Inference rules</dd></div>
+<div><dt>Note</dt><dd>llama3.1-405b sits roughly two orders of magnitude below llama3.1-8b on the same silicon</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MLPERF-03.svg" download>Download SVG</a><a href="charts/MLPERF-03.png" download>Download PNG</a></p>
+</section>
+</div>
+<div class="section" id="derived-analysis">
+<h2>Derived Analysis</h2>
+<p class="blurb">Our own analysis of the same export — the ranking read as a succession of generations, and what the benchmark actually contains behind it. Submitting is voluntary and costly, so an absent cell is a vendor&#x27;s choice rather than a limit of the hardware.</p>
+<section class="chart" id="MLPERF-D01">
+<div class="chart-head">
+<a class="pid" href="#MLPERF-D01">MLPERF-D01</a>
+<h3>Throughput by chip generation</h3>
+</div>
+<p class="shows">Per-accelerator throughput read as a succession rather than a ranking, one line per vendor.</p>
+<div class="figure">
+<img src="charts/MLPERF-D01.svg" alt="Throughput by chip generation" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>MLCommons — MLPerf Inference (datacenter, closed)</dd></div>
+<div><dt>Granularity</dt><dd>One chip generation</dd></div>
+<div><dt>Year</dt><dd>MLPerf v6.0</dd></div>
+<div><dt>Coverage</dt><dd>NVIDIA H200–GB300 and AMD MI300X–MI355X</dd></div>
+<div><dt>Source files</dt><dd class="files">MLPerf_Inference_Hardware_Performance_Benchmarks.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Best submitted result per generation; the two vendor lines share a shape, not a timeline</dd></div>
+<div><dt>Source</dt><dd><a href="https://mlcommons.org/benchmarks/inference-datacenter/" rel="noopener">MLCommons — MLPerf Inference</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows MLCommons&#x27; published MLPerf Inference rules</dd></div>
+<div><dt>Note</dt><dd>NVIDIA gained 3.9x from H200 to GB300, AMD 3.7x from MI300X to MI355X</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MLPERF-D01.svg" download>Download SVG</a><a href="charts/MLPERF-D01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="MLPERF-D02">
+<div class="chart-head">
+<a class="pid" href="#MLPERF-D02">MLPERF-D02</a>
+<h3>What the benchmark actually contains</h3>
+</div>
+<p class="shows">How many results each chip carries on each workload, and therefore which comparisons the release supports.</p>
+<div class="figure">
+<img src="charts/MLPERF-D02.svg" alt="What the benchmark actually contains" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>MLCommons — MLPerf Inference (datacenter, closed)</dd></div>
+<div><dt>Granularity</dt><dd>One chip-workload cell</dd></div>
+<div><dt>Year</dt><dd>MLPerf v6.0</dd></div>
+<div><dt>Coverage</dt><dd>16 chips x 7 workloads; 356 of 451 submitted results used</dd></div>
+<div><dt>Source files</dt><dd class="files">MLPerf_Inference_Hardware_Performance_Benchmarks.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Submission counts as published; nothing inferred from an absent cell</dd></div>
+<div><dt>Source</dt><dd><a href="https://mlcommons.org/benchmarks/inference-datacenter/" rel="noopener">MLCommons — MLPerf Inference</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows MLCommons&#x27; published MLPerf Inference rules</dd></div>
+<div><dt>Note</dt><dd>A blank cell means nothing was submitted, not that the chip cannot run the workload</dd></div>
+</dl>
+<p class="downloads"><a href="charts/MLPERF-D02.svg" download>Download SVG</a><a href="charts/MLPERF-D02.png" download>Download PNG</a></p>
+</section>
+</div>
+<div class="section" id="how-to-read-a-benchmark-result">
+<h2>How to read a benchmark result</h2>
+<p class="blurb">MLPerf is a controlled comparison, not a measurement of production serving. These are the terms and the traps.</p>
+<dl class="glossary">
+<div><dt>Offline scenario</dt><dd>Every request is available at the start and the system may reorder and batch them freely. It is the highest number a system can post, and the one most often quoted out of context.</dd></div>
+<div><dt>Server scenario</dt><dd>Requests arrive on a Poisson pattern and the system must hold a latency target. Closer to a real serving queue, and lower.</dd></div>
+<div><dt>Interactive scenario</dt><dd>Server with a tighter latency target, standing in for chat-style use where a person is waiting. It costs 15% to 79% of offline throughput on the chips that submitted all three.</dd></div>
+<div><dt>Closed division</dt><dd>The model and the accuracy target are fixed, so submissions differ only in hardware and serving stack. That is what makes the numbers comparable, and also what makes them tuned.</dd></div>
+<div><dt>Per accelerator</dt><dd>The published result is the throughput of a whole submitted system. Dividing by the accelerator count is what makes an 8-GPU node and a 288-accelerator rack comparable, and it is done before anything here is plotted.</dd></div>
+<div><dt>Tokens/s</dt><dd>Generated tokens per second. Only the language workloads report it; image, recommendation and speech workloads report samples or queries per second and are excluded from these charts.</dd></div>
+<div><dt>-99 and -99.9</dt><dd>The accuracy target a submission had to hold, as a percentage of the reference model&#x27;s quality. The stricter target costs throughput, so the two variants of a workload are not interchangeable.</dd></div>
+<div><dt>Availability</dt><dd>&quot;Available&quot; means shipping; &quot;preview&quot; means the silicon is not generally purchasable yet. Both appear in this release.</dd></div>
+</dl>
+</div>
+
+<footer class="foot">
+  <p><strong>How to read this gallery.</strong> Every chart carries a stable Plot ID
+  matching the Dataset Register. Link straight to any chart by appending its ID, for
+  example <code>#P-59</code>. That address does not change as the gallery grows.</p>
+  <p><strong>Methodology references.</strong> Section references shown against each chart
+  are taken from the working methodology. They become links once that document is final.</p>
+</footer>
+
+</div>
+<script>
+// embedded charts post their rendered height; without this the iframe would
+// either clip the legend or leave a gap at some widths
+addEventListener('message', function (ev) {
+  var d = ev.data;
+  if (!d || d.type !== 'aidr-height' || !d.id) return;
+  var f = document.querySelector('iframe.live[src="charts/' + d.id + '.html"]');
+  // ignore implausible measurements rather than collapsing the frame to a sliver
+  if (f && d.h > 200 && d.h < 4000) f.style.height = d.h + 'px';
+});
+</script>
+</body>
+</html>

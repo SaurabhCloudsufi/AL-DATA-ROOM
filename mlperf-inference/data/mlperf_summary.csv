@@ -1,0 +1,2 @@
+source_file,version,division,system_type,submitted_results,token_results_used,chips,workloads,organizations,scenarios,excluded_not_tokens/s,excluded_no_accelerator_count,excluded_mixed_accelerators,excluded_unnamed_accelerator
+MLPerf_Inference_Hardware_Performance_Benchmarks.csv,v6.0,closed,datacenter,451,356,16,7,21,"Interactive, Offline, Server",79,0,4,12

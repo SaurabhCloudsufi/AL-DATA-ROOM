@@ -33,6 +33,9 @@ AzureLMMInferenceTrace*.csv
 # huggingface.co/datasets/Anthropic/EconomicIndex). 219 MB; the derived tables
 # in ai-usage/data/ are committed.
 /anthropic_aei/
+# MLCommons MLPerf Inference export as downloaded. The derived tables in
+# mlperf-inference/data/ are committed.
+/mlperf/
 aei_*.csv
 rankings_*.csv
 app_rankings_*.csv

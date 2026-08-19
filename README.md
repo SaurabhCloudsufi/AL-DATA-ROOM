@@ -370,6 +370,56 @@ put the file back in `anthropic_aei/` from the link above.
 
 ---
 
+## MLPerf Inference
+
+What the hardware actually delivers, measured rather than modelled. Source:
+[MLCommons, MLPerf Inference](https://mlcommons.org/benchmarks/inference-datacenter/)
+v6.0, closed division, datacenter systems, downloaded into `mlperf/`:
+
+| File | Rows | What it is |
+|---|---|---|
+| `MLPerf_Inference_Hardware_Performance_Benchmarks.csv` | 451 | One submitted result per system, workload and scenario |
+
+**5 charts**, in two sections:
+
+| IDs | Section | What they are |
+|---|---|---|
+| `MLPERF-01` – `MLPERF-03` | MLCommons — Published Results | Throughput per accelerator by chip, the same chips across the three serving scenarios, and throughput by workload |
+| `MLPERF-D01`, `MLPERF-D02` | Derived Analysis | The ranking read as a succession of chip generations, and what the benchmark actually contains behind it |
+
+Four rules govern the domain:
+
+- **A result is a system, not a chip.** The published `Result` is the throughput
+  of a whole submitted system, and systems here run from 1 accelerator to 288.
+  Nothing is comparable until it is divided by the accelerator count, so
+  per-accelerator throughput is computed once in the summariser and is what every
+  chart plots.
+- **Mixed-accelerator systems are dropped.** One submission pairs MI300X, MI325X
+  and MI355X in a single system; its throughput belongs to no one chip.
+- **Configuration variants collapse to the chip.** `(x87)`, `(x94)` and
+  `(Power Cap 1000 W)` are the same silicon set up differently, so they fold into
+  the base chip and the best submitted result is taken. Without this, MI355X
+  appears four times and its rank is meaningless.
+- **These are ceilings, not expected throughput.** Vendors optimise hard for
+  MLPerf and the closed division fixes the model and accuracy target. Production
+  serving runs below every number here, and each chart says so on its face.
+
+Of 451 submitted results, 356 are token throughput with an attributable
+accelerator count and reach the charts; the rest report other units, name no
+accelerator, or are that one mixed system.
+
+The page carries a glossary — offline, server and interactive scenarios, closed
+division, per accelerator, the -99 and -99.9 accuracy targets — because a
+benchmark number means nothing without the conditions attached.
+
+```bash
+python build/summarise_mlperf.py              # mlperf/*.csv → mlperf-inference/data/
+python build/generate_charts.py MLPERF-01 …   # derived tables → SVG + PNG
+python build/build_site.py                    # → mlperf-inference/index.html
+```
+
+---
+
 ## Structure
 
 ```
@@ -488,15 +538,16 @@ The names are the files as downloaded, in the project source store:
 | `ai_models` | `notable_ai_models.csv`, `frontier_ai_models.csv`, `large_scale_ai_models.csv`, `all_ai_models.csv` | `MODELS-01` – `MODELS-13`, `MODELS-D01` – `MODELS-D11` |
 | `ai_chip_components` | `quarterly_by_designer.csv`, `cumulative_by_designer.csv`, `cumulative_by_chip.csv`, `supply_denominators.csv` | `CHIP-01` – `CHIP-14`, `CHIP-D01` – `CHIP-D06` |
 | `anthropic_aei` (Hugging Face) | `aei_claude_ai_2026-06-26.csv` | `AEI-01` – `AEI-10`, `AEI-D01` – `AEI-D06` |
+| *(root)* | `MLPerf_Inference_Hardware_Performance_Benchmarks.csv` | `MLPERF-01` – `MLPERF-03`, `MLPERF-D01`, `MLPERF-D02` |
 | `ai_companies` | `ai_companies_revenue_reports.csv`, `ai_companies_funding_rounds.csv`, `ai_companies_staff_reports.csv`, `ai_companies_usage_reports.csv`, `ai_companies_compute_spend.csv`, `ai_companies.csv` | `COMPANIES-01` – `COMPANIES-10`, `COMPANIES-D01` – `COMPANIES-D08` |
 
 `build/source_files_manifest.csv` records that store file by file, and
 
 ```bash
-python build/verify_source_files.py     # 74 published charts checked, 0 failing
+python build/verify_source_files.py     # 79 published charts checked, 0 failing
 ```
 
-checks all 74 published charts against it. A chart that names no file, that
+checks all 79 published charts against it. A chart that names no file, that
 names a different file on its face than in its index row, or that names a file
 the store does not hold, fails the check rather than reaching a client.
 

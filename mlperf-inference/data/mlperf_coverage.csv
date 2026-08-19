@@ -1,0 +1,56 @@
+chip,workload,submissions,scenarios
+AMD Instinct MI300X 192GB HBM3,llama2-70b-99,4,2
+AMD Instinct MI300X 192GB HBM3,llama2-70b-99.9,4,2
+AMD Instinct MI325X 256GB HBM3e,llama2-70b-99,2,2
+AMD Instinct MI325X 256GB HBM3e,llama2-70b-99.9,2,2
+AMD Instinct MI350X 288GB HBM3e,llama2-70b-99,11,3
+AMD Instinct MI350X 288GB HBM3e,llama2-70b-99.9,3,3
+AMD Instinct MI355X 288GB HBM3e,gpt-oss-120b,12,2
+AMD Instinct MI355X 288GB HBM3e,llama2-70b-99,25,3
+AMD Instinct MI355X 288GB HBM3e,llama2-70b-99.9,25,3
+Intel Arc Pro B50,llama3.1-8b,2,2
+Intel Arc Pro B60,gpt-oss-120b,2,2
+Intel Arc Pro B60,llama2-70b-99,2,2
+Intel Arc Pro B60,llama2-70b-99.9,2,2
+Intel Arc Pro B60,llama3.1-8b,2,2
+Intel Arc Pro B70,gpt-oss-120b,2,2
+Intel Arc Pro B70,llama2-70b-99,2,2
+Intel Arc Pro B70,llama2-70b-99.9,2,2
+Intel Arc Pro B70,llama3.1-8b,2,2
+MS-Intel Arc Pro B60 Dual 48G Turbo,gpt-oss-120b,2,2
+MS-Intel Arc Pro B60 Dual 48G Turbo,llama2-70b-99,2,2
+MS-Intel Arc Pro B60 Dual 48G Turbo,llama2-70b-99.9,2,2
+MS-Intel Arc Pro B60 Dual 48G Turbo,llama3.1-8b,2,2
+NVIDIA B200-SXM-180GB,deepseek-r1,6,2
+NVIDIA B200-SXM-180GB,gpt-oss-120b,5,3
+NVIDIA B200-SXM-180GB,llama2-70b-99,5,3
+NVIDIA B200-SXM-180GB,llama2-70b-99.9,5,3
+NVIDIA B200-SXM-180GB,llama3.1-405b,2,2
+NVIDIA B200-SXM-180GB,llama3.1-8b,6,3
+NVIDIA B200-SXM-180GB,mixtral-8x7b,2,2
+NVIDIA B300-SXM-270GB,deepseek-r1,15,3
+NVIDIA B300-SXM-270GB,gpt-oss-120b,13,3
+NVIDIA B300-SXM-270GB,llama2-70b-99,12,3
+NVIDIA B300-SXM-270GB,llama2-70b-99.9,8,3
+NVIDIA B300-SXM-270GB,llama3.1-405b,9,3
+NVIDIA B300-SXM-270GB,llama3.1-8b,7,3
+NVIDIA GB200,deepseek-r1,7,3
+NVIDIA GB200,gpt-oss-120b,5,3
+NVIDIA GB200,llama2-70b-99,3,3
+NVIDIA GB200,llama2-70b-99.9,3,3
+NVIDIA GB200,llama3.1-405b,3,3
+NVIDIA GB300,deepseek-r1,11,3
+NVIDIA GB300,gpt-oss-120b,11,3
+NVIDIA GB300,llama2-70b-99,3,3
+NVIDIA GB300,llama2-70b-99.9,3,3
+NVIDIA GB300,llama3.1-405b,3,3
+NVIDIA H200-NVL-141GB,llama2-70b-99,3,3
+NVIDIA H200-NVL-141GB,llama2-70b-99.9,3,3
+NVIDIA H200-NVL-141GB,llama3.1-8b,4,2
+NVIDIA H200-SXM-141GB,gpt-oss-120b,2,2
+NVIDIA RTX PRO 4500 Blackwell,llama3.1-8b,4,2
+NVIDIA RTX PRO 6000 Blackwell Server Edition,gpt-oss-120b,6,2
+NVIDIA RTX PRO 6000 Blackwell Server Edition,llama2-70b-99,24,3
+NVIDIA RTX PRO 6000 Blackwell Server Edition,llama2-70b-99.9,14,2
+NVIDIA RTX PRO 6000 Blackwell Server Edition,llama3.1-8b,27,3
+NVIDIA RTX PRO 6000 Blackwell Server Edition,mixtral-8x7b,8,2

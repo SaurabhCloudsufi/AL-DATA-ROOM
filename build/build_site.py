@@ -201,6 +201,66 @@ DOMAINS = [
         "live": True,
     },
     {
+        "slug": "mlperf-inference",
+        "title": "MLPerf Inference",
+        "blurb": "What the hardware actually delivers: MLCommons' measured inference "
+                 "throughput per accelerator, across chips, workloads and the three "
+                 "serving scenarios.",
+        "index": "build/plot_index_mlperf.csv",
+        "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "MLCommons — Published Results":
+                "MLCommons publishes a results table rather than a figure, so these are "
+                "readings of that table. Every number is divided by the accelerator "
+                "count before it is plotted: the published result is the whole system, "
+                "and systems in this release run from one accelerator to 288.",
+            "Derived Analysis":
+                "Our own analysis of the same export — the ranking read as a "
+                "succession of generations, and what the benchmark actually contains "
+                "behind it. Submitting is voluntary and costly, so an absent cell is a "
+                "vendor's choice rather than a limit of the hardware.",
+        },
+        "extra_sections": [{
+            "title": "How to read a benchmark result",
+            "body": "MLPerf is a controlled comparison, not a measurement of production "
+                    "serving. These are the terms and the traps.",
+            "terms": [
+                ("Offline scenario",
+                 "Every request is available at the start and the system may reorder "
+                 "and batch them freely. It is the highest number a system can post, "
+                 "and the one most often quoted out of context."),
+                ("Server scenario",
+                 "Requests arrive on a Poisson pattern and the system must hold a "
+                 "latency target. Closer to a real serving queue, and lower."),
+                ("Interactive scenario",
+                 "Server with a tighter latency target, standing in for chat-style use "
+                 "where a person is waiting. It costs 15% to 79% of offline throughput "
+                 "on the chips that submitted all three."),
+                ("Closed division",
+                 "The model and the accuracy target are fixed, so submissions differ "
+                 "only in hardware and serving stack. That is what makes the numbers "
+                 "comparable, and also what makes them tuned."),
+                ("Per accelerator",
+                 "The published result is the throughput of a whole submitted system. "
+                 "Dividing by the accelerator count is what makes an 8-GPU node and a "
+                 "288-accelerator rack comparable, and it is done before anything here "
+                 "is plotted."),
+                ("Tokens/s",
+                 "Generated tokens per second. Only the language workloads report it; "
+                 "image, recommendation and speech workloads report samples or queries "
+                 "per second and are excluded from these charts."),
+                ("-99 and -99.9",
+                 "The accuracy target a submission had to hold, as a percentage of the "
+                 "reference model's quality. The stricter target costs throughput, so "
+                 "the two variants of a workload are not interchangeable."),
+                ("Availability",
+                 "\"Available\" means shipping; \"preview\" means the silicon is not "
+                 "generally purchasable yet. Both appear in this release."),
+            ],
+        }],
+        "live": True,
+    },
+    {
         "slug": "ai-usage",
         "title": "AI Usage",
         "blurb": "What people actually do with a frontier model: what they ask for, what "

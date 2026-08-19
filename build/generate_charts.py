@@ -4746,6 +4746,343 @@ def build_chip_d08(_r=None):
     save(fig, "CHIP-D08", CHIP_DOMAIN)
 
 
+# ========================================================= MLPERF INFERENCE
+# MLCommons publishes a results table, not a figure, so every chart here is a
+# reading of that table. The quantity that makes submissions comparable is
+# throughput per accelerator: "Result" is the whole system, and systems in this
+# release run from 1 accelerator to 288.
+MLPERF_DOMAIN = "mlperf-inference"
+MLPERF_DATA = REPO / MLPERF_DOMAIN / "data"
+MLPERF_FILE = "MLPerf_Inference_Hardware_Performance_Benchmarks.csv"
+MLPERF_METH = ("Methodology reference pending final methodology document; derivation "
+               "follows MLCommons' published MLPerf Inference rules")
+HEADLINE = "llama2-70b-99"
+
+VENDOR_COLOUR = {"NVIDIA": "#1f3864", "AMD": "#b4763a", "": "#6b8f71"}
+
+
+def mlperf_src():
+    return (f"MLCommons, MLPerf Inference v6.0 closed division — {MLPERF_FILE} — "
+            f"mlcommons.org/benchmarks/inference-datacenter")
+
+
+def _mlcsv(name):
+    import pandas as pd
+    return pd.read_csv(MLPERF_DATA / name)
+
+
+def _mlmeta():
+    return _mlcsv("mlperf_summary.csv").iloc[0]
+
+
+def _ml_badge(ax, above=True):
+    """The caveat that governs every number in this domain."""
+    y, va = (1.030, "bottom") if above else (0.955, "top")
+    ax.text(0.0 if above else 0.017, y,
+            "  BENCHMARK CONDITIONS  ·  not production serving  ",
+            transform=ax.transAxes, ha="left", va=va, fontsize=9.1,
+            fontweight="bold", color="white", zorder=9, clip_on=False,
+            bbox=dict(boxstyle="round,pad=0.42", facecolor=SERIES["current"],
+                      edgecolor="none"))
+
+
+MLPERF_SCOPE = ("Every figure is a vendor-tuned submission to the closed division, "
+                "where the model and the accuracy target are fixed and the system is "
+                "optimised hard for the benchmark. Production serving runs below this, "
+                "so these are ceilings rather than expected throughput.")
+MLPERF_NORM = ("Throughput is per accelerator: the published result is the whole "
+               "system, and systems here run from 1 accelerator to 288.")
+
+
+def _mlfig(subtitle, note, left, width, xlabel_room=0.058, figsize=(12.0, 8.4)):
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_axes(_rect(subtitle, note, left=left, width=width,
+                            xlabel_room=xlabel_room, badge_above=True,
+                            source=mlperf_src()))
+    return fig, ax
+
+
+def _mlfinish(fig, ax, pid, title, subtitle, note):
+    _ml_badge(ax, above=True)
+    frame(fig, ax, pid, title, subtitle, mlperf_src(), MLPERF_METH, note)
+    save(fig, pid, MLPERF_DOMAIN)
+
+
+def _tok(v):
+    return f"{v/1000:,.1f}k" if v >= 1000 else f"{v:,.0f}"
+
+
+def build_mlperf_01(_r=None):
+    """The headline comparison: what one accelerator does on the common workload."""
+    b = _mlcsv("mlperf_by_chip.csv")
+    d = b[(b.workload == HEADLINE) & (b.scenario == "Offline")].copy()
+    d = d.sort_values("per_accelerator", ascending=False)
+    meta = _mlmeta()
+
+    subtitle = (f"What it shows: the best submitted throughput per accelerator on "
+                f"{HEADLINE}, the workload with the most submissions in the release, "
+                f"in the offline scenario. {len(d)} chips from "
+                f"{int(meta['organizations'])} submitting organisations. "
+                f"{MLPERF_NORM}")
+    note = (f"Offline is the batch scenario: requests are all available at once and the "
+            f"system may reorder them freely, which is the most favourable condition "
+            f"the benchmark offers. {MLPERF_SCOPE} A chip absent here was not submitted "
+            f"on this workload, which is not a statement about what it can do.")
+
+    fig, ax = _mlfig(subtitle, note, left=0.310, width=0.560)
+    ys = list(range(len(d)))
+    colours = [VENDOR_COLOUR.get(v if isinstance(v, str) else "", "#6b8f71")
+               for v in d["vendor"].fillna("")]
+    ax.barh(ys, d["per_accelerator"], height=0.70, color=colours,
+            edgecolor="white", linewidth=0.6, zorder=3)
+    hi = float(d["per_accelerator"].max())
+    for y, r in zip(ys, d.itertuples()):
+        ax.text(r.per_accelerator + hi * 0.012, y, _tok(r.per_accelerator),
+                va="center", fontsize=9, fontweight="bold", color=INK)
+    ax.set_yticks(ys)
+    ax.set_yticklabels([_clip(c, 42) for c in d["chip"]], fontsize=9.2)
+    ax.invert_yaxis()
+    ax.set_xlim(0, hi * 1.16)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: _tok(v)))
+    ax.set_xlabel("Tokens per second, per accelerator (offline scenario)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(facecolor=VENDOR_COLOUR["NVIDIA"], label="NVIDIA"),
+                       Patch(facecolor=VENDOR_COLOUR["AMD"], label="AMD"),
+                       Patch(facecolor=VENDOR_COLOUR[""], label="Other vendor")],
+              loc="lower right", frameon=False, fontsize=9)
+    top = d.iloc[0]
+    _mlfinish(fig, ax, "MLPERF-01",
+              f"{top['chip'].replace('NVIDIA ', '')} leads at {_tok(top['per_accelerator'])} "
+              f"tokens/s per accelerator",
+              subtitle, note)
+
+
+def build_mlperf_02(_r=None):
+    """What interactive serving costs, which a single headline number hides."""
+    b = _mlcsv("mlperf_by_chip.csv")
+    d = b[b.workload == HEADLINE]
+    piv = d.pivot_table(index="chip", columns="scenario", values="per_accelerator")
+    piv = piv.dropna(subset=["Offline", "Server", "Interactive"])
+    piv = piv.sort_values("Offline", ascending=False)
+    piv["penalty"] = (1 - piv["Interactive"] / piv["Offline"]) * 100
+
+    subtitle = (f"What it shows: the same chips on {HEADLINE} across all three serving "
+                f"scenarios. Offline batches everything; server holds a latency target "
+                f"under a Poisson arrival pattern; interactive tightens that target "
+                f"further. {len(piv)} chips submitted all three. {MLPERF_NORM}")
+    note = (f"The gap between the bars is the price of responsiveness, and it is the "
+            f"reason an offline figure must never be quoted as serving capacity: it "
+            f"assumes every request is already waiting. Interactive costs "
+            f"{piv['penalty'].min():.0f}% to {piv['penalty'].max():.0f}% of offline "
+            f"throughput across these chips. {MLPERF_SCOPE}")
+
+    fig, ax = _mlfig(subtitle, note, left=0.300, width=0.520)
+    ys = list(range(len(piv)))
+    h = 0.26
+    for off, (scen, colour) in enumerate([("Offline", "#1f3864"),
+                                          ("Server", "#4e8a8b"),
+                                          ("Interactive", "#b4763a")]):
+        ax.barh([y + (off - 1) * h for y in ys], piv[scen], height=h, color=colour,
+                edgecolor="white", linewidth=0.5, label=scen, zorder=3)
+    hi = float(piv["Offline"].max())
+    for y, r in zip(ys, piv.itertuples()):
+        ax.text(hi * 1.19, y, f"−{r.penalty:.0f}%", va="center", ha="center",
+                fontsize=9.2, fontweight="bold", color="#b4763a")
+    ax.text(hi * 1.19, -0.85, "interactive\nvs offline", ha="center", va="center",
+            fontsize=8.2, color=MUTED, style="italic", linespacing=1.4)
+    ax.set_yticks(ys)
+    ax.set_yticklabels([_clip(c, 40) for c in piv.index], fontsize=9.2)
+    ax.invert_yaxis()
+    ax.set_xlim(0, hi * 1.30)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: _tok(v)))
+    ax.set_xlabel("Tokens per second, per accelerator", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    hh, ll = ax.get_legend_handles_labels()
+    ax.legend(hh, ll, loc="lower right", bbox_to_anchor=(0.86, 0.02), frameon=False,
+              fontsize=9, title="Scenario", title_fontsize=9.2)
+    lo, hi_p = piv["penalty"].min(), piv["penalty"].max()
+    _mlfinish(fig, ax, "MLPERF-02",
+              f"Interactive serving costs {lo:.0f}% to {hi_p:.0f}% of batch throughput",
+              subtitle, note)
+
+
+def build_mlperf_03(_r=None):
+    """What the model itself costs to serve, which dwarfs the chip choice."""
+    b = _mlcsv("mlperf_by_chip.csv")
+    d = b[b.scenario == "Offline"]
+    best = (d.groupby("workload", as_index=False)
+             .agg(per_accelerator=("per_accelerator", "max"),
+                  chips=("chip", "nunique")))
+    best = best.sort_values("per_accelerator", ascending=False)
+
+    subtitle = (f"What it shows: the best per-accelerator throughput any submitted chip "
+                f"reached on each of the {len(best)} token-generating workloads, offline. "
+                f"The spread across workloads is far wider than the spread across chips "
+                f"on any one of them — what is being served matters more than what it "
+                f"is served on.")
+    note = (f"Each bar is a different model, so the bars are not alternatives to one "
+            f"another: they show what a fixed amount of silicon yields depending on the "
+            f"workload put through it. llama3.1-405b sits roughly two orders of "
+            f"magnitude below llama3.1-8b on the same hardware. Accuracy targets differ "
+            f"between the -99 and -99.9 variants of llama2-70b and are not "
+            f"interchangeable. {MLPERF_SCOPE}")
+
+    fig, ax = _mlfig(subtitle, note, left=0.235, width=0.620)
+    ys = list(range(len(best)))
+    # dots, not bars: a bar on a log axis reads as proportional length when it is
+    # not — llama3.1-405b is 77x below llama3.1-8b and a bar would show a quarter
+    ax.set_xscale("log")
+    lo = float(best["per_accelerator"].min()) * 0.55
+    for y, r in zip(ys, best.itertuples()):
+        ax.plot([lo, r.per_accelerator], [y, y], color=RULE, linewidth=1.2, zorder=2)
+        ax.plot([r.per_accelerator], [y], marker="o", markersize=11,
+                color=SERIES["current"], markeredgecolor="white",
+                markeredgewidth=1.0, zorder=4)
+    _plain_log_axis(ax.xaxis, lambda v: _tok(v) if v >= 1 else "")
+    for y, r in zip(ys, best.itertuples()):
+        ax.text(r.per_accelerator * 1.10, y,
+                f"{_tok(r.per_accelerator)}   ({r.chips} chips submitted)",
+                va="center", fontsize=8.8, color=INK)
+    ax.set_yticks(ys)
+    ax.set_yticklabels(best["workload"], fontsize=9.6)
+    ax.invert_yaxis()
+    ax.set_xlim(lo, best["per_accelerator"].max() * 7)
+    ax.set_xlabel("Best tokens per second, per accelerator (offline, log scale)",
+                  fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ratio = float(best["per_accelerator"].max() / best["per_accelerator"].min())
+    ax.text(0.995, 0.03, f"top to bottom: {ratio:.0f}x", transform=ax.transAxes,
+            ha="right", va="bottom", fontsize=8.8, color=MUTED, style="italic")
+    _mlfinish(fig, ax, "MLPERF-03",
+              "The workload swings throughput far harder than the chip does",
+              subtitle, note)
+
+
+def build_mlperf_d01(_r=None):
+    """Generation over generation, which the ranking flattens into one list."""
+    b = _mlcsv("mlperf_by_chip.csv")
+    d = b[(b.workload == HEADLINE) & (b.scenario == "Offline")
+          & b["generation"].notna() & (b["generation_order"] >= 0)]
+    d = d.sort_values("generation_order")
+
+    fig, ax = None, None
+    lines = []
+    for vendor in ("NVIDIA", "AMD"):
+        sub = d[d.vendor == vendor]
+        if len(sub) >= 2:
+            lines.append((vendor, sub))
+
+    gains = []
+    for vendor, sub in lines:
+        first, last = sub.iloc[0], sub.iloc[-1]
+        gains.append(f"{vendor} {first['generation']} to {last['generation']} "
+                     f"{last['per_accelerator']/first['per_accelerator']:.1f}x")
+
+    subtitle = (f"What it shows: per-accelerator throughput on {HEADLINE} by chip "
+                f"generation, one line per vendor. The ranking in MLPERF-01 puts every "
+                f"chip in one list; this is the same numbers read as a succession. "
+                f"{'; '.join(gains)}.")
+    note = (f"Generations are ordered by release, not by submission date, and each "
+            f"point is the best submitted result for that generation. The two lines are "
+            f"not directly comparable to each other beyond their shape: the systems, "
+            f"software stacks and submitting organisations differ. {MLPERF_SCOPE}")
+
+    fig, ax = _mlfig(subtitle, note, left=0.088, width=0.640)
+    # the two lines converge at several points, so one vendor labels above the
+    # marker and the other below rather than writing over each other
+    for k, (vendor, sub) in enumerate(lines):
+        colour = VENDOR_COLOUR[vendor]
+        xs = list(range(len(sub)))
+        ax.plot(xs, sub["per_accelerator"], marker="o", markersize=8, linewidth=2.4,
+                color=colour, label=vendor, zorder=4)
+        above = k == 0
+        for x, r in zip(xs, sub.itertuples()):
+            ax.annotate(f"{r.generation}\n{_tok(r.per_accelerator)}",
+                        (x, r.per_accelerator), textcoords="offset points",
+                        xytext=(0, 14 if above else -34), ha="center", fontsize=8.8,
+                        color=colour, fontweight="bold", linespacing=1.35)
+    ax.set_xticks(range(max(len(s) for _, s in lines)))
+    ax.set_xticklabels([f"generation {i+1}" for i in range(max(len(s) for _, s in lines))],
+                       fontsize=9.4)
+    ax.set_xlim(-0.35, max(len(s) for _, s in lines) - 0.65)
+    ax.set_ylim(0, float(d["per_accelerator"].max()) * 1.30)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: _tok(v)))
+    ax.set_ylabel("Tokens per second, per accelerator", fontsize=10)
+    ax.set_xlabel("Successive generations submitted, oldest first", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.legend(loc="upper left", frameon=False, fontsize=9.4, title="Vendor",
+              title_fontsize=9.4)
+    _mlfinish(fig, ax, "MLPERF-D01",
+              "Both vendors gained about four-fold across their submitted generations",
+              subtitle, note)
+
+
+def build_mlperf_d02(_r=None):
+    """What the benchmark actually contains, before anyone reads a ranking off it."""
+    import numpy as np
+    cov = _mlcsv("mlperf_coverage.csv")
+    grid = cov.pivot_table(index="chip", columns="workload", values="submissions",
+                           aggfunc="sum")
+    order = grid.notna().sum(axis=1).sort_values(ascending=False).index
+    grid = grid.loc[order]
+    meta = _mlmeta()
+    filled = int(grid.notna().sum().sum())
+    cells = grid.shape[0] * grid.shape[1]
+
+    subtitle = (f"What it shows: how many results each chip carries on each workload. "
+                f"{filled} of {cells} chip-workload cells hold any submission at all, "
+                f"which is why a like-for-like comparison is only possible on a couple "
+                f"of workloads and why {HEADLINE} carries the headline charts.")
+    note = (f"A blank cell means nothing was submitted, not that the chip cannot run "
+            f"the workload — submitting is voluntary and costly, and vendors pick their "
+            f"battles. Of {int(meta['submitted_results'])} results in the release, "
+            f"{int(meta['token_results_used'])} are token throughput with an "
+            f"attributable accelerator count and reach these charts; the rest are other "
+            f"units, unnamed accelerators, or one mixed-accelerator system. "
+            f"{MLPERF_SCOPE}")
+
+    fig, ax = _mlfig(subtitle, note, left=0.300, width=0.560, xlabel_room=0.086)
+    vals = grid.to_numpy(dtype=float)
+    im = ax.imshow(np.where(np.isnan(vals), np.nan, vals), cmap="Blues", aspect="auto",
+                   vmin=0, vmax=float(np.nanmax(vals)))
+    for i in range(grid.shape[0]):
+        for j in range(grid.shape[1]):
+            v = vals[i, j]
+            if not np.isnan(v):
+                ax.text(j, i, f"{int(v)}", ha="center", va="center", fontsize=9,
+                        fontweight="bold",
+                        color="white" if v > np.nanmax(vals) * 0.55 else INK)
+            else:
+                ax.text(j, i, "—", ha="center", va="center", fontsize=9, color="#c9ced8")
+    ax.set_xticks(range(grid.shape[1]))
+    ax.set_xticklabels(grid.columns, fontsize=8.8, rotation=28, ha="right")
+    ax.set_yticks(range(grid.shape[0]))
+    ax.set_yticklabels([_clip(c, 40) for c in grid.index], fontsize=8.8)
+    ax.set_xticks([x - 0.5 for x in range(1, grid.shape[1])], minor=True)
+    ax.set_yticks([y - 0.5 for y in range(1, grid.shape[0])], minor=True)
+    ax.grid(which="minor", color="white", linewidth=1.6)
+    ax.tick_params(which="minor", length=0)
+    ax.grid(which="major", visible=False)
+    cb = fig.colorbar(im, ax=ax, fraction=0.026, pad=0.02)
+    cb.set_label("Results submitted", fontsize=9)
+    cb.outline.set_visible(False)
+    _mlfinish(fig, ax, "MLPERF-D02",
+              "The benchmark is dense on one workload and sparse everywhere else",
+              subtitle, note)
+
+
+MLPERF_BUILDERS = {
+    "MLPERF-01": build_mlperf_01, "MLPERF-02": build_mlperf_02,
+    "MLPERF-03": build_mlperf_03, "MLPERF-D01": build_mlperf_d01,
+    "MLPERF-D02": build_mlperf_d02,
+}
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -4773,6 +5110,7 @@ BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_mix(_p)) for pid in AEI_M
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in AEI_DERIVED.items()})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_api_rank(_p)) for pid in AEI_API_RANK})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in AEI_API_DERIVED.items()})
+BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in MLPERF_BUILDERS.items()})
 
 
 def main():
