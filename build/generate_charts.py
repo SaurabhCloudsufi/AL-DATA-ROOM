@@ -1180,7 +1180,17 @@ def build_d05(_r=None):
                 "rooftop counted in an aerial image into a power figure.")
     allpts = [p for g in order for p in groups[g]]
     med = sorted(c / a for a, c in allpts)[len(allpts) // 2]
-    note = (f"Manufacturer catalogue specifications, not measurements of installed "
+    # who actually makes this equipment, which the scatter cannot show
+    makers = {}
+    for r in rows:
+        makers[r["manufacturer"]] = makers.get(r["manufacturer"], 0) + 1
+    top2 = sorted(makers, key=lambda k: -makers[k])[:2]
+    top2_share = sum(makers[m] for m in top2) / len(rows) * 100
+    note = (f"{top2[0]} and {top2[1]} supply {top2_share:.0f}% of the {len(makers)} "
+            f"manufacturers catalogued, so this relationship is largely those two "
+            f"companies' product lines; the interactive companion names the maker of "
+            f"every unit and colours the catalogue by it. "
+            f"Manufacturer catalogue specifications, not measurements of installed "
             f"units: rated capacity is an upper bound that real duty rarely reaches. "
             f"{meta['cooling_rows_usable']} of {meta['cooling_rows']} catalogue rows "
             f"carry both a footprint and a capacity and are plotted; the rest are "

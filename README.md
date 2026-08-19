@@ -133,6 +133,20 @@ python build/generate_charts.py CHIP-01 …          # derived series → SVG + 
 python build/build_site.py                         # → ai-chip-components/index.html
 ```
 
+`DERIVED-05` — the cooling-equipment catalogue — ships an interactive
+companion, because it is the measurement backbone of the domain and the static
+scatter cannot name any of the 31 manufacturers behind its 670 units. Hover a
+unit for the company that builds it, its rating, footprint and intensity; colour
+the catalogue by equipment class or by maker; and show the median intensity per
+class rather than one line across all three. Those classes run 53, 104 and
+206 kW/m² — a four-fold spread that a single ratio hides, and the step where most
+of the uncertainty in the published IT power figures begins.
+
+`generate_interactive_datacenters.py` builds it and
+`verify_interactive_datacenters.mjs` checks it — along with `EPOCH-03` to
+`EPOCH-05`, which shipped with a jsdom-based check that could never run in this
+environment and so had gone unverified since they were added.
+
 ---
 
 ## AI Models
