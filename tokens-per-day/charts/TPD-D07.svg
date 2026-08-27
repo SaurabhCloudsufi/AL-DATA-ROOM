@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="604.8pt" viewBox="0 0 864 604.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 604.8 
+L 864 604.8 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 250.56 443.9232 
+L 721.44 443.9232 
+L 721.44 146.9664 
+L 250.56 146.9664 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 250.56 443.9232 
+L 250.56 146.9664 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="ma3a00a99b0" d="M 0 0 
+L 0 3.5 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="250.56" y="443.9232" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="250.56" y="458.520856" transform="rotate(-0 250.56 458.520856)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 334.645714 443.9232 
+L 334.645714 146.9664 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="334.645714" y="443.9232" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="334.645714" y="458.520856" transform="rotate(-0 334.645714 458.520856)">100</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 418.731429 443.9232 
+L 418.731429 146.9664 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="418.731429" y="443.9232" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="418.731429" y="458.520856" transform="rotate(-0 418.731429 458.520856)">200</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 502.817143 443.9232 
+L 502.817143 146.9664 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="502.817143" y="443.9232" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="502.817143" y="458.520856" transform="rotate(-0 502.817143 458.520856)">300</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 586.902857 443.9232 
+L 586.902857 146.9664 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="586.902857" y="443.9232" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="586.902857" y="458.520856" transform="rotate(-0 586.902857 458.520856)">400</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 670.988571 443.9232 
+L 670.988571 146.9664 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#ma3a00a99b0" x="670.988571" y="443.9232" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #6b7280" x="670.988571" y="458.520856" transform="rotate(-0 670.988571 458.520856)">500</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: middle; fill: #1a1a1a" x="486" y="472.521637" transform="rotate(-0 486 472.521637)">Trillion tokens per day</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13">
+      <path d="M 250.56 415.962982 
+L 721.44 415.962982 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14">
+      <defs>
+       <path id="mdfe75e7a28" d="M 0 0 
+L -3.5 0 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="250.56" y="415.962982" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(164.870375 414.533259)">a16z / OpenRouter</text>
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(178.513812 424.615556)">LLM API market</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_15">
+      <path d="M 250.56 367.755709 
+L 721.44 367.755709 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="250.56" y="367.755709" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(105.692375 366.326315)">Tomasz Tunguz (The Token Race)</text>
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(155.678937 376.408611)">Global (all providers)</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_17">
+      <path d="M 250.56 319.548436 
+L 721.44 319.548436 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="250.56" y="319.548436" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(129.76625 318.119042)">Tokens Per Day (this index)</text>
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(107.209625 328.201339)">Reported floor (disclosures only)</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_19">
+      <path d="M 250.56 271.341164 
+L 721.44 271.341164 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="250.56" y="271.341164" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(129.76625 269.911769)">Tokens Per Day (this index)</text>
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(7.991187 279.994066)">Estimated total (six-channel triangulation, 308.4–477.1)</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_21">
+      <path d="M 250.56 223.133891 
+L 721.44 223.133891 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="250.56" y="223.133891" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(112.134125 221.704496)">OpenRouter (1% extrapolation)</text>
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(174.764 231.786793)">Global inference</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_23">
+      <path d="M 250.56 174.926618 
+L 721.44 174.926618 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke: #d7dbe2; stroke-opacity: 0.9; stroke-width: 0.7; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_24">
+      <g>
+       <use xlink:href="#mdfe75e7a28" x="250.56" y="174.926618" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(126.496812 173.497224)">Epoch AI / Exponential View</text>
+      <text style="font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; fill: #6b7280" transform="translate(156.256437 183.579521)">All providers (global)</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 509.880343 443.9232 
+L 651.732943 443.9232 
+L 651.732943 146.9664 
+L 509.880343 146.9664 
+z
+" clip-path="url(#p2625f37128)" style="fill: #1f3864; opacity: 0.11; stroke: #1f3864; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_25">
+    <path d="M 553.604914 443.9232 
+L 553.604914 146.9664 
+" clip-path="url(#p2625f37128)" style="fill: none; stroke-dasharray: 7,4.2; stroke-dashoffset: 0; stroke: #1f3864; stroke-width: 1.4"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 250.56 443.9232 
+L 250.56 146.9664 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 250.56 443.9232 
+L 721.44 443.9232 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="297.648" y="418.300872" transform="rotate(-0 297.648 418.300872)">50.0T</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="329.600571" y="370.0936" transform="rotate(-0 329.600571 370.0936)">88.0T</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="507.946371" y="321.886327" transform="rotate(-0 507.946371 321.886327)">300.1T</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="558.650057" y="273.679054" transform="rotate(-0 558.650057 273.679054)">360.4T</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="591.948" y="225.471782" transform="rotate(-0 591.948 225.471782)">400.0T</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="618.855429" y="177.264509" transform="rotate(-0 618.855429 177.264509)">432.0T</text>
+   </g>
+   <g id="text_20">
+    <text style="font-style: italic; font-size: 8.8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1f3864" x="558.650057" y="143.591891" transform="rotate(-0 558.650057 143.591891)">this index's band, 308–477T</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 250.56 430.425164 
+L 292.602857 430.425164 
+L 292.602857 401.5008 
+L 250.56 401.5008 
+z
+" clip-path="url(#p2625f37128)" style="fill: #b4763a; opacity: 0.75; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 250.56 382.217891 
+L 324.555429 382.217891 
+L 324.555429 353.293527 
+L 250.56 353.293527 
+z
+" clip-path="url(#p2625f37128)" style="fill: #b4763a; opacity: 0.75; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 250.56 334.010618 
+L 502.901229 334.010618 
+L 502.901229 305.086255 
+L 250.56 305.086255 
+z
+" clip-path="url(#p2625f37128)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 250.56 285.803345 
+L 553.604914 285.803345 
+L 553.604914 256.878982 
+L 250.56 256.878982 
+z
+" clip-path="url(#p2625f37128)" style="fill: #1f3864; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 250.56 237.596073 
+L 586.902857 237.596073 
+L 586.902857 208.671709 
+L 250.56 208.671709 
+z
+" clip-path="url(#p2625f37128)" style="fill: #b4763a; opacity: 0.75; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 250.56 189.3888 
+L 613.810286 189.3888 
+L 613.810286 160.464436 
+L 250.56 160.464436 
+z
+" clip-path="url(#p2625f37128)" style="fill: #b4763a; opacity: 0.75; stroke: #ffffff; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="legend_1">
+    <g id="patch_12">
+     <path d="M 566.218125 420.160388 
+L 584.218125 420.160388 
+L 584.218125 413.860388 
+L 566.218125 413.860388 
+z
+" style="fill: #1f3864; stroke: #1f3864; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_21">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="591.418125" y="420.160388" transform="rotate(-0 591.418125 420.160388)">Tokens Per Day (this index)</text>
+    </g>
+    <g id="patch_13">
+     <path d="M 566.218125 433.661091 
+L 584.218125 433.661091 
+L 584.218125 427.361091 
+L 566.218125 427.361091 
+z
+" style="fill: #b4763a; opacity: 0.75; stroke: #b4763a; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_22">
+     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="591.418125" y="433.661091" transform="rotate(-0 591.418125 433.661091)">Independent estimate</text>
+    </g>
+   </g>
+   <g id="text_23">
+    <g id="patch_14">
+     <path d="M 250.56 141.879696 
+L 483.228516 141.879696 
+Q 487.050516 141.879696 487.050516 138.057696 
+L 487.050516 128.957696 
+Q 487.050516 125.135696 483.228516 125.135696 
+L 250.56 125.135696 
+Q 246.738 125.135696 246.738 128.957696 
+L 246.738 138.057696 
+Q 246.738 141.879696 250.56 141.879696 
+z
+" style="fill: #7d5a7d"/>
+    </g>
+    <text style="font-weight: 700; font-size: 9.1px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #ffffff" x="250.56" y="135.871563" transform="rotate(-0 250.56 135.871563)">  MODELED ESTIMATE  ·  not a measurement  </text>
+   </g>
+  </g>
+  <g id="line2d_26">
+   <path d="M 30.24 479.0016 
+L 833.76 479.0016 
+" style="fill: none; stroke: #d7dbe2; stroke-width: 0.8; stroke-linecap: square"/>
+  </g>
+  <g id="text_24">
+   <text style="font-weight: 700; font-size: 10.5px; font-family: 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Computer Modern Typewriter', 'Andale Mono', 'Nimbus Mono L', 'Courier New', 'Courier', 'Fixed', 'Terminal', monospace; text-anchor: start; fill: #1f3864" x="30.24" y="24.911939" transform="rotate(-0 30.24 24.911939)">TPD-D07</text>
+  </g>
+  <g id="text_25">
+   <text style="font-weight: 700; font-size: 15.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #1a1a1a" x="30.24" y="55.323178" transform="rotate(-0 30.24 55.323178)">Published estimates of the same quantity differ 8.6-fold, mostly about scope</text>
+  </g>
+  <g id="text_26">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="79.116806" transform="rotate(-0 30.24 79.116806)">What it shows: this index against every other published attempt at the same quantity — 4 third-party estimates and the</text>
+  </g>
+  <g id="text_27">
+   <text style="font-size: 10.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="97.260806" transform="rotate(-0 30.24 97.260806)">index's own two figures, with the band from TPD-06 behind them. The scopes are not the same, which is most of the spread.</text>
+  </g>
+  <g id="text_28">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="498.841856" transform="rotate(-0 30.24 498.841856)">Source: Tokens Per Day (tokensperday.com) — comparison_vs_independent_estimates.csv + estimate_band_quarterly.csv — chartData objects</text>
+  </g>
+  <g id="text_29">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="514.566656" transform="rotate(-0 30.24 514.566656)">        and evidence ledger as extracted 2026-08-21</text>
+  </g>
+  <g id="text_30">
+   <text style="font-size: 8.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="530.291456" transform="rotate(-0 30.24 530.291456)">Methodology: Methodology reference pending final methodology document; derivation follows the Tokens Per Day published methodology and estimates pages</text>
+  </g>
+  <g id="text_31">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="545.864288" transform="rotate(-0 30.24 545.864288)">Note: The estimates run 50T to 432T/day — an 8.6x range — and the low end is not a disagreement: a16z's 50T covers the LLM API market only,</text>
+  </g>
+  <g id="text_32">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="560.379488" transform="rotate(-0 30.24 560.379488)">      while Epoch's 432T covers all providers globally. Read against matched scope, the only comparable figure sits inside this index's</text>
+  </g>
+  <g id="text_33">
+   <text style="font-style: italic; font-size: 8.4px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', sans-serif; text-anchor: start; fill: #6b7280" x="30.24" y="574.894688" transform="rotate(-0 30.24 574.894688)">      band. These rows are never summed and never averaged into it; they are a check on it.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p2625f37128">
+   <rect x="250.56" y="146.9664" width="470.88" height="296.9568"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -38,6 +38,10 @@ AzureLMMInferenceTrace*.csv
 /mlperf/
 # Epoch AI chip-owner files as downloaded; derived tables in ai-chip-owners/data/
 /ai_chip_owners/
+# The tokensperday.com extraction as staged (chart_data + extraction, ~9 MB,
+# including archived source mirrors). The derived tables in tokens-per-day/data/
+# are committed and are what the charts are built from.
+/tokensperday/
 aei_*.csv
 rankings_*.csv
 app_rankings_*.csv

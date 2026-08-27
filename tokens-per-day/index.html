@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tokens Per Day — Visual Evidence Gallery — AI Data Room</title>
+<meta name="description" content="A running index of how many tokens the world&#x27;s LLMs process each day: a floor built only from what companies actually disclosed, and a six-channel estimate of everything above it.">
+<link rel="stylesheet" href="../inference-tokens/assets/style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow"><a href="../">AI Data Room</a> &nbsp;/&nbsp; Visual Evidence</p>
+  <h1>Tokens Per Day</h1>
+  <p class="standfirst">A running index of how many tokens the world&#x27;s LLMs process each day: a floor built only from what companies actually disclosed, and a six-channel estimate of everything above it.</p>
+  <dl class="meta">
+    <div><dt>Charts published</dt><dd>14</dd></div>
+  </dl>
+</header>
+
+<div class="toc"><h2>Contents</h2><ol>
+<li><a href="#tokens-per-day-published-visualizations">Tokens Per Day — Published Visualizations</a> <span class="count">6 of 6 published</span></li>
+<li><a href="#derived-analysis">Derived Analysis</a> <span class="count">8 of 8 published</span></li>
+</ol></div>
+<div class="section" id="tokens-per-day-published-visualizations">
+<h2>Tokens Per Day — Published Visualizations</h2>
+<p class="blurb">tokensperday.com is a static site with no API: every chart it draws comes from a JavaScript object embedded in its homepage, and those objects were lifted character-for-character. So these are not a rebuild from an underlying release — the plotted numbers are the site&#x27;s own, copied verbatim, and the only changes are of axis and layout, each stated on the chart that makes it.</p>
+<section class="chart" id="TPD-01">
+<div class="chart-head">
+<a class="pid" href="#TPD-01">TPD-01</a>
+<h3>Tokens per day over time — the estimate and the disclosed floor</h3>
+</div>
+<p class="shows">The site&#x27;s TOTAL tab: its modeled estimate of global tokens per day against the disclosed floor beneath it, drawn linear as the site draws it and logarithmic beside it.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/TPD-01.html" title="Tokens per day over time — the estimate and the disclosed floor (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One observation per disclosure or quarterly estimate</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>2 series, 30 points, Jan 2024 – Jul 2026</dd></div>
+<div><dt>Source files</dt><dd class="files">tokens_per_day_total.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Values copied verbatim from the chartData objects embedded in the site&#x27;s homepage; nothing rounded, interpolated or recomputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>The floor has gone from 6% of the estimate to 83%; on a linear axis the first eighteen months sit on the axis</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/TPD-01.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/TPD-01.svg" download>Download SVG</a><a href="charts/TPD-01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-02">
+<div class="chart-head">
+<a class="pid" href="#TPD-02">TPD-02</a>
+<h3>Tokens per day over time — by country</h3>
+</div>
+<p class="shows">The site&#x27;s BY COUNTRY tab: five regional series, of which one is measured and four are share allocations of the same residual.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/TPD-02.html" title="Tokens per day over time — by country (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One observation per plotted point</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>5 series, 99 points, Jan 2024 – Jun 2026</dd></div>
+<div><dt>Source files</dt><dd class="files">tokens_per_day_country.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Values copied verbatim from the chartData objects embedded in the site&#x27;s homepage; nothing rounded, interpolated or recomputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>The five sum to the disclosed floor, not to the estimate — the 60T/day difference appears in no region</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/TPD-02.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/TPD-02.svg" download>Download SVG</a><a href="charts/TPD-02.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-03">
+<div class="chart-head">
+<a class="pid" href="#TPD-03">TPD-03</a>
+<h3>Tokens per day over time — by company</h3>
+</div>
+<p class="shows">The site&#x27;s BY COMPANY tab: every company-level disclosure it holds, on a log axis so all eight series are readable.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/TPD-03.html" title="Tokens per day over time — by company (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One observation per disclosure</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>8 companies, 28 points, Feb 2024 – Jun 2026</dd></div>
+<div><dt>Source files</dt><dd class="files">tokens_per_day_company.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Values copied verbatim from the chartData objects embedded in the site&#x27;s homepage; nothing rounded, interpolated or recomputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>No two series count the same thing, and two of the eight rest on a single observation</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/TPD-03.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/TPD-03.svg" download>Download SVG</a><a href="charts/TPD-03.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-04">
+<div class="chart-head">
+<a class="pid" href="#TPD-04">TPD-04</a>
+<h3>A day in tokens — the 24-hour cycle</h3>
+</div>
+<p class="shows">The site&#x27;s hourly chart: Global, United States and China as a percentage of each series&#x27; own peak hour, in UTC.</p>
+<div class="figure">
+<img src="charts/TPD-04.svg" alt="A day in tokens — the 24-hour cycle" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One value per series per hour</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>3 series x 24 hours UTC</dd></div>
+<div><dt>Source files</dt><dd class="files">hourly_tokens.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Percentages copied verbatim; each series is normalised to its own peak, so levels are not comparable across series</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>Nothing here is a token count — the site states the curves are a stylised model, not measured hourly traffic</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-04.svg" download>Download SVG</a><a href="charts/TPD-04.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-05">
+<div class="chart-head">
+<a class="pid" href="#TPD-05">TPD-05</a>
+<h3>Cumulative tokens processed, all time</h3>
+</div>
+<p class="shows">The site&#x27;s all-time cumulative curve, drawn together with the same curve rebuilt by integrating the daily estimate.</p>
+<div class="figure">
+<img src="charts/TPD-05.svg" alt="Cumulative tokens processed, all time" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One point per quarter</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>12 quarters, Jan 2024 – Jul 2026</dd></div>
+<div><dt>Source files</dt><dd class="files">cumulative_tokens.csv + tokens_per_day_total.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Published curve copied verbatim; the reconstruction is a trapezoid integral of the plotted daily estimate, stated as a check rather than substituted for it</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>The two agree to 0.10%, which settles what the chart is: the daily estimate added up</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-05.svg" download>Download SVG</a><a href="charts/TPD-05.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-06">
+<div class="chart-head">
+<a class="pid" href="#TPD-06">TPD-06</a>
+<h3>The estimate across time — the quarterly band</h3>
+</div>
+<p class="shows">The /estimates/ page&#x27;s quarterly low, middle and high for the six-channel triangulation.</p>
+<div class="figure">
+<img src="charts/TPD-06.svg" alt="The estimate across time — the quarterly band" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One low/mid/high per quarter</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>12 quarters, Jan 2024 – Jul 2026</dd></div>
+<div><dt>Source files</dt><dd class="files">estimate_band_quarterly.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Values copied verbatim from the chartData objects embedded in the site&#x27;s homepage; nothing rounded, interpolated or recomputed</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>The band ends 308–477T/day around a middle of 360; quoting the middle alone states a precision the method does not have</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-06.svg" download>Download SVG</a><a href="charts/TPD-06.png" download>Download PNG</a></p>
+</section>
+</div>
+<div class="section" id="derived-analysis">
+<h2>Derived Analysis</h2>
+<p class="blurb">Our own analysis of the same extraction, including the site&#x27;s evidence ledger and estimates tables — questions its three charts do not answer, and two tests of what those charts are actually made of. Where a published chart turns out to restate another, the test is shown rather than the conclusion asserted.</p>
+<section class="chart" id="TPD-D01">
+<div class="chart-head">
+<a class="pid" href="#TPD-D01">TPD-D01</a>
+<h3>The disclosed floor against the estimate above it</h3>
+</div>
+<p class="shows">The disclosed floor as a percentage of the estimate at each quarter — how much of the index is evidence rather than inference.</p>
+<div class="figure">
+<img src="charts/TPD-D01.svg" alt="The disclosed floor against the estimate above it" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One ratio per quarterly estimate point</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>11 quarters where a floor observation exists</dd></div>
+<div><dt>Source files</dt><dd class="files">tokens_per_day_total.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">The floor is carried forward between disclosures, matching the site&#x27;s own tooltip rule; never interpolated</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>6% in Oct 2024 to 83% now, almost all of it four disclosures arriving between January and June 2026</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-D01.svg" download>Download SVG</a><a href="charts/TPD-D01.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-D02">
+<div class="chart-head">
+<a class="pid" href="#TPD-D02">TPD-D02</a>
+<h3>The evidence ledger, and the six rows that are the floor</h3>
+</div>
+<p class="shows">Every disclosure the index holds, marked by whether it is in the floor, contained inside another row, or superseded.</p>
+<div class="figure">
+<img src="charts/TPD-D02.svg" alt="The evidence ledger, and the six rows that are the floor" width="864" height="691" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One disclosure</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>27 disclosures from 10 entities; 6 in the floor</dd></div>
+<div><dt>Source files</dt><dd class="files">evidence_ledger.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Read from the site&#x27;s own evidence ledger and estimates tables; the measured/modeled distinction is preserved rather than flattened</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>Doubao&#x27;s 180T/day is the largest number in the ledger and contributes nothing — it sits inside the China aggregate</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-D02.svg" download>Download SVG</a><a href="charts/TPD-D02.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-D03">
+<div class="chart-head">
+<a class="pid" href="#TPD-D03">TPD-D03</a>
+<h3>Whether the country split is four numbers or one</h3>
+</div>
+<p class="shows">Each non-China region as a percentage of the four combined, at every date the country tab plots, against the share the site says it applies.</p>
+<div class="figure">
+<img src="charts/TPD-D03.svg" alt="Whether the country split is four numbers or one" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One implied share per region per date</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>4 regions x 12 dates with a base above 10T/day</dd></div>
+<div><dt>Source files</dt><dd class="files">tokens_per_day_country.csv + geography_allocation_shares.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Shares computed from the plotted values; the stability test excludes dates where the site&#x27;s 0.1T rounding dominates the arithmetic</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>The shares hold to 0.32 percentage points, against a 0.27pp tolerance from rounding alone — they are fixed, not measured</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-D03.svg" download>Download SVG</a><a href="charts/TPD-D03.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-D04">
+<div class="chart-head">
+<a class="pid" href="#TPD-D04">TPD-D04</a>
+<h3>What each company&#x27;s estimate is actually worth</h3>
+</div>
+<p class="shows">The reconciled low-to-high band behind each company&#x27;s published figure, ordered by width.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/TPD-D04.html" title="What each company&#x27;s estimate is actually worth (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One band per company</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>10 companies plus the global reconciliation</dd></div>
+<div><dt>Source files</dt><dd class="files">reconciled_company_estimates.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Read from the site&#x27;s own evidence ledger and estimates tables; the measured/modeled distinction is preserved rather than flattened</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>Widths run from 1x to 112x; the largest contributors are the best known, because they disclosed</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/TPD-D04.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/TPD-D04.svg" download>Download SVG</a><a href="charts/TPD-D04.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-D05">
+<div class="chart-head">
+<a class="pid" href="#TPD-D05">TPD-D05</a>
+<h3>The channels behind each band, and the one that failed its back-test</h3>
+</div>
+<p class="shows">For each company estimated by more than one route, every route the site ran and the band it produced, separating demand estimates from hardware ceilings.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/TPD-D05.html" title="The channels behind each band, and the one that failed its back-test (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One channel estimate</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>12 channel estimates across the 5 companies with more than one route</dd></div>
+<div><dt>Source files</dt><dd class="files">channel_fan_per_company.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Read from the site&#x27;s own evidence ledger and estimates tables; the measured/modeled distinction is preserved rather than flattened</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>A hardware figure is a ceiling and passes only by sitting above the demand figure; DeepSeek&#x27;s revenue route back-tested 12.9x high and was dropped</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/TPD-D05.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/TPD-D05.svg" download>Download SVG</a><a href="charts/TPD-D05.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-D06">
+<div class="chart-head">
+<a class="pid" href="#TPD-D06">TPD-D06</a>
+<h3>Demand against the hardware ceiling</h3>
+</div>
+<p class="shows">The four inputs to the site&#x27;s capacity check, each as its own range, and what they compound to against the demand estimate they are meant to bound.</p>
+<div class="figure">
+<img src="charts/TPD-D06.svg" alt="Demand against the hardware ceiling" width="950" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One parameter range</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>4 parameters and the compounded capacity band</dd></div>
+<div><dt>Source files</dt><dd class="files">capacity_parameters.csv + headline_metrics.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Parameter ranges as published; each drawn against its own middle case so four different units compare on one axis</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>No input is worse than 3.3x uncertain; multiplied they give an 18x ceiling, which can refute an estimate but cannot confirm one</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-D06.svg" download>Download SVG</a><a href="charts/TPD-D06.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-D07">
+<div class="chart-head">
+<a class="pid" href="#TPD-D07">TPD-D07</a>
+<h3>This index against the independent estimates</h3>
+</div>
+<p class="shows">Every other published attempt at the same quantity, with this index&#x27;s own band behind them.</p>
+<div class="figure">
+<img src="charts/TPD-D07.svg" alt="This index against the independent estimates" width="864" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One published estimate</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>6 estimates with a single plottable figure, of 7 published</dd></div>
+<div><dt>Source files</dt><dd class="files">comparison_vs_independent_estimates.csv + estimate_band_quarterly.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Third-party figures are shown for comparison only; they are never summed into or averaged with the index</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>The 8.6x spread is mostly scope — a16z&#x27;s 50T is the LLM API market, Epoch&#x27;s 432T is all providers globally</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-D07.svg" download>Download SVG</a><a href="charts/TPD-D07.png" download>Download PNG</a></p>
+</section>
+<section class="chart" id="TPD-D08">
+<div class="chart-head">
+<a class="pid" href="#TPD-D08">TPD-D08</a>
+<h3>How fast the estimate grew, and how uncertain it stayed</h3>
+</div>
+<p class="shows">Quarter-on-quarter growth in the middle estimate, and the width of the band around it, as quantities rather than as slope and thickness.</p>
+<div class="figure">
+<img src="charts/TPD-D08.svg" alt="How fast the estimate grew, and how uncertain it stayed" width="950" height="605" loading="lazy">
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>Tokens Per Day — global inference token index</dd></div>
+<div><dt>Granularity</dt><dd>One quarter-on-quarter step</dd></div>
+<div><dt>Year</dt><dd>Extracted 2026-08-21; data last verified 2026-07-16</dd></div>
+<div><dt>Coverage</dt><dd>10 growth steps and 12 band widths</dd></div>
+<div><dt>Source files</dt><dd class="files">estimate_band_quarterly.csv</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Growth is computed from the published quarterly middles; the one-day step to the site&#x27;s as-of date is excluded as not a quarter</dd></div>
+<div><dt>Source</dt><dd><a href="https://tokensperday.com/" rel="noopener">Tokens Per Day — tokensperday.com</a></dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Derivation follows the Tokens Per Day published methodology and estimates pages</dd></div>
+<div><dt>Note</dt><dd>Growth peaked at x2.21 in Jul 2025 and has fallen every quarter since; the band bottomed at x1.41 and has widened slightly</dd></div>
+</dl>
+<p class="downloads"><a href="charts/TPD-D08.svg" download>Download SVG</a><a href="charts/TPD-D08.png" download>Download PNG</a></p>
+</section>
+</div>
+<div class="section" id="how-to-read-this-index">
+<h2>How to read this index</h2>
+<p class="blurb">Every figure here belongs to one of two kinds, and the difference between them is the whole point of the site. Reading a modeled number as a measured one is the mistake this domain exists to prevent, so each chart carries a badge saying which it is.</p>
+<dl class="glossary">
+<div><dt>Disclosed floor</dt><dd>The sum of six company or national statements that do not overlap: China&#x27;s national aggregate, Google, Fireworks AI, OpenAI, Together AI and Microsoft. It is a lower bound and nothing else — a number that needs no assumption beyond unit conversion, and that is certain to be short of the truth because most providers disclose nothing.</dd></div>
+<div><dt>Estimated total</dt><dd>The floor plus a triangulation over the companies that stay silent. It is published as a single figure and is really a band: 308 to 477 trillion tokens per day around a middle of 360. TPD-06 plots the band, TPD-D04 plots the per-company bands inside it.</dd></div>
+<div><dt>The six channels</dt><dd>The routes used to estimate an undisclosed company: an anchor (something it did say), demand (users x messages x tokens), telemetry, financial (revenue divided by a realised price), and hardware (fleet x throughput x utilisation). A hardware figure is a ceiling, not an estimate, and passes only by sitting above the demand figure. TPD-D05 shows which company got which.</dd></div>
+<div><dt>Contained</dt><dd>A disclosure that is real but already inside another row. Doubao&#x27;s 180 trillion a day is the largest number in the ledger and adds nothing to the floor, because it is counted inside China&#x27;s national aggregate. Adding contained rows is the easiest way to double-count in this dataset.</dd></div>
+<div><dt>Measured against modeled</dt><dd>The site flags every plotted point as a real observation or not. It matters in one place and matters a lot: the China line in the country tab has 27 points and 3 measurements. The other 24 are the site&#x27;s own curve drawn between them.</dd></div>
+<div><dt>Share allocation</dt><dd>How the four non-China regions are produced: one number — non-China tokens — split 47/18/13/22 by OpenRouter&#x27;s billing-geography mix, a roughly 1% sample the site itself rates low confidence. Those four lines are not four measurements, and TPD-D03 demonstrates it arithmetically rather than asserting it.</dd></div>
+<div><dt>Midpoint dating</dt><dd>Each figure is dated to the middle of the period its disclosure covers, and companies disclose on their own schedule. Two series at the same point on the x axis are rarely the same week&#x27;s news, and a series is carried forward at its last value until the next disclosure rather than interpolated.</dd></div>
+<div><dt>Not an industry return</dt><dd>This is one publisher&#x27;s index, compiled from public statements and inference. It is careful, it shows its work, and it is not audited by anyone. TPD-D07 sets it beside the other published attempts, which differ from each other by a factor of nine.</dd></div>
+</dl>
+</div>
+
+<footer class="foot">
+  <p><strong>How to read this gallery.</strong> Every chart carries a stable Plot ID
+  matching the Dataset Register. Link straight to any chart by appending its ID, for
+  example <code>#P-59</code>. That address does not change as the gallery grows.</p>
+  <p><strong>Methodology references.</strong> Section references shown against each chart
+  are taken from the working methodology. They become links once that document is final.</p>
+</footer>
+
+</div>
+<script>
+// embedded charts post their rendered height; without this the iframe would
+// either clip the legend or leave a gap at some widths
+addEventListener('message', function (ev) {
+  var d = ev.data;
+  if (!d || d.type !== 'aidr-height' || !d.id) return;
+  var f = document.querySelector('iframe.live[src="charts/' + d.id + '.html"]');
+  // ignore implausible measurements rather than collapsing the frame to a sliver
+  if (f && d.h > 200 && d.h < 4000) f.style.height = d.h + 'px';
+});
+</script>
+</body>
+</html>

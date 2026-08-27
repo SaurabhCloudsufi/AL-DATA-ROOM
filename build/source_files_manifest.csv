@@ -31,3 +31,16 @@ MLPerf_Inference_Hardware_Performance_Benchmarks.csv,<root>,MLCommons — MLPerf
 cumulative_by_designer.csv,ai_chip_owners,"Epoch AI, AI Chip Owners",OWNERS-01 + D01..D04
 cumulative_by_chip_type.csv,ai_chip_owners,"Epoch AI, AI Chip Owners",OWNERS-02
 quarters_by_chip_type.csv,ai_chip_owners,"Epoch AI, AI Chip Owners",OWNERS-D04
+tokens_per_day_total.csv,tokensperday_chart_data,Tokens Per Day — chart data (TOTAL tab),TPD-01 + TPD-05 + TPD-D01
+tokens_per_day_country.csv,tokensperday_chart_data,Tokens Per Day — chart data (BY COUNTRY tab),TPD-02 + TPD-D03
+tokens_per_day_company.csv,tokensperday_chart_data,Tokens Per Day — chart data (BY COMPANY tab),TPD-03
+hourly_tokens.csv,tokensperday_chart_data,Tokens Per Day — chart data (24-hour cycle),TPD-04
+cumulative_tokens.csv,tokensperday_chart_data,Tokens Per Day — chart data (cumulative all time),TPD-05
+estimate_band_quarterly.csv,tokensperday_chart_data,Tokens Per Day — chart data (/estimates/ band),TPD-06 + TPD-D07 + TPD-D08
+evidence_ledger.csv,tokensperday_extraction/normalized/disclosures,Tokens Per Day — evidence ledger,TPD-D02
+geography_allocation_shares.csv,tokensperday_extraction/normalized/geography,Tokens Per Day — regional allocation shares,TPD-D03
+reconciled_company_estimates.csv,tokensperday_extraction/normalized/estimates,Tokens Per Day — reconciled company bands,TPD-D04
+channel_fan_per_company.csv,tokensperday_extraction/normalized/estimates,Tokens Per Day — per-company channel fan,TPD-D05
+capacity_parameters.csv,tokensperday_extraction/normalized/channel_inputs,Tokens Per Day — hardware capacity parameters,TPD-D06
+headline_metrics.csv,tokensperday_extraction/normalized/global,Tokens Per Day — headline metrics,TPD-D06
+comparison_vs_independent_estimates.csv,tokensperday_extraction/normalized/global,Tokens Per Day — comparison against independent estimates,TPD-D07

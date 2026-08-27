@@ -1,0 +1,28 @@
+entity,region,observation_scope,ledger,t_per_day,as_of_date,confidence,floor_status,source_title,source_url,archive_url,archive_status
+Doubao,China,model_usage,supply,180.0,2026-06-08,medium,contained,Volcano Engine (Tan Dai) via KuCoin,https://www.kucoin.com/news/flash/volcanic-engine-launches-doubao-2-1-with-daily-token-usage-exceeding-180-trillion,,pending
+China aggregate,China,national,aggregate,140.0,2026-03-16,medium,yes,National Data Bureau (Liu Liehong) via China News Service,https://www.ecns.cn/cns-wire/2026-03-24/detail-ihfaytev9463369.shtml,https://archive.ph/fjlut,archived
+Doubao,China,model_usage,supply,120.0,2026-04-01,medium,contained,Volcano Engine via China Daily,https://global.chinadaily.com.cn/a/202604/02/WS69ce3326a310d6866eb41733.html,https://archive.ph/ahzHz,archived
+Google,US,first_party_and_partner,supply,105.133,2026-05-16,high,yes,Sundar Pichai at Google I/O 2026,https://www.theregister.com/ai-ml/2026/05/19/google-touts-tokenmaxxing-huge-capex-and-ai-agents-at-i/o/5242983,https://archive.ph/8muWU,archived
+China aggregate,China,national,aggregate,100.0,2025-12-16,medium,no,National Data Bureau via China News Service,https://www.ecns.cn/cns-wire/2026-03-24/detail-ihfaytev9463369.shtml,https://archive.ph/fjlut,archived
+Doubao,China,model_usage,supply,63.0,2026-01-16,medium,contained,Volcano Engine via Robonomics Token Tracker,https://robonomics.substack.com/p/token-tracker-and-implications,,pending
+Google,US,first_party_and_partner,supply,42.71,2025-10-16,high,no,Alphabet Q3 2025 CEO remarks,https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q3-2025/,,pending
+Google,US,first_party_and_partner,supply,32.197,2025-07-16,high,no,Alphabet Q2 2025 CEO remarks,https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q2-2025/,https://archive.ph/kUcyk,archived
+Fireworks AI,US,platform_usage,supply,30.0,2026-06-12,medium,yes,Fireworks AI homepage,https://fireworks.ai/,,pending
+OpenAI,US,api_only,supply,21.6,2026-03-16,medium,yes,OpenAI statistics (15B tokens/min),https://www.getpanto.ai/blog/openai-statistics,https://archive.ph/DlCdm,archived
+Google,US,first_party_and_partner,supply,15.77,2025-05-16,high,no,Google I/O 2025 (restated in Alphabet Q2 2025 CEO remarks),https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q2-2025/,https://archive.ph/kUcyk,archived
+Fireworks AI,US,platform_usage,supply,15.0,2026-04-15,medium,no,Fast Company (Lin Qiao interview),https://www.fastcompany.com/91550793/fireworks-ais-lin-qiao-wants-to-make-ai-agents-cheaper-to-run,https://archive.ph/qedWk,archived
+Fireworks AI,US,platform_usage,supply,10.0,2025-10-14,medium,no,Fireworks Series C announcement,https://fireworks.ai/blog/series-c,,pending
+OpenAI,US,api_only,supply,8.6,2025-10-16,medium,no,OpenRouter/a16z State of AI 2025,https://openrouter.ai/blog/the-2025-state-of-ai-report/,https://archive.ph/aAiLV,archived
+Fireworks AI,US,inference_cloud,supply,5.0,2025-06-08,high,no,Fireworks Virtual Cloud GA blog,https://fireworks.ai/blog/virtual-cloud,,pending
+Together AI,US,open_model_inference,supply,2.0,2025-09-15,medium,yes,Tomasz Tunguz (The Token Race),https://tomtunguz.com/trillion-token-race/,,pending
+Doubao,China,model_usage,supply,2.0,2024-12-16,medium,contained,Volcano Engine via Robonomics Token Tracker,https://robonomics.substack.com/p/token-tracker-and-implications,,pending
+Microsoft,US,foundry_apis,supply,1.643,2025-03-16,high,no,Microsoft FY2025 Q3 earnings (50T in March),https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q3,,pending
+OpenRouter,US,cross_model_router,router,1.4,2026-04-06,medium,no,OpenRouter on X: Qwen3.6-Plus first model past 1T tokens in a day,https://x.com/OpenRouter/status/2040239467865489874,,pending
+Microsoft,US,foundry_apis,supply,1.369,2024-12-30,high,yes,Microsoft FY2025 Q4 earnings call,https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4,https://archive.ph/NPrA0,archived
+OpenRouter,US,cross_model_router,router,1.0,2025-12-04,medium,no,OpenRouter/a16z State of AI 2025,https://openrouter.ai/blog/the-2025-state-of-ai-report/,https://archive.ph/aAiLV,archived
+Microsoft,US,foundry_apis,supply,0.821,2025-12-30,medium,no,Microsoft FY2026 Q3 earnings (Nadella),https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q3,,pending
+DeepSeek,China,own_serving_only,supply,0.776,2025-02-27,high,no,DeepSeek Open Source Week Day 6: V3/R1 inference system overview,https://github.com/deepseek-ai/open-infra-index/blob/main/202502OpenSourceWeek/day_6_one_more_thing_deepseekV3R1_inference_system_overview.md,,pending
+Harvey,US,legal_ai,demand,0.411,2026-05-16,medium,no,Business Insider (CEO Weinberg) via AOL,https://www.aol.com/articles/harvey-ceo-says-companys-ai-091502000.html,https://archive.ph/OwagD,archived
+Google,US,first_party_and_partner,supply,0.319,2024-04-15,medium,no,Google I/O 2025 (9.7T/mo ~year before 480T),https://blog.google/company-news/inside-google/message-ceo/alphabet-earnings-q2-2025/,,pending
+OpenAI,US,all_products,supply,0.133,2024-02-15,medium,no,Sam Altman via Epoch AI usage dataset,https://epoch.ai/data/ai_companies_usage_reports.csv,,pending
+China aggregate,China,national,aggregate,0.1,2024-01-16,medium,no,National Data Bureau via China News Service,https://www.ecns.cn/cns-wire/2026-03-24/detail-ihfaytev9463369.shtml,https://archive.ph/fjlut,archived

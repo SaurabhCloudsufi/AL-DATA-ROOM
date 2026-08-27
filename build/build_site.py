@@ -349,6 +349,86 @@ DOMAINS = [
         },
         "live": True,
     },
+    {
+        "slug": "tokens-per-day",
+        "title": "Tokens Per Day",
+        "blurb": "A running index of how many tokens the world's LLMs process each day: a "
+                 "floor built only from what companies actually disclosed, and a "
+                 "six-channel estimate of everything above it.",
+        "index": "build/plot_index_tokensperday.csv",
+        "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "Tokens Per Day — Published Visualizations":
+                "tokensperday.com is a static site with no API: every chart it draws "
+                "comes from a JavaScript object embedded in its homepage, and those "
+                "objects were lifted character-for-character. So these are not a "
+                "rebuild from an underlying release — the plotted numbers are the "
+                "site's own, copied verbatim, and the only changes are of axis and "
+                "layout, each stated on the chart that makes it.",
+            "Derived Analysis":
+                "Our own analysis of the same extraction, including the site's "
+                "evidence ledger and estimates tables — questions its three charts do "
+                "not answer, and two tests of what those charts are actually made of. "
+                "Where a published chart turns out to restate another, the test is "
+                "shown rather than the conclusion asserted.",
+        },
+        "extra_sections": [{
+            "title": "How to read this index",
+            "body": "Every figure here belongs to one of two kinds, and the difference "
+                    "between them is the whole point of the site. Reading a modeled "
+                    "number as a measured one is the mistake this domain exists to "
+                    "prevent, so each chart carries a badge saying which it is.",
+            "terms": [
+                ("Disclosed floor",
+                 "The sum of six company or national statements that do not overlap: "
+                 "China's national aggregate, Google, Fireworks AI, OpenAI, Together "
+                 "AI and Microsoft. It is a lower bound and nothing else — a number "
+                 "that needs no assumption beyond unit conversion, and that is certain "
+                 "to be short of the truth because most providers disclose nothing."),
+                ("Estimated total",
+                 "The floor plus a triangulation over the companies that stay silent. "
+                 "It is published as a single figure and is really a band: 308 to 477 "
+                 "trillion tokens per day around a middle of 360. TPD-06 plots the "
+                 "band, TPD-D04 plots the per-company bands inside it."),
+                ("The six channels",
+                 "The routes used to estimate an undisclosed company: an anchor "
+                 "(something it did say), demand (users x messages x tokens), "
+                 "telemetry, financial (revenue divided by a realised price), and "
+                 "hardware (fleet x throughput x utilisation). A hardware figure is a "
+                 "ceiling, not an estimate, and passes only by sitting above the "
+                 "demand figure. TPD-D05 shows which company got which."),
+                ("Contained",
+                 "A disclosure that is real but already inside another row. Doubao's "
+                 "180 trillion a day is the largest number in the ledger and adds "
+                 "nothing to the floor, because it is counted inside China's national "
+                 "aggregate. Adding contained rows is the easiest way to double-count "
+                 "in this dataset."),
+                ("Measured against modeled",
+                 "The site flags every plotted point as a real observation or not. It "
+                 "matters in one place and matters a lot: the China line in the "
+                 "country tab has 27 points and 3 measurements. The other 24 are the "
+                 "site's own curve drawn between them."),
+                ("Share allocation",
+                 "How the four non-China regions are produced: one number — non-China "
+                 "tokens — split 47/18/13/22 by OpenRouter's billing-geography mix, a "
+                 "roughly 1% sample the site itself rates low confidence. Those four "
+                 "lines are not four measurements, and TPD-D03 demonstrates it "
+                 "arithmetically rather than asserting it."),
+                ("Midpoint dating",
+                 "Each figure is dated to the middle of the period its disclosure "
+                 "covers, and companies disclose on their own schedule. Two series at "
+                 "the same point on the x axis are rarely the same week's news, and a "
+                 "series is carried forward at its last value until the next "
+                 "disclosure rather than interpolated."),
+                ("Not an industry return",
+                 "This is one publisher's index, compiled from public statements and "
+                 "inference. It is careful, it shows its work, and it is not audited "
+                 "by anyone. TPD-D07 sets it beside the other published attempts, "
+                 "which differ from each other by a factor of nine."),
+            ],
+        }],
+        "live": True,
+    },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
     {"slug": "model-pricing", "title": "Model Pricing", "live": False},
     {"slug": "energy", "title": "Energy", "live": False},

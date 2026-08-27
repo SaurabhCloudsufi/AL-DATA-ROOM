@@ -1,0 +1,158 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every route behind every estimate</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#7d5a7d; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn[disabled] { opacity:.35; cursor:not-allowed; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; font-size:12px; }
+  .lg .sw { width:11px; height:11px; border-radius:2px; flex:none; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .rule { stroke:#1f3864; stroke-width:1; stroke-dasharray:3 3; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .rowlab { fill:#1a1a1a; font-size:11px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px;
+          box-shadow:0 4px 14px rgba(0,0,0,.10); opacity:0; transition:opacity .08s;
+          max-width:340px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .tip .row { display:flex; gap:8px; align-items:baseline; }
+  .tip .row i { font-style:normal; margin-left:auto; font-variant-numeric:tabular-nums;
+                 font-weight:700; }
+  .tip .row s { text-decoration:none; color:#6b7280; font-size:10.5px; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+  .empty { fill:#6b7280; font-size:12px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">TPD-D05</span><h1>Every route behind every estimate</h1></div>
+<div class="sub">All 18 channel estimates the reconciliation ran, across 11 entities. A demand channel asks how many tokens were wanted; a hardware channel asks how many could have been served, and is a ceiling rather than an estimate. <span class="badge">MODELED ESTIMATE · not a measurement</span></div>
+<div class="ctl" id="ctl"></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" role="img" aria-label="Every route behind every estimate"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Show only the companies with more than one route, or all of them; hover a row for the formula and the back-test. Source: Tokens Per Day (tokensperday.com) — channel_fan_per_company.csv —
+chartData objects and evidence ledger as extracted 2026-08-21. Values are the site's own,
+copied verbatim. The disclosed floor is measured; everything above it is triangulated from
+revenue, hardware, users and telemetry by parties who do not have the numbers.</div>
+</div>
+<script>
+const D = {"modes":["Cross-checked (5 companies)","All routes (18)"],"sets":[[{"entity":"Google","label":"Google  \u00b7  anchor","lo":94.6,"mid":105.1,"hi":115.6,"disp":"","faded":false,"c":"#1f3864","note":"disclosed 3,200T/month (all surfaces, incl multimodal)"},{"entity":"Google","label":"Google  \u00b7  hardware","lo":41.1,"mid":405.2,"hi":1250.4,"disp":"","faded":false,"c":"#b4763a","note":"A ceiling, not a demand estimate. fleet x tok/s x inference_fraction x utilization x 86400"},{"entity":"OpenAI","label":"OpenAI  \u00b7  demand","lo":22.9,"mid":26.6,"hi":44.0,"disp":"","faded":false,"c":"#1f3864","note":"disclosed API 21.6T/day + messages/day x tokens/message"},{"entity":"OpenAI","label":"OpenAI  \u00b7  telemetry","lo":48.0,"mid":61.7,"hi":86.4,"disp":"","faded":false,"c":"#1f3864","note":"disclosed API / (API:all-surfaces ratio 0.25-0.45)"},{"entity":"OpenAI","label":"OpenAI  \u00b7  financial","lo":4.1,"mid":21.2,"hi":79.1,"disp":"","faded":false,"c":"#1f3864","note":"COGS: inference spend/day / frontier cost-to-serve ($/Mtok x5-6 frontier premium)"},{"entity":"Meta","label":"Meta  \u00b7  demand","lo":0.1,"mid":0.6,"hi":2.6,"disp":"","faded":false,"c":"#1f3864","note":"DAU x msgs/user/day x tokens/message"},{"entity":"Meta","label":"Meta  \u00b7  hardware","lo":12.8,"mid":131.7,"hi":416.8,"disp":"","faded":false,"c":"#b4763a","note":"A ceiling, not a demand estimate. fleet x tok/s x inference_fraction x utilization x 86400"},{"entity":"xAI","label":"xAI  \u00b7  demand","lo":0.1,"mid":0.9,"hi":7.5,"disp":"","faded":false,"c":"#1f3864","note":"DAU x msgs/user/day x reasoning tokens/message"},{"entity":"xAI","label":"xAI  \u00b7  hardware","lo":1.9,"mid":23.3,"hi":78.1,"disp":"","faded":false,"c":"#b4763a","note":"A ceiling, not a demand estimate. fleet x tok/s x inference_fraction x utilization x 86400"},{"entity":"DeepSeek","label":"DeepSeek  \u00b7  demand","lo":0.2,"mid":1.5,"hi":9.0,"disp":"","faded":false,"c":"#1f3864","note":"DAU x msgs/user/day x reasoning tokens/message"},{"entity":"DeepSeek","label":"DeepSeek  \u00b7  financial","lo":4.9,"mid":10.0,"hi":17.8,"disp":"","faded":true,"c":"#9aa9c4","note":"EXCLUDED \u2014 back-tested 12.9x against its own anchor. API revenue/day / realized $/Mtok"},{"entity":"DeepSeek","label":"DeepSeek  \u00b7  hardware","lo":0.3,"mid":1.3,"hi":2.6,"disp":"","faded":false,"c":"#b4763a","note":"A ceiling, not a demand estimate. fleet x tok/s x inference_fraction x utilization x 86400"}],[{"entity":"Google","label":"Google  \u00b7  anchor","lo":94.6,"mid":105.1,"hi":115.6,"disp":"","faded":false,"c":"#1f3864","note":"disclosed 3,200T/month (all surfaces, incl multimodal)"},{"entity":"Google","label":"Google  \u00b7  hardware","lo":41.1,"mid":405.2,"hi":1250.4,"disp":"","faded":false,"c":"#b4763a","note":"A ceiling, not a demand estimate. fleet x tok/s x inference_fraction x utilization x 86400"},{"entity":"OpenAI","label":"OpenAI  \u00b7  demand","lo":22.9,"mid":26.6,"hi":44.0,"disp":"","faded":false,"c":"#1f3864","note":"disclosed API 21.6T/day + messages/day x tokens/message"},{"entity":"OpenAI","label":"OpenAI  \u00b7  telemetry","lo":48.0,"mid":61.7,"hi":86.4,"disp":"","faded":false,"c":"#1f3864","note":"disclosed API / (API:all-surfaces ratio 0.25-0.45)"},{"entity":"OpenAI","label":"OpenAI  \u00b7  financial","lo":4.1,"mid":21.2,"hi":79.1,"disp":"","faded":false,"c":"#1f3864","note":"COGS: inference spend/day / frontier cost-to-serve ($/Mtok x5-6 frontier premium)"},{"entity":"Anthropic","label":"Anthropic  \u00b7  financial","lo":13.7,"mid":31.9,"hi":69.4,"disp":"","faded":false,"c":"#1f3864","note":"API run-rate revenue/day / realized $/Mtok (1.5-6)"},{"entity":"Microsoft","label":"Microsoft  \u00b7  anchor","lo":1.4,"mid":2.2,"hi":3.0,"disp":"","faded":false,"c":"#1f3864","note":"Foundry 500T/FY2025 disclosed, grown to FY26 (+30% QoQ customer trend)"},{"entity":"Meta","label":"Meta  \u00b7  demand","lo":0.1,"mid":0.6,"hi":2.6,"disp":"","faded":false,"c":"#1f3864","note":"DAU x msgs/user/day x tokens/message"},{"entity":"Meta","label":"Meta  \u00b7  hardware","lo":12.8,"mid":131.7,"hi":416.8,"disp":"","faded":false,"c":"#b4763a","note":"A ceiling, not a demand estimate. fleet x tok/s x inference_fraction x utilization x 86400"},{"entity":"xAI","label":"xAI  \u00b7  demand","lo":0.1,"mid":0.9,"hi":7.5,"disp":"","faded":false,"c":"#1f3864","note":"DAU x msgs/user/day x reasoning tokens/message"},{"entity":"xAI","label":"xAI  \u00b7  hardware","lo":1.9,"mid":23.3,"hi":78.1,"disp":"","faded":false,"c":"#b4763a","note":"A ceiling, not a demand estimate. fleet x tok/s x inference_fraction x utilization x 86400"},{"entity":"DeepSeek","label":"DeepSeek  \u00b7  demand","lo":0.2,"mid":1.5,"hi":9.0,"disp":"","faded":false,"c":"#1f3864","note":"DAU x msgs/user/day x reasoning tokens/message"},{"entity":"DeepSeek","label":"DeepSeek  \u00b7  financial","lo":4.9,"mid":10.0,"hi":17.8,"disp":"","faded":true,"c":"#9aa9c4","note":"EXCLUDED \u2014 back-tested 12.9x against its own anchor. API revenue/day / realized $/Mtok"},{"entity":"DeepSeek","label":"DeepSeek  \u00b7  hardware","lo":0.3,"mid":1.3,"hi":2.6,"disp":"","faded":false,"c":"#b4763a","note":"A ceiling, not a demand estimate. fleet x tok/s x inference_fraction x utilization x 86400"},{"entity":"China aggregate","label":"China aggregate  \u00b7  anchor","lo":140.0,"mid":140.0,"hi":140.0,"disp":"","faded":false,"c":"#1f3864","note":"disclosed (2026-03-24)"},{"entity":"Fireworks AI","label":"Fireworks AI  \u00b7  anchor","lo":30.0,"mid":30.0,"hi":30.0,"disp":"","faded":false,"c":"#1f3864","note":"disclosed (2026-06-23)"},{"entity":"Together AI","label":"Together AI  \u00b7  anchor","lo":2.0,"mid":2.0,"hi":2.0,"disp":"","faded":false,"c":"#1f3864","note":"disclosed (2025-09-15)"},{"entity":"GLOBAL","label":"GLOBAL  \u00b7  telemetry","lo":5.0,"mid":15.0,"hi":40.0,"disp":"","faded":false,"c":"#1f3864","note":"unattributed remainder: self-hosted open-weights + Bedrock non-Claude + Groq/Cerebras + sovereign"}]],"lo":0.06,"hi":2000.6400000000003,"kinds":[["Demand estimate","#1f3864"],["Hardware ceiling","#b4763a"],["Excluded on back-test","#9aa9c4"]]};
+const svg=document.getElementById('c'), tip=document.getElementById('tip');
+const ctl=document.getElementById('ctl'), lgw=document.getElementById('lg');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000;
+
+let MODE=0;
+const MM={l:210,r:190,t:16,b:52}, RH=30;
+function rows(){ return D.sets[MODE]; }
+function fmt(v){ return v>=100? v.toFixed(0) : v>=10? v.toFixed(1)
+  : v>=1? v.toFixed(1) : v.toFixed(2); }
+
+function buildCtl(){
+  ctl.innerHTML='';
+  const g=document.createElement('div'); g.className='grp';
+  const c=document.createElement('span'); c.className='cap'; c.textContent='Show';
+  g.appendChild(c);
+  D.modes.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='btn'; b.type='button';
+    b.textContent=o; b.setAttribute('aria-pressed', i===MODE?'true':'false');
+    b.onclick=()=>{ MODE=i; buildCtl(); draw(); reportHeight(); };
+    g.appendChild(b);
+  });
+  ctl.appendChild(g);
+  const s=document.createElement('span'); s.className='cap';
+  s.textContent=rows().length+' rows';
+  ctl.appendChild(s);
+}
+
+let SX, RR=[], HH;
+function draw(){
+  const R=rows(); RR=R;
+  HH=MM.t+MM.b+R.length*RH;
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.setAttribute('viewBox','0 0 '+W+' '+HH);
+  const lo=D.lo, hi=D.hi;
+  SX=v=>MM.l+(Math.log10(Math.max(v,lo))-Math.log10(lo))
+    /(Math.log10(hi)-Math.log10(lo))*(W-MM.l-MM.r);
+  for(let e=Math.floor(Math.log10(lo)); Math.pow(10,e)<=hi; e++){
+    const v=Math.pow(10,e), x=SX(v);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:MM.t,y2:HH-MM.b,class:'grid'}));
+    const t=el('text',{x:x,y:HH-MM.b+17,class:'axis','text-anchor':'middle'});
+    t.textContent=v>=1?String(v):String(v); svg.appendChild(t);
+  }
+  R.forEach((r,i)=>{
+    const y=MM.t+i*RH+RH/2;
+    svg.appendChild(el('rect',{x:SX(r.lo),y:y-5,width:Math.max(2,SX(r.hi)-SX(r.lo)),
+      height:10,fill:r.c,opacity:r.faded?0.20:0.42,rx:2}));
+    svg.appendChild(el('circle',{cx:SX(r.mid),cy:y,r:5,fill:r.c,
+      opacity:r.faded?0.35:1}));
+    const lab=el('text',{x:MM.l-8,y:y+3.6,class:'rowlab','text-anchor':'end'});
+    lab.textContent=r.label; svg.appendChild(lab);
+    const val=el('text',{x:SX(r.hi)+8,y:y+3.6,class:'axis'});
+    val.textContent=fmt(r.lo)+' \u2013 '+fmt(r.hi)+(r.disp?'   \u00d7'+r.disp:'');
+    svg.appendChild(val);
+  });
+  const xl=el('text',{x:(MM.l+W-MM.r)/2,y:HH-MM.b+38,class:'axlab','text-anchor':'middle'});
+  xl.textContent='Trillion tokens per day, low to high (log scale)'; svg.appendChild(xl);
+  lgw.innerHTML='';
+  D.kinds.forEach(k=>{ const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:'+k[1]+'"></span>'+k[0];
+    lgw.appendChild(d); });
+}
+
+svg.addEventListener('pointermove',ev=>{
+  if(!RR.length){ tip.style.opacity=0; return; }
+  const r=svg.getBoundingClientRect();
+  const py=(ev.clientY-r.top)/r.width*W;
+  const i=Math.floor((py-MM.t)/RH);
+  if(i<0||i>=RR.length){ tip.style.opacity=0; return; }
+  const x=RR[i];
+  let h='<b>'+x.label+'</b>';
+  h+='<div class="row">Low<i>'+fmt(x.lo)+'</i></div>';
+  h+='<div class="row">Published figure<i>'+fmt(x.mid)+'</i></div>';
+  h+='<div class="row">High<i>'+fmt(x.hi)+'</i></div>';
+  if(x.disp) h+='<div class="row m">Width<i>\u00d7'+x.disp+'</i></div>';
+  if(x.note) h+='<div class="m" style="margin-top:4px">'+x.note+'</div>';
+  tip.innerHTML=h; tip.style.opacity=1;
+  const w=tip.offsetWidth||300;
+  tip.style.left=Math.min(Math.max(8,(MM.l/W*r.width)+20), r.width-w-8)+'px';
+  tip.style.top=Math.min(Math.max(8,(MM.t+i*RH)/W*r.width), r.height-tip.offsetHeight-8)+'px';
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;});
+
+buildCtl(); draw();
+
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'TPD-D05',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>

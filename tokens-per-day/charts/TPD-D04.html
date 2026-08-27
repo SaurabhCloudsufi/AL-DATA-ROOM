@@ -1,0 +1,158 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What each company's estimate is actually worth</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#7d5a7d; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn[disabled] { opacity:.35; cursor:not-allowed; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; font-size:12px; }
+  .lg .sw { width:11px; height:11px; border-radius:2px; flex:none; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .rule { stroke:#1f3864; stroke-width:1; stroke-dasharray:3 3; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .rowlab { fill:#1a1a1a; font-size:11px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px;
+          box-shadow:0 4px 14px rgba(0,0,0,.10); opacity:0; transition:opacity .08s;
+          max-width:340px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .tip .row { display:flex; gap:8px; align-items:baseline; }
+  .tip .row i { font-style:normal; margin-left:auto; font-variant-numeric:tabular-nums;
+                 font-weight:700; }
+  .tip .row s { text-decoration:none; color:#6b7280; font-size:10.5px; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+  .empty { fill:#6b7280; font-size:12px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">TPD-D04</span><h1>What each company's estimate is actually worth</h1></div>
+<div class="sub">The reconciled low-to-high band behind each of 10 company figures and the global total. The site publishes the middle of each as a single number; the bar is what the method supports. <span class="badge">MODELED ESTIMATE · not a measurement</span></div>
+<div class="ctl" id="ctl"></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" role="img" aria-label="What each company's estimate is actually worth"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Order by width or by size; hover a row for the band and the site's own note on it. Source: Tokens Per Day (tokensperday.com) — reconciled_company_estimates.csv —
+chartData objects and evidence ledger as extracted 2026-08-21. Values are the site's own,
+copied verbatim. The disclosed floor is measured; everything above it is triangulated from
+revenue, hardware, users and telemetry by parties who do not have the numbers.</div>
+</div>
+<script>
+const D = {"modes":["By width","By size"],"sets":[[{"label":"China aggregate","lo":140.0,"mid":140.0,"hi":140.0,"disp":"1","faded":false,"c":"#1f3864","note":"NDB-measured; STALE (Mar 2026) and growing ~40%/3mo per Yicai - treated as a floor-anchor, not nowcast"},{"label":"Fireworks AI","lo":30.0,"mid":30.0,"hi":30.0,"disp":"1","faded":false,"c":"#1f3864","note":"disclosed; serves open models incl DeepSeek/Llama"},{"label":"Together AI","lo":2.0,"mid":2.0,"hi":2.0,"disp":"1","faded":false,"c":"#1f3864","note":"disclosed Sep 2025; stale but small"},{"label":"Google","lo":94.6,"mid":105.1,"hi":115.6,"disp":"1.2","faded":false,"c":"#1f3864","note":"disclosed by Pichai at I/O 2026; nearly ground truth"},{"label":"GLOBAL","lo":308.4,"mid":360.4,"hi":477.1,"disp":"1.5","faded":false,"c":"#b4763a","note":"excluded by construction: DeepSeek (in China agg + hosts), Doubao (in China agg), OpenRouter (router), Harvey (demand ledger), rented fleets (in owners); closure: ExpView-via-Epoch 432T/day sits inside our band -> PASS; realized mid is 24% of global hardware capacity mid"},{"label":"Microsoft","lo":1.4,"mid":2.2,"hi":3.0,"disp":"2.2","faded":false,"c":"#1f3864","note":"Foundry-only by construction; OpenAI serving on Azure excluded (counted under OpenAI); the undisclosed Azure remainder sits in GLOBAL unattributed"},{"label":"OpenAI","lo":21.6,"mid":32.6,"hi":67.0,"disp":"3.1","faded":false,"c":"#1f3864","note":"band-wise geometric mean of three bracketing routes, low clamped to the disclosed API-only anchor (all-surfaces cannot be below API); COGS mid lands within 15% of Epoch's independent ~19T (2025) after growth"},{"label":"Anthropic","lo":13.7,"mid":31.9,"hi":69.4,"disp":"5.1","faded":false,"c":"#1f3864","note":"no token disclosure exists; widest per-company band on the board and honestly so"},{"label":"Meta","lo":0.1,"mid":0.6,"hi":2.6,"disp":"32.5","faded":false,"c":"#1f3864","note":"supply signals strong but $0 revenue; demand and capacity pincer it per doc 5"},{"label":"DeepSeek  (excluded)","lo":0.2,"mid":1.5,"hi":9.0,"disp":"40.9","faded":true,"c":"#9aa9c4","note":"EXCLUDED from GLOBAL sum: domestic usage sits inside the China aggregate and third-party-hosted DeepSeek sits under its hosts"},{"label":"xAI","lo":0.1,"mid":0.9,"hi":7.5,"disp":"111.9","faded":false,"c":"#1f3864","note":"no token or revenue signal usable; driver is tokens/message on Grok reasoning traffic"}],[{"label":"GLOBAL","lo":308.4,"mid":360.4,"hi":477.1,"disp":"1.5","faded":false,"c":"#b4763a","note":"excluded by construction: DeepSeek (in China agg + hosts), Doubao (in China agg), OpenRouter (router), Harvey (demand ledger), rented fleets (in owners); closure: ExpView-via-Epoch 432T/day sits inside our band -> PASS; realized mid is 24% of global hardware capacity mid"},{"label":"China aggregate","lo":140.0,"mid":140.0,"hi":140.0,"disp":"1","faded":false,"c":"#1f3864","note":"NDB-measured; STALE (Mar 2026) and growing ~40%/3mo per Yicai - treated as a floor-anchor, not nowcast"},{"label":"Google","lo":94.6,"mid":105.1,"hi":115.6,"disp":"1.2","faded":false,"c":"#1f3864","note":"disclosed by Pichai at I/O 2026; nearly ground truth"},{"label":"OpenAI","lo":21.6,"mid":32.6,"hi":67.0,"disp":"3.1","faded":false,"c":"#1f3864","note":"band-wise geometric mean of three bracketing routes, low clamped to the disclosed API-only anchor (all-surfaces cannot be below API); COGS mid lands within 15% of Epoch's independent ~19T (2025) after growth"},{"label":"Anthropic","lo":13.7,"mid":31.9,"hi":69.4,"disp":"5.1","faded":false,"c":"#1f3864","note":"no token disclosure exists; widest per-company band on the board and honestly so"},{"label":"Fireworks AI","lo":30.0,"mid":30.0,"hi":30.0,"disp":"1","faded":false,"c":"#1f3864","note":"disclosed; serves open models incl DeepSeek/Llama"},{"label":"Microsoft","lo":1.4,"mid":2.2,"hi":3.0,"disp":"2.2","faded":false,"c":"#1f3864","note":"Foundry-only by construction; OpenAI serving on Azure excluded (counted under OpenAI); the undisclosed Azure remainder sits in GLOBAL unattributed"},{"label":"Together AI","lo":2.0,"mid":2.0,"hi":2.0,"disp":"1","faded":false,"c":"#1f3864","note":"disclosed Sep 2025; stale but small"},{"label":"DeepSeek  (excluded)","lo":0.2,"mid":1.5,"hi":9.0,"disp":"40.9","faded":true,"c":"#9aa9c4","note":"EXCLUDED from GLOBAL sum: domestic usage sits inside the China aggregate and third-party-hosted DeepSeek sits under its hosts"},{"label":"xAI","lo":0.1,"mid":0.9,"hi":7.5,"disp":"111.9","faded":false,"c":"#1f3864","note":"no token or revenue signal usable; driver is tokens/message on Grok reasoning traffic"},{"label":"Meta","lo":0.1,"mid":0.6,"hi":2.6,"disp":"32.5","faded":false,"c":"#1f3864","note":"supply signals strong but $0 revenue; demand and capacity pincer it per doc 5"}]],"lo":0.06,"hi":763.3600000000001,"kinds":[["In the global sum","#1f3864"],["The global total","#b4763a"],["Excluded from the global sum","#9aa9c4"]]};
+const svg=document.getElementById('c'), tip=document.getElementById('tip');
+const ctl=document.getElementById('ctl'), lgw=document.getElementById('lg');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000;
+
+let MODE=0;
+const MM={l:210,r:190,t:16,b:52}, RH=30;
+function rows(){ return D.sets[MODE]; }
+function fmt(v){ return v>=100? v.toFixed(0) : v>=10? v.toFixed(1)
+  : v>=1? v.toFixed(1) : v.toFixed(2); }
+
+function buildCtl(){
+  ctl.innerHTML='';
+  const g=document.createElement('div'); g.className='grp';
+  const c=document.createElement('span'); c.className='cap'; c.textContent='Show';
+  g.appendChild(c);
+  D.modes.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='btn'; b.type='button';
+    b.textContent=o; b.setAttribute('aria-pressed', i===MODE?'true':'false');
+    b.onclick=()=>{ MODE=i; buildCtl(); draw(); reportHeight(); };
+    g.appendChild(b);
+  });
+  ctl.appendChild(g);
+  const s=document.createElement('span'); s.className='cap';
+  s.textContent=rows().length+' rows';
+  ctl.appendChild(s);
+}
+
+let SX, RR=[], HH;
+function draw(){
+  const R=rows(); RR=R;
+  HH=MM.t+MM.b+R.length*RH;
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.setAttribute('viewBox','0 0 '+W+' '+HH);
+  const lo=D.lo, hi=D.hi;
+  SX=v=>MM.l+(Math.log10(Math.max(v,lo))-Math.log10(lo))
+    /(Math.log10(hi)-Math.log10(lo))*(W-MM.l-MM.r);
+  for(let e=Math.floor(Math.log10(lo)); Math.pow(10,e)<=hi; e++){
+    const v=Math.pow(10,e), x=SX(v);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:MM.t,y2:HH-MM.b,class:'grid'}));
+    const t=el('text',{x:x,y:HH-MM.b+17,class:'axis','text-anchor':'middle'});
+    t.textContent=v>=1?String(v):String(v); svg.appendChild(t);
+  }
+  R.forEach((r,i)=>{
+    const y=MM.t+i*RH+RH/2;
+    svg.appendChild(el('rect',{x:SX(r.lo),y:y-5,width:Math.max(2,SX(r.hi)-SX(r.lo)),
+      height:10,fill:r.c,opacity:r.faded?0.20:0.42,rx:2}));
+    svg.appendChild(el('circle',{cx:SX(r.mid),cy:y,r:5,fill:r.c,
+      opacity:r.faded?0.35:1}));
+    const lab=el('text',{x:MM.l-8,y:y+3.6,class:'rowlab','text-anchor':'end'});
+    lab.textContent=r.label; svg.appendChild(lab);
+    const val=el('text',{x:SX(r.hi)+8,y:y+3.6,class:'axis'});
+    val.textContent=fmt(r.lo)+' \u2013 '+fmt(r.hi)+(r.disp?'   \u00d7'+r.disp:'');
+    svg.appendChild(val);
+  });
+  const xl=el('text',{x:(MM.l+W-MM.r)/2,y:HH-MM.b+38,class:'axlab','text-anchor':'middle'});
+  xl.textContent='Trillion tokens per day, low to high (log scale)'; svg.appendChild(xl);
+  lgw.innerHTML='';
+  D.kinds.forEach(k=>{ const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:'+k[1]+'"></span>'+k[0];
+    lgw.appendChild(d); });
+}
+
+svg.addEventListener('pointermove',ev=>{
+  if(!RR.length){ tip.style.opacity=0; return; }
+  const r=svg.getBoundingClientRect();
+  const py=(ev.clientY-r.top)/r.width*W;
+  const i=Math.floor((py-MM.t)/RH);
+  if(i<0||i>=RR.length){ tip.style.opacity=0; return; }
+  const x=RR[i];
+  let h='<b>'+x.label+'</b>';
+  h+='<div class="row">Low<i>'+fmt(x.lo)+'</i></div>';
+  h+='<div class="row">Published figure<i>'+fmt(x.mid)+'</i></div>';
+  h+='<div class="row">High<i>'+fmt(x.hi)+'</i></div>';
+  if(x.disp) h+='<div class="row m">Width<i>\u00d7'+x.disp+'</i></div>';
+  if(x.note) h+='<div class="m" style="margin-top:4px">'+x.note+'</div>';
+  tip.innerHTML=h; tip.style.opacity=1;
+  const w=tip.offsetWidth||300;
+  tip.style.left=Math.min(Math.max(8,(MM.l/W*r.width)+20), r.width-w-8)+'px';
+  tip.style.top=Math.min(Math.max(8,(MM.t+i*RH)/W*r.width), r.height-tip.offsetHeight-8)+'px';
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;});
+
+buildCtl(); draw();
+
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'TPD-D04',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>

@@ -1,0 +1,2 @@
+source_site,extracted,data_last_verified,chart_points,chart_series,modeled_points,ledger_rows,ledger_entities,floor_rows,floor_t_per_day,headline_t_per_day,band_low_t_per_day,band_high_t_per_day,capacity_mid_t_per_day,demand_share_of_mid_capacity_pct,cumulative_quadrillions,cumulative_integral_worst_diff_pct,region_share_spread_pp,region_share_dates_tested
+https://tokensperday.com/,2026-08-21,2026-07-16,157,15,24,27,10,6,300.10200000000003,360.4,308.4,477.1,691.0,52.0,92.6,0.1000000000000075,0.3152254827177572,12

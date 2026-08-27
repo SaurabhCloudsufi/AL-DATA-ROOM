@@ -1,0 +1,6 @@
+parameter,unit,low,mid,high,basis
+Accelerator installed base,million_h100_equiv,12.0,16.0,20.0,Epoch AI: ~15M H100-equivalents operational end-2025 (~30 GW); growing ~3.3x/year
+Throughput per accelerator,tokens_per_sec,1500.0,2500.0,5000.0,MLPerf v4.1 audited: H100 dense Llama-70B FP8 ~3066 tok/s/GPU; DeepSeek-R1 MoE ~2788; optimized/Blackwell higher
+Inference fraction,fraction,0.4,0.5,0.65,McKinsey ~50/50 inference/training on a compute basis in 2025 rising to inference-heavy by 2030 (basis-dependent)
+Utilization,fraction,0.25,0.4,0.5,FlexPipe: GPU reservation falls ~75% to ~30% with better pipelining; allocation/duty-cycle utilization (distinct from ~10% per-kernel MFU)
+Capacity (T/day),,156.0,691.0,2808.0,low/high compound extreme assumptions

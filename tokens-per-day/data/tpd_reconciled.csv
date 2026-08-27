@@ -1,0 +1,12 @@
+entity,low,mid,high,dispersion,primary_channel,notes,in_global_sum
+Google,94.6,105.1,115.6,1.2,anchor,disclosed by Pichai at I/O 2026; nearly ground truth,yes
+OpenAI,21.6,32.6,67,3.1,demand,"band-wise geometric mean of three bracketing routes, low clamped to the disclosed API-only anchor (all-surfaces cannot be below API); COGS mid lands within 15% of Epoch's independent ~19T (2025) after growth",yes
+Anthropic,13.7,31.9,69.4,5.1,financial,no token disclosure exists; widest per-company band on the board and honestly so,yes
+Microsoft,1.4,2.2,3,2.2,anchor,Foundry-only by construction; OpenAI serving on Azure excluded (counted under OpenAI); the undisclosed Azure remainder sits in GLOBAL unattributed,yes
+Meta,0.1,0.6,2.6,32.5,demand,supply signals strong but $0 revenue; demand and capacity pincer it per doc 5,yes
+xAI,0.1,0.9,7.5,111.9,demand,no token or revenue signal usable; driver is tokens/message on Grok reasoning traffic,yes
+DeepSeek,0.2,1.5,9,40.9,demand,EXCLUDED from GLOBAL sum: domestic usage sits inside the China aggregate and third-party-hosted DeepSeek sits under its hosts,no
+China aggregate,140,140,140,1,anchor,"NDB-measured; STALE (Mar 2026) and growing ~40%/3mo per Yicai - treated as a floor-anchor, not nowcast",yes
+Fireworks AI,30,30,30,1,anchor,disclosed; serves open models incl DeepSeek/Llama,yes
+Together AI,2,2,2,1,anchor,disclosed Sep 2025; stale but small,yes
+GLOBAL,308.4,360.4,477.1,1.5,composition,"excluded by construction: DeepSeek (in China agg + hosts), Doubao (in China agg), OpenRouter (router), Harvey (demand ledger), rented fleets (in owners); closure: ExpView-via-Epoch 432T/day sits inside our band -> PASS; realized mid is 24% of global hardware capacity mid",

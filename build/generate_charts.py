@@ -5486,6 +5486,1024 @@ OWNERS_BUILDERS = {
 }
 
 
+# ========================================================= TOKENS PER DAY
+# tokensperday.com publishes an index of global LLM inference volume. It is a
+# static site: every chart it draws comes from a JavaScript object embedded in
+# the homepage, and the extraction lifted those objects verbatim. So unlike the
+# Epoch and MLCommons domains, where a published figure is rebuilt from the
+# underlying release, here the plotted numbers ARE the source. Nothing below
+# refits, interpolates or re-derives a value.
+#
+# The domain's whole structure is one distinction, and every chart states which
+# side of it the numbers sit on:
+#
+#   The disclosed floor is measured. Six company or national statements, no
+#   overlaps, summing to a number nobody has to believe an assumption about.
+#   The estimate is modeled. Six channels of triangulation over the companies
+#   that disclose nothing, published as a band rather than a point.
+TPD_DOMAIN = "tokens-per-day"
+TPD_DATA = REPO / TPD_DOMAIN / "data"
+TPD_METH = ("Methodology reference pending final methodology document; derivation "
+            "follows the Tokens Per Day published methodology and estimates pages")
+TPD_EXTRACTED = "2026-08-21"
+
+# the site's own series colours, so a reproduction is recognisable against the
+# page it reproduces
+TPD_C = {"estimate": "#8b9bff", "floor": "#2563eb", "china": "#ef4444",
+         "us": "#2563eb", "europe": "#22c55e", "asia": "#f59e0b",
+         "row": "#a855f7"}
+# house palette for the derived charts, which are ours rather than the site's
+TPD_D = ["#1f3864", "#b4763a", "#6b8f71", "#7d5a7d", "#4e8a8b", "#a46b6b",
+         "#8a8f5c", "#4a6fa5", "#9aa9c4", "#c3c8d1"]
+
+TPD_FLOOR_STATUS = {
+    "yes": ("In the floor", "#1f3864"),
+    "contained": ("Inside another row", "#b4763a"),
+    "no": ("Superseded or out of scope", "#c3c8d1"),
+}
+
+
+def tpd_src(files):
+    return ("Tokens Per Day (tokensperday.com) — "
+            + " + ".join(files)
+            + f" — chartData objects and evidence ledger as extracted "
+              f"{TPD_EXTRACTED}")
+
+
+def _tcsv(name):
+    import pandas as pd
+    return pd.read_csv(TPD_DATA / name)
+
+
+def _tmeta():
+    return _tcsv("tpd_summary.csv").iloc[0]
+
+
+# The two badges are the domain, not decoration: a chart of the ledger and a
+# chart of the estimate are different kinds of claim and must not be read alike.
+TPD_BADGE = {
+    "floor": "  DISCLOSED FLOOR  ·  company statements  ",
+    "estimate": "  MODELED ESTIMATE  ·  not a measurement  ",
+    "both": "  MEASURED FLOOR vs MODELED ESTIMATE  ",
+}
+
+
+def _tpd_badge(ax, kind, above=True):
+    y, va = (1.030, "bottom") if above else (0.955, "top")
+    colour = SERIES["current"] if kind == "floor" else "#7d5a7d"
+    ax.text(0.0 if above else 0.017, y, TPD_BADGE[kind], transform=ax.transAxes,
+            ha="left", va=va, fontsize=9.1, fontweight="bold", color="white",
+            zorder=9, clip_on=False,
+            bbox=dict(boxstyle="round,pad=0.42", facecolor=colour, edgecolor="none"))
+
+
+TPD_SCOPE = ("This is one publisher's index, not an industry return. The floor is "
+             "what companies said; everything above it is triangulated from revenue, "
+             "hardware, users and telemetry by parties who do not have the numbers.")
+TPD_STALE = ("Figures are dated to the midpoint of the period each disclosure "
+             "covers, and companies disclose on their own schedule, so two series "
+             "at the same x are rarely the same week's news.")
+
+
+def _tfig(subtitle, note, left, width, files, xlabel_room=0.058,
+          figsize=(12.0, 8.4)):
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_axes(_rect(subtitle, note, left=left, width=width,
+                            xlabel_room=xlabel_room, badge_above=True,
+                            source=tpd_src(files)))
+    return fig, ax
+
+
+def _tfinish(fig, ax, pid, title, subtitle, note, files, badge="both"):
+    _tpd_badge(ax, badge, above=True)
+    frame(fig, ax, pid, title, subtitle, tpd_src(files), TPD_METH, note)
+    save(fig, pid, TPD_DOMAIN)
+
+
+def _tt(v):
+    """Trillions of tokens per day, at the precision the site itself plots."""
+    return f"{v:,.1f}" if v < 10 else f"{v:,.0f}"
+
+
+def _an(v):
+    """"a" or "an" for a figure as it is read aloud: an 8x, an 11x, an 18x, a 3x."""
+    lead = f"{float(v):g}"
+    return "an" if lead[0] == "8" or lead[:2] in ("11", "18") else "a"
+
+
+def _tn(v):
+    """Four significant figures, never scientific notation.
+
+    Default formatting turns Google's 1250.4T hardware ceiling into "1.25e+03"
+    on the chart face, which is unreadable in a printed figure.
+    """
+    return f"{float(v):,.4g}"
+
+
+def _spread(values, gap):
+    """Nudge label positions apart, preserving order.
+
+    Several charts label every series at its last point, and those points can
+    sit closer together than the text is tall. Without this the labels overprint
+    each other and the chart loses the series it is naming.
+    """
+    idx = sorted(range(len(values)), key=lambda i: values[i])
+    out = list(values)
+    for k in range(1, len(idx)):
+        lo, hi = idx[k - 1], idx[k]
+        if out[hi] - out[lo] < gap:
+            out[hi] = out[lo] + gap
+    return out
+
+
+def _tdates(d):
+    import pandas as pd
+    return pd.to_datetime(d)
+
+
+def _tline_axis(ax, first, last):
+    """Year-quarter ticks across the site's own x domain."""
+    import matplotlib.dates as mdates
+    ax.set_xlim(first, last)
+    ax.xaxis.set_major_locator(mdates.MonthLocator(bymonth=(1, 7)))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b\n%Y"))
+    ax.tick_params(axis="x", labelsize=8.8)
+
+
+def _tseries(tab):
+    """The plotted observations for one tab, as {series: dataframe}."""
+    ts = _tcsv("tpd_timeseries.csv")
+    d = ts[ts.tab == tab].copy()
+    d["d"] = _tdates(d.date)
+    return {s: g.sort_values("d") for s, g in d.groupby("series")}
+
+
+# --------------------------------------- Published Visualizations (the site's)
+def build_tpd_01(_r=None):
+    """The site's headline chart: what is known against what is estimated."""
+    S = _tseries("TOTAL")
+    est, flr = S["Estimated total"], S["Global floor"]
+    m = _tmeta()
+    files = ["tokens_per_day_total.csv"]
+
+    subtitle = (f"What it shows: the site's TOTAL tab — its modeled estimate of "
+                f"global tokens per day against the disclosed floor beneath it, over "
+                f"{len(est)} quarterly estimate points and {len(flr)} floor steps. "
+                f"The same data is drawn twice: linear as the site draws it, and "
+                f"logarithmic so the first eighteen months are legible.")
+    # the floor carried forward to each estimate date, so "then" and "now" are
+    # the same comparison the site's own tooltip makes
+    ratio = [(d, float(flr[flr.d <= d].value.iloc[-1]) / v * 100)
+             for d, v in zip(est.d, est.value) if len(flr[flr.d <= d])]
+    then_d, then_pct = min(ratio, key=lambda r: r[1])
+    note = (f"The estimate ends at {est.value.iloc[-1]:,.1f}T/day and the floor at "
+            f"{flr.value.iloc[-1]:,.1f}T/day — the floor is now "
+            f"{flr.value.iloc[-1]/est.value.iloc[-1]*100:.0f}% of the estimate, "
+            f"against {then_pct:.0f}% in {then_d:%b %Y}, which TPD-D01 plots "
+            f"directly. On the linear "
+            f"panel everything before mid-2025 sits on the axis; that is a property "
+            f"of the growth, not of the data. {TPD_SCOPE}")
+
+    fig = plt.figure(figsize=(13.2, 8.4))
+    r = _rect(subtitle, note, left=0.062, width=0.905, xlabel_room=0.062,
+              badge_above=True, source=tpd_src(files))
+    gap = 0.085
+    w = (r[2] - gap) / 2
+    axL = fig.add_axes([r[0], r[1], w, r[3]])
+    axR = fig.add_axes([r[0] + w + gap, r[1], w, r[3]])
+
+    for ax, logy in ((axL, False), (axR, True)):
+        ax.plot(flr.d, flr.value, color=TPD_C["floor"], linewidth=2.4, zorder=4,
+                marker="o", markersize=3.6, label="Global floor (disclosed)")
+        ax.plot(est.d, est.value, color=TPD_C["estimate"], linewidth=2.4,
+                linestyle=(0, (7, 3)), zorder=5, marker="o", markersize=3.6,
+                label="Estimated total (modeled)")
+        _tline_axis(ax, min(flr.d.min(), est.d.min()), max(flr.d.max(), est.d.max()))
+        ax.grid(axis="y", color=RULE, linewidth=0.7)
+        ax.set_axisbelow(True)
+        if logy:
+            ax.set_yscale("log")
+            ax.set_ylim(0.06, 700)
+            _plain_log_axis(ax.yaxis, lambda v: f"{v:g}")
+            ax.set_title("Logarithmic — same numbers, early years readable",
+                         fontsize=10.2, color=MUTED, pad=8, loc="right")
+        else:
+            ax.set_ylim(0, 400)
+            # the badge occupies the top-left of the left panel, so the panel
+            # titles are right-aligned to clear it
+            ax.set_title("Linear — as the site plots it", fontsize=10.2,
+                         color=MUTED, pad=8, loc="right")
+        ax.set_ylabel("Trillion tokens per day", fontsize=10)
+    axL.legend(loc="upper left", frameon=False, fontsize=9.4)
+
+    # the two end points are the site's headline numbers, so they are labelled
+    # to the right of the last observation rather than on top of the curve
+    for ax in (axL, axR):
+        ax.set_xlim(right=_tdates("2027-01-15"))
+        ax.annotate(f" {est.value.iloc[-1]:,.1f}T", (est.d.iloc[-1], est.value.iloc[-1]),
+                    textcoords="offset points", xytext=(5, 4), ha="left",
+                    fontsize=9.2, fontweight="bold", color=TPD_C["estimate"])
+        ax.annotate(f" {flr.value.iloc[-1]:,.1f}T", (flr.d.iloc[-1], flr.value.iloc[-1]),
+                    textcoords="offset points", xytext=(5, -9), ha="left",
+                    fontsize=9.2, fontweight="bold", color=TPD_C["floor"])
+    _tfinish(fig, axL, "TPD-01",
+             "The disclosed floor is now most of the estimate above it",
+             subtitle, note, files, badge="both")
+
+
+def build_tpd_02(_r=None):
+    """The country tab, with its one measured line marked as such."""
+    S = _tseries("COUNTRY")
+    files = ["tokens_per_day_country.csv"]
+    order = ["China (measured)", "United States (est.)", "Rest of world (est.)",
+             "Europe (est.)", "Asia ex-China (est.)"]
+    colour = {"China (measured)": TPD_C["china"],
+              "United States (est.)": TPD_C["us"],
+              "Rest of world (est.)": TPD_C["row"],
+              "Europe (est.)": TPD_C["europe"],
+              "Asia ex-China (est.)": TPD_C["asia"]}
+    china = S["China (measured)"]
+    measured = china[china.is_real]
+
+    subtitle = (f"What it shows: the site's BY COUNTRY tab — five regional series "
+                f"over the same window. Only China is measured, and only at "
+                f"{len(measured)} of its {len(china)} plotted points; the four other "
+                f"lines are one number split by fixed shares, which TPD-D03 shows.")
+    note = (f"The five series sum to the disclosed floor, not to the estimate: each "
+            f"carried forward to its own last observation, as the site's tooltip "
+            f"does, they total "
+            f"{sum(g.value.iloc[-1] for g in S.values()):,.1f}T/day against an "
+            f"estimated {(_tcsv('tpd_estimate_band.csv')['mid'].iloc[-1]):,.1f}T/day. "
+            f"The 60T/day difference is the unattributed remainder and appears in no "
+            f"region. China's line stops at its last measurement rather than being "
+            f"carried forward. {TPD_STALE}")
+
+    fig, ax = _tfig(subtitle, note, 0.070, 0.700, files)
+    for name in order:
+        g = S[name]
+        ax.plot(g.d, g.value, color=colour[name], linewidth=2.2, zorder=4,
+                label=name)
+        ax.annotate(f" {name.split(' (')[0]}  {g.value.iloc[-1]:,.1f}T",
+                    (g.d.iloc[-1], g.value.iloc[-1]), textcoords="offset points",
+                    xytext=(5, -3), fontsize=9, color=colour[name],
+                    fontweight="bold")
+    # the three measured China points, which are the only measurements on the chart
+    ax.scatter(measured.d, measured.value, s=52, facecolor="white",
+               edgecolor=TPD_C["china"], linewidth=2.0, zorder=7)
+    ax.annotate("the 3 measured points", (measured.d.iloc[1], measured.value.iloc[1]),
+                textcoords="offset points", xytext=(-12, 16), ha="right",
+                fontsize=9, color=TPD_C["china"], style="italic")
+    _tline_axis(ax, min(g.d.min() for g in S.values()),
+                max(g.d.max() for g in S.values()))
+    ax.set_xlim(right=_tdates("2026-09-15"))
+    ax.set_ylim(0, 160)
+    ax.set_ylabel("Trillion tokens per day", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.legend(loc="upper left", frameon=False, fontsize=9.2)
+    _tfinish(fig, ax, "TPD-02",
+             "One country is measured; the rest of the world is a share of a residual",
+             subtitle, note, files, badge="both")
+
+
+def build_tpd_03(_r=None):
+    """The company tab. Log, because four of the eight sit on a linear axis."""
+    S = _tseries("COMPANY")
+    files = ["tokens_per_day_company.csv"]
+    last = {k: g.value.iloc[-1] for k, g in S.items()}
+    order = sorted(S, key=lambda k: -last[k])
+
+    subtitle = (f"What it shows: the site's BY COMPANY tab — every company-level "
+                f"disclosure it holds, {sum(len(g) for g in S.values())} points across "
+                f"{len(S)} companies. Plotted on a log axis: the site uses a linear one, "
+                f"on which the four smallest series lie flat against the baseline. No "
+                f"value is altered.")
+    note = (f"The series are not a partition of anything. Doubao's "
+            f"{last['Doubao']:,.0f}T/day sits inside the Chinese national aggregate, "
+            f"Microsoft's is Azure Foundry only with OpenAI-on-Azure counted under "
+            f"OpenAI, and Anthropic never disclosed a token figure at all — its "
+            f"line is inferred from revenue. The record is thin: "
+            f"{sum(1 for g in S.values() if len(g) == 1)} of the {len(S)} rest on a "
+            f"single observation, and the rest carry between "
+            f"{min(len(g) for g in S.values() if len(g) > 1)} and "
+            f"{max(len(g) for g in S.values())} points over two and a half years. "
+            f"These lines connect disclosures; they do not trace usage. {TPD_STALE}")
+
+    fig, ax = _tfig(subtitle, note, 0.070, 0.690, files)
+    # label y-positions are spread in log space, where the axis is linear, so
+    # eight end labels within one decade of each other stay readable
+    import math as _m
+    # ~0.115 decades is the height of a 9pt label on this axis; below that the
+    # eight end labels overprint
+    label_y = _spread([_m.log10(last[k]) for k in order], 0.115)
+    for i, name in enumerate(order):
+        g = S[name]
+        c = TPD_D[i % len(TPD_D)]
+        style = "-" if len(g) > 1 else "None"
+        ax.plot(g.d, g.value, color=c, linewidth=2.2, linestyle=style,
+                marker="o", markersize=5.0, zorder=4, label=name)
+        ax.annotate(f" {name}  {last[name]:,.1f}T", (g.d.iloc[-1], last[name]),
+                    xytext=(_tdates("2026-08-01"), 10 ** label_y[i]),
+                    textcoords="data", fontsize=9, va="center",
+                    color=c, fontweight="bold",
+                    arrowprops=dict(arrowstyle="-", color=c, linewidth=0.7,
+                                    alpha=0.55, shrinkA=2, shrinkB=2))
+    _tline_axis(ax, min(g.d.min() for g in S.values()),
+                max(g.d.max() for g in S.values()))
+    ax.set_xlim(right=_tdates("2027-03-15"))
+    ax.set_yscale("log")
+    # OpenAI's first observation is 0.133T; a floor of 0.4 clipped three series
+    # off the bottom of the chart
+    ax.set_ylim(0.09, 600)
+    _plain_log_axis(ax.yaxis, lambda v: f"{v:g}")
+    ax.set_ylabel("Trillion tokens per day (log scale)", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    _tfinish(fig, ax, "TPD-03",
+             "Eight companies, and no two of them counting the same thing",
+             subtitle, note, files, badge="floor")
+
+
+def build_tpd_04(_r=None):
+    """The 24-hour cycle. Every series normalised to its own peak."""
+    h = _tcsv("tpd_hourly.csv")
+    files = ["hourly_tokens.csv"]
+    order = ["Global", "United States", "China"]
+    # the site draws Global #2440ff and the US #2563eb — two blues a reader
+    # cannot tell apart. The shapes are the whole chart, so the hues separate.
+    colour = {"Global": "#1f3864", "United States": "#4e8a8b", "China": TPD_C["china"]}
+    dash = {"Global": "-", "United States": (0, (7, 3)), "China": "-"}
+    # China holds 100% for two consecutive hours; the peak is the first of them
+    peak = {s: int(g[g.is_peak].hour_utc.min()) for s, g in h.groupby("series")}
+    gap = min((peak["United States"] - peak["China"]) % 24,
+              (peak["China"] - peak["United States"]) % 24)
+
+    subtitle = (f"What it shows: the site's 24-hour cycle — each series as a "
+                f"percentage of its own busiest hour, in UTC. Global peaks at "
+                f"{peak['Global']:02d}:00, the United States at "
+                f"{peak['United States']:02d}:00 and China at {peak['China']:02d}:00, "
+                f"which is the finding: the two largest markets are {gap} hours "
+                f"apart, close to antiphase.")
+    note = (f"Nothing on this chart is a token count. Each line is normalised to its "
+            f"own peak, so the three cannot be compared in level — only in shape "
+            f"— and the site states the curves are a stylised model built from "
+            f"business-hours patterns and blended by token share, not measured hourly "
+            f"traffic. Read it as a claim about when demand arrives, not how much.")
+
+    fig, ax = _tfig(subtitle, note, 0.075, 0.700, files)
+    # the Global and US peaks are three hours apart, so their labels are stacked
+    # rather than centred on the marker
+    label_dy = {"China": 13, "Global": 30, "United States": 13}
+    for name in order:
+        g = h[h.series == name].sort_values("hour_utc")
+        ax.plot(g.hour_utc, g.pct_of_peak, color=colour[name], linewidth=2.6,
+                linestyle=dash[name], zorder=4, label=name)
+        pk = g[g.hour_utc == peak[name]]
+        ax.scatter(pk.hour_utc, pk.pct_of_peak, s=48, color=colour[name], zorder=6)
+        ax.annotate(f"{name} peak {peak[name]:02d}:00 UTC",
+                    (peak[name], float(pk.pct_of_peak.iloc[0])),
+                    textcoords="offset points", xytext=(0, label_dy[name]),
+                    ha="center", fontsize=9, fontweight="bold", color=colour[name])
+    ax.set_xlim(-0.4, 23.4)
+    ax.set_xticks(range(0, 24, 2))
+    ax.set_xticklabels([f"{x:02d}:00" for x in range(0, 24, 2)], fontsize=9)
+    ax.set_ylim(0, 124)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}%"))
+    ax.set_ylabel("Percent of that series' own peak hour", fontsize=10)
+    ax.set_xlabel("Hour of day (UTC)", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.legend(loc="lower right", frameon=False, fontsize=9.4)
+    _tfinish(fig, ax, "TPD-04",
+             f"The world's two largest AI markets peak {gap} hours apart",
+             subtitle, note, files, badge="estimate")
+
+
+def build_tpd_05(_r=None):
+    """Cumulative tokens, with the reconstruction that shows what it is."""
+    cu = _tcsv("tpd_cumulative.csv")
+    cu["d"] = _tdates(cu.date)
+    files = ["cumulative_tokens.csv", "tokens_per_day_total.csv"]
+    worst = cu.integral_diff_pct.abs().max()
+
+    subtitle = (f"What it shows: the site's all-time cumulative chart — every "
+                f"token the index believes has been processed since 15 January 2024, "
+                f"reaching {cu.cumulative_quadrillions.iloc[-1]:,.1f} quadrillion. The "
+                f"dashed line is that curve rebuilt independently, by integrating the "
+                f"daily estimate from TPD-01.")
+    note = (f"The two agree to {worst:.2f}% at worst and "
+            f"{cu.integral_diff_pct.abs().iloc[-1]:.3f}% at the end, which settles "
+            f"what this chart is: it carries no evidence the daily estimate does not "
+            f"already carry, and its headline is that estimate added up. It is kept "
+            f"because the site publishes it and quotes the figure, and it is drawn "
+            f"with its own reconstruction so that is visible rather than assumed. "
+            f"Every uncertainty in TPD-06's band is inside this number too.")
+
+    fig, ax = _tfig(subtitle, note, 0.078, 0.700, files)
+    # the last row is the site's as-of snapshot one day after the final quarter;
+    # drawn as a bar it lands on top of that quarter and both labels overprint
+    q = cu.iloc[:-1]
+    ax.bar(q.d, q.cumulative_quadrillions, width=62, color=SERIES["current"],
+           edgecolor="white", linewidth=0.6, zorder=3,
+           label="Published cumulative curve")
+    ax.plot(cu.d, cu.integral_quadrillions, color=SERIES["scope"], linewidth=2.2,
+            linestyle=(0, (6, 3)), zorder=6,
+            label="Daily estimate integrated (our reconstruction)")
+    for _, r in q.iterrows():
+        if r.cumulative_quadrillions > 0:
+            ax.text(r.d, r.cumulative_quadrillions + 2.0,
+                    f"{r.cumulative_quadrillions:,.1f}", ha="center", va="bottom",
+                    fontsize=8.2, color=INK, fontweight="bold")
+    _tline_axis(ax, cu.d.min(), cu.d.max())
+    ax.set_xlim(_tdates("2023-11-15"), _tdates("2026-10-15"))
+    ax.set_ylim(0, 108)
+    ax.set_ylabel("Cumulative tokens (quadrillions)", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.legend(loc="upper left", frameon=False, fontsize=9.4)
+    _tfinish(fig, ax, "TPD-05",
+             "The all-time headline is the daily estimate added up",
+             subtitle, note, files, badge="estimate")
+
+
+def build_tpd_06(_r=None):
+    """The estimate's own band, which the headline number hides."""
+    b = _tcsv("tpd_estimate_band.csv")
+    b["d"] = _tdates(b.date)
+    files = ["estimate_band_quarterly.csv"]
+    lastb = b.iloc[-1]
+
+    subtitle = (f"What it shows: the /estimates/ page's quarterly band — the low, "
+                f"middle and high of the six-channel triangulation across "
+                f"{len(b)} quarters. The middle line is the same series TPD-01 plots; "
+                f"what is added here is how much room sits around it.")
+    note = (f"The band ends at {lastb.low:,.1f}–{lastb.high:,.1f}T/day around a "
+            f"middle of {lastb['mid']:,.1f} — a factor of "
+            f"{lastb.band_ratio_high_over_low:.2f} between the ends, and it has been "
+            f"between {b.band_ratio_high_over_low.min():.1f}x and "
+            f"{b.band_ratio_high_over_low.max():.1f}x throughout. Quoting the middle "
+            f"alone states a precision the method does not have. The middle matches "
+            f"TPD-01's line to {b.mid_diff_pct.abs().max():.2f}%, which is this "
+            f"table's own rounding to 0.1.")
+
+    fig, ax = _tfig(subtitle, note, 0.075, 0.700, files)
+    ax.fill_between(b.d, b.low, b.high, color=SERIES["current"], alpha=0.16,
+                    zorder=2, label="Low to high")
+    ax.plot(b.d, b["mid"], color=SERIES["current"], linewidth=2.6, marker="o",
+            markersize=4.2, zorder=5, label="Middle of the band")
+    ax.plot(b.d, b.low, color=SERIES["current"], linewidth=1.0, alpha=0.55, zorder=3)
+    ax.plot(b.d, b.high, color=SERIES["current"], linewidth=1.0, alpha=0.55, zorder=3)
+    ax.annotate(f"{lastb.high:,.1f}T", (lastb.d, lastb.high),
+                textcoords="offset points", xytext=(6, 0), fontsize=9.2,
+                color=SERIES["current"])
+    ax.annotate(f"{lastb['mid']:,.1f}T", (lastb.d, lastb["mid"]),
+                textcoords="offset points", xytext=(6, 0), fontsize=9.2,
+                fontweight="bold", color=SERIES["current"])
+    ax.annotate(f"{lastb.low:,.1f}T", (lastb.d, lastb.low),
+                textcoords="offset points", xytext=(6, -4), fontsize=9.2,
+                color=SERIES["current"])
+    _tline_axis(ax, b.d.min(), b.d.max())
+    ax.set_xlim(right=_tdates("2026-11-15"))
+    ax.set_ylim(0, 520)
+    ax.set_ylabel("Trillion tokens per day", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.legend(loc="upper left", frameon=False, fontsize=9.4)
+    _tfinish(fig, ax, "TPD-06",
+             "The estimate is a range from 308 to 477, published as 360",
+             subtitle, note, files, badge="estimate")
+
+
+# ------------------------------------------- Derived Analysis (same extraction)
+def build_tpd_d01(_r=None):
+    """How much of the estimate is now evidence, which no published view states."""
+    S = _tseries("TOTAL")
+    est, flr = S["Estimated total"], S["Global floor"]
+    files = ["tokens_per_day_total.csv"]
+    # the site's own tooltip rule: a series' value at a date is its last
+    # observation at or before that date, carried forward, never interpolated
+    carried, pct = [], []
+    for d, v in zip(est.d, est.value):
+        prior = flr[flr.d <= d]
+        carried.append(float(prior.value.iloc[-1]) if len(prior) else float("nan"))
+        pct.append(carried[-1] / v * 100)
+    lo_i = int(min(range(len(pct)), key=lambda i: pct[i] if pct[i] == pct[i] else 9e9))
+
+    subtitle = (f"What it shows: the disclosed floor as a percentage of the estimate "
+                f"standing above it, at each of the {len(est)} quarters the estimate "
+                f"is evaluated. Both series are on TPD-01; the ratio between them is "
+                f"not, and it is the measure of how much of this index is evidence "
+                f"rather than inference.")
+    note = (f"The floor was {pct[lo_i]:.0f}% of the estimate in "
+            f"{est.d.iloc[lo_i]:%b %Y} and is {pct[-1]:.0f}% now. Almost all of that "
+            f"closure is four disclosures arriving between January and June 2026 — "
+            f"China's national aggregate, Google at I/O, Fireworks and OpenAI's API "
+            f"figure — not a change of method. The remaining "
+            f"{est.value.iloc[-1] - carried[-1]:,.1f}T/day is the part no company has "
+            f"stated, and TPD-D04 shows how wide the estimates for it are. The floor "
+            f"is carried forward between disclosures, exactly as the site's own "
+            f"tooltip does, so each step is a new statement rather than growth.")
+
+    fig, ax = _tfig(subtitle, note, 0.078, 0.700, files)
+    ax.bar(est.d, pct, width=62, color=SERIES["current"], edgecolor="white",
+           linewidth=0.6, zorder=3)
+    for d, p in zip(est.d, pct):
+        ax.text(d, p + 1.6, f"{p:.0f}%", ha="center", va="bottom", fontsize=8.6,
+                color=INK, fontweight="bold")
+    ax2 = ax.twinx()
+    ax2.plot(est.d, est.value, color=TPD_C["estimate"], linewidth=2.0,
+             linestyle=(0, (6, 3)), zorder=6, label="Estimated total (right)")
+    ax2.plot(est.d, carried, color=TPD_C["floor"], linewidth=2.0, zorder=6,
+             label="Disclosed floor, carried forward (right)")
+    ax2.set_ylim(0, 430)
+    ax2.set_ylabel("Trillion tokens per day", fontsize=9.6, color=MUTED)
+    ax2.tick_params(labelsize=9, colors=MUTED)
+    ax2.grid(False)
+    _tline_axis(ax, est.d.min(), est.d.max())
+    ax.set_xlim(_tdates("2023-11-15"), _tdates("2026-10-15"))
+    ax.set_ylim(0, 100)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}%"))
+    ax.set_ylabel("Disclosed floor as a share of the estimate", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    h2, l2 = ax2.get_legend_handles_labels()
+    ax.legend(h2, l2, loc="upper left", frameon=False, fontsize=9.2)
+    months = ((est.d.iloc[-1].year - est.d.iloc[lo_i].year) * 12
+              + est.d.iloc[-1].month - est.d.iloc[lo_i].month)
+    _tfinish(fig, ax, "TPD-D01",
+             f"In {months} months this index went from mostly inference to "
+             f"mostly evidence",
+             subtitle, note, files, badge="both")
+
+
+def build_tpd_d02(_r=None):
+    """Everything the ledger holds, and the six rows that survive into the floor."""
+    led = _tcsv("tpd_ledger.csv").sort_values("t_per_day", ascending=False)
+    files = ["evidence_ledger.csv"]
+    floor = led[led.floor_status == "yes"]
+    counts = led.floor_status.value_counts()
+
+    subtitle = (f"What it shows: every one of the {len(led)} disclosures the index "
+                f"holds, from {led.entity.nunique()} entities, and which of them the "
+                f"{floor.t_per_day.sum():,.1f}T/day floor is actually made of. Six "
+                f"rows are in it. The other {len(led) - len(floor)} are superseded, "
+                f"out of scope, or already inside a row that is.")
+    note = (f"Doubao's {led[led.entity == 'Doubao'].t_per_day.max():,.0f}T/day is the "
+            f"largest number in the ledger and contributes nothing: it is inside "
+            f"China's national aggregate and adding it would count it twice. "
+            f"Microsoft's floor row is its {floor[floor.entity == 'Microsoft'].as_of_date.iloc[0]} "
+            f"figure rather than its later one, because the later disclosure covers a "
+            f"narrower product. {int((led.archive_status == 'archived').sum())} of "
+            f"{len(led)} sources have an archived snapshot; the rest are live links "
+            f"only, and a live link is not evidence once it changes. {TPD_SCOPE}")
+
+    fig, ax = _tfig(subtitle, note, 0.235, 0.590, files, figsize=(12.0, 9.6))
+    ys = list(range(len(led)))
+    for y, (_, r) in zip(ys, led.iterrows()):
+        _, c = TPD_FLOOR_STATUS[r.floor_status]
+        ax.barh(y, r.t_per_day, height=0.66, color=c, edgecolor="white",
+                linewidth=0.5, zorder=3)
+        ax.text(r.t_per_day * 1.10, y, f"{r.t_per_day:,.3g}", va="center",
+                fontsize=8.4, color=INK)
+    ax.set_yticks(ys)
+    ax.set_yticklabels([f"{r.entity}  ·  {r.as_of_date}" for _, r in led.iterrows()],
+                       fontsize=8.4)
+    ax.invert_yaxis()
+    ax.set_xscale("log")
+    ax.set_xlim(0.05, 900)
+    _plain_log_axis(ax.xaxis, lambda v: f"{v:g}")
+    # the ledger spans 0.1 to 180 T/day; on a linear axis two thirds of the rows
+    # are invisible, and on a log one bar length is not proportional to value,
+    # which the reader is told rather than left to infer
+    ax.set_xlabel("Trillion tokens per day, as disclosed (log scale — bar length "
+                  "is not proportional to value; each figure is printed)",
+                  fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    handles = [plt.Rectangle((0, 0), 1, 1, color=c)
+               for _, (lab, c) in TPD_FLOOR_STATUS.items()]
+    labels = [f"{lab} ({counts.get(k, 0)})" for k, (lab, c) in TPD_FLOOR_STATUS.items()]
+    ax.legend(handles, labels, loc="lower right", frameon=False, fontsize=9)
+    _tfinish(fig, ax, "TPD-D02",
+             "Twenty-seven disclosures, six of which are the floor",
+             subtitle, note, files, badge="floor")
+
+
+def build_tpd_d03(_r=None):
+    """Whether the country tab is four measurements or one, tested arithmetically."""
+    import pandas as pd
+    rs = _tcsv("tpd_region_shares.csv")
+    ts = _tcsv("tpd_timeseries.csv")
+    files = ["tokens_per_day_country.csv", "geography_allocation_shares.csv"]
+    regions = list(rs.region)
+    c = ts[ts.tab == "COUNTRY"].pivot_table(index="date", columns="entity",
+                                            values="value")
+    have = c[regions].dropna()
+    base = have.sum(axis=1)
+    shares = have.div(base, axis=0) * 100
+    big = shares[base >= 10.0]
+    d = _tdates(big.index)
+    worst = rs.spread_where_base_over_10T_pp.max()
+
+    subtitle = (f"What it shows: each non-China region as a percentage of the four "
+                f"combined, at every date the country tab plots. If these were four "
+                f"measurements the shares would move. Across the "
+                f"{len(big)} dates where the base is large enough for the site's "
+                f"0.1T rounding not to dominate, they move by at most {worst:.2f} "
+                f"percentage points.")
+    note = (f"That is the finding: the United States, Europe, Asia ex-China and Rest "
+            f"of world are one number — non-China tokens — split "
+            f"{'/'.join(f'{v:.0f}' for v in rs.stated_share_pct)} and never "
+            f"re-measured. The shares come from OpenRouter's billing-geography mix, a "
+            f"roughly 1% sample skewed to Western developers, and the site rates them "
+            f"low confidence. Four of the five lines in TPD-02 therefore carry one "
+            f"line's shape, and a reader comparing Europe against Asia is reading a "
+            f"constant. Rounding alone permits {rs.rounding_tolerance_pp.iloc[0]:.2f}pp "
+            f"of the movement seen.")
+
+    fig, ax = _tfig(subtitle, note, 0.078, 0.690, files)
+    for i, r in enumerate(regions):
+        col = TPD_D[i]
+        ax.plot(d, big[r].to_numpy(), color=col, linewidth=2.2, marker="o",
+                markersize=4.0, zorder=4, label=r)
+        stated = float(rs[rs.region == r].stated_share_pct.iloc[0])
+        # the dashed reference stops short of the label, which would otherwise
+        # read as struck through
+        ax.axhline(stated, xmax=0.70, color=col, linewidth=1.0,
+                   linestyle=(0, (3, 3)), alpha=0.75, zorder=2)
+        ax.annotate(f" {r}   stated {stated:.0f}%,  observed "
+                    f"{big[r].min():.1f}–{big[r].max():.1f}%",
+                    (d[-1], big[r].iloc[-1]), textcoords="offset points",
+                    xytext=(9, 8), fontsize=8.8, color=col, fontweight="bold")
+    _tline_axis(ax, d.min(), d.max())
+    ax.set_xlim(right=_tdates("2027-04-15"))
+    ax.set_ylim(0, 55)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"{v:,.0f}%"))
+    ax.set_ylabel("Share of the four non-China regions combined", fontsize=10)
+    ax.grid(axis="y", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.text(0.012, 0.035, "dashed  =  the share the site states it applies",
+            transform=ax.transAxes, fontsize=8.8, color=MUTED, style="italic")
+    _tfinish(fig, ax, "TPD-D03",
+             "Four of the five country lines are one number split four ways",
+             subtitle, note, files, badge="estimate")
+
+
+def build_tpd_d04(_r=None):
+    """What each company estimate is actually worth, which a line chart cannot say."""
+    rec = _tcsv("tpd_reconciled.csv")
+    files = ["reconciled_company_estimates.csv"]
+    comp = rec[rec.entity != "GLOBAL"].sort_values("dispersion", ascending=True)
+    glob = rec[rec.entity == "GLOBAL"].iloc[0]
+    excluded = comp[comp.in_global_sum == "no"]
+
+    subtitle = (f"What it shows: the reconciled low-to-high band behind each company's "
+                f"figure, ordered by how wide it is. The site publishes the middle of "
+                f"each of these as a single number; the bar is what the method "
+                f"actually supports. Widths run from {comp.dispersion.min():.0f}x to "
+                f"{comp.dispersion.max():.0f}x.")
+    note = (f"Ordering by width rather than by size reverses the chart: the largest "
+            f"contributors are the best known, because they disclosed. The four "
+            f"companies that have never disclosed a token figure — "
+            f"{', '.join(comp[comp.dispersion >= 5].entity)} — carry bands from "
+            f"{comp[comp.dispersion >= 5].dispersion.min():.0f}x to "
+            f"{comp.dispersion.max():.0f}x, and xAI's band spans two orders of "
+            f"magnitude. {len(excluded)} company is excluded from the global sum "
+            f"entirely: DeepSeek's domestic usage is already inside China's aggregate. "
+            f"The GLOBAL band is narrower ({glob.dispersion:.1f}x) than most of its "
+            f"parts because the largest parts are anchored, not because the unknowns "
+            f"resolved.")
+
+    fig, ax = _tfig(subtitle, note, 0.150, 0.660, files)
+    ys = list(range(len(comp)))
+    for y, (_, r) in zip(ys, comp.iterrows()):
+        c = SERIES["current"] if r.in_global_sum == "yes" else "#9aa9c4"
+        ax.plot([r.low, r.high], [y, y], color=c, linewidth=6.0, solid_capstyle="butt",
+                zorder=3, alpha=0.42)
+        ax.scatter([r["mid"]], [y], s=64, color=c, zorder=5)
+        ax.text(r.high * 1.16, y, f"{_tn(r.low)} – {_tn(r.high)}   ×{r.dispersion:,.1f}",
+                va="center", fontsize=8.8, color=INK)
+    ax.set_yticks(ys)
+    ax.set_yticklabels([f"{r.entity}" + ("  (excluded)" if r.in_global_sum == "no" else "")
+                        for _, r in comp.iterrows()], fontsize=9.6)
+    ax.axhline(len(comp) - 0.5, color=RULE, linewidth=0.8)
+    # the global band, plotted on the same axis so the parts read against the whole
+    ax.plot([glob.low, glob.high], [len(comp), len(comp)], color=SERIES["scope"],
+            linewidth=6.0, solid_capstyle="butt", zorder=3, alpha=0.42)
+    ax.scatter([glob["mid"]], [len(comp)], s=64, color=SERIES["scope"], zorder=5)
+    ax.text(glob.high * 1.16, len(comp),
+            f"{_tn(glob.low)} – {_tn(glob.high)}   ×{glob.dispersion:,.1f}",
+            va="center", fontsize=8.8, fontweight="bold", color=SERIES["scope"])
+    ax.set_yticks(ys + [len(comp)])
+    ax.set_yticklabels([f"{r.entity}" + ("  (excluded)" if r.in_global_sum == "no" else "")
+                        for _, r in comp.iterrows()] + ["GLOBAL"], fontsize=9.6)
+    ax.invert_yaxis()
+    ax.set_xscale("log")
+    ax.set_xlim(0.05, 3000)
+    _plain_log_axis(ax.xaxis, lambda v: f"{v:g}")
+    ax.set_xlabel("Trillion tokens per day, low to high (log scale) — the dot is "
+                  "the single number the site publishes", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    _tfinish(fig, ax, "TPD-D04",
+             "The companies that disclose nothing carry bands two orders of magnitude wide",
+             subtitle, note, files, badge="estimate")
+
+
+def build_tpd_d05(_r=None):
+    """The routes behind each band, including the one that failed its back-test."""
+    fan = _tcsv("tpd_channels.csv")
+    files = ["channel_fan_per_company.csv"]
+    multi = [e for e, g in fan.groupby("entity") if len(g) > 1]
+    d = fan[fan.entity.isin(multi)].copy()
+    order = (d[d.value_kind == "demand_estimate"].groupby("entity")["mid"].max()
+             .sort_values(ascending=False).index.tolist())
+    order += [e for e in multi if e not in order]
+    failed = fan[fan.included_in_reconciliation == "no"]
+
+    subtitle = (f"What it shows: for each company estimated by more than one route, "
+                f"every route the site ran and the band it produced — "
+                f"{len(d)} channel estimates across {len(multi)} companies. A demand "
+                f"channel asks how many tokens were wanted; a hardware channel asks "
+                f"how many could physically have been served.")
+    note = (f"The two kinds are not alternatives and must not be averaged: a hardware "
+            f"figure is a ceiling, and it passes only by sitting above the demand "
+            f"figure, which is why Google's hardware band reaches "
+            f"{d[(d.entity == 'Google') & (d.channel == 'hardware')].high.iloc[0]:,.0f}T/day "
+            f"against a disclosed {d[(d.entity == 'Google') & (d.channel == 'anchor')]['mid'].iloc[0]:,.0f}T. "
+            f"{len(failed)} channel is excluded outright: DeepSeek's revenue route "
+            f"back-tested {failed.backtest_ratio.iloc[0]:,.1f}x above its own disclosed "
+            f"anchor and was dropped rather than blended in. Companies estimated by a "
+            f"single route — Anthropic among them — are not on this chart, because "
+            f"there is nothing to cross.")
+
+    fig, ax = _tfig(subtitle, note, 0.150, 0.640, files, figsize=(12.0, 9.0))
+    KIND = {"demand_estimate": ("#1f3864", "Demand estimate"),
+            "capacity_ceiling": ("#b4763a", "Hardware ceiling")}
+    y, ticks, labels = 0, [], []
+    for ent in order:
+        g = d[d.entity == ent]
+        for _, r in g.iterrows():
+            c, _lab = KIND[r.value_kind]
+            faded = r.included_in_reconciliation == "no"
+            ax.plot([r.low, r.high], [y, y], color=c, linewidth=7.0,
+                    solid_capstyle="butt", zorder=3, alpha=0.20 if faded else 0.42)
+            ax.scatter([r["mid"]], [y], s=56, color=c, zorder=5,
+                       alpha=0.35 if faded else 1.0)
+            tag = "  excluded on back-test" if faded else ""
+            ax.text(r.high * 1.16, y, f"{_tn(r.low)} – {_tn(r.high)}{tag}",
+                    va="center", fontsize=8.4,
+                    color=MUTED if faded else INK)
+            ticks.append(y)
+            labels.append(f"{ent}  ·  {r.channel}")
+            y += 1
+        y += 0.6
+    ax.set_yticks(ticks)
+    ax.set_yticklabels(labels, fontsize=8.8)
+    ax.invert_yaxis()
+    ax.set_xscale("log")
+    # room on the right for the widest label, and the legend clear of it
+    ax.set_xlim(0.02, 300000)
+    _plain_log_axis(ax.xaxis, lambda v: f"{v:g}" if v <= 10000 else "")
+    ax.set_xlabel("Trillion tokens per day, low to high (log scale)", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.legend([plt.Rectangle((0, 0), 1, 1, color=c) for c, _ in KIND.values()],
+              [lab for _, lab in KIND.values()], loc="upper right", frameon=False,
+              fontsize=9)
+    _tfinish(fig, ax, "TPD-D05",
+             "Where each estimate comes from, and the route that failed its own "
+             "back-test",
+             subtitle, note, files, badge="estimate")
+
+
+def build_tpd_d06(_r=None):
+    """The hardware ceiling, and how little it constrains the answer."""
+    cap = _tcsv("tpd_capacity.csv")
+    m = _tmeta()
+    files = ["capacity_parameters.csv", "headline_metrics.csv"]
+    params = cap[cap.unit.notna()].copy()
+    total = cap[cap.unit.isna()].iloc[0]
+    params["spread"] = params.high / params.low
+    # the source names units as identifiers; a chart face needs them written out
+    UNIT = {"million_h100_equiv": "million H100-equivalents",
+            "tokens_per_sec": "tokens/second", "fraction": "of compute"}
+    demand = float(m.headline_t_per_day)
+
+    subtitle = (f"What it shows: the site's third layer — a check from the hardware "
+                f"side, that accelerators × throughput × inference share × utilisation "
+                f"could serve so many tokens. Left, the four inputs, each as its own "
+                f"low-to-high range. Right, what they compound to, against the demand "
+                f"estimate they are meant to bound.")
+    note = (f"No single input is worse than {params.spread.max():.1f}x uncertain, but "
+            f"multiplied together they give {total.low:,.0f} to {total.high:,.0f}T/day "
+            f"— an {total.high/total.low:.0f}x range around {total['mid']:,.0f}. The "
+            f"demand estimate of {demand:,.1f}T/day sits at "
+            f"{m.demand_share_of_mid_capacity_pct:.0f}% of the middle case, above the "
+            f"low case entirely and at {demand/total.high*100:.0f}% of the high one. A "
+            f"check this wide can refute an estimate but cannot confirm one, and the "
+            f"site says so.")
+
+    fig = plt.figure(figsize=(13.2, 8.4))
+    r = _rect(subtitle, note, left=0.185, width=0.780, xlabel_room=0.062,
+              badge_above=True, source=tpd_src(files))
+    gap, wR = 0.115, 0.235
+    wL = r[2] - gap - wR
+    axL = fig.add_axes([r[0], r[1], wL, r[3]])
+    axR = fig.add_axes([r[0] + wL + gap, r[1], wR, r[3]])
+
+    ys = list(range(len(params)))
+    for y, (_, p) in zip(ys, params.iterrows()):
+        # each range drawn against its own middle, so four different units compare
+        ax_lo, ax_hi = p.low / p["mid"], p.high / p["mid"]
+        axL.plot([ax_lo, ax_hi], [y, y], color=SERIES["current"], linewidth=8.0,
+                 solid_capstyle="butt", alpha=0.40, zorder=3)
+        axL.scatter([1.0], [y], s=64, color=SERIES["current"], zorder=5)
+        axL.text(ax_hi + 0.06, y, f"{p.low:,g} – {p.high:,g} "
+                                  f"{UNIT.get(p.unit, p.unit)}    ×{p.spread:,.1f}",
+                 va="center", fontsize=8.8, color=INK)
+    axL.set_yticks(ys)
+    axL.set_yticklabels(params.parameter, fontsize=9.6)
+    axL.invert_yaxis()
+    axL.axvline(1.0, color=RULE, linewidth=0.9)
+    axL.set_xlim(0.25, 3.3)
+    axL.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"×{v:g}"))
+    axL.set_xlabel("Range as a multiple of the middle case", fontsize=10)
+    axL.grid(axis="x", color=RULE, linewidth=0.7)
+    axL.set_axisbelow(True)
+    # right-aligned so the badge, which sits top-left, does not cover it
+    axL.set_title("The four inputs", fontsize=10.2, color=MUTED, pad=8, loc="right")
+
+    axR.bar([0], [total.high - total.low], bottom=[total.low], width=0.52,
+            color=SERIES["current"], alpha=0.22, edgecolor="none", zorder=3)
+    axR.plot([-0.26, 0.26], [total["mid"]] * 2, color=SERIES["current"],
+             linewidth=2.6, zorder=5)
+    for v, lab, dy in ((total.high, f"high {total.high:,.0f}T", 6),
+                       (total["mid"], f"mid {total['mid']:,.0f}T", 6),
+                       (total.low, f"low {total.low:,.0f}T", -14)):
+        axR.text(0.30, v, lab, va="center", fontsize=9, color=SERIES["current"])
+    # bounded to the bar rather than an axhline, which ran under its own label
+    axR.plot([-0.30, 0.30], [demand] * 2, color=SERIES["scope"], linewidth=2.4,
+             linestyle=(0, (5, 3)), zorder=6)
+    axR.text(0.34, demand, f"demand {demand:,.0f}T", va="top", fontsize=9,
+             fontweight="bold", color=SERIES["scope"])
+    axR.set_xlim(-0.55, 1.35)
+    axR.set_xticks([])
+    axR.set_yscale("log")
+    axR.set_ylim(80, 6000)
+    _plain_log_axis(axR.yaxis, lambda v: f"{v:g}")
+    axR.set_ylabel("Trillion tokens per day (log scale)", fontsize=10)
+    axR.grid(axis="y", color=RULE, linewidth=0.7)
+    axR.set_axisbelow(True)
+    axR.set_title("What they compound to", fontsize=10.2, color=MUTED, pad=8,
+                  loc="right")
+    _tfinish(fig, axL, "TPD-D06",
+             f"Four inputs, none worse than {params.spread.max():.1f}x, "
+             f"compounding to {_an(total.high/total.low)} "
+             f"{total.high/total.low:.0f}x ceiling",
+             subtitle, note, files, badge="estimate")
+
+
+def build_tpd_d07(_r=None):
+    """Where this index sits among the other people who have tried to size this."""
+    cmp_ = _tcsv("tpd_comparison.csv")
+    band = _tcsv("tpd_estimate_band.csv").iloc[-1]
+    files = ["comparison_vs_independent_estimates.csv", "estimate_band_quarterly.csv"]
+    d = cmp_[cmp_.t_per_day.notna()].sort_values("t_per_day").reset_index(drop=True)
+    third = d[d.is_this_index == "no"]
+
+    subtitle = (f"What it shows: this index against every other published attempt at "
+                f"the same quantity — {len(third)} third-party estimates and the "
+                f"index's own two figures, with the band from TPD-06 behind them. "
+                f"The scopes are not the same, which is most of the spread.")
+    note = (f"The estimates run {third.t_per_day.min():,.0f}T to "
+            f"{third.t_per_day.max():,.0f}T/day — "
+            f"{_an(third.t_per_day.max()/third.t_per_day.min())} "
+            f"{third.t_per_day.max()/third.t_per_day.min():.1f}x range — and the low "
+            f"end is not a disagreement: a16z's {third.t_per_day.min():,.0f}T covers "
+            f"the LLM API market only, while Epoch's {third.t_per_day.max():,.0f}T "
+            f"covers all providers globally. Read against matched scope, the only "
+            f"comparable figure sits inside this index's band. These rows are never "
+            f"summed and never averaged into it; they are a check on it.")
+
+    fig, ax = _tfig(subtitle, note, 0.290, 0.545, files)
+    ax.axvspan(band.low, band.high, color=SERIES["current"], alpha=0.11, zorder=1)
+    ax.axvline(band["mid"], color=SERIES["current"], linewidth=1.4,
+               linestyle=(0, (5, 3)), zorder=2)
+    ys = list(range(len(d)))
+    for y, (_, r) in zip(ys, d.iterrows()):
+        mine = r.is_this_index == "yes"
+        c = SERIES["current"] if mine else SERIES["scope"]
+        ax.barh(y, r.t_per_day, height=0.60, color=c, edgecolor="white",
+                linewidth=0.6, zorder=4, alpha=1.0 if mine else 0.75)
+        ax.text(r.t_per_day + 6, y, f"{r.t_per_day:,.1f}T", va="center",
+                fontsize=9, fontweight="bold" if mine else "normal", color=INK)
+    ax.set_yticks(ys)
+    # the source writes one scope as "( six-channel triangulation , 308.4-477.1)"
+    def _scope(t):
+        t = " ".join(str(t).split())
+        return t.replace("( ", "(").replace(" )", ")").replace(" ,", ",")
+    ax.set_yticklabels([f"{r.source}\n{_clip(_scope(r.scope), 60)}"
+                        for _, r in d.iterrows()], fontsize=8.4)
+    ax.set_xlim(0, 560)
+    ax.set_xlabel("Trillion tokens per day", fontsize=10)
+    ax.grid(axis="x", color=RULE, linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.text(band["mid"] + 6, len(d) - 0.35,
+            f"this index's band, {band.low:,.0f}–{band.high:,.0f}T",
+            fontsize=8.8, color=SERIES["current"], style="italic")
+    ax.legend([plt.Rectangle((0, 0), 1, 1, color=SERIES["current"]),
+               plt.Rectangle((0, 0), 1, 1, color=SERIES["scope"], alpha=0.75)],
+              ["Tokens Per Day (this index)", "Independent estimate"],
+              loc="lower right", frameon=False, fontsize=9)
+    _tfinish(fig, ax, "TPD-D07",
+             f"Published estimates of the same quantity differ "
+             f"{third.t_per_day.max()/third.t_per_day.min():.1f}-fold, mostly "
+             f"about scope",
+             subtitle, note, files, badge="estimate")
+
+
+def build_tpd_d08(_r=None):
+    """The rate and the uncertainty, which the band chart can only imply."""
+    b = _tcsv("tpd_estimate_band.csv")
+    b["d"] = _tdates(b.date)
+    files = ["estimate_band_quarterly.csv"]
+    g = b[b.qoq_growth_multiple.notna()]
+    # the last row is a one-day step to the site's as-of date, not a quarter
+    g = g[g.qoq_growth_multiple > 1.001]
+
+    subtitle = (f"What it shows: how fast the estimate grew each quarter, and how the "
+                f"band around it behaved while it did. TPD-06 carries both as slope "
+                f"and thickness; here each is the quantity itself, over "
+                f"{len(g)} quarter-on-quarter steps.")
+    note = (f"Growth peaked at ×{g.qoq_growth_multiple.max():.2f} in "
+            f"{g.loc[g.qoq_growth_multiple.idxmax(), 'd']:%b %Y} and has fallen every "
+            f"quarter since, to ×{g.qoq_growth_multiple.iloc[-1]:.2f}. The band "
+            f"narrowed over the same period, from "
+            f"×{b.band_ratio_high_over_low.max():.1f} to a floor of "
+            f"×{b.band_ratio_high_over_low.min():.2f}, and has widened slightly since "
+            f"— but the narrowing is the disclosures "
+            f"arriving, not the method improving, and TPD-D01 shows the same movement "
+            f"as evidence displacing inference. A ×{g.qoq_growth_multiple.iloc[-1]:.2f} "
+            f"quarter is still {(g.qoq_growth_multiple.iloc[-1]**4 - 1)*100:,.0f}% a "
+            f"year if it holds, and nothing here says it will.")
+
+    fig = plt.figure(figsize=(13.2, 8.4))
+    r = _rect(subtitle, note, left=0.070, width=0.900, xlabel_room=0.062,
+              badge_above=True, source=tpd_src(files))
+    gap = 0.090
+    w = (r[2] - gap) / 2
+    axL = fig.add_axes([r[0], r[1], w, r[3]])
+    axR = fig.add_axes([r[0] + w + gap, r[1], w, r[3]])
+
+    idx = list(range(len(g)))
+    axL.bar(idx, g.qoq_growth_multiple, width=0.66, color=SERIES["current"],
+            edgecolor="white", linewidth=0.6, zorder=3)
+    for i, v in enumerate(g.qoq_growth_multiple):
+        axL.text(i, v + 0.02, f"×{v:.2f}", ha="center", va="bottom", fontsize=8.4,
+                 color=INK, fontweight="bold")
+    axL.axhline(1.0, color=RULE, linewidth=0.9)
+    axL.set_xticks(idx)
+    axL.set_xticklabels([f"{d:%b\n%Y}" for d in g.d], fontsize=8.4)
+    axL.set_ylim(0, g.qoq_growth_multiple.max() * 1.18)
+    axL.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"×{v:g}"))
+    axL.set_ylabel("Quarter-on-quarter growth in the middle estimate", fontsize=10)
+    axL.grid(axis="y", color=RULE, linewidth=0.7)
+    axL.set_axisbelow(True)
+    # right-aligned to clear the badge in the panel's top-left corner
+    axL.set_title("How fast", fontsize=10.2, color=MUTED, pad=8, loc="right")
+
+    axR.plot(b.d, b.band_ratio_high_over_low, color=SERIES["scope"], linewidth=2.6,
+             marker="o", markersize=4.4, zorder=5)
+    for _, row in b.iterrows():
+        axR.annotate(f"×{row.band_ratio_high_over_low:.1f}",
+                     (row.d, row.band_ratio_high_over_low),
+                     textcoords="offset points", xytext=(0, 8), ha="center",
+                     fontsize=8.2, color=MUTED)
+    _tline_axis(axR, b.d.min(), b.d.max())
+    axR.set_xlim(b.d.min() - (b.d.iloc[1] - b.d.iloc[0]) * 0.35,
+                 b.d.max() + (b.d.iloc[1] - b.d.iloc[0]) * 0.35)
+    axR.set_ylim(1.0, 3.6)
+    axR.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _p: f"×{v:g}"))
+    axR.set_ylabel("Width of the band, high over low", fontsize=10)
+    axR.grid(axis="y", color=RULE, linewidth=0.7)
+    axR.set_axisbelow(True)
+    axR.set_title("How uncertain", fontsize=10.2, color=MUTED, pad=8, loc="right")
+    _tfinish(fig, axL, "TPD-D08",
+             "Growth has slowed every quarter since mid-2025; the band stopped "
+             "narrowing before it did",
+             subtitle, note, files, badge="estimate")
+
+
+TPD_BUILDERS = {
+    "TPD-01": build_tpd_01, "TPD-02": build_tpd_02, "TPD-03": build_tpd_03,
+    "TPD-04": build_tpd_04, "TPD-05": build_tpd_05, "TPD-06": build_tpd_06,
+    "TPD-D01": build_tpd_d01, "TPD-D02": build_tpd_d02, "TPD-D03": build_tpd_d03,
+    "TPD-D04": build_tpd_d04, "TPD-D05": build_tpd_d05, "TPD-D06": build_tpd_d06,
+    "TPD-D07": build_tpd_d07, "TPD-D08": build_tpd_d08,
+}
+
+
 BUILDERS = {"P-01": build_p01, "P-03": build_p03, "P-58": build_p58}
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_azure(_p)) for pid in AZURE_PLOTS})
 BUILDERS.update({pid: (lambda _rows, _p=pid: build_epoch(_p)) for pid in EPOCH_PLOTS})
@@ -5515,6 +6533,7 @@ BUILDERS.update({pid: (lambda _rows, _p=pid: build_aei_api_rank(_p)) for pid in 
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in AEI_API_DERIVED.items()})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in MLPERF_BUILDERS.items()})
 BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in OWNERS_BUILDERS.items()})
+BUILDERS.update({pid: (lambda _rows, _b=fn: _b()) for pid, fn in TPD_BUILDERS.items()})
 
 
 def main():

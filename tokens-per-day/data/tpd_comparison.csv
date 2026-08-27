@@ -1,0 +1,8 @@
+source,scope,t_per_day,t_per_day_raw_text,as_of,confidence,is_this_index
+Tokens Per Day (this index),Reported floor (disclosures only),300.1,300.1,2026-07-16,measured,yes
+Tokens Per Day (this index),"Estimated total ( six-channel triangulation , 308.4–477.1)",360.4,360.4,2026-07-16,modeled,yes
+Epoch AI / Exponential View,All providers (global),432.0,432,mid-2026,medium,no
+OpenRouter (1% extrapolation),Global inference,400.0,400,late-2025,very_low,no
+Tomasz Tunguz (The Token Race),Global (all providers),88.0,88,Sep-2025,medium,no
+a16z / OpenRouter,LLM API market,50.0,50,late-2025,medium,no
+Epoch AI (compute-derived),Frontier lab (OpenAI),,10–100,late-2025,high,no

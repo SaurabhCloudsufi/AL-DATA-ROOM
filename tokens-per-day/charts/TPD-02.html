@@ -1,0 +1,201 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tokens per day over time — country, with the site's own tooltip</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#fff; color:#1a1a1a; }
+  #pg { padding:14px 16px 10px;
+         font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px; }
+  .pid { font:700 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:#1f3864;
+          letter-spacing:.04em; }
+  h1 { font-size:15px; margin:0; font-weight:700; }
+  .sub { color:#6b7280; font-size:12px; margin:2px 0 8px; }
+  .badge { display:inline-block; background:#7d5a7d; color:#fff; font-weight:700;
+            font-size:10.5px; padding:3px 9px; border-radius:999px; }
+  .ctl { display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 2px; align-items:center; }
+  .grp { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .cap { color:#6b7280; font-size:11.5px; }
+  .btn { font-size:12px; border:1px solid #d7dbe2; background:#fff; color:#1a1a1a;
+          padding:3px 10px; border-radius:999px; cursor:pointer; }
+  .btn[aria-pressed="true"] { background:#1f3864; color:#fff; border-color:#1f3864; }
+  .btn[disabled] { opacity:.35; cursor:not-allowed; }
+  .btn:focus-visible { outline:2px solid #1f3864; outline-offset:2px; }
+  .legend { display:flex; flex-wrap:wrap; gap:5px 12px; margin:8px 0 4px; }
+  .lg { display:inline-flex; align-items:center; gap:6px; font-size:12px; }
+  .lg .sw { width:11px; height:11px; border-radius:2px; flex:none; }
+  svg { width:100%; height:auto; display:block; touch-action:none; }
+  .grid { stroke:#d7dbe2; stroke-width:1; }
+  .rule { stroke:#1f3864; stroke-width:1; stroke-dasharray:3 3; }
+  .axis { fill:#6b7280; font-size:11px; }
+  .axlab { fill:#1a1a1a; font-size:11.5px; }
+  .rowlab { fill:#1a1a1a; font-size:11px; }
+  .tip { position:absolute; pointer-events:none; background:#fff; border:1px solid #d7dbe2;
+          border-radius:6px; padding:8px 10px; font-size:12px;
+          box-shadow:0 4px 14px rgba(0,0,0,.10); opacity:0; transition:opacity .08s;
+          max-width:340px; z-index:5; }
+  .tip b { display:block; margin-bottom:3px; font-size:12.5px; }
+  .tip .m { color:#6b7280; }
+  .tip .row { display:flex; gap:8px; align-items:baseline; }
+  .tip .row i { font-style:normal; margin-left:auto; font-variant-numeric:tabular-nums;
+                 font-weight:700; }
+  .tip .row s { text-decoration:none; color:#6b7280; font-size:10.5px; }
+  .foot { color:#6b7280; font-size:11px; margin-top:6px; }
+  .empty { fill:#6b7280; font-size:12px; }
+</style>
+<div id="pg">
+<div class="hd"><span class="pid">TPD-02</span><h1>Tokens per day over time — country, with the site's own tooltip</h1></div>
+<div class="sub">Five regional series that sum to the disclosed floor rather than to the estimate. Only China is measured, and only at 3 of its 27 points — the hollow markers are the site's own modelled ones. All 5 series and 99 observations, with the tooltip replaying the site's own rule: each series at its most recent disclosure on or before the cursor, carried forward. <span class="badge">MEASURED FLOOR vs MODELED ESTIMATE</span></div>
+<div class="ctl" id="ctl"></div>
+<div class="legend" id="lg"></div>
+<div style="position:relative">
+  <svg id="c" role="img" aria-label="Tokens per day over time — country, with the site's own tooltip"></svg>
+  <div class="tip" id="tip"></div>
+</div>
+<div class="foot">Move the cursor across the chart for every series at that date, and the date each figure was actually disclosed on. Source: Tokens Per Day (tokensperday.com) — tokens_per_day_country.csv —
+chartData objects and evidence ledger as extracted 2026-08-21. Values are the site's own,
+copied verbatim. The disclosed floor is measured; everything above it is triangulated from
+revenue, hardware, users and telemetry by parties who do not have the numbers.</div>
+</div>
+<script>
+const D = {"series":[{"n":"China (measured)","c":"#1f3864","pts":[[1705363200000,0.1,1],[1707955200000,0.14,0],[1710547200000,0.18,0],[1713225600000,0.25,0],[1715817600000,0.33,0],[1718496000000,0.45,0],[1721088000000,0.61,0],[1723766400000,0.82,0],[1726358400000,1.11,0],[1728950400000,1.49,0],[1731628800000,2.02,0],[1734220800000,2.72,0],[1736899200000,3.67,0],[1739491200000,4.96,0],[1742169600000,6.7,0],[1744761600000,9.05,0],[1747353600000,12.22,0],[1750032000000,16.5,0],[1752624000000,22.28,0],[1755302400000,30.08,0],[1757894400000,40.62,0],[1760572800000,54.84,0],[1763164800000,74.06,0],[1765843200000,100.0,1],[1768435200000,111.87,0],[1771027200000,125.15,0],[1773619200000,140.0,1]],"est":0},{"n":"United States (est.)","c":"#b4763a","pts":[[1705363200000,0.0,1],[1707955200000,0.0,1],[1713139200000,0.2,1],[1735516800000,0.8,1],[1740614400000,1.2,1],[1742083200000,1.4,1],[1747353600000,8.6,1],[1749340800000,11.0,1],[1752624000000,18.7,1],[1757894400000,19.6,1],[1760400000000,21.9,1],[1760572800000,30.9,1],[1765843200000,30.9,1],[1767052800000,30.5,1],[1773619200000,36.6,1],[1776211200000,39.0,1],[1778889600000,68.3,1],[1781222400000,75.3,1]],"est":1},{"n":"Rest of world (est.)","c":"#6b8f71","pts":[[1705363200000,0.0,1],[1707955200000,0.0,1],[1713139200000,0.1,1],[1735516800000,0.4,1],[1740614400000,0.6,1],[1742083200000,0.6,1],[1747353600000,4.0,1],[1749340800000,5.1,1],[1752624000000,8.7,1],[1757894400000,9.2,1],[1760400000000,10.3,1],[1760572800000,14.5,1],[1765843200000,14.5,1],[1767052800000,14.3,1],[1773619200000,17.1,1],[1776211200000,18.2,1],[1778889600000,32.0,1],[1781222400000,35.3,1]],"est":1},{"n":"Europe (est.)","c":"#7d5a7d","pts":[[1705363200000,0.0,1],[1707955200000,0.0,1],[1713139200000,0.1,1],[1735516800000,0.3,1],[1740614400000,0.5,1],[1742083200000,0.5,1],[1747353600000,3.3,1],[1749340800000,4.2,1],[1752624000000,7.1,1],[1757894400000,7.5,1],[1760400000000,8.4,1],[1760572800000,11.8,1],[1765843200000,11.8,1],[1767052800000,11.7,1],[1773619200000,14.0,1],[1776211200000,14.9,1],[1778889600000,26.2,1],[1781222400000,28.9,1]],"est":1},{"n":"Asia ex-China (est.)","c":"#4e8a8b","pts":[[1705363200000,0.0,1],[1707955200000,0.0,1],[1713139200000,0.1,1],[1735516800000,0.2,1],[1740614400000,0.3,1],[1742083200000,0.4,1],[1747353600000,2.4,1],[1749340800000,3.0,1],[1752624000000,5.2,1],[1757894400000,5.4,1],[1760400000000,6.1,1],[1760572800000,8.5,1],[1765843200000,8.5,1],[1767052800000,8.4,1],[1773619200000,10.1,1],[1776211200000,10.8,1],[1778889600000,18.9,1],[1781222400000,20.8,1]],"est":1}],"x0":1705276800000,"x1":1784160000000,"floorLog":0.06999999999999999};
+const svg=document.getElementById('c'), tip=document.getElementById('tip');
+const ctl=document.getElementById('ctl'), lgw=document.getElementById('lg');
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+const W=1000;
+
+let LOG=0;
+const MM={l:62,r:170,t:16,b:42}, H=470;
+const ser=()=>D.series;
+function fmt(v){ return v>=100? v.toFixed(0) : v>=10? v.toFixed(1) : v.toFixed(2); }
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function my(ms){ const d=new Date(ms); return MON[d.getUTCMonth()]+' '+d.getUTCFullYear(); }
+function dmy(ms){ const d=new Date(ms);
+  return d.getUTCDate()+' '+MON[d.getUTCMonth()]+' '+d.getUTCFullYear(); }
+
+function buildCtl(){
+  ctl.innerHTML='';
+  const add=(cap,opts,cur,pick)=>{
+    const g=document.createElement('div'); g.className='grp';
+    const c=document.createElement('span'); c.className='cap'; c.textContent=cap;
+    g.appendChild(c);
+    opts.forEach((o,i)=>{
+      const b=document.createElement('button'); b.className='btn'; b.type='button';
+      b.textContent=o; b.setAttribute('aria-pressed', i===cur?'true':'false');
+      b.onclick=()=>{ pick(i); buildCtl(); draw(); reportHeight(); };
+      g.appendChild(b);
+    });
+    ctl.appendChild(g);
+  };
+  add('Scale', ['Linear','Log'], LOG, i=>{LOG=i;});
+  const s=document.createElement('span'); s.className='cap';
+  s.textContent=ser().length+' series, '
+    +ser().reduce((a,x)=>a+x.pts.length,0)+' observations';
+  ctl.appendChild(s);
+}
+
+let SX, SY, YMAX;
+function draw(){
+  const S=ser();
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  let hi=0; S.forEach(s=>s.pts.forEach(p=>{ if(p[1]>hi) hi=p[1]; }));
+  YMAX=hi*1.10;
+  const lo=LOG? D.floorLog : 0;
+  SX=t=>MM.l+(t-D.x0)/(D.x1-D.x0)*(W-MM.l-MM.r);
+  SY=v=>{ if(!LOG) return H-MM.b-v/YMAX*(H-MM.t-MM.b);
+    const a=Math.log10(Math.max(v,lo)), b0=Math.log10(lo), b1=Math.log10(YMAX);
+    return H-MM.b-(a-b0)/(b1-b0)*(H-MM.t-MM.b); };
+
+  // y grid
+  const ticks=[];
+  if(LOG){ for(let e=Math.floor(Math.log10(lo)); Math.pow(10,e)<=YMAX; e++) ticks.push(Math.pow(10,e)); }
+  else { const step=Math.pow(10,Math.floor(Math.log10(YMAX/5)));
+    const st=[1,2,2.5,5,10].map(m=>m*step).find(x=>x>=YMAX/5)||10*step;
+    for(let v=0; v<=YMAX; v+=st) ticks.push(v); }
+  ticks.forEach(v=>{
+    const y=SY(v);
+    svg.appendChild(el('line',{x1:MM.l,x2:W-MM.r,y1:y,y2:y,class:'grid'}));
+    const t=el('text',{x:MM.l-8,y:y+3.6,class:'axis','text-anchor':'end'});
+    t.textContent=v>=1?String(+v.toFixed(0)):String(v); svg.appendChild(t);
+  });
+  // x ticks, every six months
+  for(let y=2024;y<=2026;y++) for(const m of [0,6]){
+    const ms=Date.UTC(y,m,15); if(ms<D.x0||ms>D.x1) continue;
+    const x=SX(ms);
+    svg.appendChild(el('line',{x1:x,x2:x,y1:MM.t,y2:H-MM.b,class:'grid'}));
+    const t=el('text',{x:x,y:H-MM.b+16,class:'axis','text-anchor':'middle'});
+    t.textContent=MON[m]+' '+y; svg.appendChild(t);
+  }
+  const yl=el('text',{x:14,y:H/2,class:'axlab','text-anchor':'middle',
+    transform:'rotate(-90 14 '+(H/2)+')'});
+  yl.textContent='Trillion tokens per day'+(LOG?' (log)':''); svg.appendChild(yl);
+
+  S.forEach(s=>{
+    let d='';
+    s.pts.forEach((p,i)=>{ d+=(i?'L':'M')+SX(p[0]).toFixed(2)+' '+SY(p[1]).toFixed(2); });
+    if(s.pts.length>1) svg.appendChild(el('path',{d:d,fill:'none',stroke:s.c,
+      'stroke-width':2.2,'stroke-dasharray':s.est?'7 3':'none'}));
+    s.pts.forEach(p=>svg.appendChild(el('circle',{cx:SX(p[0]),cy:SY(p[1]),
+      r:p[2]?3.2:2.0,fill:p[2]?s.c:'#fff',stroke:s.c,'stroke-width':1.4})));
+    const last=s.pts[s.pts.length-1];
+    const t=el('text',{x:SX(last[0])+7,y:SY(last[1])+3.6,class:'axis',
+      style:'fill:'+s.c+';font-weight:700'});
+    t.textContent=s.n; svg.appendChild(t);
+  });
+  svg.appendChild(el('line',{id:'rule',x1:-9,x2:-9,y1:MM.t,y2:H-MM.b,class:'rule'}));
+  lgw.innerHTML='';
+  S.forEach(s=>{ const d=document.createElement('span'); d.className='lg';
+    d.innerHTML='<span class="sw" style="background:'+s.c+'"></span>'+s.n
+      +(s.est?' <span class="m">(est.)</span>':''); lgw.appendChild(d); });
+  const h=document.createElement('span'); h.className='lg m';
+  h.innerHTML='hollow point = the site\u2019s own \u201cnot a real observation\u201d flag';
+  lgw.appendChild(h);
+}
+
+svg.addEventListener('pointermove',ev=>{
+  const r=svg.getBoundingClientRect();
+  const px=(ev.clientX-r.left)/r.width*W;
+  if(px<MM.l||px>W-MM.r){ tip.style.opacity=0; return; }
+  // the site's own rule: the cursor pixel is a continuous timestamp, and each
+  // series reports its last observation at or before it, carried forward
+  const ms=D.x0+(D.x1-D.x0)*(px-MM.l)/(W-MM.l-MM.r);
+  const rows=[];
+  ser().forEach(s=>{ let pt=null;
+    for(const p of s.pts) if(p[0]<=ms) pt=p;
+    if(pt) rows.push({n:s.n,c:s.c,v:pt[1],t:pt[0],real:pt[2]}); });
+  if(!rows.length){ tip.style.opacity=0; return; }
+  rows.sort((a,b)=>b.v-a.v);
+  const rule=document.getElementById('rule');
+  if(rule){ rule.setAttribute('x1',px); rule.setAttribute('x2',px); }
+  let h='<b>'+my(ms)+'</b>';
+  rows.forEach(x=>{ h+='<div class="row"><span class="sw" style="display:inline-block;'
+    +'width:9px;height:9px;border-radius:2px;background:'+x.c+'"></span>'+x.n
+    +'<i>'+fmt(x.v)+'</i></div>'
+    +'<div class="row m"><s>&nbsp;&nbsp;&nbsp;as disclosed '+dmy(x.t)
+    +(x.real?'':' \u00b7 modelled point')+'</s></div>'; });
+  h+='<div class="m" style="margin-top:4px">trillion tokens / day \u00b7 '
+    +'each series at its most recent disclosure on or before the cursor</div>';
+  tip.innerHTML=h; tip.style.opacity=1;
+  const w=tip.offsetWidth||300;
+  tip.style.left=Math.min(Math.max(8,(px/W*r.width)+16), r.width-w-8)+'px';
+  tip.style.top=Math.min(24, r.height-tip.offsetHeight-8)+'px';
+});
+svg.addEventListener('pointerleave',()=>{tip.style.opacity=0;
+  const rule=document.getElementById('rule');
+  if(rule){ rule.setAttribute('x1',-9); rule.setAttribute('x2',-9); }});
+
+buildCtl(); draw();
+
+function reportHeight(){
+  const h=Math.ceil(document.getElementById('pg').getBoundingClientRect().height)+2;
+  if(window.parent!==window) window.parent.postMessage({type:'aidr-height',id:'TPD-02',h:h},'*');
+}
+window.addEventListener('load',reportHeight);
+window.addEventListener('resize',reportHeight);
+if(window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
+reportHeight();
+</script>
