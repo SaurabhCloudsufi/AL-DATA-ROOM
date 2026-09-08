@@ -17,14 +17,21 @@ and drop observations.
 
 The defensible boundary is the date, and the dataset itself fixes it. Step-summing
 each site's most recent snapshot reproduces Epoch's own "Current" columns exactly
-- 12,934,582 H100-equivalents and 12,115.1 MW IT power - for every cutoff from
-2026-08-04 to 2026-08-11, and diverges outside that window. Epoch therefore treats
-this snapshot date as "now"; the last milestone actually recorded is 2026-08-02
-and the next lands 2026-08-12. Rows dated after the snapshot are future-dated
+- 13,937,200 H100-equivalents and 13,257.1 MW IT power - for every cutoff from
+2026-08-24 to 2026-09-29, and diverges outside that window. Epoch therefore treats
+this snapshot date as "now". Rows dated after the snapshot are future-dated
 milestones, i.e. schedules, and are excluded everywhere in this script.
 
 The reconciliation is asserted below, so if a future download shifts the cutoff
 this script fails rather than silently publishing projections as observations.
+
+SNAPSHOT IS PINNED AND MUST BE MOVED ON EVERY REFRESH. It is deliberately not
+derived by scanning for a reconciling date: that would let a download where
+Epoch's "Current" columns lag their own timelines pick a cutoff silently. The
+guard below fails loudly instead, and the fix is to re-run this scan and set the
+constant to the date the new download represents. Refresh history:
+  2026-08-06 download - reconciled 2026-08-04 .. 2026-08-11, 77 sites
+  2026-09-08 download - reconciled 2026-08-24 .. 2026-09-29, 86 sites
 
 NOT DERIVED
 -----------
@@ -44,7 +51,7 @@ import pandas as pd
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "ai-infrastructure" / "data"
 
-SNAPSHOT = pd.Timestamp("2026-08-06")    # date this download represents
+SNAPSHOT = pd.Timestamp("2026-09-08")    # date this download represents
 AXIS_START = pd.Timestamp("2023-01-01")  # Epoch's published axis starts here
 
 # metric key -> (timeline column, published "current" column to reconcile against)
@@ -95,10 +102,17 @@ def step_total(timelines, col, asof):
 
 def main(src: str) -> None:
     src = Path(src)
+    # Epoch renamed the chip file between the 2026-08 and 2026-09 releases
+    # (data_center_ -> data_centers_). Both names are accepted so a refresh does
+    # not fail on a filename while the columns this script reads are unchanged.
+    chip_file = next((n for n in ("data_centers_chip_quantities.csv",
+                                  "data_center_chip_quantities.csv")
+                      if (src / n).exists()), None)
     need = ["data_centers.csv", "data_center_timelines.csv",
-            "data_center_chip_quantities.csv", "data_center_cooling_towers.csv",
-            "data_center_chillers.csv"]
+            "data_center_cooling_towers.csv", "data_center_chillers.csv"]
     missing = [f for f in need if not (src / f).exists()]
+    if chip_file is None:
+        missing.append("data_centers_chip_quantities.csv")
     if missing:
         sys.exit("missing source files: " + ", ".join(missing) +
                  "\ndownload from https://epoch.ai/data/data_centers/")
@@ -188,7 +202,7 @@ def main(src: str) -> None:
         OUT / "dc_sites_observed.csv", index=False)
 
     # ------------------------------------------------ chip mix (observed only)
-    chips = pd.read_csv(src / "data_center_chip_quantities.csv", parse_dates=["Date"])
+    chips = pd.read_csv(src / chip_file, parse_dates=["Date"])
     chips_obs = chips[chips.Date <= SNAPSHOT]
     chips["src_norm"] = (chips["Number of Units source"].astype(str).str.strip()
                          .str.lower().replace({"esimate": "estimate"}))

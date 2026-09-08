@@ -651,5 +651,6 @@
 <text x="65.2" y="597.0">4 GW</text>
 <text x="101.2" y="597.0">800 MW</text>
 </g>
-<text x="16" y="614" font-size="10.5" fill="#898781">Circle area = announced capacity</text>
+<text x="16" y="600" font-size="10.5" fill="#898781">Circle area = announced capacity</text>
+<text x="16" y="614" font-size="9.5" fill="#a9a7a0">Source: AI DC INDEX (compiled from company, regulator and trade-press disclosures) — AI_DC_INDEX.xlsx + geocode_cache.csv &#8212; Methodology: free-text status, energy and workload classified on their head clause; capacity as announced, not measured.</text>
 </svg>

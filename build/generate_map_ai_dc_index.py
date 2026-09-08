@@ -71,7 +71,13 @@ PLOT_ID = "DCMAP-01"
 TITLE = "AI data centres worldwide, by announced capacity"
 SUBTITLE = ("Every site in the AI DC INDEX, sized by announced IT capacity. "
             "Drag to pan, scroll to zoom, drag the year to see what existed when.")
-SOURCE = "AI DC INDEX (compiled from company, regulator and trade-press disclosures)"
+# Named files, not a prose description: verify_source_files.py greps these off
+# the chart face, the interactive and the gallery row, and they must agree.
+SOURCE_FILES = "AI_DC_INDEX.xlsx + geocode_cache.csv"
+SOURCE = ("AI DC INDEX (compiled from company, regulator and trade-press "
+          f"disclosures) — {SOURCE_FILES}")
+METHODOLOGY = ("Methodology: free-text status, energy and workload classified on "
+               "their head clause; capacity as announced, not measured.")
 
 YEAR_FLOOR = 2015   # 33 sites predate this; they read as "already there" at step one
 
@@ -1066,8 +1072,10 @@ def write_static_svg(sites, path, w=STATIC_W, h=STATIC_H):
     for cx, label, _ in slots:
         out.append(f'<text x="{cx:.1f}" y="{base_y + 11:.1f}">{label}</text>')
     out.append("</g>")
-    out.append(f'<text x="16" y="{h - 6}" font-size="10.5" fill="#898781">'
+    out.append(f'<text x="16" y="{h - 20}" font-size="10.5" fill="#898781">'
                f'Circle area = announced capacity</text>')
+    out.append(f'<text x="16" y="{h - 6}" font-size="9.5" fill="#a9a7a0">'
+               f'Source: {SOURCE} &#8212; {METHODOLOGY}</text>')
     out.append("</svg>")
     path.write_text("\n".join(out))
 
@@ -1110,8 +1118,10 @@ def write_static_png(sites, path, w=STATIC_W, h=STATIC_H):
         ax.text(cx, base_y + 11, label, fontsize=4.8, color="#52514e",
                 ha="center", va="center", zorder=7)
         x += slot + 8
-    ax.text(16, h - 6, "Circle area = announced capacity", fontsize=5.2,
+    ax.text(16, h - 20, "Circle area = announced capacity", fontsize=5.2,
             color="#898781", ha="left", va="center", zorder=7)
+    ax.text(16, h - 6, f"Source: {SOURCE} \u2014 {METHODOLOGY}", fontsize=4.6,
+            color="#a9a7a0", ha="left", va="center", zorder=7)
 
     ax.set_xlim(0, w)
     ax.set_ylim(h, 0)
@@ -1142,7 +1152,7 @@ def main():
         f"building and carry a shaded uncertainty halo. "
         f"The slider is cumulative &mdash; it shows what had started by each year, not how "
         f"capacity grew within a site. "
-        f"Source: {SOURCE}."
+        f"Source: {SOURCE}. {METHODOLOGY}"
     )
 
     data = {

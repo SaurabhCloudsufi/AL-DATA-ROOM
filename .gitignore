@@ -59,7 +59,9 @@ model_prices_and_context_window.json
 # The AI DC INDEX workbook is the source for the ai-dc-index domain and ships
 # with it, so the map can be rebuilt from the same file it was built from. The
 # *.xlsx rule above is for private working datasets; this one is published.
-!ai-dc-index/source/AI DC INDEX.xlsx
+# Underscored, not "AI DC INDEX.xlsx": verify_source_files.py matches file names
+# with [A-Za-z0-9_-]+, so a name with spaces is not greppable off a chart face.
+!ai-dc-index/source/AI_DC_INDEX.xlsx
 
 # ---------------------------------------------------------------- python
 __pycache__/

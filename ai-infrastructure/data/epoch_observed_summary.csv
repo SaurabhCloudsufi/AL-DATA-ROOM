@@ -1,4 +1,4 @@
 metric,column,unit,records_in_file,records_after_site_join,records_observed,records_projected_excluded,sites_total,sites_with_observed_data,observed_first,observed_last,snapshot_date,value_at_snapshot,value_if_projections_included,sites_excluded_no_site_record,chip_records_total,chip_records_observed,chip_records_projected_excluded,chip_units_company_disclosed,cooling_rows,cooling_rows_usable,countries,owners,sites_with_primary_user
-compute_h100e,H100 equivalents,H100-equivalents,441,430,358,72,77,77,2018-12-18,2026-08-02,2026-08-06,12934581.692407,65319652.370229,DayOne Kempas; EdgeCore Mesa PH03,219,173,46,16,670,669,8,17,56
-it_power_mw,IT power (MW),MW,441,430,358,72,77,77,2018-12-18,2026-08-02,2026-08-06,12115.12971,34005.12971,DayOne Kempas; EdgeCore Mesa PH03,219,173,46,16,670,669,8,17,56
-capital_cost_busd,Total capital cost (2025 USD billions),2025 US$ billions,441,430,358,72,77,77,2018-12-18,2026-08-02,2026-08-06,458.945344,1288.182324,DayOne Kempas; EdgeCore Mesa PH03,219,173,46,16,670,669,8,17,56
+compute_h100e,H100 equivalents,H100-equivalents,497,497,416,81,86,86,2018-12-18,2026-09-01,2026-09-08,13937151.212872,64012155.392463,,207,163,44,19,670,669,9,19,64
+it_power_mw,IT power (MW),MW,497,497,416,81,86,86,2018-12-18,2026-09-01,2026-09-08,13257.12971,35676.12971,,207,163,44,19,670,669,9,19,64
+capital_cost_busd,Total capital cost (2025 USD billions),2025 US$ billions,497,497,416,81,86,86,2018-12-18,2026-09-01,2026-09-08,502.206588,1351.483146,,207,163,44,19,670,669,9,19,64

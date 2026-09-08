@@ -689,9 +689,10 @@ def build_epoch(plot_id):
             f"the line to {float(meta['value_if_projections_included'])/cfg['scale']:,.1f}"
             f"{'M' if cfg['scale'] > 1e5 else ' GW'} by 2030, which is a plan, not a "
             f"measurement. The step-sum at the snapshot reproduces Epoch's own published "
-            f"current total exactly. {cfg['derivation']} Coverage is about 27% of AI "
-            f"compute delivered globally and is strongest for the largest sites, so this "
-            f"is a floor on the world total. Values before "
+            f"current total exactly. {cfg['derivation']} Epoch put this database's "
+            f"coverage of global deployed AI compute at 46% at the end of June 2026 "
+            f"(90% CI 26-79%), strongest for the largest sites, so this is a floor on "
+            f"the world total. Values before "
             f"{axis_start.isoformat()} are included in the level but off the axis.")
 
     n_sub = len(textwrap.wrap(subtitle, 122))
@@ -839,7 +840,7 @@ DC_FILES = {
     "DERIVED-01": ("data_centers.csv", "data_center_timelines.csv"),
     "DERIVED-02": ("data_centers.csv", "data_center_timelines.csv"),
     "DERIVED-03": ("data_centers.csv", "data_center_timelines.csv"),
-    "DERIVED-04": ("data_center_chip_quantities.csv",),
+    "DERIVED-04": ("data_centers_chip_quantities.csv",),
     "DERIVED-05": ("data_center_cooling_towers.csv", "data_center_chillers.csv"),
     "DERIVED-06": ("data_centers.csv", "data_center_timelines.csv"),
 }
@@ -879,9 +880,10 @@ def build_owner_metric(plot_id):
             f"built and holds the site, which is often not the entity using it - "
             f"see the owner-versus-user chart in Derived Analysis. \"Unknown\" is "
             f"Epoch's own label where ownership is unattributed, not a residual we "
-            f"computed. {caveat} Coverage is about 27% of AI compute delivered "
-            f"globally and is strongest for the largest sites, so every share is a "
-            f"share of what Epoch tracks, not of the world.")
+            f"computed. {caveat} Epoch put this database's coverage of global "
+            f"deployed AI compute at 46% at the end of June 2026 (90% CI 26-79%), "
+            f"strongest for the largest sites, so every share is a share of what "
+            f"Epoch tracks, not of the world.")
 
     fig = plt.figure(figsize=(12.0, 8.3))
     ax = fig.add_axes(_rect(subtitle, note))
