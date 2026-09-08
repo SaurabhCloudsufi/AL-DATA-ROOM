@@ -1,0 +1,53 @@
+id,lat,lng,precision,query,matched
+microsoft-india-ai-infrastructure-hyderabad-pune,17.3606,78.4741,region,"Hyderabad, India","Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
+galaxy-data-center-rayong-1gw-ai-hub-thailand,12.6786,101.0671,city,"Ban Chang, Rayong, Thailand","บ้านฉาง, อำเภอบ้านฉาง, จังหวัดระยอง, 21130, ประเทศไทย"
+volcengine-bytedance-ai-training-china,40.2952,111.9045,city,"Horinger, Inner Mongolia, China","和林格尔县 ᠬᠣᠷᠢᠨᠭᠡᠷ ᠰᠢᠶᠠᠨ, 呼和浩特市, 内蒙古自治区 ᠦᠪᠦᠷ ᠮᠣᠩᠭᠤᠯ ᠤᠨ ᠥᠪᠡᠷᠲᠡᠭᠡᠨ ᠵᠠᠰᠠᠬᠣ ᠣᠷᠣᠨ, 011500, 中国"
+amazon-aws-india-announced-expansion,22.3511,78.6677,country,India,India
+aws-hyderabad-ap-south-2-india,17.3606,78.4741,region,"Hyderabad, India","Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
+aws-mumbai-ap-south-1-india,19.055,72.8692,region,"Mumbai, India","Mumbai, Mumbai Suburban District, Maharashtra, 400051, India"
+baidu-ai-cloud-data-center-china,38.0936,113.5266,city,"Yangquan, Shanxi, China","阳泉市, 山西省, 中国"
+google-cloud-india-mumbai-delhi-region,22.3511,78.6677,country,India,India
+oracle-cloud-india-ai-region-hyderabad,17.3606,78.4741,region,"Hyderabad, India","Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
+sk-telecom-ulsan-ai-mega-campus-south-korea,35.5392,129.3119,city,"Ulsan, South Korea","울산광역시, 대한민국"
+stargate-uae-abu-dhabi-ai-cluster,24.4538,54.3774,city,"Abu Dhabi, United Arab Emirates","أبو ظبي, أبوظبي, أبو ظبي, الإمارات العربية المتحدة"
+meta-vistra-nuclear-uprate-agreement-oh-pa,39.293,-76.6292,region,"PJM, United States","Harry Deitchman PJM Center, 312, North Martin Luther King Junior Boulevard, Poppleton, Sowebo, Baltimore, Maryland, 2120"
+amazon-aws-oregon-us-west-2-hillsboro,43.9793,-120.7373,region,"Oregon, United States","Oregon, United States"
+xai-gigascale-data-center-tennessee-mississippi,35.1462,-90.0534,region,"Greater Memphis, United States","Greater Memphis Chamber, Center Lane, Court Square Historic District, Downtown, Memphis, Shelby County, West Tennessee, "
+aws-ai-innovation-campuses-pennsylvania,40.97,-77.7279,region,"Pennsylvania, United States","Pennsylvania, United States"
+exxonmobil-1-5gw-data-center-power-plant-initiative,39.7837,-100.4459,country,United States,United States
+vantage-texas-mega-campus-shackelford,32.7089,-99.3308,region,"Shackelford County, Texas, United States","Shackelford County, Texas, United States"
+meta-oklo-nuclear-ai-campus-ohio,39.1056,-83.0611,region,"Pike County, Ohio, United States","Pike County, Ohio, United States"
+vistra-comanche-peak-nuclear-power-plant-expansion,39.7837,-100.4459,country,United States,United States
+meta-terrapower-natrium-ai-campus-wyoming,39.7837,-100.4459,country,United States,United States
+amazon-ec2-virginia-hyperscale-campus,32.3647,-84.9554,region,"US East, United States","Western Hemisphere Institute for Security Cooperation, 7161, Richardson Circle, East Main Post, Chattahoochee County, Ge"
+aws-mississippi-ai-data-center,32.6308,-90.0041,region,"Madison County, Mississippi, United States","Madison County, Mississippi, United States"
+aws-oregon-ai-infrastructure-expansion,45.3172,-118.0916,region,"Eastern Oregon, United States","Eastern Oregon University, 1, 7th Street, La Grande, Union County, Oregon, 97850, United States"
+aws-richmond-county-north-carolina-ai-campus,35.0288,-79.7333,region,"Richmond County, North Carolina, United States","Richmond County, North Carolina, United States"
+aws-us-government-ai-supercomputing-expansion,39.7837,-100.4459,country,United States,United States
+coreweave-ai-data-centers-us,39.7837,-100.4459,country,United States,United States
+digital-realty-project-bunkhouse-georgia,34.1048,-84.9158,region,"Stilesboro, United States","Stilesboro, Bartow County, Georgia, United States"
+google-gemini-cluster-iowa-nebraska,41.2588,-95.8519,city,"Council Bluffs, United States","Council Bluffs, Kane Township, Pottawattamie County, Iowa, United States"
+google-nebraska-mega-campus-private-gas-power,41.737,-99.5874,region,"Nebraska, United States","Nebraska, United States"
+google-wilbarger-county-texas-ai-campus,34.0265,-99.2086,region,"Wilbarger County, Texas, United States","Wilbarger County, Texas, United States"
+ibm-watson-ai-us-data-centers,39.7837,-100.4459,country,United States,United States
+meta-ashburn-virginia-ai-data-center,37.5131,-77.3465,region,"Henrico County, Virginia, United States","Henrico County, Virginia, United States"
+meta-cortland-illinois-ai-training-campus,41.9299,-88.7502,city,"DeKalb, DeKalb, Illinois, United States","DeKalb, DeKalb Township, DeKalb County, Illinois, 60115, United States"
+microsoft-atlanta-ai-campus-georgia,33.6374,-84.4298,city,"Atlanta, Atlanta, Georgia, United States","Hartsfield–Jackson Atlanta International Airport, 6000, North Terminal Parkway, Atlanta, Fulton County, Georgia, 30320, "
+microsoft-northern-virginia-ai-data-centers,37.1232,-78.4928,region,"Virginia, United States","Virginia, United States"
+microsoft-openai-stargate-new-mexico,32.3282,-106.8494,region,"Dona Ana County, New Mexico, United States","Doña Ana County, New Mexico, United States"
+nvidia-eos-supercomputer-santa-clara-california,39.7837,-100.4459,country,United States,United States
+oracle-ai-cloud-infrastructure-us,39.7837,-100.4459,country,United States,United States
+stargate-ai-supercomputer,39.7837,-100.4459,country,United States,United States
+neom-oxagon-ai-data-center-campus,27.5679,35.546,city,"Oxagon, Saudi Arabia","Oxagon, محافظة ضباء, منطقة تبوك, السعودية"
+microsoft-australia-ai-expansion,-24.7761,134.755,country,Australia,Australia
+softbank-france-ai-data-center-capacity-program,46.6034,1.8883,country,France,France
+romania-black-sea-ai-gigafactory,45.9852,24.6859,country,Romania,România
+mgx-mistral-ai-campus-paris-region,48.619,3.0418,region,"Seine-et-Marne, France","Seine-et-Marne, Île-de-France, France métropolitaine, France"
+edf-opcore-montereau-ai-data-center-france,46.6034,1.8883,country,France,France
+scaleway-aion-ai-gigafactory-france,46.6034,1.8883,country,France,France
+mistral-ai-cluster-france,48.5928,2.1918,city,"Bruyeres-le-Chatel, Bruyeres-le-Chatel, Essonne, France","Bruyères-le-Châtel, Rue du Pré d'Arny, Verville, Bruyères-le-Châtel, Palaiseau, Essonne, Île-de-France, France métropoli"
+aws-aragon-ai-mega-campus-spain,41.6916,-0.9101,city,"Zaragoza, Aragon, Spain","Zaragoza, Aragón, España"
+aws-paris-europe-west-3-france,48.8535,2.3484,region,"Paris, France","Paris, Île-de-France, France métropolitaine, France"
+microsoft-azure-france-central-paris,45.7755,3.0841,region,"France Central, France","Place de la France Libre, Ballainvilliers, Bonnabaud, Plateau central, Clermont-Ferrand, Puy-de-Dôme, Auvergne-Rhône-Alp"
+openaifrance-sovereign-ai-data-center,48.8535,2.3484,city,"Paris, France","Paris, Île-de-France, France métropolitaine, France"
+scaleway-ai-data-center-france,49.0448,2.106,city,"Saint-Ouen-l'Aumone, DC5, France","Saint-Ouen-l'Aumône, Pontoise, Val-d'Oise, Île-de-France, France métropolitaine, 95310, France"

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI DC Index — Visual Evidence Gallery — AI Data Room</title>
+<meta name="description" content="Where the AI build-out is actually going: every announced AI data centre site worldwide, on a map, by capacity, operator, build stage and power source.">
+<link rel="stylesheet" href="../inference-tokens/assets/style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow"><a href="../">AI Data Room</a> &nbsp;/&nbsp; Visual Evidence</p>
+  <h1>AI DC Index</h1>
+  <p class="standfirst">Where the AI build-out is actually going: every announced AI data centre site worldwide, on a map, by capacity, operator, build stage and power source.</p>
+  <dl class="meta">
+    <div><dt>Charts published</dt><dd>1</dd></div>
+  </dl>
+</header>
+
+<div class="section" id="map">
+<h2>Map</h2>
+<p class="blurb">One interactive map of the whole index. Circle area is announced capacity as the operator stated it, not measured delivered load, and the year slider is cumulative — it shows which sites had started by a year, not how any one site grew. Where the source gives no coordinates the site is geocoded once to the finest level its record supports, and anything coarser than an exact position is drawn with an uncertainty halo rather than a false rooftop.</p>
+<section class="chart" id="DCMAP-01">
+<div class="chart-head">
+<a class="pid" href="#DCMAP-01">DCMAP-01</a>
+<h3>AI data centres worldwide, by announced capacity</h3>
+</div>
+<p class="shows">Every site in the AI DC INDEX placed on an interactive world map, sized by announced IT capacity and colourable by company, build status, energy source or AI workload. The year slider is cumulative: it shows which sites had started by each year.</p>
+<div class="figure figure-live">
+<iframe class="live" src="charts/DCMAP-01.html" title="AI data centres worldwide, by announced capacity (interactive)" height="620" loading="lazy"></iframe>
+</div>
+<dl class="facts">
+<div><dt>Dataset</dt><dd>AI DC INDEX (AI DC INDEX.xlsx, eight continent sheets)</dd></div>
+<div><dt>Granularity</dt><dd>One record per site; announced capacity and a single start year, no capacity time series</dd></div>
+<div><dt>Coverage</dt><dd>346 sites across 64 countries; start years 2000-2032, slider floors at 2015</dd></div>
+<div><dt>Source files</dt><dd class="files">AI DC INDEX.xlsx + geocode_cache.csv (Nominatim, committed)</dd></div>
+<div><dt>Data treatment</dt><dd class="treatment">Announced capacity as stated by the source; 52 of 346 rows carry no coordinates and are geocoded once to city, region or country precision, recorded per row and drawn with an uncertainty halo below exact precision</dd></div>
+<div><dt>Source</dt><dd>AI DC INDEX</dd></div>
+<div><dt>Methodology</dt><dd data-methodology-ref>Methodology reference pending final methodology document · Free-text status, energy and workload columns are classified on their head clause into closed vocabularies; the original wording is carried through and shown on every site card</dd></div>
+<div><dt>Note</dt><dd>circle area encodes announced capacity, which is what operators state, not measured delivered load; 52 sites disclose no capacity figure and are searchable but not drawn</dd></div>
+</dl>
+<p class="downloads"><a class="interactive" href="charts/DCMAP-01.html" target="_blank" rel="noopener">Open full screen &#8599;</a><a href="charts/DCMAP-01.svg" download>Download SVG</a><a href="charts/DCMAP-01.png" download>Download PNG</a></p>
+</section>
+</div>
+
+<footer class="foot">
+  <p><strong>How to read this gallery.</strong> Every chart carries a stable Plot ID
+  matching the Dataset Register. Link straight to any chart by appending its ID, for
+  example <code>#P-59</code>. That address does not change as the gallery grows.</p>
+  <p><strong>Methodology references.</strong> Section references shown against each chart
+  are taken from the working methodology. They become links once that document is final.</p>
+</footer>
+
+</div>
+<script>
+// embedded charts post their rendered height; without this the iframe would
+// either clip the legend or leave a gap at some widths
+addEventListener('message', function (ev) {
+  var d = ev.data;
+  if (!d || d.type !== 'aidr-height' || !d.id) return;
+  var f = document.querySelector('iframe.live[src="charts/' + d.id + '.html"]');
+  // ignore implausible measurements rather than collapsing the frame to a sliver
+  if (f && d.h > 200 && d.h < 4000) f.style.height = d.h + 'px';
+});
+</script>
+</body>
+</html>

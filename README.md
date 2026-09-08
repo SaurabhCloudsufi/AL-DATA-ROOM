@@ -592,6 +592,57 @@ regional series total 300.3T/day while the estimate stands at 360.4T. The
 
 ---
 
+## AI DC Index
+
+Where the AI build-out is actually going. Source: `AI DC INDEX.xlsx` — eight
+continent sheets sharing one 14-column schema, 346 sites in 64 countries,
+117,179 MW of announced capacity, start years 2000–2032.
+
+**1 chart:**
+
+| ID | Section | What it is |
+|---|---|---|
+| `DCMAP-01` | Map | Every site on an interactive world map, sized by announced capacity, colourable by company, build status, energy source or AI workload, with a cumulative year slider |
+
+The map is self-contained: no tile server, no CDN, no API key, nothing fetched at
+view time. Country outlines are Natural Earth 110m, reduced to plain rings by
+`build/make_world_geometry.py` and committed as `build/world_110m.json` (147 KB).
+
+Four things about the source decide what the map can honestly show:
+
+- **Free text is not a category.** `status` arrives with 89 distinct values over
+  346 rows, `energy_type` 173, `ai_focus` 267 — unusable as facets. They are
+  classified into closed vocabularies on the **head clause**, because these cells
+  routinely name a category then append a caveat ("…general cloud and AI services;
+  specific facility capacity not disclosed"); reading the whole string sends those
+  to Unknown and throws away what the row plainly states. That one rule cut
+  unclassified `ai_focus` from 88 rows to 30. The original wording is carried
+  through unchanged and shown on every site card, so nothing is lost.
+- **52 rows ship without coordinates.** They are geocoded once, offline, into
+  `ai-dc-index/data/geocode_cache.csv` — committed, with the query and matched
+  name against each row so any of them can be audited or corrected by hand. Only
+  13 resolve to a city; the rest are portfolio and cloud-region records
+  ("AWS US East (Northern Virginia) Region") that name no single building, so
+  they land on a region or country centroid. Precision is recorded per row and
+  anything coarser than exact is drawn with an uncertainty halo sized in **ground**
+  units rather than given a false rooftop.
+- **52 rows disclose no capacity.** A circle has no size without one, so they are
+  searchable but not drawn, and the count is stated on the chart.
+- **There is one `start_year` per site and no capacity curve.** So the slider is
+  cumulative — what had started by a year — and circles do not grow. The 74 sites
+  with no start year are shown at every step rather than dropped.
+
+```bash
+python build/geocode_ai_dc_index.py "~/AI DC INDEX.xlsx"   # once; writes the cache
+python build/make_world_geometry.py                        # once; writes world_110m.json
+python build/summarise_ai_dc_index.py "~/AI DC INDEX.xlsx" # workbook → derived CSVs
+python build/generate_map_ai_dc_index.py                   # → DCMAP-01.html/.svg/.png
+node   build/verify_map_ai_dc_index.mjs                    # no dependencies
+python build/build_site.py
+```
+
+---
+
 ## Structure
 
 ```
