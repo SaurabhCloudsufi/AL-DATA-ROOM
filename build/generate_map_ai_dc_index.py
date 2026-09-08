@@ -46,9 +46,13 @@ COLOUR
 Light-only, matching every other chart in this gallery. The categorical hues are
 the first six slots that pass the all-pairs validator on a light surface (a map
 is a bubble field - any two marks can end up adjacent, so the adjacent-pair
-list does not apply). Build status is ordinal, not categorical, so it uses a
-single-hue ordinal ramp light->dark instead of spending six categorical slots on
-what is really a progression.
+list does not apply).
+
+Build status is a progression, so it started on a single-hue ordinal ramp. That
+was wrong in practice: four steps of one blue are not separable on marks this
+small, which is the whole job of the control. It now uses four distinct
+validated hues ordered to read intuitively - green running, amber building, blue
+committed, violet announced.
 
 Usage:
     python build/generate_map_ai_dc_index.py
@@ -77,12 +81,17 @@ YEAR_FLOOR = 2015   # 33 sites predate this; they read as "already there" at ste
 CATEGORICAL = ["#2a78d6", "#eda100", "#008300", "#4a3aa7", "#1baf7a", "#e87ba4"]
 NEUTRAL = "#b8b6ae"          # Other / Unknown - never a categorical slot
 
-# Ordinal ramp for build status: light -> dark reads as less built -> more built.
+# Build status. This began as a single-hue ordinal ramp, since the four stages
+# are a progression - but four steps of one blue are hard to tell apart on marks
+# this small, which is the whole job of the control. Distinct hues instead,
+# ordered so the reading is intuitive: green is running, amber is being built,
+# blue is committed, violet is only announced. Validated light-surface,
+# --pairs all: worst normal-vision dE 16.3, worst CVD dE 13.0.
 STATUS_RAMP = {
-    "Announced": "#86b6ef",
-    "Planned": "#5598e7",
-    "Under construction": "#2a78d6",
-    "Operational": "#184f95",
+    "Operational": "#008300",
+    "Under construction": "#eda100",
+    "Planned": "#2a78d6",
+    "Announced": "#4a3aa7",
     "Unknown": NEUTRAL,
 }
 STATUS_ORDER = ["Operational", "Under construction", "Planned", "Announced", "Unknown"]
@@ -156,6 +165,23 @@ def colour_scheme(sites):
         "fo": {"label": "AI focus", "colors": fixed(FOCUS_ORDER), "single": None,
                "order": FOCUS_ORDER},
     }
+
+
+# The dataset's country names against Natural Earth's. Only two disagree; the
+# three that are absent from 110m geometry (Singapore, Hong Kong, Bahrain) are
+# genuinely too small to carry an outline at this resolution.
+GEO_ALIAS = {"United States": "United States of America", "Czech Republic": "Czechia"}
+
+
+def hot_countries(sites):
+    """Geometry country name -> capacity held, so labels follow the data."""
+    agg = {}
+    for s in sites:
+        if not s["mw"]:
+            continue
+        name = GEO_ALIAS.get(s["co"], s["co"])
+        agg[name] = agg.get(name, 0) + s["mw"]
+    return {k: round(v, 1) for k, v in agg.items()}
 
 
 def facets(sites):
@@ -238,23 +264,27 @@ HTML = r"""<!doctype html>
   .dot.dim { opacity:.18; }
   .dot.hot { stroke:var(--ink); stroke-width:1.8; }
 
-  .legend { position:absolute; top:10px; left:10px; background:rgba(252,252,251,.93);
-            border:1px solid var(--hair); border-radius:8px; padding:9px 11px;
-            max-width:200px; max-height:calc(100% - 20px); overflow:auto; }
+  /* The legend sits UNDER the map, not floating over it. As an overlay it
+     covered live sites - Pacific Northwest and the Nordics both sit exactly
+     where a top-left panel lands - and a legend that hides data defeats itself. */
+  .legend { display:flex; align-items:flex-end; gap:22px; flex-wrap:wrap;
+            padding:9px 2px 0; border-top:1px solid var(--hair); margin-top:8px; }
   .legend .cap { font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;
-                 color:var(--muted); font-weight:700; }
-  .legend .ttl { font-size:12px; color:var(--ink); margin-bottom:5px; }
+                 color:var(--muted); font-weight:700; display:block; }
+  .legend .blk { display:flex; flex-direction:column; gap:3px; }
+  .lg-circ { overflow:visible; }
   .lg-circ circle { fill:none; stroke:var(--muted); stroke-width:1; }
-  .lg-circ text { font-size:10px; fill:var(--ink-2); text-anchor:middle;
-                  paint-order:stroke; stroke:var(--surface); stroke-width:3px;
-                  stroke-linejoin:round; }
-  .swatches { margin-top:9px; border-top:1px solid var(--hair); padding-top:8px; }
-  .sw { display:flex; align-items:center; gap:6px; font-size:11.5px; padding:1.5px 0;
-        color:var(--ink-2); }
+  .lg-circ text { font-size:10px; fill:var(--ink-2); text-anchor:middle; }
+  .swatches { display:flex; align-items:center; gap:13px; flex-wrap:wrap; }
+  .sw { display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--ink-2); }
   .sw i { width:11px; height:11px; border-radius:3px; flex:none;
           box-shadow:0 0 0 1px var(--ring) inset; }
-  .sw b { font-weight:400; color:var(--ink); overflow:hidden; text-overflow:ellipsis;
-          white-space:nowrap; }
+  .sw b { font-weight:400; color:var(--ink); }
+
+  /* Country names, drawn under the marks so a label never hides a site. */
+  .cname { font-size:10.5px; fill:#8d8b84; text-anchor:middle; pointer-events:none;
+           paint-order:stroke; stroke:var(--land); stroke-width:2.5px;
+           stroke-linejoin:round; letter-spacing:.02em; }
 
   .zoom { position:absolute; top:10px; right:10px; display:flex; flex-direction:column;
           gap:4px; }
@@ -328,13 +358,13 @@ HTML = r"""<!doctype html>
 
   <div class="wrap" id="wrap">
     <svg class="map" id="map"></svg>
-    <div class="legend" id="legend"></div>
     <div class="zoom">
       <button id="zin"  title="Zoom in">+</button>
       <button id="zout" title="Zoom out">&minus;</button>
       <button id="zfit" title="Reset view" style="font-size:11px">&#9673;</button>
     </div>
   </div>
+  <div class="legend" id="legend"></div>
 
   <div class="tl">
     <button class="play" id="play" title="Play">&#9654;</button>
@@ -432,42 +462,98 @@ function colourOf(s) {
 
 /* ================================================================ render */
 let layers = {};
+/* Ring coordinates stay in this array, paired by index with the <path> nodes.
+   Parking them in data- attributes instead would mean JSON.parse-ing all 279
+   rings - ~9,900 points - on every drawLand(), and drawLand() runs on every
+   pointermove of a drag and every wheel tick. */
+let landRings = [];
 function initSvg() {
-  svg.innerHTML = '';
+  svg.replaceChildren();
   const g = document.createElementNS(NS, 'g');
   layers.land  = document.createElementNS(NS, 'g');
+  layers.names = document.createElementNS(NS, 'g');
   layers.halo  = document.createElementNS(NS, 'g');
   layers.dots  = document.createElementNS(NS, 'g');
-  g.append(layers.land, layers.halo, layers.dots);
+  g.append(layers.land, layers.names, layers.halo, layers.dots);
   svg.append(g);
+  landRings = [];
+  const paths = [];
   for (const f of W) for (const ring of f.r) {
     const p = document.createElementNS(NS, 'path');
     p.setAttribute('class', 'land');
-    p.dataset.ring = JSON.stringify(ring);
-    layers.land.append(p);
+    landRings.push(ring);
+    paths.push(p);
   }
+  layers.land.append(...paths);
 }
 
 function drawLand() {
-  for (const p of layers.land.children) {
-    const ring = JSON.parse(p.dataset.ring);
+  const paths = layers.land.children;
+  for (let n = 0; n < landRings.length; n++) {
+    const ring = landRings[n];
     let d = '';
     for (let i = 0; i < ring.length; i++) {
       d += (i ? 'L' : 'M') + sx(ring[i][0]).toFixed(1) + ' ' + sy(ring[i][1]).toFixed(1);
     }
-    p.setAttribute('d', d + 'Z');
+    paths[n].setAttribute('d', d + 'Z');
   }
+}
+
+/* Country names.
+   Two rules decide which names appear, and both matter:
+
+   1. ORDER BY THE DATA, NOT BY LANDMASS. Placement is greedy, so whatever is
+      tried first wins the space. Sorting by land width alone labelled Mali,
+      Niger and the Central African Republic while skipping Germany, the UK and
+      Ireland - backwards for a map of AI data centres. Countries that hold
+      sites are tried first, heaviest capacity down, and everything else fills
+      in behind them.
+   2. A NAME NEEDS ROOM. A country is labelled only once it is wide enough on
+      screen to carry its own text, so world view names the big landmasses and
+      more appear as you zoom - no zoom thresholds to hand-tune. Countries that
+      hold sites clear a lower bar, since they are the ones being read.
+
+   Labels are drawn beneath the marks: a basemap label must never hide a site. */
+const SHORT = { 'United States of America': 'United States',
+                'Dem. Rep. Congo': 'DR Congo', 'Central African Rep.': 'CAR',
+                'Bosnia and Herz.': 'Bosnia', 'S. Sudan': 'South Sudan',
+                'Korea': 'South Korea', 'Dem. Rep. Korea': 'North Korea' };
+const named = W.filter(f => f.l).sort((a, b) => {
+  const ha = D.hot[a.n] || 0, hb = D.hot[b.n] || 0;
+  return (hb - ha) || (b.w - a.w);
+});
+
+function drawNames() {
+  const nodes = [], boxes = [];
+  for (const f of named) {
+    const label = SHORT[f.n] || f.n;
+    const need = label.length * 5.6 + 10;
+    const px = f.w / 360 * worldPx();
+    if (px < need * (D.hot[f.n] ? 0.55 : 1)) continue;
+    const x = sx(f.l[0]), y = sy(f.l[1]);
+    if (x < 4 || y < 10 || x > size.w - 4 || y > size.h - 4) continue;
+    const box = { x0: x - need / 2, x1: x + need / 2, y0: y - 7, y1: y + 7 };
+    if (boxes.some(b => box.x0 < b.x1 && box.x1 > b.x0 && box.y0 < b.y1 && box.y1 > b.y0)) continue;
+    boxes.push(box);
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('class', 'cname');
+    t.setAttribute('x', x.toFixed(1));
+    t.setAttribute('y', y.toFixed(1));
+    t.textContent = label;
+    nodes.push(t);
+  }
+  layers.names.replaceChildren(...nodes);
 }
 
 let visible = [];
 function draw() {
   drawLand();
+  drawNames();
   visible = sites.filter(matches);
   const marks = visible.filter(s => s.mw)          // no capacity, no circle
                        .sort((a, b) => b.mw - a.mw); // big ones underneath
 
-  layers.halo.innerHTML = '';
-  layers.dots.innerHTML = '';
+  const haloNodes = [], dotNodes = [];
   for (const s of marks) {
     const cx = sx(s.lng), cy = sy(s.lat), col = colourOf(s);
     const hr = haloR(s);
@@ -477,7 +563,7 @@ function draw() {
       h.setAttribute('cx', cx.toFixed(1)); h.setAttribute('cy', cy.toFixed(1));
       h.setAttribute('r', Math.min(hr, 400).toFixed(1));
       h.setAttribute('fill', col); h.setAttribute('opacity', '.10');
-      layers.halo.append(h);
+      haloNodes.push(h);
     }
     const c = document.createElementNS(NS, 'circle');
     c.setAttribute('class', 'dot' + (state.pinned && state.pinned !== s.id ? ' dim' : '')
@@ -486,8 +572,13 @@ function draw() {
     c.setAttribute('r', radius(s.mw).toFixed(2));
     c.setAttribute('fill', col); c.setAttribute('fill-opacity', '.82');
     c.dataset.id = s.id;
-    layers.dots.append(c);
+    dotNodes.push(c);
   }
+  // One replaceChildren per layer instead of an append per mark: 294 circles
+  // reflowed individually on every pan frame is the difference between a map
+  // that drags smoothly and one that stutters.
+  layers.halo.replaceChildren(...haloNodes);
+  layers.dots.replaceChildren(...dotNodes);
   drawLegend(marks);
   const undated = visible.filter(s => s.y == null).length;
   document.getElementById('count').textContent =
@@ -499,7 +590,7 @@ function draw() {
 function drawLegend(marks) {
   const el = document.getElementById('legend');
   const max = marks.length ? Math.max(...marks.map(s => s.mw)) : 0;
-  let html = '<div class="cap">Circles sized by</div><div class="ttl">Announced capacity</div>';
+  let html = '<div class="blk"><span class="cap">Announced capacity</span>';
 
   if (max > 0) {
     // Circles sit side by side on a shared baseline with the label under each.
@@ -525,6 +616,7 @@ function drawLegend(marks) {
     html += `<svg class="lg-circ" width="${w.toFixed(0)}" height="${h.toFixed(0)}" ` +
             `viewBox="0 0 ${w.toFixed(0)} ${h.toFixed(0)}">${parts.join('')}</svg>`;
   }
+  html += '</div>';
 
   const sc = scheme();
   if (!sc.single) {
@@ -540,10 +632,11 @@ function drawLegend(marks) {
     const rank = k => (k === 'Unknown' ? 2 : k === 'Other' ? 1 : 0);
     const items = [...seen.entries()].sort((a, b) => rank(a[0]) - rank(b[0]) || b[1] - a[1]);
     if (items.length) {
-      html += `<div class="swatches"><div class="cap">${esc(sc.label)}</div>` +
+      html += `<div class="blk"><span class="cap">${esc(sc.label)}</span>` +
+        '<div class="swatches">' +
         items.map(([k]) =>
-          `<div class="sw"><i style="background:${sc.colors[k] || '__NEUTRAL__'}"></i>` +
-          `<b title="${esc(k)}">${esc(k)}</b></div>`).join('') + '</div>';
+          `<span class="sw"><i style="background:${sc.colors[k] || '__NEUTRAL__'}"></i>` +
+          `<b>${esc(k)}</b></span>`).join('') + '</div></div>';
     }
   }
   el.innerHTML = html;
@@ -863,7 +956,39 @@ def static_geometry(sites, w=STATIC_W, h=STATIC_H):
         lat = max(-84, min(84, s["lat"]))
         return min(m * world_px / (40075017 * math.cos(lat * math.pi / 180)), 400)
 
-    return marks, sx, sy, radius, halo, shrink
+    return marks, sx, sy, radius, halo, shrink, world_px
+
+
+SHORT_NAME = {"United States of America": "United States", "Dem. Rep. Congo": "DR Congo",
+              "Central African Rep.": "CAR", "Bosnia and Herz.": "Bosnia",
+              "S. Sudan": "South Sudan", "Korea": "South Korea",
+              "Dem. Rep. Korea": "North Korea"}
+
+
+def place_names(world, hot, sx, sy, world_px, w, h):
+    """The page's own label rule, so the static twin names the same countries.
+
+    Data first (countries holding capacity, heaviest down), then the rest by
+    landmass; a name needs room to fit; greedy overlap culling.
+    """
+    order = sorted((f for f in world if f.get("l")),
+                   key=lambda f: (-hot.get(f["n"], 0), -f["w"]))
+    placed, boxes = [], []
+    for f in order:
+        label = SHORT_NAME.get(f["n"], f["n"])
+        need = len(label) * 5.6 + 10
+        if f["w"] / 360 * world_px < need * (0.55 if hot.get(f["n"]) else 1):
+            continue
+        x, y = sx(f["l"][0]), sy(f["l"][1])
+        if x < 4 or y < 10 or x > w - 4 or y > h - 4:
+            continue
+        box = (x - need / 2, x + need / 2, y - 7, y + 7)
+        if any(box[0] < b[1] and box[1] > b[0] and box[2] < b[3] and box[3] > b[2]
+               for b in boxes):
+            continue
+        boxes.append(box)
+        placed.append((x, y, label))
+    return placed
 
 
 def legend_rings(marks, radius):
@@ -889,7 +1014,7 @@ def legend_rings(marks, radius):
 
 
 def write_static_svg(sites, path, w=STATIC_W, h=STATIC_H):
-    marks, sx, sy, radius, halo, shrink = static_geometry(sites, w, h)
+    marks, sx, sy, radius, halo, _, world_px = static_geometry(sites, w, h)
     world = json.loads(WORLD.read_text())
     single = CATEGORICAL[0]
 
@@ -902,6 +1027,13 @@ def write_static_svg(sites, path, w=STATIC_W, h=STATIC_H):
             d = "".join(("L" if i else "M") + f"{sx(p[0]):.1f} {sy(p[1]):.1f}"
                         for i, p in enumerate(ring))
             out.append(f'<path d="{d}Z"/>')
+    out.append("</g>")
+
+    out.append('<g fill="#8d8b84" font-size="10.5" text-anchor="middle" '
+               'paint-order="stroke" stroke="#edece7" stroke-width="2.5" '
+               'stroke-linejoin="round">')
+    for x, y, label in place_names(world, hot_countries(sites), sx, sy, world_px, w, h):
+        out.append(f'<text x="{x:.1f}" y="{y:.1f}">{label}</text>')
     out.append("</g>")
 
     out.append(f'<g fill="{single}" opacity=".10">')
@@ -944,9 +1076,10 @@ def write_static_png(sites, path, w=STATIC_W, h=STATIC_H):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    import matplotlib.patheffects as pe
     from matplotlib.patches import Circle
 
-    marks, sx, sy, radius, halo, _ = static_geometry(sites, w, h)
+    marks, sx, sy, radius, halo, _, world_px = static_geometry(sites, w, h)
     world = json.loads(WORLD.read_text())
     single = CATEGORICAL[0]
 
@@ -957,14 +1090,17 @@ def write_static_png(sites, path, w=STATIC_W, h=STATIC_H):
         for ring in f["r"]:
             ax.fill([sx(p[0]) for p in ring], [sy(p[1]) for p in ring],
                     facecolor="#edece7", edgecolor="#d9d7d0", linewidth=.6, zorder=1)
+    for x, y, label in place_names(world, hot_countries(sites), sx, sy, world_px, w, h):
+        ax.text(x, y, label, fontsize=5.2, color="#8d8b84", ha="center", va="center",
+                zorder=2, path_effects=[pe.withStroke(linewidth=1.6, foreground="#edece7")])
     for s in marks:
         r = halo(s)
         if r > 1.5:
             ax.add_patch(Circle((sx(s["lng"]), sy(s["lat"])), r,
-                                facecolor=single, alpha=.10, lw=0, zorder=2))
+                                facecolor=single, alpha=.10, lw=0, zorder=3))
         ax.add_patch(Circle((sx(s["lng"]), sy(s["lat"])), radius(s["mw"]),
                             facecolor=single, alpha=.82,
-                            edgecolor=(11 / 255, 11 / 255, 11 / 255, .45), lw=1, zorder=3))
+                            edgecolor=(11 / 255, 11 / 255, 11 / 255, .45), lw=1, zorder=4))
     base_y, x = h - 34, 16.0
     for _, label, r in legend_rings(marks, radius):
         slot = max(2 * r, len(label) * 5.6)
@@ -1013,6 +1149,7 @@ def main():
         "sites": sites,
         "schemes": schemes,
         "facets": facets(sites),
+        "hot": hot_countries(sites),
         "years": years,
         "today": min(2026, years[-1]),
         "footnote": footnote,

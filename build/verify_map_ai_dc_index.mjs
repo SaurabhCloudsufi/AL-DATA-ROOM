@@ -9,6 +9,7 @@
  *   draws        circles appear, and big ones are painted before small ones so a
  *                small site sitting inside a large one stays hoverable
  *   halos        drawn only for sites whose location is coarser than `exact`
+ *   names        country labels are placed, data-first, and de-overlapped
  *   legend       size rings render and are labelled
  *   search       narrows the mark count and recovers when cleared
  *   facet        a checkbox filter narrows the count and clears cleanly
@@ -51,6 +52,7 @@ function mk(tag) {
     getAttribute(k) { return this.attrs[k]; },
     appendChild(c) { this.children.push(c); c.parentNode = this; return c; },
     append(...cs) { cs.forEach(c => this.appendChild(c)); },
+    replaceChildren(...cs) { this.children = []; cs.forEach(c => this.appendChild(c)); },
     removeChild(c) { this.children = this.children.filter(x => x !== c); },
     addEventListener(t, fn) { (this._ev[t] ||= []).push(fn); },
     removeEventListener() {},
@@ -129,9 +131,10 @@ try {
 }
 
 const svg = byId.map;
-const layer = i => svg.children[0].children[i];          // land, halo, dots
-const dots = () => layer(2).children;
-const halos = () => layer(1).children;
+const layer = i => svg.children[0].children[i];   // land, names, halo, dots
+const dots = () => layer(3).children;
+const halos = () => layer(2).children;
+const names = () => layer(1).children;
 const radii = () => dots().map(c => parseFloat(c.attrs.r));
 const fills = () => dots().map(c => c.attrs.fill);
 const fire = (el, type, ev = {}) => (el._ev[type] || []).forEach(fn => fn(ev));
@@ -148,7 +151,10 @@ const approx = D.sites.filter(s => s.mw && s.p !== 'exact').length;
 check('halos', halos().length > 0 && halos().length <= approx,
       `${halos().length} halos, ${approx} sites coarser than exact`);
 
-check('legend', /Circles sized by/.test(byId.legend.innerHTML) &&
+check('names', names().length > 0,
+      `${names().length} country labels placed, data-priority with overlap culling`);
+
+check('legend', /Announced capacity/.test(byId.legend.innerHTML) &&
                 /<circle/.test(byId.legend.innerHTML),
       `${(byId.legend.innerHTML.match(/<circle/g) || []).length} size rings`);
 

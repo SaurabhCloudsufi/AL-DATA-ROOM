@@ -6,9 +6,13 @@ basemap has to ship inside the HTML, so this reduces world-atlas TopoJSON to the
 smallest thing that still reads as a world map - a flat list of
 {n: country name, r: [ring, ...]} with rings as [[lng, lat], ...].
 
-Output build/world_110m.json is committed (~147 KB, 176 countries, 279 rings,
-~9,900 points). Antarctica is dropped: it is a large share of the vertices and no
-AI data centre is ever going there.
+Output build/world_110m.json is committed (~150 KB, 176 countries, 279 rings,
+~9,900 points). Each country also carries a label anchor and the longitude span
+of its largest ring, so the map can place country names and decide which ones
+are wide enough on screen to be worth drawing at the current zoom.
+
+Antarctica is dropped: it is a large share of the vertices and no AI data centre
+is ever going there.
 
 THE SEAM
 --------
@@ -96,6 +100,31 @@ def simplify(pts, tol):
     return out if len(out) >= 4 else None
 
 
+def ring_area(ring):
+    """Unsigned shoelace area, used only to rank rings against each other."""
+    a = 0.0
+    for (x0, y0), (x1, y1) in zip(ring, ring[1:] + ring[:1]):
+        a += x0 * y1 - x1 * y0
+    return abs(a) / 2
+
+
+def label_anchor(rings):
+    """Where a country's name should sit: the centroid of its largest ring.
+
+    Largest, not all rings averaged - averaging drags the United States into the
+    Pacific between Alaska, Hawaii and the mainland, and France into the Atlantic
+    off its overseas territories. The biggest landmass is the one a reader is
+    looking at, so the name goes there. Returned with that ring's longitude span,
+    which the map uses to decide whether the country is wide enough on screen to
+    be worth labelling at the current zoom.
+    """
+    big = max(rings, key=ring_area)
+    xs = [p[0] for p in big]
+    ys = [p[1] for p in big]
+    return ([round(sum(xs) / len(xs), 2), round(sum(ys) / len(ys), 2)],
+            round(max(xs) - min(xs), 2))
+
+
 def main():
     print(f"fetching {SRC}")
     with urllib.request.urlopen(SRC, timeout=60) as r:
@@ -110,7 +139,9 @@ def main():
         raw = [piece for ring in rings_of(geom, arcs) for piece in split_antimeridian(ring)]
         rings = [s for s in (simplify(r, TOLERANCE) for r in raw) if s]
         if rings:
-            features.append({"n": name, "r": [[[x, y] for x, y in r] for r in rings]})
+            anchor, span = label_anchor(rings)
+            features.append({"n": name, "l": anchor, "w": span,
+                             "r": [[[x, y] for x, y in r] for r in rings]})
 
     bad = [f["n"] for f in features for r in f["r"]
            if any(abs(b[0] - a[0]) > 180 for a, b in zip(r, r[1:]))]
