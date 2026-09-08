@@ -1,0 +1,2 @@
+sites_total,sites_mapped,megawatts_total,megawatts_mapped,missing_megawatts,missing_coords_in_source,geo_exact,geo_city,geo_region,geo_country,geo_unresolved,missing_start_year,year_first,year_last,countries,primary_companies,status_unclassified,energy_unclassified,focus_unclassified
+346,294,117178.8,117178.8,52,52,294,13,23,16,0,74,2000,2032,64,137,3,87,30

@@ -429,6 +429,26 @@ DOMAINS = [
         }],
         "live": True,
     },
+    {
+        "slug": "ai-dc-index",
+        "title": "AI DC Index",
+        "blurb": "Where the AI build-out is actually going: every announced AI data centre "
+                 "site worldwide, on a map, by capacity, operator, build stage and power "
+                 "source.",
+        "index": "build/plot_index_ai_dc_index.csv",
+        "css": "../inference-tokens/assets/style.css",
+        "section_blurbs": {
+            "Map":
+                "One interactive map of the whole index. Circle area is announced capacity "
+                "as the operator stated it, not measured delivered load, and the year "
+                "slider is cumulative — it shows which sites had started by a year, not "
+                "how any one site grew. Where the source gives no coordinates the site is "
+                "geocoded once to the finest level its record supports, and anything "
+                "coarser than an exact position is drawn with an uncertainty halo rather "
+                "than a false rooftop.",
+        },
+        "live": True,
+    },
     {"slug": "training-compute", "title": "Training Compute", "live": False},
     {"slug": "model-pricing", "title": "Model Pricing", "live": False},
     {"slug": "energy", "title": "Energy", "live": False},

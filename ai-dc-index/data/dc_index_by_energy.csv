@@ -1,0 +1,7 @@
+energy_class,sites,sites_with_mw,megawatts
+Renewable,133,120,42030.8
+Nuclear,15,13,16789.0
+Gas,8,7,15803.0
+Grid,40,34,18138.0
+Mixed,63,63,10295.0
+Unknown,87,57,14123.0

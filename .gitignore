@@ -56,6 +56,11 @@ model_prices_and_context_window.json
 !build/plot_index.csv
 !build/company_disclosures.csv
 
+# The AI DC INDEX workbook is the source for the ai-dc-index domain and ships
+# with it, so the map can be rebuilt from the same file it was built from. The
+# *.xlsx rule above is for private working datasets; this one is published.
+!ai-dc-index/source/AI DC INDEX.xlsx
+
 # ---------------------------------------------------------------- python
 __pycache__/
 *.py[cod]
